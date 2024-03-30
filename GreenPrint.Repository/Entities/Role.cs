@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 
 namespace GreenPrint.Repository.Entities
 {
-    public class Category
+    public class Role
     {
         [Key]
         public int Id { get; set; }
-        public string CategoryName { get; set; }
+        public string RoleName { get; set; }
 
         // Navigation Properties
-        public List<Item> Items { get; set; }
-
+        public List<User> Users { get; set; }
     }
 }
