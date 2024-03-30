@@ -14,6 +14,14 @@ namespace GreenPrint.UnitTests
         
         // Services
         private AddressService _addressService = new(_context, _mappingService);
+        private CategoryService _categoryService = new(_context, _mappingService);
+        private CustomerService _customerService = new(_context, _mappingService);
+        private ItemService _itemService = new(_context, _mappingService);
+        private OrderService _orderService = new(_context, _mappingService);
+        private RoleService _roleService = new(_context, _mappingService);
+        private UserService _userService = new(_context, _mappingService);
+        private WarehouseService _warehouseService = new(_context, _mappingService);
+        private WarehouseItemService _warehouseItemService = new(_context, _mappingService);
         #endregion
 
 

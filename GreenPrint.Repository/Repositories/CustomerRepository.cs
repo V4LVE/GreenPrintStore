@@ -9,13 +9,12 @@ using System.Threading.Tasks;
 
 namespace GreenPrint.Repository.Repositories
 {
-    public class AddressRepository(StoreContext context) : GenericRepository<Address>(context), IAddressRepository
+    public class CustomerRepository(StoreContext context) : GenericRepository<Customer>(context), ICustomerRepository
     {
         #region Backing fields
         private readonly StoreContext _dbContext = context;
 
         #endregion
-        #region Constructor
-        #endregion
+
     }
 }
