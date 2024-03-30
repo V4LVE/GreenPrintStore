@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GreenPrint.Repository.Entities
+namespace GreenPrint.Service.DataTransferObjects
 {
-    public class Item
+    public class ItemDTO
     {
         [Key]
         public int Id { get; set; }
@@ -17,6 +17,6 @@ namespace GreenPrint.Repository.Entities
         public int CategoryId { get; set; }
 
         // Navigation Properties
-        public Category Category { get; set; }
+        public CategoryDTO Category { get; set; }
     }
 }
