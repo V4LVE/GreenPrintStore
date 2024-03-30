@@ -32,5 +32,12 @@ namespace GreenPrint.Repository.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<List<E>> GetAllAsync();
+
+        /// <summary>
+        /// Gets an entity by its id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<E> GetByIdAsync(int id);
     }
 }

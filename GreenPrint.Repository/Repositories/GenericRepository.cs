@@ -44,6 +44,11 @@ namespace GreenPrint.Repository.Repositories
             return temp;
         }
 
+        public async Task<E> GetByIdAsync(int id)
+        {
+            return await _dbContext.Set<E>().FindAsync(id);
+        }
+
         public async Task DeleteAsync(E entity)
         {
             _dbContext.Remove(entity);

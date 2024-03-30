@@ -32,5 +32,12 @@ namespace GreenPrint.Service.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<List<DTO>> GetAllAsync();
+
+        /// <summary>
+        /// Gets an entity by its id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<DTO> GetByIdAsync(int id);
     }
 }

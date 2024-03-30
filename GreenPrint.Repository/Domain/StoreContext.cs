@@ -35,6 +35,20 @@ namespace GreenPrint.Repository.Domain
                 new Role { Id = 2, RoleName = "StoreManager" },
                 new Role { Id = 3, RoleName = "SuperAdmin" }
                 );
+
+            // Categories
+            modelBuilder.Entity<Category>().HasData(
+                new Category { Id = 1, CategoryName = "Printers" },
+                new Category { Id = 2, CategoryName = "Filament" },
+                new Category { Id = 3, CategoryName = "Misc" }
+                );
+
+            // Items
+            modelBuilder.Entity<Item>().HasData(
+                new Item { Id = 1, ItemName = "ELEGOO Neptune 4 Pro", Description = "A good cheap 3D Printer", CategoryId = 1, Price = 2250 },
+                new Item { Id = 2, ItemName = "Bambulab X1 Carbon", Description = "A great but expensive 3D printer", CategoryId = 1, Price = 8500 },
+                new Item { Id = 3, ItemName = "Sort PLA 1Kg", Description = "A material for printing", CategoryId = 2, Price = 150 }
+                );
             #endregion
         }
     }
