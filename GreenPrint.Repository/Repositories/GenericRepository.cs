@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 using GreenPrint.Repository.Domain;
 using GreenPrint.Repository.Interfaces;
+using GreenPrint.Repository.Paging;
 
 namespace GreenPrint.Repository.Repositories
 {
@@ -42,6 +43,14 @@ namespace GreenPrint.Repository.Repositories
             List<E> temp = new(await _dbContext.Set<E>().AsNoTracking().ToListAsync());
 
             return temp;
+        }
+
+        public async Task<List<E>> GetAllAsyncWithPaging(SortFilterPageOptions options)
+        {
+            var query = _dbContext.Set<E>().AsNoTracking();
+
+            options.SetupRestOfDto(query);
+            return await query.Page(options.PageNum - 1, options.PageSize).ToListAsync();
         }
 
         public async Task<E> GetByIdAsync(int id)

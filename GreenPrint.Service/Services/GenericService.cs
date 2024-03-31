@@ -1,5 +1,7 @@
 ﻿using GreenPrint.Repository.Interfaces;
+using GreenPrint.Repository.Paging;
 using GreenPrint.Service.Interfaces;
+using GreenPrint.Service.Paging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -37,6 +39,12 @@ namespace GreenPrint.Services.Services
         public async Task<List<DTO>> GetAllAsync()
         {
             return _mappingService._mapper.Map<List<DTO>>(await _genericRepository.GetAllAsync());
+        }
+
+
+        public async Task<List<DTO>> GetAllAsyncWithPaging(SortFilterPageOptions options)
+        {
+            return _mappingService._mapper.Map<List<DTO>>(await _genericRepository.GetAllAsyncWithPaging(options));
         }
 
         public async Task<DTO> GetByIdAsync(int id)

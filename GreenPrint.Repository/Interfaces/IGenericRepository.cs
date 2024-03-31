@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GreenPrint.Repository.Paging;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -32,6 +33,13 @@ namespace GreenPrint.Repository.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<List<E>> GetAllAsync();
+
+        /// <summary>
+        /// Gets an entities from the database with paging
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        Task<List<E>> GetAllAsyncWithPaging(SortFilterPageOptions options);
 
         /// <summary>
         /// Gets an entity by its id
