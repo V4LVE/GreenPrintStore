@@ -38,6 +38,12 @@ namespace GreenPrint.Repository.Repositories
             return entity;
         }
 
+        public async Task CreateListAsync(List<E> entityList)
+        {
+            _dbContext.AddRange(entityList);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task UpdateAsync(E entity)
         {
             _dbContext.Set<E>().Attach(entity);

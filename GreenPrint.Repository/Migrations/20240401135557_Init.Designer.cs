@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenPrint.Repository.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20240401132305_Init")]
+    [Migration("20240401135557_Init")]
     partial class Init
     {
         /// <inheritdoc />

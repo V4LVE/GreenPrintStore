@@ -17,6 +17,13 @@ namespace GreenPrint.Repository.Interfaces
         Task CreateAsync(E entity);
 
         /// <summary>
+        /// Adds a list of entities to the database
+        /// </summary>
+        /// <param name="entityList"></param>
+        /// <returns></returns>
+        Task CreateListAsync(List<E> entityList);
+
+        /// <summary>
         /// Adds an entity to the database and returns it
         /// </summary>
         /// <param name="entity"></param>
