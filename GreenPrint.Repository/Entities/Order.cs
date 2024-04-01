@@ -17,7 +17,7 @@ namespace GreenPrint.Repository.Entities
         public OrderStatusEnum Status { get; set; }
 
         // Navigation properties
-        public List<WarehouseItem> Items { get; set; }
+        public List<ItemOrder> ItemOrders { get; set; }
         public Customer Customer { get; set; }
     }
 }

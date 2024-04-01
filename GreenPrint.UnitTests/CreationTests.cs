@@ -24,6 +24,10 @@ namespace GreenPrint.UnitTests
         private WarehouseItemService _warehouseItemService = new(_context, _mappingService);
         #endregion
 
+        public AddressDTO Address { get; set; }
+        public CustomerDTO Customer { get; set; }
+        public UserDTO User { get; set; }
+        public WarehouseDTO Warehouse { get; set; }
 
         [Fact]
         public async Task CreateAddress()
@@ -38,12 +42,59 @@ namespace GreenPrint.UnitTests
             };
 
             // Act
-            await _addressService.CreateAsync(address);
+            AddressDTO result = await _addressService.CreateAndReturn(address);
             
-            var temp = await _addressService.GetByIdAsync(1);
+            var temp = await _addressService.GetByIdAsync(result.Id);
 
             // Assert
             Assert.Equal(address.StreetName, temp.StreetName);
+            Address = temp;
         }
+
+        [Fact]
+        public async Task CreateCustomer()
+        {
+            // Arrange
+            var customer = new CustomerDTO
+            {
+                FirstName = "John",
+                LastName = "Doe",
+                Email = "JD@John.Doe",
+                Phone = "12345678",
+                Address = Address
+            };
+
+            // Act
+            CustomerDTO result = await _customerService.CreateAndReturn(customer);
+            
+            var temp = await _customerService.GetByIdAsync(result.Id);
+
+            // Assert
+            Assert.Equal(customer.Id, temp.Id);
+            Customer = temp;
+        }
+
+        [Fact]
+        public async Task CreateUser()
+        {
+            // Arrange
+            var user = new UserDTO
+            {
+                Password = "Password",
+                Email = "JohnDoe@John.Doe",
+                Role = await _roleService.GetByIdAsync(1),
+                Customer = Customer
+            };
+
+            // Act
+            UserDTO result = await _userService.CreateAndReturn(user);
+
+            var temp = await _userService.GetByIdAsync(result.Id);
+
+            // Assert
+            Assert.Equal(user.Email, temp.Email);
+            User = temp;
+        }
+
     }
 }

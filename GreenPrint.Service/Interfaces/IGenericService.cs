@@ -46,7 +46,7 @@ namespace GreenPrint.Service.Interfaces
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
-        Task<List<DTO>> GetAllAsyncWithPaging(SortFilterPageOptions options);
+        Task<List<DTO>> GetAllAsyncWithPaging(PageOptions options);
 
         /// <summary>
         /// Gets an entity by its id
