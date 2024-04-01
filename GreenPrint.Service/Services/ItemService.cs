@@ -20,5 +20,20 @@ namespace GreenPrint.Service.Services
         private readonly IItemRepository _ItemRepository = new ItemRepository(context);
 
         #endregion
+
+        public async Task<List<Item>> GetItemsBySearch(string searchQuery)
+        {
+            return await _ItemRepository.GetItemsBySearch(searchQuery);
+        }
+
+        public async Task<List<Item>> GetItemsbyCategory(string category)
+        {
+            return await _ItemRepository.GetItemsbyCategory(category);
+        }
+
+        public async Task<List<Item>> GetItemsbyCategory(int categoryId)
+        {
+            return await _ItemRepository.GetItemsbyCategory(categoryId);
+        }
     }
 }

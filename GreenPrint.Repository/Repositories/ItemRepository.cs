@@ -1,6 +1,7 @@
 ﻿using GreenPrint.Repository.Domain;
 using GreenPrint.Repository.Entities;
 using GreenPrint.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,23 @@ namespace GreenPrint.Repository.Repositories
         private readonly StoreContext _dbContext = context;
 
         #endregion
+
+        public async Task<List<Item>> GetItemsbyCategory(string category)
+        {
+            return await _dbContext.Items.AsNoTracking().Where(i => i.Category.CategoryName == category).ToListAsync();
+        }
+
+        public async Task<List<Item>> GetItemsbyCategory(int categoryId)
+        {
+            return await _dbContext.Items.AsNoTracking().Where(i => i.CategoryId == categoryId).ToListAsync();
+        }
+
+        public async Task<List<Item>> GetItemsBySearch(string searchQuery)
+        {
+            var stringProps = typeof(Item).GetProperties().Where(p => p.PropertyType == typeof(string));
+
+            return await _dbContext.Items.AsNoTracking().Where(item => stringProps.Any(prop => prop.GetValue(item) == searchQuery)).ToListAsync();
+        }
 
     }
 }
