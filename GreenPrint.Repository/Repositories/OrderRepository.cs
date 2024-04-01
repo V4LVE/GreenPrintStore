@@ -29,5 +29,17 @@ namespace GreenPrint.Repository.Repositories
             return await query.Page(options.PageNum - 1, options.PageSize).ToListAsync();
         }
 
+        public async Task<List<Order>> GetOrdersBySearch(string searchQuery)
+        {
+            return await _dbContext.Orders.AsNoTracking().Where(
+                x => x.Customer.FirstName.Equals(searchQuery) ||
+                x.Customer.Email.Contains(searchQuery)).ToListAsync();
+        }
+
+        public async Task<List<Order>> GetOrdersByStatus(OrderStatusEnum status)
+        {
+            return await _dbContext.Orders.AsNoTracking().Where(x => x.Status == status).ToListAsync();
+        }
+
     }
 }
