@@ -31,6 +31,13 @@ namespace GreenPrint.Repository.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<E> CreateAndReturn(E entity)
+        {
+            _dbContext.Add(entity);
+            await _dbContext.SaveChangesAsync();
+            return entity;
+        }
+
         public async Task UpdateAsync(E entity)
         {
             _dbContext.Set<E>().Attach(entity);

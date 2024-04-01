@@ -31,6 +31,11 @@ namespace GreenPrint.Services.Services
             await _genericRepository.CreateAsync(_mappingService._mapper.Map<Entity>(entity));
         }
 
+        public async Task<DTO> CreateAndReturn(DTO entity)
+        {
+            return _mappingService._mapper.Map<DTO>(await _genericRepository.CreateAndReturn(_mappingService._mapper.Map<Entity>(entity)));
+        }
+
         public async Task DeleteAsync(DTO entity)
         {
             await _genericRepository.DeleteAsync(_mappingService._mapper.Map<Entity>(entity));

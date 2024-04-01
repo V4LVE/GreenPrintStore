@@ -17,6 +17,13 @@ namespace GreenPrint.Service.Interfaces
         Task CreateAsync(DTO entity);
 
         /// <summary>
+        /// Adds an entity to the database and returns it
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        Task<DTO> CreateAndReturn(DTO entity);
+
+        /// <summary>
         /// Updates an entiry in the database
         /// </summary>
         /// <param name="entity"></param>
