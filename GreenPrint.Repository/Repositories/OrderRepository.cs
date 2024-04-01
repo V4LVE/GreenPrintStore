@@ -21,9 +21,9 @@ namespace GreenPrint.Repository.Repositories
 
         #endregion
 
-        new public async Task<List<Order>> GetAllAsyncWithPaging(SortFilterPageOptions options)
+        public async Task<List<Order>> GetAllAsyncWithPaging(PageOptions options, OrderByOptionsOrder order)
         {
-            var query = _dbContext.Orders.AsNoTracking().OrderOrdersBy(options.OrderByOptions);
+            var query = _dbContext.Orders.AsNoTracking().OrderOrdersBy(order);
 
             options.SetupRestOfDto(query);
             return await query.Page(options.PageNum - 1, options.PageSize).ToListAsync();

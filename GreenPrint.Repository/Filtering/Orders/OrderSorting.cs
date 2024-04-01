@@ -13,20 +13,20 @@ namespace GreenPrint.Repository.Filtering.Orders
 
     public static class OrderSorting
     {
-        public static IQueryable<Order> OrderOrdersBy(this IQueryable<Order> order, OrderByOptions orderByOptions)
+        public static IQueryable<Order> OrderOrdersBy(this IQueryable<Order> order, OrderByOptionsOrder orderByOptions)
         {
             switch (orderByOptions)
             {
-                case OrderByOptions.IDDes:
+                case OrderByOptionsOrder.IDDes:
                     return order.OrderByDescending(x => x.Id);
 
-                case OrderByOptions.IDAsc:
+                case OrderByOptionsOrder.IDAsc:
                     return order.OrderBy(x => x.Id);
 
-                case OrderByOptions.DateAsc:
+                case OrderByOptionsOrder.DateAsc:
                     return order.OrderBy(x => x.OrderDate);
 
-                case OrderByOptions.DateDes:
+                case OrderByOptionsOrder.DateDes:
                     return order.OrderByDescending(x => x.OrderDate);
 
                 default:

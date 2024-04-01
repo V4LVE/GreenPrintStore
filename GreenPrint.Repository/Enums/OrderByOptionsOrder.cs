@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GreenPrint.Repository.Enums
 {
-    public enum OrderByOptions
+    public enum OrderByOptionsOrder
     {
         [Display(Name = "Order Id Descending ↓")]
         IDDes = 0,

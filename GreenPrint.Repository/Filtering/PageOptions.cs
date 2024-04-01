@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace GreenPrint.Repository.Paging
 {
-    public class SortFilterPageOptions
+    public class PageOptions
     {
-        // Ordering if any
-        public OrderByOptions OrderByOptions { get; set; }
 
         // PAGING
         public const int DefaultPageSize = 10;   //default page size is 10

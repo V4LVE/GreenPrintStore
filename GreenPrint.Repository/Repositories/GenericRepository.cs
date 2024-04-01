@@ -52,7 +52,7 @@ namespace GreenPrint.Repository.Repositories
             return temp;
         }
 
-        public async Task<List<E>> GetAllAsyncWithPaging(SortFilterPageOptions options)
+        public async Task<List<E>> GetAllAsyncWithPaging(PageOptions options)
         {
             var query = _dbContext.Set<E>().AsNoTracking();
 
