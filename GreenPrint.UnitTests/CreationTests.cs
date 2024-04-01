@@ -1,4 +1,5 @@
 using GreenPrint.Repository.Domain;
+using GreenPrint.Repository.Entities;
 using GreenPrint.Service.DataTransferObjects;
 using GreenPrint.Service.Services;
 using GreenPrint.Services.Services;
@@ -54,6 +55,8 @@ namespace GreenPrint.UnitTests
         [Fact]
         public async Task CreateCustomer()
         {
+            Address = await _addressService.GetByIdAsync(1);
+
             // Arrange
             var customer = new CustomerDTO
             {
@@ -61,7 +64,7 @@ namespace GreenPrint.UnitTests
                 LastName = "Doe",
                 Email = "JD@John.Doe",
                 Phone = "12345678",
-                Address = Address
+                AddressId = Address.Id
             };
 
             // Act
@@ -70,20 +73,23 @@ namespace GreenPrint.UnitTests
             var temp = await _customerService.GetByIdAsync(result.Id);
 
             // Assert
-            Assert.Equal(customer.Id, temp.Id);
+            Assert.Equal(result.Id, temp.Id);
             Customer = temp;
         }
 
         [Fact]
         public async Task CreateUser()
         {
+            var role = await _roleService.GetByIdAsync(1);
+            this.Customer = await _customerService.GetByIdAsync(1);
+
             // Arrange
             var user = new UserDTO
             {
                 Password = "Password",
                 Email = "JohnDoe@John.Doe",
-                Role = await _roleService.GetByIdAsync(1),
-                Customer = Customer
+                Roleid = role.Id,
+                CustomerId = Customer.Id
             };
 
             // Act
@@ -92,7 +98,7 @@ namespace GreenPrint.UnitTests
             var temp = await _userService.GetByIdAsync(result.Id);
 
             // Assert
-            Assert.Equal(user.Email, temp.Email);
+            Assert.Equal(result.Email, temp.Email);
             User = temp;
         }
 

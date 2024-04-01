@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenPrint.Repository.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20240401135557_Init")]
+    [Migration("20240401145947_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -209,7 +209,7 @@ namespace GreenPrint.Repository.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<int?>("WarehouseId")
+                    b.Property<int>("WarehouseId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -432,7 +432,8 @@ namespace GreenPrint.Repository.Migrations
                     b.HasOne("GreenPrint.Repository.Entities.Warehouse", "Warehouse")
                         .WithMany("ItemOrders")
                         .HasForeignKey("WarehouseId")
-                        .OnDelete(DeleteBehavior.ClientNoAction);
+                        .OnDelete(DeleteBehavior.ClientNoAction)
+                        .IsRequired();
 
                     b.Navigation("Item");
 

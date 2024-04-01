@@ -21,6 +21,7 @@ namespace GreenPrint.UnitTests
         private UserService _userService = new(_context, _mappingService);
         private WarehouseService _warehouseService = new(_context, _mappingService);
         private WarehouseItemService _warehouseItemService = new(_context, _mappingService);
+        private ItemOrderService _itemOrderService = new(_context, _mappingService);
         #endregion
 
 
@@ -31,12 +32,13 @@ namespace GreenPrint.UnitTests
 
             // Initialize basket
             List<ItemOrderDTO> basket = new();
+            CustomerDTO customer = await _customerService.GetByIdAsync(1);
 
             // Initialize order with customer
             OrderDTO newOrder = new()
             {
                 OrderDate = DateTime.Now,
-                Customer = await _customerService.GetByIdAsync(1),
+                CustomerId = customer.Id,
             };
 
             // Create order and return it so we can work with it
@@ -44,23 +46,40 @@ namespace GreenPrint.UnitTests
 
             ItemOrderDTO itemOrder = new()
             {
-                Item = await _itemService.GetByIdAsync(1),
-                Order = newOrder,
-                Warehouse = await _warehouseService.GetByIdAsync(1),
+                ItemId = _itemService.GetByIdAsync(1).Result.Id,
+                OrderId = newOrder.Id,
+                WarehouseId = _warehouseService.GetByIdAsync(1).Result.Id,
                 Quantity = 2
             };
 
             ItemOrderDTO itemOrder2 = new()
             {
-                Item = await _itemService.GetByIdAsync(2),
-                Order = newOrder,
-                Warehouse = await _warehouseService.GetByIdAsync(1),
+                ItemId = _itemService.GetByIdAsync(2).Result.Id,
+                OrderId = newOrder.Id,
+                WarehouseId = _warehouseService.GetByIdAsync(1).Result.Id,
                 Quantity = 1
             };
+
 
             basket.Add(itemOrder);
             basket.Add(itemOrder2);
 
+            if (basket.Count != 0)
+            {
+                await _itemOrderService.CreateListAsync(basket);
+            }
+            foreach (var item in basket)
+            {
+                WarehouseItemDTO warehouseItem = await _warehouseItemService.GetByItemAndWarehouseId(item.WarehouseId, item.ItemId);
+                warehouseItem.Quantity -= item.Quantity;
+                await _warehouseItemService.UpdateAsync(warehouseItem);
+            }
+
+            // Act
+            OrderDTO result = await _orderService.GetByIdAsync(newOrder.Id);
+
+            // Assert
+            Assert.True(result.ItemOrders.Count > 0);
 
         }
     }

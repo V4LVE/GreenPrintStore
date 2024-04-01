@@ -5,6 +5,7 @@ using GreenPrint.Repository.Filtering.Orders;
 using GreenPrint.Repository.Interfaces;
 using GreenPrint.Repository.Paging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,29 @@ namespace GreenPrint.Repository.Repositories
         private readonly StoreContext _dbContext = context;
 
         #endregion
+
+        new public async Task<List<Order>> GetAllAsync()
+        {
+            var temp = await _dbContext.Orders.AsNoTracking()
+                .Include(x => x.Customer)
+                .Include(x => x.ItemOrders)
+                .ThenInclude(x => x.Item)
+                .ToListAsync();
+
+            return temp;
+        }
+
+        new public async Task<Order> GetByIdAsync(int id)
+        {
+            var temp = await _dbContext.Orders.AsNoTracking()
+                .Include(x => x.Customer)
+                .Include(x => x.ItemOrders)
+                .ThenInclude(x => x.Item)
+                .Where(x => x.Id == id)
+                .SingleAsync();
+
+            return temp;
+        }
 
         public async Task<List<Order>> GetAllAsyncWithPaging(PageOptions options, OrderByOptionsOrder order)
         {

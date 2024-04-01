@@ -17,8 +17,14 @@ namespace GreenPrint.Service.Services
     {
         #region backing fields
         private readonly MappingService _mappingService = mappingService;
-        private readonly IWarehouseItemRepository _WarehouseItemRepository = new WarehouseItemRepository(context);
+        private readonly IWarehouseItemRepository _warehouseItemRepository = new WarehouseItemRepository(context);
 
         #endregion
+
+        public async Task<WarehouseItemDTO> GetByItemAndWarehouseId(int warehouseId, int itemId)
+        {
+            var temp = _mappingService._mapper.Map<WarehouseItemDTO>(await _warehouseItemRepository.GetByItemAndWarehouseId(warehouseId, itemId));
+            return temp;
+        }
     }
 }
