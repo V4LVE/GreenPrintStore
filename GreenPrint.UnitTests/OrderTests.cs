@@ -1,27 +1,26 @@
+using Dumpify;
 using GreenPrint.Repository.Domain;
 using GreenPrint.Service.DataTransferObjects;
 using GreenPrint.Service.Services;
 using GreenPrint.Services.Services;
+using GreenPrint.UnitTests.TestTools;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.TestPlatform.Utilities;
+using Xunit.Abstractions;
 
 namespace GreenPrint.UnitTests
 {
     public class OrderTests
     {
-        #region Setup
-        private static StoreContext _context = new();
-        private static MappingService _mappingService = new();
+        private readonly ITestOutputHelper output;
 
-        // Services
-        private AddressService _addressService = new(_context, _mappingService);
-        private CategoryService _categoryService = new(_context, _mappingService);
-        private CustomerService _customerService = new(_context, _mappingService);
-        private ItemService _itemService = new(_context, _mappingService);
-        private OrderService _orderService = new(_context, _mappingService);
-        private RoleService _roleService = new(_context, _mappingService);
-        private UserService _userService = new(_context, _mappingService);
-        private WarehouseService _warehouseService = new(_context, _mappingService);
-        private WarehouseItemService _warehouseItemService = new(_context, _mappingService);
-        private ItemOrderService _itemOrderService = new(_context, _mappingService);
+        public OrderTests(ITestOutputHelper output)
+        {
+            this.output = output;
+        }
+
+        #region Setup
+        private static MappingService _mappingService = new();
         #endregion
 
 
@@ -30,9 +29,20 @@ namespace GreenPrint.UnitTests
         {
             // Arrange
 
+            #region Setup
+            ContextCreator.RecreateDatabase();
+            StoreContext context = ContextCreator.Create();
+
+            // Service Injections
+            CustomerService customerService = new(context, _mappingService);
+            OrderService orderService = new(context, _mappingService);
+            ItemOrderService _itemOrderService = new(context, _mappingService);
+            WarehouseItemService _warehouseItemService = new(context, _mappingService);
+            #endregion
+
             // Initialize basket
             List<ItemOrderDTO> basket = new();
-            CustomerDTO customer = await _customerService.GetByIdAsync(1);
+            CustomerDTO customer = await customerService.GetByIdAsync(1);
 
             // Initialize order with customer
             OrderDTO newOrder = new()
@@ -42,21 +52,21 @@ namespace GreenPrint.UnitTests
             };
 
             // Create order and return it so we can work with it
-            newOrder = await _orderService.CreateAndReturn(newOrder);
+            newOrder = await orderService.CreateAndReturn(newOrder);
 
             ItemOrderDTO itemOrder = new()
             {
-                ItemId = _itemService.GetByIdAsync(1).Result.Id,
+                ItemId = 1,
                 OrderId = newOrder.Id,
-                WarehouseId = _warehouseService.GetByIdAsync(1).Result.Id,
+                WarehouseId = 1,
                 Quantity = 2
             };
 
             ItemOrderDTO itemOrder2 = new()
             {
-                ItemId = _itemService.GetByIdAsync(2).Result.Id,
+                ItemId = 2,
                 OrderId = newOrder.Id,
-                WarehouseId = _warehouseService.GetByIdAsync(1).Result.Id,
+                WarehouseId = 1,
                 Quantity = 1
             };
 
@@ -76,11 +86,16 @@ namespace GreenPrint.UnitTests
             }
 
             // Act
-            OrderDTO result = await _orderService.GetByIdAsync(newOrder.Id);
+            OrderDTO result = await orderService.GetByIdAsync(newOrder.Id);
 
             // Assert
             Assert.True(result.ItemOrders.Count > 0);
+            Assert.Equal(result.Id, newOrder.Id);
+            Assert.Equal(result.CustomerId, newOrder.CustomerId);
 
+            System.Diagnostics.Trace.WriteLine(result.Dump());
+
+            output.WriteLine(result.DumpText());
         }
     }
 }

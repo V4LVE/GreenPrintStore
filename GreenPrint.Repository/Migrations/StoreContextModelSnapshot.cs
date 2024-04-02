@@ -127,6 +127,17 @@ namespace GreenPrint.Repository.Migrations
                     b.HasIndex("AddressId");
 
                     b.ToTable("Customer");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AddressId = 1,
+                            Email = "JohnnyD@69420.com",
+                            FirstName = "John",
+                            LastName = "Doe",
+                            Phone = "69696969"
+                        });
                 });
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.Item", b =>
@@ -309,6 +320,16 @@ namespace GreenPrint.Repository.Migrations
                     b.HasIndex("Roleid");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CustomerId = 1,
+                            Email = "JohnnyD@69420.com",
+                            Password = "Password",
+                            Roleid = 1
+                        });
                 });
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.Warehouse", b =>

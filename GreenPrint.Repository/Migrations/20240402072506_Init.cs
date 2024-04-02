@@ -255,6 +255,11 @@ namespace GreenPrint.Repository.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Customer",
+                columns: new[] { "Id", "AddressId", "Email", "FirstName", "LastName", "Phone" },
+                values: new object[] { 1, 1, "JohnnyD@69420.com", "John", "Doe", "69696969" });
+
+            migrationBuilder.InsertData(
                 table: "Items",
                 columns: new[] { "Id", "CategoryId", "Description", "ItemName", "Price" },
                 values: new object[,]
@@ -268,6 +273,11 @@ namespace GreenPrint.Repository.Migrations
                 table: "Warehouses",
                 columns: new[] { "Id", "AddressId", "WarehouseName" },
                 values: new object[] { 1, 1, "Warehouse" });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "CustomerId", "Email", "Password", "Roleid" },
+                values: new object[] { 1, 1, "JohnnyD@69420.com", "Password", 1 });
 
             migrationBuilder.InsertData(
                 table: "WarehouseItems",
