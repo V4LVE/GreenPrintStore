@@ -48,7 +48,17 @@ namespace GreenPrint.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Address");
+                    b.ToTable("Addresses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            City = "Sønderborg",
+                            StreetName = "JutlandStreet",
+                            StreetNumber = "69B",
+                            ZipCode = "6400"
+                        });
                 });
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.Category", b =>
@@ -65,7 +75,7 @@ namespace GreenPrint.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -117,6 +127,17 @@ namespace GreenPrint.Repository.Migrations
                     b.HasIndex("AddressId");
 
                     b.ToTable("Customer");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AddressId = 1,
+                            Email = "JohnnyD@69420.com",
+                            FirstName = "John",
+                            LastName = "Doe",
+                            Phone = "69696969"
+                        });
                 });
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.Item", b =>
@@ -145,7 +166,7 @@ namespace GreenPrint.Repository.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Item");
+                    b.ToTable("Items");
 
                     b.HasData(
                         new
@@ -174,6 +195,42 @@ namespace GreenPrint.Repository.Migrations
                         });
                 });
 
+            modelBuilder.Entity("GreenPrint.Repository.Entities.ItemOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("WarehouseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("WarehouseId");
+
+                    b.ToTable("ItemOrders");
+                });
+
             modelBuilder.Entity("GreenPrint.Repository.Entities.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -195,7 +252,7 @@ namespace GreenPrint.Repository.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.Role", b =>
@@ -212,7 +269,7 @@ namespace GreenPrint.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Role");
+                    b.ToTable("Roles");
 
                     b.HasData(
                         new
@@ -262,7 +319,17 @@ namespace GreenPrint.Repository.Migrations
 
                     b.HasIndex("Roleid");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CustomerId = 1,
+                            Email = "JohnnyD@69420.com",
+                            Password = "Password",
+                            Roleid = 1
+                        });
                 });
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.Warehouse", b =>
@@ -284,7 +351,15 @@ namespace GreenPrint.Repository.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("Warehouse");
+                    b.ToTable("Warehouses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AddressId = 1,
+                            WarehouseName = "Warehouse"
+                        });
                 });
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.WarehouseItem", b =>
@@ -298,9 +373,6 @@ namespace GreenPrint.Repository.Migrations
                     b.Property<int>("ItemId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -311,11 +383,32 @@ namespace GreenPrint.Repository.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.HasIndex("OrderId");
-
                     b.HasIndex("WarehouseId");
 
-                    b.ToTable("WarehouseItem");
+                    b.ToTable("WarehouseItems");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ItemId = 1,
+                            Quantity = 10,
+                            WarehouseId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ItemId = 2,
+                            Quantity = 5,
+                            WarehouseId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ItemId = 3,
+                            Quantity = 100,
+                            WarehouseId = 1
+                        });
                 });
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.Customer", b =>
@@ -338,6 +431,33 @@ namespace GreenPrint.Repository.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("GreenPrint.Repository.Entities.ItemOrder", b =>
+                {
+                    b.HasOne("GreenPrint.Repository.Entities.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GreenPrint.Repository.Entities.Order", "Order")
+                        .WithMany("ItemOrders")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GreenPrint.Repository.Entities.Warehouse", "Warehouse")
+                        .WithMany("ItemOrders")
+                        .HasForeignKey("WarehouseId")
+                        .OnDelete(DeleteBehavior.ClientNoAction)
+                        .IsRequired();
+
+                    b.Navigation("Item");
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Warehouse");
                 });
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.Order", b =>
@@ -387,10 +507,6 @@ namespace GreenPrint.Repository.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GreenPrint.Repository.Entities.Order", null)
-                        .WithMany("Items")
-                        .HasForeignKey("OrderId");
-
                     b.HasOne("GreenPrint.Repository.Entities.Warehouse", "Warehouse")
                         .WithMany("Items")
                         .HasForeignKey("WarehouseId")
@@ -417,7 +533,7 @@ namespace GreenPrint.Repository.Migrations
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.Order", b =>
                 {
-                    b.Navigation("Items");
+                    b.Navigation("ItemOrders");
                 });
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.Role", b =>
@@ -427,6 +543,8 @@ namespace GreenPrint.Repository.Migrations
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.Warehouse", b =>
                 {
+                    b.Navigation("ItemOrders");
+
                     b.Navigation("Items");
                 });
 #pragma warning restore 612, 618

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GreenPrint.Repository.Paging;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,6 +15,20 @@ namespace GreenPrint.Service.Interfaces
         /// </summary>
         /// <param name="entity"></param>
         Task CreateAsync(DTO entity);
+
+        /// <summary>
+        /// Adds a list of entities to the database
+        /// </summary>
+        /// <param name="entityList"></param>
+        /// <returns></returns>
+        Task CreateListAsync(List<DTO> entityList);
+
+        /// <summary>
+        /// Adds an entity to the database and returns it
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        Task<DTO> CreateAndReturn(DTO entity);
 
         /// <summary>
         /// Updates an entiry in the database
@@ -32,6 +47,13 @@ namespace GreenPrint.Service.Interfaces
         /// </summary>
         /// <returns></returns>
         Task<List<DTO>> GetAllAsync();
+
+        /// <summary>
+        /// Gets an entities from the database with paging
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        Task<List<DTO>> GetAllAsyncWithPaging(PageOptions options);
 
         /// <summary>
         /// Gets an entity by its id

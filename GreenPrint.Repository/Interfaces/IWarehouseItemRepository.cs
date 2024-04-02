@@ -9,5 +9,12 @@ namespace GreenPrint.Repository.Interfaces
 {
     public interface IWarehouseItemRepository : IGenericRepository<WarehouseItem>
     {
+        /// <summary>
+        /// Get all warehouse items by warehouse id
+        /// </summary>
+        /// <param name="itemId"></param>
+        /// <param name="warehouseId"></param>
+        /// <returns></returns>
+        Task<WarehouseItem> GetByItemAndWarehouseId(int itemId, int warehouseId);
     }
 }

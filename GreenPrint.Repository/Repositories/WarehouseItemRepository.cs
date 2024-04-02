@@ -1,6 +1,7 @@
 ﻿using GreenPrint.Repository.Domain;
 using GreenPrint.Repository.Entities;
 using GreenPrint.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,12 @@ namespace GreenPrint.Repository.Repositories
         private readonly StoreContext _dbContext = context;
 
         #endregion
+
+        public async Task<WarehouseItem> GetByItemAndWarehouseId(int warehouseId, int itemId)
+        {
+            var temp = await _dbContext.WarehouseItems.AsNoTracking().FirstOrDefaultAsync(wi => wi.WarehouseId == warehouseId && wi.ItemId == itemId);
+            return temp;
+        }
 
     }
 }
