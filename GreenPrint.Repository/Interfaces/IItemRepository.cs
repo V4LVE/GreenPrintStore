@@ -1,4 +1,6 @@
 ﻿using GreenPrint.Repository.Entities;
+using GreenPrint.Repository.Enums;
+using GreenPrint.Repository.Paging;
 using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,14 @@ namespace GreenPrint.Repository.Interfaces
 {
     public interface IItemRepository : IGenericRepository<Item>
     {
+        /// <summary>
+        /// Get all items with paging and sorting
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        Task<List<Item>> GetAllAsyncWithPagingAndSort(PageOptions options, OrderByOptionsItem order);
+
         /// <summary>
         /// Get all items by category
         /// </summary>

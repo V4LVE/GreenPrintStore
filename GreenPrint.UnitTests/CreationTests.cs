@@ -29,8 +29,8 @@ namespace GreenPrint.UnitTests
         public async Task CreateAddress()
         {
             #region Setup
-            ContextCreator.RecreateDatabase();
             StoreContext context = ContextCreator.Create();
+            ContextCreator.RecreateDatabase(context);
 
             // Service Injections
             AddressService addressService = new(context, _mappingService);
@@ -62,8 +62,8 @@ namespace GreenPrint.UnitTests
         public async Task CreateCustomer()
         {
             #region Setup
-            ContextCreator.RecreateDatabase();
             StoreContext context = ContextCreator.Create();
+            ContextCreator.RecreateDatabase(context);
 
             // Service Injections
             CustomerService customerService = new(context, _mappingService);
@@ -97,8 +97,8 @@ namespace GreenPrint.UnitTests
         public async Task CreateUser()
         {
             #region Setup
-            ContextCreator.RecreateDatabase();
             StoreContext context = ContextCreator.Create();
+            ContextCreator.RecreateDatabase(context);
 
             // Service Injections
             UserService userService = new(context, _mappingService);

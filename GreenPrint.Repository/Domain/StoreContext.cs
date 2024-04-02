@@ -3,6 +3,7 @@ using GreenPrint.Repository.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,10 @@ namespace GreenPrint.Repository.Domain
                 //optionsBuilder.UseSqlServer("Server =COLSERVER\\COLDB; Database = GreenPrintStore;User Id=DBUser;Password=Pwrvol901;TrustServerCertificate=True;"); // Desktop DB
                 optionsBuilder.UseSqlServer("Server =ALEX_PC\\SQLEXPRESS; Database = GreenPrintStore; Trusted_Connection = True;TrustServerCertificate=True; "); // Laptop DB
                 optionsBuilder.EnableSensitiveDataLogging();
+                optionsBuilder.UseLoggerFactory(new ServiceCollection()
+                              .AddLogging(builder => builder.AddConsole()
+                                                            .AddFilter(DbLoggerCategory.Database.Command.Name, LogLevel.Information))
+                               .BuildServiceProvider().GetService<ILoggerFactory>());
             }
 
             base.OnConfiguring(optionsBuilder);

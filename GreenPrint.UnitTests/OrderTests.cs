@@ -30,8 +30,8 @@ namespace GreenPrint.UnitTests
             // Arrange
 
             #region Setup
-            ContextCreator.RecreateDatabase();
             StoreContext context = ContextCreator.Create();
+            ContextCreator.RecreateDatabase(context);
 
             // Service Injections
             CustomerService customerService = new(context, _mappingService);

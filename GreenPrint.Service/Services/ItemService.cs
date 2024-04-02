@@ -1,6 +1,8 @@
 ﻿using GreenPrint.Repository.Domain;
 using GreenPrint.Repository.Entities;
+using GreenPrint.Repository.Enums;
 using GreenPrint.Repository.Interfaces;
+using GreenPrint.Repository.Paging;
 using GreenPrint.Repository.Repositories;
 using GreenPrint.Service.DataTransferObjects;
 using GreenPrint.Service.Interfaces;
@@ -21,19 +23,24 @@ namespace GreenPrint.Service.Services
 
         #endregion
 
-        public async Task<List<Item>> GetItemsBySearch(string searchQuery)
+        public async Task<List<ItemDTO>> GetItemsBySearch(string searchQuery)
         {
-            return await _ItemRepository.GetItemsBySearch(searchQuery);
+            return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetItemsBySearch(searchQuery));
         }
 
-        public async Task<List<Item>> GetItemsbyCategory(string category)
+        public async Task<List<ItemDTO>> GetItemsbyCategory(string category)
         {
-            return await _ItemRepository.GetItemsbyCategory(category);
+            return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetItemsbyCategory(category));
         }
 
-        public async Task<List<Item>> GetItemsbyCategory(int categoryId)
+        public async Task<List<ItemDTO>> GetItemsbyCategory(int categoryId)
         {
-            return await _ItemRepository.GetItemsbyCategory(categoryId);
+            return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetItemsbyCategory(categoryId));
+        }
+
+        public async Task<List<ItemDTO>> GetAllAsyncWithPaging(PageOptions options, OrderByOptionsItem order)
+        {
+            return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetAllAsyncWithPagingAndSort(options, order));
         }
     }
 }
