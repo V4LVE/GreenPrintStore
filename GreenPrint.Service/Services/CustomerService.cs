@@ -1,4 +1,5 @@
-﻿using GreenPrint.Repository.Domain;
+﻿using Azure.Identity;
+using GreenPrint.Repository.Domain;
 using GreenPrint.Repository.Entities;
 using GreenPrint.Repository.Interfaces;
 using GreenPrint.Repository.Repositories;
@@ -13,11 +14,11 @@ using System.Threading.Tasks;
 
 namespace GreenPrint.Service.Services
 {
-    public class CustomerService(StoreContext context, MappingService mappingService) : GenericService<CustomerDTO, ICustomerRepository, Customer>(mappingService, new CustomerRepository(context)), ICustomerService
+    public class CustomerService(MappingService mappingService, ICustomerRepository customerRepository) : GenericService<CustomerDTO, ICustomerRepository, Customer>(mappingService, customerRepository), ICustomerService
     {
         #region backing fields
         private readonly MappingService _mappingService = mappingService;
-        private readonly ICustomerRepository _CustomerRepository = new CustomerRepository(context);
+        private readonly ICustomerRepository _CustomerRepository = customerRepository;
 
         #endregion
     }
