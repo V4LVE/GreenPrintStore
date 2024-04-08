@@ -98,10 +98,10 @@ namespace GreenPrint.Repository.Domain
                                new User
                                {
                                    Id = 1,
-                                   Email = "JohnnyD@69420.com",
-                                   Password = "Password",
+                                   Email = "alex802c@gmail.com",
+                                   Password = "Pwrvol901",
                                    CustomerId = 1,
-                                   Roleid = 1
+                                   Roleid = 3
                                }
                           );
             #endregion

@@ -1,6 +1,7 @@
 ﻿using GreenPrint.Repository.Domain;
 using GreenPrint.Repository.Entities;
 using GreenPrint.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,16 @@ namespace GreenPrint.Repository.Repositories
         #endregion
         #region Constructor
         #endregion
+
+        public async Task CheckSession(int sessionId)
+        {
+            var session = await _dbContext.Sessions.SingleAsync(s => s.Id == sessionId && s.ExpirationDate < DateTime.Now);
+
+            if (session != null)
+            {
+                _dbContext.Sessions.Remove(session);
+                await _dbContext.SaveChangesAsync();
+            }
+        }
     }
 }

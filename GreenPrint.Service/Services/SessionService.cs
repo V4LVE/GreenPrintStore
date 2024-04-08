@@ -20,5 +20,22 @@ namespace GreenPrint.Service.Services
         private readonly ISessionRepository _SessionRepository = SessionRepository;
 
         #endregion
+
+        public async Task<SessionDTO> CreateSession(int userId)
+        {
+            SessionDTO session = new()
+            {
+                UserId = userId,
+                SessionToken = Guid.NewGuid(),
+                ExpirationDate = DateTime.Now.AddHours(1)
+            };
+
+            return _mappingService._mapper.Map<SessionDTO>(await _SessionRepository.CreateAndReturn(_mappingService._mapper.Map<Session>(session)));
+        }
+
+        public async Task CheckSession(int sessionId)
+        {
+            await _SessionRepository.CheckSession(sessionId);
+        }
     }
 }

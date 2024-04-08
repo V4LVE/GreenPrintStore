@@ -9,5 +9,17 @@ namespace GreenPrint.Service.Interfaces
 {
     public interface ISessionService : IGenericService<SessionDTO>
     {
+        /// <summary>
+        /// Creates a session
+        /// </summary>
+        /// <returns></returns>
+        Task<SessionDTO> CreateSession(int userId);
+
+        /// <summary>
+        /// Check a user session
+        /// </summary>
+        /// <param name="sessionId"></param>
+        /// <returns></returns>
+        Task CheckSession(int sessionId);
     }
 }
