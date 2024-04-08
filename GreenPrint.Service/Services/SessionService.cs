@@ -33,9 +33,9 @@ namespace GreenPrint.Service.Services
             return _mappingService._mapper.Map<SessionDTO>(await _SessionRepository.CreateAndReturn(_mappingService._mapper.Map<Session>(session)));
         }
 
-        public async Task CheckSession(int sessionId)
+        public async Task<bool> CheckSession(int sessionId)
         {
-            await _SessionRepository.CheckSession(sessionId);
+            return await _SessionRepository.CheckSession(sessionId);
         }
     }
 }

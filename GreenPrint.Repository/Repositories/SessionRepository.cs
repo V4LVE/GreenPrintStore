@@ -19,15 +19,18 @@ namespace GreenPrint.Repository.Repositories
         #region Constructor
         #endregion
 
-        public async Task CheckSession(int sessionId)
+        public async Task<bool> CheckSession(int sessionId)
         {
-            var session = await _dbContext.Sessions.SingleAsync(s => s.Id == sessionId && s.ExpirationDate < DateTime.Now);
+            var session = await _dbContext.Sessions.SingleAsync(s => s.Id == sessionId);
 
-            if (session != null)
+            if (session.ExpirationDate < DateTime.Now)
             {
                 _dbContext.Sessions.Remove(session);
                 await _dbContext.SaveChangesAsync();
+                return false;
             }
+
+            return true;
         }
     }
 }

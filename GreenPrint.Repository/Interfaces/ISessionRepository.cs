@@ -15,6 +15,6 @@ namespace GreenPrint.Repository.Interfaces
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task CheckSession(int id);
+        Task<bool> CheckSession(int id);
     }
 }

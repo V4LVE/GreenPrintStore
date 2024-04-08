@@ -20,6 +20,6 @@ namespace GreenPrint.Service.Interfaces
         /// </summary>
         /// <param name="sessionId"></param>
         /// <returns></returns>
-        Task CheckSession(int sessionId);
+        Task<bool> CheckSession(int sessionId);
     }
 }

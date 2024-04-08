@@ -1,5 +1,7 @@
-﻿using GreenPrint.Service.DataTransferObjects;
+﻿using Azure.Core;
+using GreenPrint.Service.DataTransferObjects;
 using GreenPrint.Service.Interfaces;
+using GreenPrint.Service.Services;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Text.Json;
@@ -23,7 +25,22 @@ namespace GreenPrint.Web.Extensions
                 return "Not logged in";
             }
         }
-            
+        
+        public static async Task<bool> IsLoggedIn(this HttpContext context)
+        {
+            ISessionService sessionService = context.RequestServices.GetService<ISessionService>();
+            try
+            {
+                string SessionCookie = context.Request.Cookies["Session"];
+                var session = JsonSerializer.Deserialize<SessionDTO>(SessionCookie);
+
+                return await sessionService.CheckSession(session.Id);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
 
         public static async Task<bool> AuthenticatedUserIsAdmin(this HttpContext context)
