@@ -119,10 +119,16 @@ namespace GreenPrint.Repository.Domain
             modelBuilder.Entity<Warehouse>()
                 .HasMany(w => w.ItemOrders).WithOne(io => io.Warehouse);
             #endregion
+
+            #region Session
+            modelBuilder.Entity<Session>()
+                .HasOne(s => s.User).WithOne(u => u.Session).HasForeignKey<Session>(s => s.UserId).OnDelete(DeleteBehavior.NoAction);
+            #endregion
         }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Customer> Customers { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Address> Addresses { get; set; }
@@ -130,6 +136,7 @@ namespace GreenPrint.Repository.Domain
         public DbSet<WarehouseItem> WarehouseItems { get; set; }
         public DbSet<ItemOrder> ItemOrders { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Session> Sessions { get; set; }
 
     }
 }

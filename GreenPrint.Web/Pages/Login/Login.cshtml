@@ -1,0 +1,24 @@
+﻿@page
+@model GreenPrint.Web.Pages.Login.LoginModel
+@{
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <h2>Login</h2>
+            <form method="post" asp-page-handler="Login">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" required />
+
+                </div>
+                <div class="form-group" >
+                    <label for="pass" class="form-label">Password</label>
+                    <input type="password" name="password" id="pass" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>

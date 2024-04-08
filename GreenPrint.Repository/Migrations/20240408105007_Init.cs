@@ -56,7 +56,7 @@ namespace GreenPrint.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customer",
+                name: "Customers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -69,9 +69,9 @@ namespace GreenPrint.Repository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customer", x => x.Id);
+                    table.PrimaryKey("PK_Customers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Customer_Addresses_AddressId",
+                        name: "FK_Customers_Addresses_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Addresses",
                         principalColumn: "Id",
@@ -134,9 +134,9 @@ namespace GreenPrint.Repository.Migrations
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_Customer_CustomerId",
+                        name: "FK_Orders_Customers_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customer",
+                        principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -150,15 +150,16 @@ namespace GreenPrint.Repository.Migrations
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Roleid = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: true)
+                    CustomerId = table.Column<int>(type: "int", nullable: true),
+                    SessionId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Users_Customer_CustomerId",
+                        name: "FK_Users_Customers_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customer",
+                        principalTable: "Customers",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Users_Roles_Roleid",
@@ -229,6 +230,26 @@ namespace GreenPrint.Repository.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Sessions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SessionToken = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sessions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Sessions_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "Addresses",
                 columns: new[] { "Id", "City", "StreetName", "StreetNumber", "ZipCode" },
@@ -255,7 +276,7 @@ namespace GreenPrint.Repository.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Customer",
+                table: "Customers",
                 columns: new[] { "Id", "AddressId", "Email", "FirstName", "LastName", "Phone" },
                 values: new object[] { 1, 1, "JohnnyD@69420.com", "John", "Doe", "69696969" });
 
@@ -276,8 +297,8 @@ namespace GreenPrint.Repository.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "CustomerId", "Email", "Password", "Roleid" },
-                values: new object[] { 1, 1, "JohnnyD@69420.com", "Password", 1 });
+                columns: new[] { "Id", "CustomerId", "Email", "Password", "Roleid", "SessionId" },
+                values: new object[] { 1, 1, "JohnnyD@69420.com", "Password", 1, null });
 
             migrationBuilder.InsertData(
                 table: "WarehouseItems",
@@ -290,8 +311,8 @@ namespace GreenPrint.Repository.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customer_AddressId",
-                table: "Customer",
+                name: "IX_Customers_AddressId",
+                table: "Customers",
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
@@ -318,6 +339,12 @@ namespace GreenPrint.Repository.Migrations
                 name: "IX_Orders_CustomerId",
                 table: "Orders",
                 column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sessions_UserId",
+                table: "Sessions",
+                column: "UserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_CustomerId",
@@ -354,7 +381,7 @@ namespace GreenPrint.Repository.Migrations
                 name: "ItemOrders");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Sessions");
 
             migrationBuilder.DropTable(
                 name: "WarehouseItems");
@@ -363,7 +390,7 @@ namespace GreenPrint.Repository.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Roles");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Items");
@@ -372,7 +399,10 @@ namespace GreenPrint.Repository.Migrations
                 name: "Warehouses");
 
             migrationBuilder.DropTable(
-                name: "Customer");
+                name: "Customers");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
 
             migrationBuilder.DropTable(
                 name: "Categories");

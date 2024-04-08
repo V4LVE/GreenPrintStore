@@ -3,11 +3,14 @@ using GreenPrint.Repository.Interfaces;
 using GreenPrint.Repository.Repositories;
 using GreenPrint.Service.Interfaces;
 using GreenPrint.Service.Services;
+using GreenPrint.Services.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 #region DI Container
+builder.Services.AddScoped<MappingService>();
+
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IAddressService, AddressService>();
 
@@ -38,6 +41,9 @@ builder.Services.AddScoped<IWarehouseService, WarehouseService>();
 builder.Services.AddScoped<IWarehouseItemRepository, WarehouseItemRepository>();
 builder.Services.AddScoped<IWarehouseItemService, WarehouseItemService>();
 
+builder.Services.AddScoped<ISessionRepository, SessionRepository>();
+builder.Services.AddScoped<ISessionService, SessionService>();
+
 #endregion
 
 
@@ -46,7 +52,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<StoreContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("GreenPrintDbContext"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Laptop"));
 });
 
 var app = builder.Build();
