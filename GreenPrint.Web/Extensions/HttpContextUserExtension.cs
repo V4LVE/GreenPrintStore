@@ -43,7 +43,7 @@ namespace GreenPrint.Web.Extensions
         }
 
 
-        /*public static async Task<bool> AuthenticatedUserIsAdmin(this HttpContext context)
+        public static async Task<bool> AuthenticatedUserIsAdmin(this HttpContext context)
         {
             IUserService userService = context.RequestServices.GetService<IUserService>();
             ISessionService sessionService = context.RequestServices.GetService<ISessionService>();
@@ -67,7 +67,7 @@ namespace GreenPrint.Web.Extensions
             
 
             
-        }*/
+        }
 
         public static async Task<SessionDTO> GetSession(this HttpContext context)
         {
