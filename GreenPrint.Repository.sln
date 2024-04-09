@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenPrint.Service", "Green
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenPrint.UnitTests", "GreenPrint.UnitTests\GreenPrint.UnitTests.csproj", "{1EAC834A-FF9A-4287-A093-CD069D6EC4DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenPrint.Web", "GreenPrint.Web\GreenPrint.Web.csproj", "{12B5EDED-C081-470E-B47A-74E17F15F311}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenPrint.Web", "GreenPrint.Web\GreenPrint.Web.csproj", "{12B5EDED-C081-470E-B47A-74E17F15F311}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

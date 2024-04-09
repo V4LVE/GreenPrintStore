@@ -1,4 +1,5 @@
 ﻿using Azure.Core;
+using GreenPrint.Repository.Entities;
 using GreenPrint.Service.DataTransferObjects;
 using GreenPrint.Service.Interfaces;
 using GreenPrint.Service.Services;
@@ -17,7 +18,7 @@ namespace GreenPrint.Web.Extensions
 
             try
             {
-                SessionDTO session = JsonSerializer.Deserialize<SessionDTO>(context.Request.Cookies["Session"]);
+                SessionDTO session = await GetSession(context);
                 return userService.GetByIdAsync(session.UserId).Result.Email;
             }
             catch (Exception)
@@ -31,8 +32,7 @@ namespace GreenPrint.Web.Extensions
             ISessionService sessionService = context.RequestServices.GetService<ISessionService>();
             try
             {
-                string SessionCookie = context.Request.Cookies["Session"];
-                var session = JsonSerializer.Deserialize<SessionDTO>(SessionCookie);
+                SessionDTO session = await GetSession(context);
 
                 return await sessionService.CheckSession(session.Id);
             }
@@ -43,11 +43,36 @@ namespace GreenPrint.Web.Extensions
         }
 
 
-        public static async Task<bool> AuthenticatedUserIsAdmin(this HttpContext context)
+        /*public static async Task<bool> AuthenticatedUserIsAdmin(this HttpContext context)
         {
             IUserService userService = context.RequestServices.GetService<IUserService>();
-            var user = await userService.GetUserByEmailAsync(context.User.Identity.Name);
-            return await userService.IsUserAdminAsync(user.Id);
+            ISessionService sessionService = context.RequestServices.GetService<ISessionService>();
+
+            try
+            {
+                SessionDTO session = await GetSession(context);
+
+                if (await sessionService.CheckSession(session.Id))
+                {
+                    return await userService.IsUserAdminAsync(session.UserId);
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+
+            
+
+            
+        }*/
+
+        public static async Task<SessionDTO> GetSession(this HttpContext context)
+        {
+           
+            return JsonSerializer.Deserialize<SessionDTO>(context.Request.Cookies["Session"]);
         }
     }
 }

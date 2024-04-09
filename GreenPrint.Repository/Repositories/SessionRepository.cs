@@ -21,7 +21,7 @@ namespace GreenPrint.Repository.Repositories
 
         public async Task<bool> CheckSession(int sessionId)
         {
-            var session = await _dbContext.Sessions.SingleAsync(s => s.Id == sessionId);
+            var session = await _dbContext.Sessions.AsNoTracking().SingleAsync(s => s.Id == sessionId);
 
             if (session.ExpirationDate < DateTime.Now)
             {

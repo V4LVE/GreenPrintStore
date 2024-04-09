@@ -34,9 +34,15 @@
                             }
                             else
                             {
-                                <a class="nav-link text-dark">Logout</a>
+                                <a class="nav-link text-dark" asp-page="/Login/Logout">Logout</a>
                             }
                         </li>
+                        @* @if (await Context.AuthenticatedUserIsAdmin())
+                        {
+                            <li>
+                                <a class="nav-link text-dark" asp-page="/Admin">Admin Area</a>
+                            </li>
+                        } *@
                     </ul>
                 </div>
             </div>

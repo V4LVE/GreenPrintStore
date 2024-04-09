@@ -44,7 +44,7 @@ namespace GreenPrint.Web.Pages.Login
                 return RedirectToPage("/Index");
             }
 
-            return Page();
+            return RedirectToPage("ShowAlert", new {Message = "Your password or email was incorrect!", success = false});
         }
     }
 }

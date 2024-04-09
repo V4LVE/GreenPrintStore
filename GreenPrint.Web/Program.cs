@@ -53,6 +53,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<StoreContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Laptop"));
+    options.EnableSensitiveDataLogging();
 });
 
 var app = builder.Build();
