@@ -1,4 +1,5 @@
-﻿using GreenPrint.Repository.Entities;
+﻿using Faker;
+using GreenPrint.Repository.Entities;
 using GreenPrint.Repository.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -58,8 +59,8 @@ namespace GreenPrint.Repository.Domain
                 );
 
             // Address
-            modelBuilder.Entity<Address>().HasData(
-                               new Address
+            modelBuilder.Entity<GreenPrint.Repository.Entities.Address>().HasData(
+                               new GreenPrint.Repository.Entities.Address
                                {
                                    Id = 1,
                                    StreetName = "JutlandStreet",
@@ -104,6 +105,50 @@ namespace GreenPrint.Repository.Domain
                                    Roleid = 3
                                }
                           );
+
+            #endregion
+
+            #region Faker Data
+            //Customers
+            for (int i = 0; i < 10; i++)
+            {
+
+                var email = Internet.Email();
+
+                modelBuilder.Entity<Customer>().HasData(
+                    new Customer
+                    {
+                        Id = i + 2,
+                        FirstName = Name.First(),
+                        LastName = Name.Last(),
+                        AddressId = i + 2,
+                        Email = email,
+                        Phone = Phone.Number()
+                    }
+                );
+
+                modelBuilder.Entity<User>().HasData(
+                    new User
+                    {
+                        Id = i + 2,
+                        Email = email,
+                        Password = "Password",
+                        CustomerId = i + 2,
+                        Roleid = RandomNumber.Next(1, 3),
+                    }
+                );
+
+                modelBuilder.Entity<Entities.Address>().HasData(
+                    new Entities.Address
+                    {
+                        Id = i + 2,
+                        StreetName = Faker.Address.StreetName(),
+                        StreetNumber = RandomNumber.Next(1, 100).ToString(),
+                        ZipCode = Faker.Address.ZipCode(),
+                        City = Faker.Address.City()
+                    }
+                );
+            }
             #endregion
 
             // Relationships
@@ -131,7 +176,7 @@ namespace GreenPrint.Repository.Domain
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Item> Items { get; set; }
-        public DbSet<Address> Addresses { get; set; }
+        public DbSet<GreenPrint.Repository.Entities.Address> Addresses { get; set; }
         public DbSet<Warehouse> Warehouses { get; set; }
         public DbSet<WarehouseItem> WarehouseItems { get; set; }
         public DbSet<ItemOrder> ItemOrders { get; set; }
