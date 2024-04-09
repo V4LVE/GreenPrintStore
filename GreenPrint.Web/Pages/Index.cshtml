@@ -1,0 +1,39 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="container">
+
+    <div class="row border-bottom border-primary">
+        <div class="col-8">
+            <h1>Catalog</h1>
+        </div>
+        <div class="col-4">
+            <form method="post" asp-page-handler="Search">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search for product ID or Name" name="Search">
+                    <button class="btn btn-primary toggleLoader" type="submit"><i class="bi bi-search"></i> Search</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        @foreach (var category in Model.Categories)
+        {
+            <div class="col-4 mt-2">
+
+                <a class="card text-center text-decoration-none" asp-page="/Items/ItemListView" asp-route-categoryID="@category.Id">
+                    <div class="card-body">
+                        <h5>@category.CategoryName</h5>
+                    </div>
+                </a>
+
+            </div>
+        }
+    </div>
+
+</div>

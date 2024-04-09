@@ -17,10 +17,12 @@ namespace GreenPrint.Repository.Entities
         public string Email { get; set; }
         public int Roleid { get; set; }
         public int? CustomerId { get; set; }
+        public int? SessionId { get; set; }
 
         // Navigation properties
         public Role Role { get; set; }
         public Customer? Customer { get; set; }
+        public Session? Session { get; set; }
 
     }
 }

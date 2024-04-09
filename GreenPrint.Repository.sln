@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenPrint.Repository", "GreenPrint.Repository\GreenPrint.Repository.csproj", "{4625A42D-DA8E-4441-B787-A26D8BECAB31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenPrint.Repository", "GreenPrint.Repository\GreenPrint.Repository.csproj", "{4625A42D-DA8E-4441-B787-A26D8BECAB31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenPrint.Service", "GreenPrint.Service\GreenPrint.Service.csproj", "{F7C61C4A-9274-4EF2-9C2D-1D5AF4F21B07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenPrint.Service", "GreenPrint.Service\GreenPrint.Service.csproj", "{F7C61C4A-9274-4EF2-9C2D-1D5AF4F21B07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenPrint.UnitTests", "GreenPrint.UnitTests\GreenPrint.UnitTests.csproj", "{1EAC834A-FF9A-4287-A093-CD069D6EC4DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenPrint.UnitTests", "GreenPrint.UnitTests\GreenPrint.UnitTests.csproj", "{1EAC834A-FF9A-4287-A093-CD069D6EC4DE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenPrint.Web", "GreenPrint.Web\GreenPrint.Web.csproj", "{12B5EDED-C081-470E-B47A-74E17F15F311}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{1EAC834A-FF9A-4287-A093-CD069D6EC4DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EAC834A-FF9A-4287-A093-CD069D6EC4DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EAC834A-FF9A-4287-A093-CD069D6EC4DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12B5EDED-C081-470E-B47A-74E17F15F311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12B5EDED-C081-470E-B47A-74E17F15F311}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12B5EDED-C081-470E-B47A-74E17F15F311}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12B5EDED-C081-470E-B47A-74E17F15F311}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

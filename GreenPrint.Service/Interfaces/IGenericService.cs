@@ -49,13 +49,6 @@ namespace GreenPrint.Service.Interfaces
         Task<List<DTO>> GetAllAsync();
 
         /// <summary>
-        /// Gets an entities from the database with paging
-        /// </summary>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        Task<List<DTO>> GetAllAsyncWithPaging(PageOptions options);
-
-        /// <summary>
         /// Gets an entity by its id
         /// </summary>
         /// <param name="id"></param>

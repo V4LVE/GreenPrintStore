@@ -1,0 +1,50 @@
+﻿@page
+@model GreenPrint.Web.Pages.Login.LoginModel
+@{
+}
+<div>
+    @await Html.PartialAsync("~/Pages/Shared/_PartialAlert.cshtml")
+</div>
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="text-center">
+            <h2>Login</h2>
+        </div>
+        <form class="col-4" asp-page-handler="Login">
+            <!-- Email input -->
+            <div class="form-floating mb-4">
+                <input type="email" name="email" id="email" class="form-control" placeholder="Email" />
+                <label class="form-label" for="email">Email address</label>
+            </div>
+
+            <!-- Password input -->
+            <div class="form-floating mb-4">
+                <input type="password" name="password" id="pass" class="form-control" placeholder="Password" />
+                <label class="form-label" for="pass">Password</label>
+            </div>
+
+            <!-- 2 column grid layout for inline styling -->
+            <div class="row mb-4 text-center">
+                <div class="col">
+                    <!-- Simple link -->
+                    <a href="#!">Forgot password?</a>
+                </div>
+            </div>
+
+            <!-- Submit button -->
+            <div class="row justify-content-center">
+                <button type="submit" class="btn btn-primary btn-block mb-4 col-4 toggleLoader">Sign in</button>
+            </div>
+            
+
+            <!-- Register buttons -->
+            <div class="text-center">
+                <p>Not a member? <a href="#!">Register</a></p>
+            </div>
+        </form>
+
+        <button class="toggleLoader">Test me</button>
+    </div>
+</div>

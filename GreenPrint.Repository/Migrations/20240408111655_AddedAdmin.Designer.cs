@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenPrint.Repository.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20240402072506_Init")]
-    partial class Init
+    [Migration("20240408111655_AddedAdmin")]
+    partial class AddedAdmin
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -129,7 +129,7 @@ namespace GreenPrint.Repository.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
 
                     b.HasData(
                         new
@@ -292,6 +292,31 @@ namespace GreenPrint.Repository.Migrations
                         });
                 });
 
+            modelBuilder.Entity("GreenPrint.Repository.Entities.Session", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("SessionToken")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Sessions");
+                });
+
             modelBuilder.Entity("GreenPrint.Repository.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -314,6 +339,9 @@ namespace GreenPrint.Repository.Migrations
                     b.Property<int>("Roleid")
                         .HasColumnType("int");
 
+                    b.Property<int?>("SessionId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId")
@@ -329,9 +357,9 @@ namespace GreenPrint.Repository.Migrations
                         {
                             Id = 1,
                             CustomerId = 1,
-                            Email = "JohnnyD@69420.com",
-                            Password = "Password",
-                            Roleid = 1
+                            Email = "alex802c@gmail.com",
+                            Password = "Pwrvol901",
+                            Roleid = 3
                         });
                 });
 
@@ -474,6 +502,17 @@ namespace GreenPrint.Repository.Migrations
                     b.Navigation("Customer");
                 });
 
+            modelBuilder.Entity("GreenPrint.Repository.Entities.Session", b =>
+                {
+                    b.HasOne("GreenPrint.Repository.Entities.User", "User")
+                        .WithOne("Session")
+                        .HasForeignKey("GreenPrint.Repository.Entities.Session", "UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("GreenPrint.Repository.Entities.User", b =>
                 {
                     b.HasOne("GreenPrint.Repository.Entities.Customer", "Customer")
@@ -542,6 +581,11 @@ namespace GreenPrint.Repository.Migrations
             modelBuilder.Entity("GreenPrint.Repository.Entities.Role", b =>
                 {
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("GreenPrint.Repository.Entities.User", b =>
+                {
+                    b.Navigation("Session");
                 });
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.Warehouse", b =>

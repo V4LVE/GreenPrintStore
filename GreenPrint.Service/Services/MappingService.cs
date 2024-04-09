@@ -47,6 +47,9 @@ namespace GreenPrint.Services.Services
 
                 cfg.CreateMap<ItemOrder, ItemOrderDTO>();
                 cfg.CreateMap<ItemOrderDTO, ItemOrder>();
+
+                cfg.CreateMap<Session, SessionDTO>();
+                cfg.CreateMap<SessionDTO, Session>();
             });
 
             try

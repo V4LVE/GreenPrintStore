@@ -51,11 +51,6 @@ namespace GreenPrint.Services.Services
         }
 
 
-        public async Task<List<DTO>> GetAllAsyncWithPaging(PageOptions options)
-        {
-            return _mappingService._mapper.Map<List<DTO>>(await _genericRepository.GetAllAsyncWithPaging(options));
-        }
-
         public async Task<DTO> GetByIdAsync(int id)
         {
             return _mappingService._mapper.Map<DTO>(await _genericRepository.GetByIdAsync(id));

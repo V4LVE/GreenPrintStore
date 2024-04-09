@@ -13,11 +13,11 @@ using System.Threading.Tasks;
 
 namespace GreenPrint.Service.Services
 {
-    public class AddressService(StoreContext context, MappingService mappingService) : GenericService<AddressDTO, IAddressRepository, Address>(mappingService, new AddressRepository(context)), IAddressService
+    public class AddressService(MappingService mappingService, IAddressRepository addressRepository) : GenericService<AddressDTO, IAddressRepository, Address>(mappingService, addressRepository), IAddressService
     {
         #region backing fields
         private readonly MappingService _mappingService = mappingService;
-        private readonly IAddressRepository _addressRepository = new AddressRepository(context);
+        private readonly IAddressRepository _addressRepository = addressRepository;
 
         #endregion
     }

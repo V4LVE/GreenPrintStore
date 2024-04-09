@@ -13,17 +13,13 @@ namespace GreenPrint.Repository.Paging
 
         // PAGING
         public const int DefaultPageSize = 10;   //default page size is 10
+        public const int defaultPageNumber = 1;  //default page number is 1
 
-        public int PageNum { get; set; }
+        public int CurrentPage { get; set; } = 1;
 
         public int PageSize { get; set; } = DefaultPageSize;
 
-        public int NumPages { get; private set; }
+        public int TotalPages { get; set; }
 
-        public void SetupRestOfDto<T>(IQueryable<T> query)
-        {
-            NumPages = (int)Math.Ceiling((double)query.Count() / PageSize);
-            PageNum = Math.Min(Math.Max(1, PageNum), NumPages);
-        }
     }
 }

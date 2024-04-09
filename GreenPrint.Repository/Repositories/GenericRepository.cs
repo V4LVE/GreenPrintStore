@@ -58,17 +58,11 @@ namespace GreenPrint.Repository.Repositories
             return temp;
         }
 
-        public async Task<List<E>> GetAllAsyncWithPaging(PageOptions options)
-        {
-            var query = _dbContext.Set<E>().AsNoTracking();
-
-            options.SetupRestOfDto(query);
-            return await query.Page(options.PageNum - 1, options.PageSize).ToListAsync();
-        }
-
         public async Task<E> GetByIdAsync(int id)
         {
-            return await _dbContext.Set<E>().FindAsync(id);
+            E entity = await _dbContext.Set<E>().FindAsync(id);
+            _dbContext.Entry(entity).State = EntityState.Detached;
+            return entity;
         }
 
         public async Task DeleteAsync(E entity)

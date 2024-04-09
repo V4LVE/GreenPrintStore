@@ -15,11 +15,11 @@ using System.Threading.Tasks;
 
 namespace GreenPrint.Service.Services
 {
-    public class ItemService(StoreContext context, MappingService mappingService) : GenericService<ItemDTO, IItemRepository, Item>(mappingService, new ItemRepository(context)), IItemService
+    public class ItemService(MappingService mappingService, IItemRepository itemRepository) : GenericService<ItemDTO, IItemRepository, Item>(mappingService, itemRepository), IItemService
     {
         #region backing fields
         private readonly MappingService _mappingService = mappingService;
-        private readonly IItemRepository _ItemRepository = new ItemRepository(context);
+        private readonly IItemRepository _ItemRepository = itemRepository;
 
         #endregion
 
@@ -28,19 +28,15 @@ namespace GreenPrint.Service.Services
             return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetItemsBySearch(searchQuery));
         }
 
-        public async Task<List<ItemDTO>> GetItemsbyCategory(string category)
+        public async Task<List<ItemDTO>> GetItemsByCategory(string category, PageOptions pageOptions)
         {
-            return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetItemsbyCategory(category));
+            return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetItemsbyCategory(category, pageOptions));
         }
 
-        public async Task<List<ItemDTO>> GetItemsbyCategory(int categoryId)
+        public async Task<List<ItemDTO>> GetItemsByCategory(int categoryId, PageOptions pageOptions)
         {
-            return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetItemsbyCategory(categoryId));
+            return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetItemsbyCategory(categoryId, pageOptions));
         }
 
-        public async Task<List<ItemDTO>> GetAllAsyncWithPaging(PageOptions options, OrderByOptionsItem order)
-        {
-            return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetAllAsyncWithPagingAndSort(options, order));
-        }
     }
 }
