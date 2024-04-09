@@ -25,23 +25,20 @@ namespace GreenPrint.Repository.Repositories
             return await _dbContext.Items.AsNoTracking().Include(i => i.Category).FirstOrDefaultAsync(i => i.Id == id);
         }
 
-        public async Task<List<Item>> GetAllAsyncWithPagingAndSort(PageOptions options, OrderByOptionsItem order)
-        {
-            var query = _dbContext.Items.AsNoTracking().OrderItemsBy(order);
-
-            options.SetupRestOfDto(query);
-
-            return await query.Page(options.PageNum - 1, options.PageSize).ToListAsync();
-        }
-
-        public async Task<List<Item>> GetItemsbyCategory(string category)
+        
+        public async Task<List<Item>> GetItemsbyCategory(string category, PageOptions pageOptions)
         {
             return await _dbContext.Items.AsNoTracking().Where(i => i.Category.CategoryName == category).Include(c => c.Category).ToListAsync();
+            
+
         }
 
-        public async Task<List<Item>> GetItemsbyCategory(int categoryId)
+        public async Task<List<Item>> GetItemsbyCategory(int categoryId, PageOptions pageOptions)
         {
-            return await _dbContext.Items.AsNoTracking().Where(i => i.CategoryId == categoryId).Include(c => c.Category).ToListAsync();
+            //return await _dbContext.Items.AsNoTracking().Where(i => i.CategoryId == categoryId).Include(c => c.Category).ToListAsync();
+            var query = _dbContext.Items.AsNoTracking().Include(s => s.Category).Where(s => s.CategoryId == categoryId);
+
+            return await query.Skip((pageOptions.CurrentPage -1) * pageOptions.PageSize).Take(pageOptions.PageSize).ToListAsync();
         }
 
         public async Task<List<Item>> GetItemsBySearch(string searchQuery)

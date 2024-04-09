@@ -49,13 +49,6 @@ namespace GreenPrint.Repository.Interfaces
         Task<List<E>> GetAllAsync();
 
         /// <summary>
-        /// Gets an entities from the database with paging
-        /// </summary>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        Task<List<E>> GetAllAsyncWithPaging(PageOptions options);
-
-        /// <summary>
         /// Gets an entity by its id
         /// </summary>
         /// <param name="id"></param>

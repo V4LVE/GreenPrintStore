@@ -45,14 +45,6 @@ namespace GreenPrint.Repository.Repositories
             return temp;
         }
 
-        public async Task<List<Order>> GetAllAsyncWithPaging(PageOptions options, OrderByOptionsOrder order)
-        {
-            var query = _dbContext.Orders.AsNoTracking().OrderOrdersBy(order);
-
-            options.SetupRestOfDto(query);
-            return await query.Page(options.PageNum - 1, options.PageSize).ToListAsync();
-        }
-
         public async Task<List<Order>> GetOrdersBySearch(string searchQuery)
         {
             return await _dbContext.Orders.AsNoTracking().Where(

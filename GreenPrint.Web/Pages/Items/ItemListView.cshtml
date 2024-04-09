@@ -1,0 +1,70 @@
+﻿@page "{categoryID:int?}"
+@model GreenPrint.Web.Pages.Items.ItemListViewModel
+@{
+}
+
+<div class="container" style="height:75vh;">
+    <div class="row">
+        <div class="row border-bottom border-danger">
+            <h1>@Model.Category.CategoryName</h1>
+        </div>
+    </div>
+
+
+    <!--Search functions-->
+    <div class="row">
+        <form method="get">
+            <div class="input-group mb-3">
+                <div class="input-group-append col-2">
+                    <select asp-for="@Model.OptionsPaging.PageSize"
+                            asp-items="Html.GetEnumSelectList<GreenPrint.Web.Pages.Items.PageSizeEnum>()"
+                            class="form-select ">
+                        <option value="">Pagesize</option>
+                    </select>
+
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="row mt-2">
+
+        @foreach (var item in Model.Items)
+        {
+            <div class="col-3 mt-2">
+
+                <a asp-page="Furniture/Details" asp-route-productGuid="@item.Id" class="card bg-danger text-decoration-none toggleLoader">
+                    <div class="card-footer text-center">
+                        <h5 class="card-title text-light">@item.ItemName</h5>
+                    </div>
+                </a>
+
+            </div>
+        }
+
+    </div>
+</div>
+
+<!--Paging-->
+<footer>
+    <div class="row mt-2 justify-content-center">
+        <ul class="pagination">
+            @for (var i = 1; i <= Model.OptionsPaging.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.OptionsPaging.CurrentPage ? "active" : "")">
+                    <a asp-page=""
+                       asp-route-currentpage="@i"
+                       asp-route-pageSize="@Model.OptionsPaging.PageSize"
+                       class="page-link">@i</a>
+                </li>
+            }
+        </ul>
+    </div>
+</footer>
+

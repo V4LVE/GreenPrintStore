@@ -12,20 +12,13 @@ namespace GreenPrint.Repository.Interfaces
 {
     public interface IItemRepository : IGenericRepository<Item>
     {
-        /// <summary>
-        /// Get all items with paging and sorting
-        /// </summary>
-        /// <param name="options"></param>
-        /// <param name="order"></param>
-        /// <returns></returns>
-        Task<List<Item>> GetAllAsyncWithPagingAndSort(PageOptions options, OrderByOptionsItem order);
 
         /// <summary>
         /// Get all items by category
         /// </summary>
         /// <returns></returns>
-        Task <List<Item>> GetItemsbyCategory(string category);
-        Task<List<Item>> GetItemsbyCategory(int category);
+        Task <List<Item>> GetItemsbyCategory(string category, PageOptions pageOptions);
+        Task<List<Item>> GetItemsbyCategory(int category, PageOptions pageOptions);
 
         /// <summary>
         /// Get all items by search query

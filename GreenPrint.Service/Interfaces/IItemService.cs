@@ -12,19 +12,13 @@ namespace GreenPrint.Service.Interfaces
 {
     public interface IItemService : IGenericService<ItemDTO>
     {
-        /// <summary>
-        /// Get all items with paging and sorting
-        /// </summary>
-        /// <param name="options"></param>
-        /// <param name="order"></param>
-        /// <returns></returns>
-        Task<List<ItemDTO>> GetAllAsyncWithPaging(PageOptions options, OrderByOptionsItem order);
 
         /// <summary>
         /// Get all items by category
         /// </summary>
         /// <returns></returns>
-        Task<List<ItemDTO>> GetItemsbyCategory(string category);
+        Task<List<ItemDTO>> GetItemsByCategory(string category, PageOptions pageOptions);
+        Task<List<ItemDTO>> GetItemsByCategory(int category, PageOptions pageOptions);
 
         /// <summary>
         /// Get all items by search query

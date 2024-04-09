@@ -28,19 +28,15 @@ namespace GreenPrint.Service.Services
             return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetItemsBySearch(searchQuery));
         }
 
-        public async Task<List<ItemDTO>> GetItemsbyCategory(string category)
+        public async Task<List<ItemDTO>> GetItemsByCategory(string category, PageOptions pageOptions)
         {
-            return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetItemsbyCategory(category));
+            return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetItemsbyCategory(category, pageOptions));
         }
 
-        public async Task<List<ItemDTO>> GetItemsbyCategory(int categoryId)
+        public async Task<List<ItemDTO>> GetItemsByCategory(int categoryId, PageOptions pageOptions)
         {
-            return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetItemsbyCategory(categoryId));
+            return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetItemsbyCategory(categoryId, pageOptions));
         }
 
-        public async Task<List<ItemDTO>> GetAllAsyncWithPaging(PageOptions options, OrderByOptionsItem order)
-        {
-            return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetAllAsyncWithPagingAndSort(options, order));
-        }
     }
 }
