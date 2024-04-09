@@ -63,10 +63,6 @@ namespace GreenPrint.Web.Extensions
 
                 return false;
             }
-
-            
-
-            
         }
 
         public static async Task<SessionDTO> GetSession(this HttpContext context)

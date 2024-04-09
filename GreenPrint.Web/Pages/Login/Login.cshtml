@@ -3,8 +3,10 @@
 @{
 }
 <div>
-    <!--await Html.PartialAsync("~/Pages/Shared/_AlertPartial.cshtml")-->
+    @await Html.PartialAsync("~/Pages/Shared/_PartialAlert.cshtml")
 </div>
+
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="text-center">
@@ -33,7 +35,7 @@
 
             <!-- Submit button -->
             <div class="row justify-content-center">
-                <button type="button" class="btn btn-primary btn-block mb-4 col-4">Sign in</button>
+                <button type="submit" class="btn btn-primary btn-block mb-4 col-4">Sign in</button>
             </div>
             
 

@@ -17,13 +17,23 @@ namespace GreenPrint.Web.Pages.Login
             _sessionService = sessionService;
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGet()
         {
             string SessionCookie = Request.Cookies["Session"];
             if (SessionCookie != null)
             {
-                _sessionService.CheckSession(JsonSerializer.Deserialize<SessionDTO>(SessionCookie).Id);
+                await _sessionService.CheckSession(JsonSerializer.Deserialize<SessionDTO>(SessionCookie).Id);
             }
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnGetShowAlert(string message, bool success)
+        {
+            ViewData["ShowAlert"] = true;
+            ViewData["Message"] = message;
+            ViewData["Success"] = success;
+            return await this.OnGet();
         }
 
         public async Task<IActionResult> OnPostLoginAsync(string email, string password)
@@ -44,7 +54,7 @@ namespace GreenPrint.Web.Pages.Login
                 return RedirectToPage("/Index");
             }
 
-            return RedirectToPage("ShowAlert", new {Message = "Your password or email was incorrect!", success = false});
+            return RedirectToPage("/Login/Login", "ShowAlert", new {Message = "Your password or email was incorrect!", success = false});
         }
     }
 }

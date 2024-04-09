@@ -23,13 +23,14 @@ namespace GreenPrint.Service.Services
 
         public async Task<SessionDTO> CreateSession(int userId)
         {
+
             SessionDTO session = new()
             {
                 UserId = userId,
                 SessionToken = Guid.NewGuid(),
                 ExpirationDate = DateTime.Now.AddHours(1)
             };
-
+            
             return _mappingService._mapper.Map<SessionDTO>(await _SessionRepository.CreateAndReturn(_mappingService._mapper.Map<Session>(session)));
         }
 
