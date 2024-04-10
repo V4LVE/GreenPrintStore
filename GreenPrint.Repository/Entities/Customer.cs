@@ -16,10 +16,11 @@ namespace GreenPrint.Repository.Entities
         public int AddressId { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+        public int? UserId { get; set; }
 
         // Navigation properties
         public Address Address { get; set; }
         public List<Order> Orders { get; set; }
-        public User User { get; set; }
+        public User? User { get; set; }
     }
 }

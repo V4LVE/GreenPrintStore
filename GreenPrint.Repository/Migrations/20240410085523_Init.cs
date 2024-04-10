@@ -56,29 +56,6 @@ namespace GreenPrint.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddressId = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Customers_Addresses_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "Addresses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Warehouses",
                 columns: table => new
                 {
@@ -121,27 +98,6 @@ namespace GreenPrint.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Orders_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -156,11 +112,6 @@ namespace GreenPrint.Repository.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Users_Roles_Roleid",
                         column: x => x.Roleid,
@@ -192,6 +143,76 @@ namespace GreenPrint.Repository.Migrations
                         name: "FK_WarehouseItems_Warehouses_WarehouseId",
                         column: x => x.WarehouseId,
                         principalTable: "Warehouses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Customers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AddressId = table.Column<int>(type: "int", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Customers_Addresses_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Customers_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sessions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SessionToken = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sessions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Sessions_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -230,30 +251,23 @@ namespace GreenPrint.Repository.Migrations
                         principalColumn: "Id");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Sessions",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SessionToken = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sessions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Sessions_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id");
-                });
-
             migrationBuilder.InsertData(
                 table: "Addresses",
                 columns: new[] { "Id", "City", "StreetName", "StreetNumber", "ZipCode" },
-                values: new object[] { 1, "Sønderborg", "JutlandStreet", "69B", "6400" });
+                values: new object[,]
+                {
+                    { 1, "Sønderborg", "JutlandStreet", "69B", "6400" },
+                    { 2, "Fordberg", "Augustine Walk", "50", "31256" },
+                    { 3, "Port Daija", "Zulauf Villages", "26", "68442-3548" },
+                    { 4, "North Alveraview", "Larkin Brooks", "33", "75989-8259" },
+                    { 5, "Chayahaven", "Terrell Road", "61", "57595" },
+                    { 6, "East Tomasaview", "Cronin Plain", "78", "31507-2143" },
+                    { 7, "Lake Willischester", "Hane Rest", "61", "98240-2275" },
+                    { 8, "West Lowell", "Kozey Forks", "16", "03615-0115" },
+                    { 9, "Port Abdiel", "Otho Rapids", "41", "69043-8375" },
+                    { 10, "Reidmouth", "Furman Hollow", "94", "44750-9274" },
+                    { 11, "South Darronburgh", "Patience Fords", "21", "33515" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -277,8 +291,21 @@ namespace GreenPrint.Repository.Migrations
 
             migrationBuilder.InsertData(
                 table: "Customers",
-                columns: new[] { "Id", "AddressId", "Email", "FirstName", "LastName", "Phone" },
-                values: new object[] { 1, 1, "JohnnyD@69420.com", "John", "Doe", "69696969" });
+                columns: new[] { "Id", "AddressId", "Email", "FirstName", "LastName", "Phone", "UserId" },
+                values: new object[,]
+                {
+                    { 1, 1, "JohnnyD@69420.com", "John", "Doe", "69696969", null },
+                    { 2, 2, "eden@davis.us", "Dana", "Hickle", "676-612-1879 x635", null },
+                    { 3, 3, "korey_lemke@davisschinner.com", "Madaline", "Rath", "(726)318-2966", null },
+                    { 4, 4, "martine@hills.name", "Gail", "Krajcik", "742.123.8216 x52299", null },
+                    { 5, 5, "russell_balistreri@lubowitz.com", "Arnaldo", "Ledner", "(942)321-4314 x792", null },
+                    { 6, 6, "conner@lefflergrady.biz", "Tremayne", "Hettinger", "969.463.9619 x6872", null },
+                    { 7, 7, "jamarcus_beatty@mcglynnblick.co.uk", "Elisha", "Kuhn", "885-626-0507", null },
+                    { 8, 8, "maya_ryan@huelkuhn.info", "Carlo", "Herman", "548.568.1660 x022", null },
+                    { 9, 9, "alda.wehner@hegmann.name", "Bernard", "Rice", "1-606-199-7052", null },
+                    { 10, 10, "erling.corwin@wunsch.com", "Jeanne", "Hoppe", "944.546.2113 x41168", null },
+                    { 11, 11, "mariana@murphy.ca", "Ruthe", "Braun", "(954)903-0064 x40321", null }
+                });
 
             migrationBuilder.InsertData(
                 table: "Items",
@@ -291,14 +318,27 @@ namespace GreenPrint.Repository.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "CustomerId", "Email", "Password", "Roleid", "SessionId" },
+                values: new object[,]
+                {
+                    { 1, 1, "alex802c@gmail.com", "Pwrvol901", 3, null },
+                    { 2, 2, "eden@davis.us", "Password", 1, null },
+                    { 3, 3, "korey_lemke@davisschinner.com", "Password", 3, null },
+                    { 4, 4, "martine@hills.name", "Password", 2, null },
+                    { 5, 5, "russell_balistreri@lubowitz.com", "Password", 2, null },
+                    { 6, 6, "conner@lefflergrady.biz", "Password", 2, null },
+                    { 7, 7, "jamarcus_beatty@mcglynnblick.co.uk", "Password", 2, null },
+                    { 8, 8, "maya_ryan@huelkuhn.info", "Password", 1, null },
+                    { 9, 9, "alda.wehner@hegmann.name", "Password", 1, null },
+                    { 10, 10, "erling.corwin@wunsch.com", "Password", 3, null },
+                    { 11, 11, "mariana@murphy.ca", "Password", 2, null }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Warehouses",
                 columns: new[] { "Id", "AddressId", "WarehouseName" },
                 values: new object[] { 1, 1, "Warehouse" });
-
-            migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "CustomerId", "Email", "Password", "Roleid", "SessionId" },
-                values: new object[] { 1, 1, "JohnnyD@69420.com", "Password", 1, null });
 
             migrationBuilder.InsertData(
                 table: "WarehouseItems",
@@ -314,6 +354,13 @@ namespace GreenPrint.Repository.Migrations
                 name: "IX_Customers_AddressId",
                 table: "Customers",
                 column: "AddressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Customers_UserId",
+                table: "Customers",
+                column: "UserId",
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItemOrders_ItemId",
@@ -345,13 +392,6 @@ namespace GreenPrint.Repository.Migrations
                 table: "Sessions",
                 column: "UserId",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_CustomerId",
-                table: "Users",
-                column: "CustomerId",
-                unique: true,
-                filter: "[CustomerId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Roleid",
@@ -390,9 +430,6 @@ namespace GreenPrint.Repository.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Users");
-
-            migrationBuilder.DropTable(
                 name: "Items");
 
             migrationBuilder.DropTable(
@@ -402,13 +439,16 @@ namespace GreenPrint.Repository.Migrations
                 name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Roles");
-
-            migrationBuilder.DropTable(
                 name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Addresses");
+
+            migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
         }
     }
 }

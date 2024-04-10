@@ -169,6 +169,16 @@ namespace GreenPrint.Repository.Domain
             modelBuilder.Entity<Session>()
                 .HasOne(s => s.User).WithOne(u => u.Session).HasForeignKey<Session>(s => s.UserId).OnDelete(DeleteBehavior.NoAction);
             #endregion
+
+            #region Customer
+            modelBuilder.Entity<Customer>()
+                .HasOne(c => c.User).WithOne(u => u.Customer).HasForeignKey<User>(u => u.CustomerId).OnDelete(DeleteBehavior.NoAction);
+            #endregion
+
+            #region User
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Customer).WithOne(c => c.User).HasForeignKey<Customer>(c => c.UserId).OnDelete(DeleteBehavior.NoAction);
+            #endregion
         }
 
         public DbSet<User> Users { get; set; }

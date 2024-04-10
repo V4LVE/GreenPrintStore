@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GreenPrint.Repository.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,10 +17,11 @@ namespace GreenPrint.Service.DataTransferObjects
         public int AddressId { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+        public int? UserId { get; set; }
 
         // Navigation properties
-        public AddressDTO Address { get; set; }
-        public List<OrderDTO> Orders { get; set; }
-        public UserDTO User { get; set; }
+        public Address Address { get; set; }
+        public List<Order> Orders { get; set; }
+        public User? User { get; set; }
     }
 }

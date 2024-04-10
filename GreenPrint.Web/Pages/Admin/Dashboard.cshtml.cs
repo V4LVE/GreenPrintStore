@@ -11,13 +11,15 @@ namespace GreenPrint.Web.Pages.Admin
         #region backing fields
         private readonly ICategoryService _categoryService;
         private readonly IWarehouseService _warehouseService;
+        private readonly IAddressService _addressService;
         #endregion
 
         #region Constructor
-        public AdminDashboardModel(ICategoryService categoryService, IWarehouseService warehouseService)
+        public AdminDashboardModel(ICategoryService categoryService, IWarehouseService warehouseService, IAddressService addressService)
         {
             _categoryService = categoryService;
             _warehouseService = warehouseService;
+            _addressService = addressService;
         }
         #endregion
 
@@ -62,9 +64,23 @@ namespace GreenPrint.Web.Pages.Admin
 
         #region Warehouses
         // Adds a new warehouse
-        public async Task<IActionResult> OnPostAddWarehouse(string newWarehouseName)
+        public async Task<IActionResult> OnPostAddWarehouse(string wname, string street, string streetnum, string zip, string city)
         {
-            WarehouseDTO newWarehouse = new() { WarehouseName = newWarehouseName };
+            await OnGet();
+
+            AddressDTO newAddress = new()
+            {
+                StreetName = street,
+                StreetNumber = streetnum,
+                ZipCode = zip,
+                City = city
+            };
+
+            WarehouseDTO newWarehouse = new()
+            {
+                WarehouseName = wname,
+                Address = newAddress
+            };
 
             await _warehouseService.CreateAsync(newWarehouse);
 

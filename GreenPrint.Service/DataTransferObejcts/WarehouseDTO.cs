@@ -13,6 +13,7 @@ namespace GreenPrint.Service.DataTransferObjects
         public int Id { get; set; }
         public string WarehouseName { get; set; }
         public AddressDTO Address { get; set; }
+        public int AddressId { get; set; }
 
         // Navigation Properties
         public List<WarehouseItemDTO>? Items { get; set; }
