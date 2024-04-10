@@ -17,6 +17,13 @@ namespace GreenPrint.Repository.Repositories
 
         #endregion
 
+
+        new public async Task<List<User>> GetAllAsync()
+        {
+            List<User> temp = await _dbContext.Users.AsNoTracking().Include(r => r.Role).ToListAsync();
+
+            return temp;
+        }
         public async Task<bool> IsUserAdminAsync(int id)
         {
             return await _dbContext.Users.AsNoTracking().AnyAsync(u => u.Id == id && u.Roleid == 3);

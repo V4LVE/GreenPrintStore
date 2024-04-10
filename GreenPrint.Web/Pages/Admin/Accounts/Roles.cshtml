@@ -2,3 +2,46 @@
 @model GreenPrint.Web.Pages.Admin.Accounts.RolesModel
 @{
 }
+
+<div class="container">
+    <div class="row border-bottom border-primary">
+        <div class="col-3">
+            <h1>Roles</h1>
+        </div>
+        <div class="col-2 gx-1">
+            <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#createUser" aria-controls="createUser"><span class="fas fa-plus-circle"></span> Add Role</button>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-striped table-hover text-center ">
+            <thead class="thead-darker">
+                <tr>
+                    <th>Role ID</th>
+                    <th>Role Name</th>
+                    <th>Role Member Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Role in Model.Roles)
+                {
+                    <tr>
+                        <td>@Role.Id</td>
+                        <td>@Role.RoleName</td>
+                        <td>@(Role.Users.Count())</td>
+                        <td>
+                            <div class="btn-group">
+                                <form asp-page-handler="removeUser">
+                                    <button class="btn btn-danger" name="RoleId" value="@Role.Id" onclick="return confirm('Are you sure you want to delete this role?')"><span class="fas fa-trash-alt"></span></button>
+                                </form>
+                                <form>
+                                    <button class="btn btn-warning" name="RoleId" value="@Role.Id"><span class="fas fa-edit"></span></button>
+                                </form>
+                            </div>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

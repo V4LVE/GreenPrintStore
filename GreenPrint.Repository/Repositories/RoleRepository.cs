@@ -1,6 +1,7 @@
 ﻿using GreenPrint.Repository.Domain;
 using GreenPrint.Repository.Entities;
 using GreenPrint.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,13 @@ namespace GreenPrint.Repository.Repositories
         private readonly StoreContext _dbContext = context;
 
         #endregion
+
+        new public async Task<List<Role>> GetAllAsync()
+        {
+            List<Role> temp = await _dbContext.Roles.AsNoTracking().Include(r => r.Users).ToListAsync();
+
+            return temp;
+        }
 
     }
 }
