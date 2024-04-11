@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using GreenPrint.Repository.Domain;
 using GreenPrint.Repository.Interfaces;
 using GreenPrint.Repository.Paging;
+using System.Linq.Expressions;
 
 namespace GreenPrint.Repository.Repositories
 {

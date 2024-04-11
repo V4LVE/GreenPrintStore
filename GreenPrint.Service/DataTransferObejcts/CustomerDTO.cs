@@ -21,7 +21,7 @@ namespace GreenPrint.Service.DataTransferObjects
 
         // Navigation properties
         public Address Address { get; set; }
-        public List<Order> Orders { get; set; }
+        public List<Order>? Orders { get; set; }
         public User? User { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 using GreenPrint.Service.DataTransferObjects;
 using GreenPrint.Service.Interfaces;
+using GreenPrint.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
@@ -26,6 +27,11 @@ namespace GreenPrint.Web.Pages.Admin.Accounts
 
         public async Task<IActionResult> OnGet()
         {
+            if (!await HttpContext.AuthenticatedUserIsAdmin())
+            {
+                return RedirectToPage("/UnAuthorized");
+            }
+
             Customers = await _customerService.GetAllAsync();
 
             return Page();

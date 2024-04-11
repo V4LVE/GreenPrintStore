@@ -24,5 +24,11 @@ namespace GreenPrint.Repository.Repositories
             return temp;
         }
 
+        new public async Task<Role> GetByIdAsync(int id)
+        {
+            Role entity = await _dbContext.Roles.AsNoTracking().Include(r => r.Users).SingleOrDefaultAsync(r => r.Id == id);
+            return entity;
+        }
+
     }
 }

@@ -5,11 +5,11 @@
 
 <div class="container">
     <div class="row border-bottom border-primary">
-        <div class="col-3">
+        <div class="col-10">
             <h1>Customers</h1>
         </div>
         <div class="col-2 gx-1">
-            <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#createUser" aria-controls="createUser"><span class="fas fa-plus-circle"></span> Add Customer</button>
+            <button class="btn btn-outline-primary" style="float:right" data-bs-toggle="offcanvas" data-bs-target="#createUser" aria-controls="createUser"><span class="fas fa-plus-circle"></span> Add</button>
         </div>
     </div>
     <div class="row">
@@ -34,13 +34,11 @@
                         <td>@customer.Phone</td>
                         <td>@(customer.UserId != null ? "Yes" : "No")</td>
                         <td>
-                            <div class="btn-group">
+                            <div class="btn-group" role="group">
                                 <form asp-page-handler="removeUser">
-                                    <button class="btn btn-danger" name="customerId" value="@customer.Id" onclick="return confirm('Are you sure you want to delete this user?')"><span class="fas fa-trash-alt"></span></button>
+                                    <button class="btn btn-outline-primary rounded-circle me-1" type="button" name="customerId" value="@customer.Id" onclick="return confirm('Are you sure you want to delete this user?')"><span class="fas fa-trash-alt"></span></button>
                                 </form>
-                                <form>
-                                    <button class="btn btn-warning" name="customerId" value="@customer.Id"><span class="fas fa-edit"></span></button>
-                                </form>
+                                <a class="btn btn-outline-primary rounded-circle me-1" asp-page="/Admin/Accounts/Customer" asp-route-customerId="@customer.Id"><span class="fas fa-edit"></span></a>
                             </div>
 
                         </td>

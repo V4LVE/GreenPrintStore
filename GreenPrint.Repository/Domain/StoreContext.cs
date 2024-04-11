@@ -101,7 +101,6 @@ namespace GreenPrint.Repository.Domain
                                    Id = 1,
                                    Email = "alex802c@gmail.com",
                                    Password = "Pwrvol901",
-                                   CustomerId = 1,
                                    Roleid = 3
                                }
                           );

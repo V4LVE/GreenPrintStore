@@ -1,6 +1,7 @@
 ﻿using GreenPrint.Repository.Domain;
 using GreenPrint.Repository.Entities;
 using GreenPrint.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,12 @@ namespace GreenPrint.Repository.Repositories
         private readonly StoreContext _dbContext = context;
 
         #endregion
+
+        new public async Task<Customer> GetByIdAsync(int id)
+        {
+            Customer entity = await _dbContext.Customers.AsNoTracking().Include(c => c.Address).SingleOrDefaultAsync(c => c.Id == id);
+            return entity;
+        }
 
     }
 }

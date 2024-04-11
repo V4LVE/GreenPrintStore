@@ -48,7 +48,7 @@
                         <form method="post" asp-page-handler="DeleteCategory" class="row m-1">
                             <div class="input-group">
                                 <input type="text" class="form-control border-primary" value="@category.CategoryName" disabled />
-                                <button type="submit" value="@category.Id" onclick="return confirm('Are you sure you want to delete this category?')" name="categoryID" class="btn btn-danger fw-bold"><i class="fa-solid fa-trash-can"></i></button>
+                                <button type="submit" value="@category.Id" onclick="return confirm('Are you sure you want to delete this category?')" name="categoryID" class="btn btn-outline-danger fw-bold"><i class="fa-solid fa-trash-can"></i></button>
                             </div>
                         </form>
                     }
@@ -56,7 +56,7 @@
                 <form method="post" asp-page-handler="AddCategory" class="col-12 border-top border-primary border-3 p-2">
                     <div class="input-group">
                         <input type="text" name="newCategoryName" class="form-control border-primary" />
-                        <button type="submit" class="btn btn-success"><i class="fa-solid fa-circle-plus"></i></button>
+                        <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-circle-plus"></i> Add</button>
                     </div>
                 </form>
             </div>
@@ -74,13 +74,13 @@
                         <form method="post" asp-page-handler="DeleteWarehouse" class="row m-1">
                             <div class="input-group">
                                 <input type="text" class="form-control border-primary" value="@warehouse.WarehouseName" disabled />
-                                <button type="submit" value="@warehouse.Id" onclick="return confirm('Are you sure you want to delete this warehouse?')" name="warehouseID" class="btn btn-danger fw-bold"><i class="fa-solid fa-trash-can"></i></button>
+                                <button type="submit" value="@warehouse.Id" onclick="return confirm('Are you sure you want to delete this warehouse?')" name="warehouseID" class="btn btn-outline-danger fw-bold"><i class="fa-solid fa-trash-can"></i></button>
                             </div>
                         </form>
                     }
                 </div>
                 <div class="col-12 border-top border-primary border-3 p-2">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createWarehouse" aria-controls="createWarehouse"><i class="fa-solid fa-circle-plus"></i></button>
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createWarehouse" aria-controls="createWarehouse"><i class="fa-solid fa-circle-plus"></i> Add</button>
                 </div>
             </div>
         </div>

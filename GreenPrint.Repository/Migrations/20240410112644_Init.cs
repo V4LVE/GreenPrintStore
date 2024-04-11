@@ -257,16 +257,16 @@ namespace GreenPrint.Repository.Migrations
                 values: new object[,]
                 {
                     { 1, "Sønderborg", "JutlandStreet", "69B", "6400" },
-                    { 2, "Fordberg", "Augustine Walk", "50", "31256" },
-                    { 3, "Port Daija", "Zulauf Villages", "26", "68442-3548" },
-                    { 4, "North Alveraview", "Larkin Brooks", "33", "75989-8259" },
-                    { 5, "Chayahaven", "Terrell Road", "61", "57595" },
-                    { 6, "East Tomasaview", "Cronin Plain", "78", "31507-2143" },
-                    { 7, "Lake Willischester", "Hane Rest", "61", "98240-2275" },
-                    { 8, "West Lowell", "Kozey Forks", "16", "03615-0115" },
-                    { 9, "Port Abdiel", "Otho Rapids", "41", "69043-8375" },
-                    { 10, "Reidmouth", "Furman Hollow", "94", "44750-9274" },
-                    { 11, "South Darronburgh", "Patience Fords", "21", "33515" }
+                    { 2, "Port Kavonmouth", "Frami Station", "4", "92155" },
+                    { 3, "New Jaysonstad", "Quinton Islands", "70", "77249" },
+                    { 4, "Mooreview", "Lindsey Ports", "69", "29000-8140" },
+                    { 5, "Lake Jordichester", "Rogahn Fork", "49", "31795" },
+                    { 6, "Fredstad", "Devyn Parkways", "69", "87447-0708" },
+                    { 7, "North Roxane", "Durgan Locks", "4", "79038-7186" },
+                    { 8, "Borerborough", "Trent Ville", "21", "61212" },
+                    { 9, "Gladyceside", "Braulio Valley", "86", "31620" },
+                    { 10, "East Majorbury", "Izabella Expressway", "28", "10666-1976" },
+                    { 11, "New Frederik", "Myles Wall", "45", "17573-5725" }
                 });
 
             migrationBuilder.InsertData(
@@ -295,16 +295,16 @@ namespace GreenPrint.Repository.Migrations
                 values: new object[,]
                 {
                     { 1, 1, "JohnnyD@69420.com", "John", "Doe", "69696969", null },
-                    { 2, 2, "eden@davis.us", "Dana", "Hickle", "676-612-1879 x635", null },
-                    { 3, 3, "korey_lemke@davisschinner.com", "Madaline", "Rath", "(726)318-2966", null },
-                    { 4, 4, "martine@hills.name", "Gail", "Krajcik", "742.123.8216 x52299", null },
-                    { 5, 5, "russell_balistreri@lubowitz.com", "Arnaldo", "Ledner", "(942)321-4314 x792", null },
-                    { 6, 6, "conner@lefflergrady.biz", "Tremayne", "Hettinger", "969.463.9619 x6872", null },
-                    { 7, 7, "jamarcus_beatty@mcglynnblick.co.uk", "Elisha", "Kuhn", "885-626-0507", null },
-                    { 8, 8, "maya_ryan@huelkuhn.info", "Carlo", "Herman", "548.568.1660 x022", null },
-                    { 9, 9, "alda.wehner@hegmann.name", "Bernard", "Rice", "1-606-199-7052", null },
-                    { 10, 10, "erling.corwin@wunsch.com", "Jeanne", "Hoppe", "944.546.2113 x41168", null },
-                    { 11, 11, "mariana@murphy.ca", "Ruthe", "Braun", "(954)903-0064 x40321", null }
+                    { 2, 2, "juana.mueller@considine.com", "Elsa", "Mills", "437.714.0665 x7013", null },
+                    { 3, 3, "clyde@balistreri.info", "Braulio", "Stanton", "915.310.1836 x05362", null },
+                    { 4, 4, "stewart_gutmann@bauchzemlak.name", "Brayan", "Connelly", "468-187-3499 x3090", null },
+                    { 5, 5, "drew@heidenreichkuvalis.ca", "Avery", "Strosin", "463-636-6830", null },
+                    { 6, 6, "queenie@keeling.co.uk", "Karina", "Ortiz", "624.079.5458 x87910", null },
+                    { 7, 7, "verdie_crist@bednareichmann.info", "Josefina", "Moore", "(659)531-1580", null },
+                    { 8, 8, "mitchel_morissette@koelpinosinski.biz", "Braden", "Carter", "1-549-562-8656 x16223", null },
+                    { 9, 9, "lincoln.streich@flatley.co.uk", "Aditya", "Denesik", "(685)783-8519 x1194", null },
+                    { 10, 10, "alf_berge@willmszieme.name", "Trudie", "Fisher", "646-857-1217 x497", null },
+                    { 11, 11, "coty@windler.uk", "Gretchen", "Reilly", "1-969-522-7205", null }
                 });
 
             migrationBuilder.InsertData(
@@ -322,17 +322,17 @@ namespace GreenPrint.Repository.Migrations
                 columns: new[] { "Id", "CustomerId", "Email", "Password", "Roleid", "SessionId" },
                 values: new object[,]
                 {
-                    { 1, 1, "alex802c@gmail.com", "Pwrvol901", 3, null },
-                    { 2, 2, "eden@davis.us", "Password", 1, null },
-                    { 3, 3, "korey_lemke@davisschinner.com", "Password", 3, null },
-                    { 4, 4, "martine@hills.name", "Password", 2, null },
-                    { 5, 5, "russell_balistreri@lubowitz.com", "Password", 2, null },
-                    { 6, 6, "conner@lefflergrady.biz", "Password", 2, null },
-                    { 7, 7, "jamarcus_beatty@mcglynnblick.co.uk", "Password", 2, null },
-                    { 8, 8, "maya_ryan@huelkuhn.info", "Password", 1, null },
-                    { 9, 9, "alda.wehner@hegmann.name", "Password", 1, null },
-                    { 10, 10, "erling.corwin@wunsch.com", "Password", 3, null },
-                    { 11, 11, "mariana@murphy.ca", "Password", 2, null }
+                    { 1, null, "alex802c@gmail.com", "Pwrvol901", 3, null },
+                    { 2, 2, "juana.mueller@considine.com", "Password", 1, null },
+                    { 3, 3, "clyde@balistreri.info", "Password", 2, null },
+                    { 4, 4, "stewart_gutmann@bauchzemlak.name", "Password", 2, null },
+                    { 5, 5, "drew@heidenreichkuvalis.ca", "Password", 3, null },
+                    { 6, 6, "queenie@keeling.co.uk", "Password", 1, null },
+                    { 7, 7, "verdie_crist@bednareichmann.info", "Password", 3, null },
+                    { 8, 8, "mitchel_morissette@koelpinosinski.biz", "Password", 1, null },
+                    { 9, 9, "lincoln.streich@flatley.co.uk", "Password", 2, null },
+                    { 10, 10, "alf_berge@willmszieme.name", "Password", 1, null },
+                    { 11, 11, "coty@windler.uk", "Password", 3, null }
                 });
 
             migrationBuilder.InsertData(

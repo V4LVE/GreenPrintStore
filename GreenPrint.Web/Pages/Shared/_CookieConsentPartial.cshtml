@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Http.Features
+
+@{
+    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+    var showBanner = !consentFeature?.CanTrack ?? false;
+    var cookieString = consentFeature?.CreateConsentCookie();
+}
+
+@if (showBanner)
+{
+    <div class="modal fade in" role="dialog" id="cookieConsent">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">We Use Cookies <i class="fa-solid fa-cookie-bite fa-bounce"></i></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>We use cookies to make your experience better. For more information please see our <a asp-page="/Privacy">Cookie Policy</a>. </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="consentButton" class="accept-policy close btn btn-outline-primary" data-bs-dismiss="modal" aria-label="Close" data-cookie-string="@cookieString">
+                        <span aria-hidden="true">Accept</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#cookieConsent").modal('show');
+        });
+
+        (function () {
+            var button = document.getElementById('consentButton')
+            button.addEventListener("click", function (event) {
+                document.cookie = button.dataset.cookieString;
+            }, false);
+        })();
+
+    </script>
+}
