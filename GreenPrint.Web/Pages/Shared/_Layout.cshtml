@@ -55,7 +55,7 @@
                                 <a asp-page="/Furniture/Cart" class="p-0 pt-2 ps-1 nav-link">
                                     <i class="fa-solid fa-cart-shopping"></i>
                                     <span class="badge badge-warning" style="transform: translate(-10px,-10px);">
-                                        <span class="badge bg-primary">5</span>
+                                        <span class="badge bg-primary">@await Context.GetCartCount()</span>
                                     </span>
                                 </a>
                             </li>

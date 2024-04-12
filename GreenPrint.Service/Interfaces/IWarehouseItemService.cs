@@ -1,4 +1,5 @@
-﻿using GreenPrint.Service.DataTransferObjects;
+﻿using GreenPrint.Repository.Entities;
+using GreenPrint.Service.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,12 @@ namespace GreenPrint.Service.Interfaces
         /// <param name="warehouseID"></param>
         /// <returns></returns>
         Task<WarehouseItemDTO> GetByItemAndWarehouseId(int itemId, int warehouseId);
+
+        /// <summary>
+        /// Get all warehouse items by item ID
+        /// </summary>
+        /// <param name="itemId"></param>
+        /// <returns></returns>
+        Task<List<WarehouseItem>> GetAllByByItemId(int itemId);
     }
 }

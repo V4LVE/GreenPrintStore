@@ -257,16 +257,16 @@ namespace GreenPrint.Repository.Migrations
                 values: new object[,]
                 {
                     { 1, "Sønderborg", "JutlandStreet", "69B", "6400" },
-                    { 2, "Port Kavonmouth", "Frami Station", "4", "92155" },
-                    { 3, "New Jaysonstad", "Quinton Islands", "70", "77249" },
-                    { 4, "Mooreview", "Lindsey Ports", "69", "29000-8140" },
-                    { 5, "Lake Jordichester", "Rogahn Fork", "49", "31795" },
-                    { 6, "Fredstad", "Devyn Parkways", "69", "87447-0708" },
-                    { 7, "North Roxane", "Durgan Locks", "4", "79038-7186" },
-                    { 8, "Borerborough", "Trent Ville", "21", "61212" },
-                    { 9, "Gladyceside", "Braulio Valley", "86", "31620" },
-                    { 10, "East Majorbury", "Izabella Expressway", "28", "10666-1976" },
-                    { 11, "New Frederik", "Myles Wall", "45", "17573-5725" }
+                    { 2, "Orieshire", "Medhurst River", "69", "15182" },
+                    { 3, "North Antonettachester", "Jarod Corner", "26", "83406" },
+                    { 4, "North Jarrodmouth", "O'Kon Radial", "49", "63047-2428" },
+                    { 5, "Lake Providenciport", "Jonathan Plaza", "15", "27859-1801" },
+                    { 6, "Lake Hadley", "Shayna Inlet", "3", "49256-8025" },
+                    { 7, "New Aleenland", "Rowe Glens", "85", "80668" },
+                    { 8, "Lake Sunny", "Ronny Roads", "43", "74800" },
+                    { 9, "Hermistonbury", "Monte Coves", "95", "76904-3571" },
+                    { 10, "Yoshikoville", "Lennie Course", "77", "56970-4962" },
+                    { 11, "Yvettebury", "Bradtke Path", "61", "28896-8517" }
                 });
 
             migrationBuilder.InsertData(
@@ -295,16 +295,16 @@ namespace GreenPrint.Repository.Migrations
                 values: new object[,]
                 {
                     { 1, 1, "JohnnyD@69420.com", "John", "Doe", "69696969", null },
-                    { 2, 2, "juana.mueller@considine.com", "Elsa", "Mills", "437.714.0665 x7013", null },
-                    { 3, 3, "clyde@balistreri.info", "Braulio", "Stanton", "915.310.1836 x05362", null },
-                    { 4, 4, "stewart_gutmann@bauchzemlak.name", "Brayan", "Connelly", "468-187-3499 x3090", null },
-                    { 5, 5, "drew@heidenreichkuvalis.ca", "Avery", "Strosin", "463-636-6830", null },
-                    { 6, 6, "queenie@keeling.co.uk", "Karina", "Ortiz", "624.079.5458 x87910", null },
-                    { 7, 7, "verdie_crist@bednareichmann.info", "Josefina", "Moore", "(659)531-1580", null },
-                    { 8, 8, "mitchel_morissette@koelpinosinski.biz", "Braden", "Carter", "1-549-562-8656 x16223", null },
-                    { 9, 9, "lincoln.streich@flatley.co.uk", "Aditya", "Denesik", "(685)783-8519 x1194", null },
-                    { 10, 10, "alf_berge@willmszieme.name", "Trudie", "Fisher", "646-857-1217 x497", null },
-                    { 11, 11, "coty@windler.uk", "Gretchen", "Reilly", "1-969-522-7205", null }
+                    { 2, 2, "megane.tromp@bradtke.uk", "Eliane", "Bernier", "1-314-631-5628 x784", null },
+                    { 3, 3, "brenda@runolfsdottir.name", "Dusty", "Schiller", "(222)773-1517 x425", null },
+                    { 4, 4, "floyd@hauck.com", "Ima", "D'Amore", "1-539-654-8864", null },
+                    { 5, 5, "myrtis@mcdermott.co.uk", "Joyce", "Blick", "1-665-012-6335 x8065", null },
+                    { 6, 6, "brooks@schimmel.info", "Anya", "Labadie", "(939)589-9187 x1835", null },
+                    { 7, 7, "candelario_sawayn@heathcote.co.uk", "Wilhelm", "Schuppe", "1-449-919-4887 x8120", null },
+                    { 8, 8, "ruthe@hills.info", "Curtis", "Von", "777-868-7194 x520", null },
+                    { 9, 9, "virgie_farrell@okon.name", "Madyson", "Metz", "653-910-2121 x20133", null },
+                    { 10, 10, "hudson@heller.biz", "Margarett", "Hand", "062.473.6113", null },
+                    { 11, 11, "cordelia.pacocha@mckenzieschmidt.co.uk", "Josh", "Weber", "931.700.7069", null }
                 });
 
             migrationBuilder.InsertData(
@@ -323,16 +323,16 @@ namespace GreenPrint.Repository.Migrations
                 values: new object[,]
                 {
                     { 1, null, "alex802c@gmail.com", "Pwrvol901", 3, null },
-                    { 2, 2, "juana.mueller@considine.com", "Password", 1, null },
-                    { 3, 3, "clyde@balistreri.info", "Password", 2, null },
-                    { 4, 4, "stewart_gutmann@bauchzemlak.name", "Password", 2, null },
-                    { 5, 5, "drew@heidenreichkuvalis.ca", "Password", 3, null },
-                    { 6, 6, "queenie@keeling.co.uk", "Password", 1, null },
-                    { 7, 7, "verdie_crist@bednareichmann.info", "Password", 3, null },
-                    { 8, 8, "mitchel_morissette@koelpinosinski.biz", "Password", 1, null },
-                    { 9, 9, "lincoln.streich@flatley.co.uk", "Password", 2, null },
-                    { 10, 10, "alf_berge@willmszieme.name", "Password", 1, null },
-                    { 11, 11, "coty@windler.uk", "Password", 3, null }
+                    { 2, 2, "megane.tromp@bradtke.uk", "Password", 1, null },
+                    { 3, 3, "brenda@runolfsdottir.name", "Password", 2, null },
+                    { 4, 4, "floyd@hauck.com", "Password", 3, null },
+                    { 5, 5, "myrtis@mcdermott.co.uk", "Password", 3, null },
+                    { 6, 6, "brooks@schimmel.info", "Password", 1, null },
+                    { 7, 7, "candelario_sawayn@heathcote.co.uk", "Password", 1, null },
+                    { 8, 8, "ruthe@hills.info", "Password", 3, null },
+                    { 9, 9, "virgie_farrell@okon.name", "Password", 3, null },
+                    { 10, 10, "hudson@heller.biz", "Password", 3, null },
+                    { 11, 11, "cordelia.pacocha@mckenzieschmidt.co.uk", "Password", 2, null }
                 });
 
             migrationBuilder.InsertData(

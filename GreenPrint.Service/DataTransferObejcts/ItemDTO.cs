@@ -18,5 +18,6 @@ namespace GreenPrint.Service.DataTransferObjects
 
         // Navigation Properties
         public CategoryDTO Category { get; set; }
+        public List<WarehouseItemDTO>? WarehouseItems { get; set; }
     }
 }

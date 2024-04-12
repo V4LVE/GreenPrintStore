@@ -28,9 +28,10 @@ namespace GreenPrint.Repository.Repositories
         
         public async Task<List<Item>> GetItemsbyCategory(string category, PageOptions pageOptions)
         {
-            return await _dbContext.Items.AsNoTracking().Where(i => i.Category.CategoryName == category).Include(c => c.Category).ToListAsync();
-            
-
+            return await _dbContext.Items.AsNoTracking()
+                .Include(c => c.Category)
+                .Where(i => i.Category.CategoryName == category)
+                .ToListAsync();
         }
 
         public async Task<List<Item>> GetItemsbyCategory(int categoryId, PageOptions pageOptions)

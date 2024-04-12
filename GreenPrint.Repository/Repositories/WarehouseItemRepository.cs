@@ -23,5 +23,15 @@ namespace GreenPrint.Repository.Repositories
             return temp;
         }
 
+        public async Task<List<WarehouseItem>> GetAllByByItemId(int itemId)
+        {
+            var temp = await _dbContext.WarehouseItems.AsNoTracking()
+                .Include(wi => wi.Item)
+                .Include(wi => wi.Warehouse)
+                .Where(wi => wi.ItemId == itemId && wi.Quantity > 0)
+                .ToListAsync();
+            return temp;
+        }
+
     }
 }

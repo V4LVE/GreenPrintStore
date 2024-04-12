@@ -12,22 +12,22 @@ namespace GreenPrint.Web.Pages.Admin.Accounts
         #region backing Fields
         private readonly IUserService _UserService;
         private readonly IRoleService _RoleService;
+        private readonly ICustomerService _CustomerService;
         #endregion
 
         #region Constructor
-        public UserModel(IUserService UserService, IRoleService roleService)
+        public UserModel(IUserService UserService, IRoleService roleService, ICustomerService customerService)
         {
             _UserService = UserService;
             _RoleService = roleService;
+            _CustomerService = customerService;
         }
         #endregion
 
         #region Properties
         [BindProperty]
         public UserDTO User { get; set; }
-        [BindProperty]
         public List<RoleDTO> Roles { get; set; }
-        [BindProperty]
         public SelectList SelectRoles { get; set; }
         #endregion
 
@@ -50,17 +50,25 @@ namespace GreenPrint.Web.Pages.Admin.Accounts
             return NotFound();
         }
 
-        public async Task<IActionResult> OnPostUpdateAsync()
+        public async Task<IActionResult> OnPostUpdateAsync(int roleId)
         {
-            await OnGet(User.Id);
+            var tempRole = await _RoleService.GetByIdAsync(roleId);
+            if (User.CustomerId != null)
+            {
+                User.Customer = await _CustomerService.GetByIdAsync((int)User.CustomerId);
+            }
             
+            tempRole.Users = null;
+            User.Role = tempRole;
+            User.Roleid = roleId;
+
             if (ModelState.IsValid)
             {
                 await _UserService.UpdateAsync(User);
                 return RedirectToPage("/Admin/Accounts/Users");
             }
 
-            
+            await OnGet(User.Id);
             return Page();
         }
     }

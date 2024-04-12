@@ -67,8 +67,19 @@ namespace GreenPrint.Web.Extensions
 
         public static async Task<SessionDTO> GetSession(this HttpContext context)
         {
-           
             return JsonSerializer.Deserialize<SessionDTO>(context.Request.Cookies["Session"]);
+        }
+
+        public static async Task<int> GetCartCount(this HttpContext context)
+        {
+            string jsoncartCookie = context.Request.Cookies["ItemCartCookie"];
+
+            if (jsoncartCookie != null)
+            {
+                return JsonSerializer.Deserialize<List<WarehouseDTO>>(jsoncartCookie).Count;
+            }
+
+            return 0;
         }
     }
 }

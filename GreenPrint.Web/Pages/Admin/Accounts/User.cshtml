@@ -13,6 +13,8 @@
                 <form asp-page-handler="Update">
                     <div class="row">
                         <input hidden asp-for="@Model.User.Id" />
+                        <input hidden asp-for="@Model.User.Password"/>
+                        <input hidden asp-for="@Model.User.CustomerId"/>
                         <!--User details-->
                         <div class="col-6">
                             <h3>User Details</h3>
@@ -22,13 +24,12 @@
                                     <input class="form-control" id="email" asp-for="@Model.User.Email" />
                                     <span class="form-label" asp-validation-for="@Model.User.Email"></span>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <select asp-for="@Model.User.Roleid"
-                                        asp-items="@Model.SelectRoles"
-                                        class="form-select">
-                                    <option value="">Pagesize</option>
-                                </select>
+                                <div>
+                                    <select name="roleId"
+                                            asp-items="@Model.SelectRoles"
+                                            class="form-select">
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>

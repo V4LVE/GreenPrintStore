@@ -47,7 +47,9 @@
                         </div>
                     </a>
                     <div class="card-footer text-center">
-                        <a href="#" class="btn btn-outline-primary col-6">Add To Cart</a>
+                        <form asp-page-handler="AddToCart">
+                            <button type="submit" name="itemId" value="@item.Id" class="btn btn-outline-primary col-6">Add To Cart</button>
+                        </form>
                     </div>
                 </div>
             </div>
