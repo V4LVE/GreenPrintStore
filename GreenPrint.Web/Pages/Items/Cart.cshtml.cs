@@ -24,6 +24,11 @@ namespace GreenPrint.Web.Pages.Items
         #endregion
 
         public List<WarehouseItemDTO> CookieItemProducts { get; set; } = new();
+        public double TotalPrice { get; set; } = 0;
+        [BindProperty(SupportsGet = true)]
+        public double ShippingPrice { get; set; } = 59;
+        public double DiscountDeduct { get; set; } = 0;
+        public string DiscountCode { get; set; }
 
         public async Task<IActionResult> OnGet()
         {
@@ -36,6 +41,16 @@ namespace GreenPrint.Web.Pages.Items
             {
                 CookieItemProducts[i].Warehouse = await _warehouseService.GetByIdAsync(CookieItemProducts[i].WarehouseId);
                 CookieItemProducts[i].Item = await _itemService.GetByIdAsync(CookieItemProducts[i].ItemId);
+                TotalPrice += CookieItemProducts[i].Item.Price * CookieItemProducts[i].Quantity;
+            }
+
+            TotalPrice += ShippingPrice;
+
+            if (TotalPrice > 10000)
+            {
+                DiscountDeduct = TotalPrice * 0.1;
+                TotalPrice -= DiscountDeduct;
+                DiscountCode = "10% Discount";
             }
 
             return Page();
