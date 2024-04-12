@@ -59,6 +59,7 @@ namespace GreenPrint.Web.Pages.Items
             {
                 ordredItems.Add(new()
                 {
+                    Id = warehouseItems[0].Id,
                     WarehouseId = warehouseItems[0].WarehouseId,
                     ItemId = itemId,
                     Quantity = 1
@@ -81,6 +82,7 @@ namespace GreenPrint.Web.Pages.Items
                 {
                     ordredItems.Add(new()
                     {
+                        Id = warehouseItems[0].Id,
                         WarehouseId = warehouseItems[0].WarehouseId,
                         ItemId = itemId,
                         Quantity = 1

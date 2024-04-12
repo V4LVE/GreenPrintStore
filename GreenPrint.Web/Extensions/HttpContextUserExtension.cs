@@ -76,7 +76,13 @@ namespace GreenPrint.Web.Extensions
 
             if (jsoncartCookie != null)
             {
-                return JsonSerializer.Deserialize<List<WarehouseDTO>>(jsoncartCookie).Count;
+                var tempitems = JsonSerializer.Deserialize<List<WarehouseItemDTO>>(jsoncartCookie);
+                var totalCount = 0;
+                foreach (var item in tempitems)
+                {
+                    totalCount += item.Quantity;
+                }
+                return totalCount;
             }
 
             return 0;
