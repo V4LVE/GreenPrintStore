@@ -35,7 +35,7 @@ namespace GreenPrint.Repository.Repositories
 
         public async Task<bool> CheckWarehouseStock(int warehouseItemID, int amount)
         {
-            WarehouseItem warehouseItem = await _dbContext.WarehouseItems.SingleAsync(wp => wp.ItemId == warehouseItemID);
+            WarehouseItem warehouseItem = await _dbContext.WarehouseItems.AsNoTracking().SingleAsync(wp => wp.ItemId == warehouseItemID);
             if (warehouseItem.Quantity >= amount)
             {
                 return true;

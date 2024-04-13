@@ -22,6 +22,7 @@ namespace GreenPrint.Repository.Repositories
         public async Task<List<ItemOrder>> GetAllByOrderId(int orderId) => await _dbContext.ItemOrders
             .AsNoTracking()
             .Include(io => io.Item)
+            .ThenInclude(io => io.ItemImages)
             .Include(io => io.Warehouse)
             .Where(io => io.OrderId == orderId)
             .ToListAsync();

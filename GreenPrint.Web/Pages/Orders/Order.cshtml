@@ -22,8 +22,14 @@
                                 {
                                     <div class="row">
                                         <div class="col-md-2">
-                                            <img src="/Images/Items/No_image_available.svg"
-                                                 class="img-fluid" alt="image">
+                                            @if (item.Item.ItemImages.Count > 0)
+                                            {
+                                                <img src="~/Images/Items/@item.Item.ItemImages.First().ImageUrl" class="img-fluid" alt="image">
+                                            }
+                                            else
+                                            {
+                                                <img src="/Images/Items/No_image_available.svg" class="img-fluid" alt="image">
+                                            }
                                         </div>
                                         <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                             <p class="text-muted mb-0">@item.Item.ItemName</p>

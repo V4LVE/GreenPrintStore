@@ -172,7 +172,7 @@ namespace GreenPrint.Web.Pages.Items
 
             Response.Cookies.Delete("ItemCartCookie");
 
-            return RedirectToPage("/Items/Order", new { NewOrder.Id });
+            return RedirectToPage("/Orders/Order", new { NewOrder.Id });
 
             
         }
