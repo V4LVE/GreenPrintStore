@@ -182,7 +182,15 @@
                                 <span class="badge badge-primary" style="transform:translate(-1rem, -1rem);">
                                     <span class="badge bg-primary">@item.Quantity</span>
                                 </span>
-                                <img src="/images/items/no_image_available.svg" style="height: 96px; width: 96x; float:left" class="img-sm rounded border" />
+                                @if (item.Item.ItemImages.Count > 0)
+                                {
+                                    <img src="~/images/items/@item.Item.ItemImages.First().ImageUrl" style="height: 96px; width: 96x; float:left" class="img-sm rounded border" />
+                                }
+                                else
+                                {
+                                    <img src="/images/items/no_image_available.svg" style="height: 96px; width: 96x; float:left" class="img-sm rounded border" />
+                                }
+                                
                             </div>
                             <div class="">
                                 <p>

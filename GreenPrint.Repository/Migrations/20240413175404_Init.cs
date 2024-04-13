@@ -121,6 +121,27 @@ namespace GreenPrint.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ItemId = table.Column<int>(type: "int", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Images_Items_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "Items",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "WarehouseItems",
                 columns: table => new
                 {
@@ -257,16 +278,16 @@ namespace GreenPrint.Repository.Migrations
                 values: new object[,]
                 {
                     { 1, "Sønderborg", "JutlandStreet", "69B", "6400" },
-                    { 2, "Ceceliastad", "Milo Row", "88", "29577-1728" },
-                    { 3, "Binsport", "Claudie Coves", "36", "10206" },
-                    { 4, "South Ernestina", "Elmo Inlet", "80", "49916-7691" },
-                    { 5, "Keshawnview", "Wilford Views", "22", "72000-7817" },
-                    { 6, "Ethelville", "Nolan Flats", "88", "75495-6721" },
-                    { 7, "North Edenland", "Marlin Garden", "29", "18952-5667" },
-                    { 8, "Grahamfurt", "Gutmann Shore", "29", "09512" },
-                    { 9, "Lelafurt", "Kirk Stream", "83", "32199-1839" },
-                    { 10, "Mannmouth", "Irma Fields", "32", "83214-0934" },
-                    { 11, "East Tillmanstad", "Brandon Neck", "71", "07271" }
+                    { 2, "Benedictview", "Buddy Locks", "52", "94266" },
+                    { 3, "Florencioville", "Nicholas Crest", "24", "94569-0702" },
+                    { 4, "Hanechester", "Tito Glens", "33", "55365-6126" },
+                    { 5, "East Loy", "Mayer Canyon", "42", "02001" },
+                    { 6, "Gutkowskifort", "Oswaldo Wall", "24", "40568" },
+                    { 7, "New Lucienneville", "Connelly Inlet", "41", "56245" },
+                    { 8, "Dooleyport", "Mckenna Streets", "73", "72514" },
+                    { 9, "Port Danyka", "Candelario Port", "54", "76619" },
+                    { 10, "Herzogton", "Mose Motorway", "41", "26212-3670" },
+                    { 11, "West Isabella", "Schoen Islands", "29", "07898" }
                 });
 
             migrationBuilder.InsertData(
@@ -295,16 +316,16 @@ namespace GreenPrint.Repository.Migrations
                 values: new object[,]
                 {
                     { 1, 1, "JohnnyD@69420.com", "John", "Doe", "69696969", null },
-                    { 2, 2, "mercedes@kochmayert.com", "Augustine", "Watsica", "595.180.8178", null },
-                    { 3, 3, "leanna@waltercollier.ca", "Mervin", "Ullrich", "774.502.0320", null },
-                    { 4, 4, "rosalyn_bernhard@abbott.com", "Arch", "Durgan", "1-639-944-4783 x425", null },
-                    { 5, 5, "caroline_jewess@waelchi.ca", "Jerrell", "Klein", "1-234-144-7491 x84589", null },
-                    { 6, 6, "bill@schowalter.ca", "Vesta", "Spencer", "779-734-5468 x2776", null },
-                    { 7, 7, "arlo_schroeder@rohan.biz", "Dora", "Rippin", "1-092-952-2324 x45103", null },
-                    { 8, 8, "christophe.schiller@murazik.co.uk", "Hans", "King", "649.991.0844 x83692", null },
-                    { 9, 9, "jada@rogahn.ca", "Alexa", "Larkin", "1-301-898-0601 x44098", null },
-                    { 10, 10, "nia@borer.com", "Davonte", "Kub", "(791)146-0580", null },
-                    { 11, 11, "terry_ferry@kulas.ca", "Obie", "O'Conner", "1-703-303-0169", null }
+                    { 2, 2, "derick@hanefisher.biz", "Tracy", "Konopelski", "(137)062-1084 x15675", null },
+                    { 3, 3, "guido.friesen@abshireheller.biz", "Sasha", "Vandervort", "507.588.7055 x02591", null },
+                    { 4, 4, "roberto.von@koss.uk", "Art", "Emmerich", "995.095.7059 x85108", null },
+                    { 5, 5, "daphne_lang@mertz.info", "Jon", "Adams", "1-723-612-9717 x5134", null },
+                    { 6, 6, "stuart_strosin@eichmannwitting.us", "Deshaun", "Marks", "(973)654-4177", null },
+                    { 7, 7, "raymond_mccullough@jaskolski.info", "Susie", "Kerluke", "(291)182-5640 x901", null },
+                    { 8, 8, "malika_blick@schuppe.info", "Forest", "Reinger", "1-409-211-5053 x7483", null },
+                    { 9, 9, "glenda_kuhic@hagenes.co.uk", "Wilber", "Larson", "1-858-437-1276 x141", null },
+                    { 10, 10, "rubye@ferryarmstrong.ca", "Torrey", "Kuhlman", "(132)014-3505 x953", null },
+                    { 11, 11, "shanie_shields@walterwalker.info", "Isabel", "Senger", "1-056-130-7122 x8466", null }
                 });
 
             migrationBuilder.InsertData(
@@ -323,22 +344,32 @@ namespace GreenPrint.Repository.Migrations
                 values: new object[,]
                 {
                     { 1, null, "alex802c@gmail.com", "Pwrvol901", 3, null },
-                    { 2, 2, "mercedes@kochmayert.com", "Password", 1, null },
-                    { 3, 3, "leanna@waltercollier.ca", "Password", 2, null },
-                    { 4, 4, "rosalyn_bernhard@abbott.com", "Password", 3, null },
-                    { 5, 5, "caroline_jewess@waelchi.ca", "Password", 1, null },
-                    { 6, 6, "bill@schowalter.ca", "Password", 1, null },
-                    { 7, 7, "arlo_schroeder@rohan.biz", "Password", 1, null },
-                    { 8, 8, "christophe.schiller@murazik.co.uk", "Password", 2, null },
-                    { 9, 9, "jada@rogahn.ca", "Password", 3, null },
-                    { 10, 10, "nia@borer.com", "Password", 1, null },
-                    { 11, 11, "terry_ferry@kulas.ca", "Password", 3, null }
+                    { 2, 2, "derick@hanefisher.biz", "Password", 1, null },
+                    { 3, 3, "guido.friesen@abshireheller.biz", "Password", 1, null },
+                    { 4, 4, "roberto.von@koss.uk", "Password", 2, null },
+                    { 5, 5, "daphne_lang@mertz.info", "Password", 3, null },
+                    { 6, 6, "stuart_strosin@eichmannwitting.us", "Password", 1, null },
+                    { 7, 7, "raymond_mccullough@jaskolski.info", "Password", 3, null },
+                    { 8, 8, "malika_blick@schuppe.info", "Password", 2, null },
+                    { 9, 9, "glenda_kuhic@hagenes.co.uk", "Password", 2, null },
+                    { 10, 10, "rubye@ferryarmstrong.ca", "Password", 2, null },
+                    { 11, 11, "shanie_shields@walterwalker.info", "Password", 3, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Warehouses",
                 columns: new[] { "Id", "AddressId", "WarehouseName" },
                 values: new object[] { 1, 1, "Warehouse" });
+
+            migrationBuilder.InsertData(
+                table: "Images",
+                columns: new[] { "Id", "DateCreated", "ImageUrl", "ItemId" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "1.png", 1 },
+                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "2.png", 2 },
+                    { 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "3.png", 3 }
+                });
 
             migrationBuilder.InsertData(
                 table: "WarehouseItems",
@@ -361,6 +392,11 @@ namespace GreenPrint.Repository.Migrations
                 column: "UserId",
                 unique: true,
                 filter: "[UserId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Images_ItemId",
+                table: "Images",
+                column: "ItemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItemOrders_ItemId",
@@ -417,6 +453,9 @@ namespace GreenPrint.Repository.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Images");
+
             migrationBuilder.DropTable(
                 name: "ItemOrders");
 

@@ -22,7 +22,10 @@ namespace GreenPrint.Repository.Repositories
 
         new public async Task<Item> GetByIdAsync(int id)
         {
-            return await _dbContext.Items.AsNoTracking().Include(i => i.Category).FirstOrDefaultAsync(i => i.Id == id);
+            return await _dbContext.Items.AsNoTracking()
+                .Include(i => i.Category)
+                .Include(i => i.ItemImages)
+                .FirstOrDefaultAsync(i => i.Id == id);
         }
 
         
@@ -31,13 +34,17 @@ namespace GreenPrint.Repository.Repositories
             return await _dbContext.Items.AsNoTracking()
                 .Include(c => c.Category)
                 .Where(i => i.Category.CategoryName == category)
+                .Include(s => s.ItemImages)
                 .ToListAsync();
         }
 
         public async Task<List<Item>> GetItemsbyCategory(int categoryId, PageOptions pageOptions)
         {
             //return await _dbContext.Items.AsNoTracking().Where(i => i.CategoryId == categoryId).Include(c => c.Category).ToListAsync();
-            var query = _dbContext.Items.AsNoTracking().Include(s => s.Category).Where(s => s.CategoryId == categoryId);
+            var query = _dbContext.Items.AsNoTracking()
+                .Include(s => s.Category)
+                .Include(s => s.ItemImages)
+                .Where(s => s.CategoryId == categoryId);
 
             return await query.Skip((pageOptions.CurrentPage -1) * pageOptions.PageSize).Take(pageOptions.PageSize).ToListAsync();
         }

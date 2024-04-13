@@ -39,11 +39,19 @@
             <div class="col-3 mt-2">
                 <div class="card">
                     <a asp-page="Items/Item/Details" asp-route-itemId="@item.Id" style="text-decoration:none;color:black">
-                        <img src="/Images/Items/No_image_available.svg" class="card-img-top" alt="...">
+                        @if (item.ItemImages.Count > 0)
+                        {
+                            <img loading="lazy" src="~/Images/Items/@item.ItemImages.First().ImageUrl" class="card-img-top" alt="...">
+                        }
+                        else
+                        {
+                            <img loading="lazy" src="/Images/Items/No_image_available.svg" class="card-img-top" alt="...">
+                        }
+                        
                         <div class="card-body">
                             <h5 class="card-title">@item.ItemName</h5>
                             <p class="card-text">@item.Description</p>
-                            <p class="card-text">@item.Price DKK</p>
+                            <p class="card-text">@($"{item.Price:C}")</p>
                         </div>
                     </a>
                     <div class="card-footer text-center">
