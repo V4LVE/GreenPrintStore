@@ -9,5 +9,11 @@ namespace GreenPrint.Repository.Interfaces
 {
     public interface IItemOrderRepository : IGenericRepository<ItemOrder>
     {
+        /// <summary>
+        /// Get all item orders by order id
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        Task <List<ItemOrder>> GetAllByOrderId(int orderId);
     }
 }

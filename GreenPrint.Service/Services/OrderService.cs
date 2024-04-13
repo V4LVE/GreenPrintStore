@@ -31,5 +31,47 @@ namespace GreenPrint.Service.Services
         {
             return await _OrderRepository.GetOrdersByStatus(status);
         }
+
+        public async Task CheckOrderStatus(List<ItemOrderDTO> ProductOrders, OrderDTO Order)
+        {
+            List<ItemOrderDTO> tmpInProgress = ProductOrders.FindAll(x => x.Status == OrderStatusEnum.Processing);
+            List<ItemOrderDTO> tmpCompleted = ProductOrders.FindAll(x => x.Status == OrderStatusEnum.Delivered);
+            List<ItemOrderDTO> tmpCreated = ProductOrders.FindAll(x => x.Status == OrderStatusEnum.Created);
+            List<ItemOrderDTO> tmpAwaitDelivery = ProductOrders.FindAll(x => x.Status == OrderStatusEnum.Shipped);
+            List<ItemOrderDTO> tmpCancelled = ProductOrders.FindAll(x => x.Status == OrderStatusEnum.Cancelled);
+            List<ItemOrderDTO> tmpRefunded = ProductOrders.FindAll(x => x.Status == OrderStatusEnum.Pending);
+            Order.Customer = null;
+
+            if (tmpInProgress.Count > 0)
+            {
+                Order.Status = OrderStatusEnum.Processing;
+                await UpdateAsync(Order);
+            }
+            if (tmpCompleted.Count == ProductOrders.Count)
+            {
+                Order.Status = OrderStatusEnum.Delivered;
+                await UpdateAsync(Order);
+            }
+            if (tmpAwaitDelivery.Count == ProductOrders.Count)
+            {
+                Order.Status = OrderStatusEnum.Shipped;
+                await UpdateAsync(Order);
+            }
+            if (tmpCreated.Count == ProductOrders.Count)
+            {
+                Order.Status = OrderStatusEnum.Created;
+                await UpdateAsync(Order);
+            }
+            if (tmpCancelled.Count == ProductOrders.Count)
+            {
+                Order.Status = OrderStatusEnum.Cancelled;
+                await UpdateAsync(Order);
+            }
+            if (tmpRefunded.Count == ProductOrders.Count)
+            {
+                Order.Status = OrderStatusEnum.Pending;
+                await UpdateAsync(Order);
+            }
+        }
     }
 }

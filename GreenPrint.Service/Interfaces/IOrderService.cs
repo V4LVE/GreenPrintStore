@@ -24,5 +24,12 @@ namespace GreenPrint.Service.Interfaces
         /// <param name="statusEnum"></param>
         /// <returns></returns>
         Task<List<Order>> GetOrdersByStatus(OrderStatusEnum status);
+
+        /// <summary>
+        /// Checks the status of the giving order(<paramref name="Order"/>) and its related ProductOrders(<paramref name="ItemOrders"/>)
+        /// </summary>
+        /// <param name="ItemOrders"></param>
+        /// <param name="Order"></param>
+        Task CheckOrderStatus(List<ItemOrderDTO> ItemOrders, OrderDTO Order);
     }
 }
