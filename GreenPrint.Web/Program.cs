@@ -58,7 +58,8 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 
 builder.Services.AddDbContext<StoreContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Laptop"));
+    //options.UseSqlServer(builder.Configuration.GetConnectionString("Laptop")); // Laptop DB
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Desktop")); // Desktop DB
     options.EnableSensitiveDataLogging();
 });
 

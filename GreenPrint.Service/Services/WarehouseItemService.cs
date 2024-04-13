@@ -23,7 +23,7 @@ namespace GreenPrint.Service.Services
 
         public async Task<WarehouseItemDTO> GetByItemAndWarehouseId(int warehouseId, int itemId)
         {
-            var temp = _mappingService._mapper.Map<WarehouseItemDTO>(await _warehouseItemRepository.GetByItemAndWarehouseId(warehouseId, itemId));
+            var temp = _mappingService._mapper.Map<WarehouseItemDTO>(await _warehouseItemRepository.GetByItemAndWarehouseId(itemId, warehouseId));
             return temp;
         }
 
@@ -31,6 +31,12 @@ namespace GreenPrint.Service.Services
         {
             var temp = await _warehouseItemRepository.GetAllByByItemId(itemId);
             return temp;
+        }
+
+        public async Task<bool> CheckWarehouseStock(int warehouseItemID, int amount)
+        {
+            bool tmpBool = await _warehouseItemRepository.CheckWarehouseStock(warehouseItemID, amount);
+            return tmpBool;
         }
     }
 }

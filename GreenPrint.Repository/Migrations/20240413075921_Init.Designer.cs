@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenPrint.Repository.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20240412074311_Init")]
+    [Migration("20240413075921_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -65,82 +65,82 @@ namespace GreenPrint.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            City = "Orieshire",
-                            StreetName = "Medhurst River",
-                            StreetNumber = "69",
-                            ZipCode = "15182"
+                            City = "Ceceliastad",
+                            StreetName = "Milo Row",
+                            StreetNumber = "88",
+                            ZipCode = "29577-1728"
                         },
                         new
                         {
                             Id = 3,
-                            City = "North Antonettachester",
-                            StreetName = "Jarod Corner",
-                            StreetNumber = "26",
-                            ZipCode = "83406"
+                            City = "Binsport",
+                            StreetName = "Claudie Coves",
+                            StreetNumber = "36",
+                            ZipCode = "10206"
                         },
                         new
                         {
                             Id = 4,
-                            City = "North Jarrodmouth",
-                            StreetName = "O'Kon Radial",
-                            StreetNumber = "49",
-                            ZipCode = "63047-2428"
+                            City = "South Ernestina",
+                            StreetName = "Elmo Inlet",
+                            StreetNumber = "80",
+                            ZipCode = "49916-7691"
                         },
                         new
                         {
                             Id = 5,
-                            City = "Lake Providenciport",
-                            StreetName = "Jonathan Plaza",
-                            StreetNumber = "15",
-                            ZipCode = "27859-1801"
+                            City = "Keshawnview",
+                            StreetName = "Wilford Views",
+                            StreetNumber = "22",
+                            ZipCode = "72000-7817"
                         },
                         new
                         {
                             Id = 6,
-                            City = "Lake Hadley",
-                            StreetName = "Shayna Inlet",
-                            StreetNumber = "3",
-                            ZipCode = "49256-8025"
+                            City = "Ethelville",
+                            StreetName = "Nolan Flats",
+                            StreetNumber = "88",
+                            ZipCode = "75495-6721"
                         },
                         new
                         {
                             Id = 7,
-                            City = "New Aleenland",
-                            StreetName = "Rowe Glens",
-                            StreetNumber = "85",
-                            ZipCode = "80668"
+                            City = "North Edenland",
+                            StreetName = "Marlin Garden",
+                            StreetNumber = "29",
+                            ZipCode = "18952-5667"
                         },
                         new
                         {
                             Id = 8,
-                            City = "Lake Sunny",
-                            StreetName = "Ronny Roads",
-                            StreetNumber = "43",
-                            ZipCode = "74800"
+                            City = "Grahamfurt",
+                            StreetName = "Gutmann Shore",
+                            StreetNumber = "29",
+                            ZipCode = "09512"
                         },
                         new
                         {
                             Id = 9,
-                            City = "Hermistonbury",
-                            StreetName = "Monte Coves",
-                            StreetNumber = "95",
-                            ZipCode = "76904-3571"
+                            City = "Lelafurt",
+                            StreetName = "Kirk Stream",
+                            StreetNumber = "83",
+                            ZipCode = "32199-1839"
                         },
                         new
                         {
                             Id = 10,
-                            City = "Yoshikoville",
-                            StreetName = "Lennie Course",
-                            StreetNumber = "77",
-                            ZipCode = "56970-4962"
+                            City = "Mannmouth",
+                            StreetName = "Irma Fields",
+                            StreetNumber = "32",
+                            ZipCode = "83214-0934"
                         },
                         new
                         {
                             Id = 11,
-                            City = "Yvettebury",
-                            StreetName = "Bradtke Path",
-                            StreetNumber = "61",
-                            ZipCode = "28896-8517"
+                            City = "East Tillmanstad",
+                            StreetName = "Brandon Neck",
+                            StreetNumber = "71",
+                            ZipCode = "07271"
                         });
                 });
 
@@ -232,91 +232,91 @@ namespace GreenPrint.Repository.Migrations
                         {
                             Id = 2,
                             AddressId = 2,
-                            Email = "megane.tromp@bradtke.uk",
-                            FirstName = "Eliane",
-                            LastName = "Bernier",
-                            Phone = "1-314-631-5628 x784"
+                            Email = "mercedes@kochmayert.com",
+                            FirstName = "Augustine",
+                            LastName = "Watsica",
+                            Phone = "595.180.8178"
                         },
                         new
                         {
                             Id = 3,
                             AddressId = 3,
-                            Email = "brenda@runolfsdottir.name",
-                            FirstName = "Dusty",
-                            LastName = "Schiller",
-                            Phone = "(222)773-1517 x425"
+                            Email = "leanna@waltercollier.ca",
+                            FirstName = "Mervin",
+                            LastName = "Ullrich",
+                            Phone = "774.502.0320"
                         },
                         new
                         {
                             Id = 4,
                             AddressId = 4,
-                            Email = "floyd@hauck.com",
-                            FirstName = "Ima",
-                            LastName = "D'Amore",
-                            Phone = "1-539-654-8864"
+                            Email = "rosalyn_bernhard@abbott.com",
+                            FirstName = "Arch",
+                            LastName = "Durgan",
+                            Phone = "1-639-944-4783 x425"
                         },
                         new
                         {
                             Id = 5,
                             AddressId = 5,
-                            Email = "myrtis@mcdermott.co.uk",
-                            FirstName = "Joyce",
-                            LastName = "Blick",
-                            Phone = "1-665-012-6335 x8065"
+                            Email = "caroline_jewess@waelchi.ca",
+                            FirstName = "Jerrell",
+                            LastName = "Klein",
+                            Phone = "1-234-144-7491 x84589"
                         },
                         new
                         {
                             Id = 6,
                             AddressId = 6,
-                            Email = "brooks@schimmel.info",
-                            FirstName = "Anya",
-                            LastName = "Labadie",
-                            Phone = "(939)589-9187 x1835"
+                            Email = "bill@schowalter.ca",
+                            FirstName = "Vesta",
+                            LastName = "Spencer",
+                            Phone = "779-734-5468 x2776"
                         },
                         new
                         {
                             Id = 7,
                             AddressId = 7,
-                            Email = "candelario_sawayn@heathcote.co.uk",
-                            FirstName = "Wilhelm",
-                            LastName = "Schuppe",
-                            Phone = "1-449-919-4887 x8120"
+                            Email = "arlo_schroeder@rohan.biz",
+                            FirstName = "Dora",
+                            LastName = "Rippin",
+                            Phone = "1-092-952-2324 x45103"
                         },
                         new
                         {
                             Id = 8,
                             AddressId = 8,
-                            Email = "ruthe@hills.info",
-                            FirstName = "Curtis",
-                            LastName = "Von",
-                            Phone = "777-868-7194 x520"
+                            Email = "christophe.schiller@murazik.co.uk",
+                            FirstName = "Hans",
+                            LastName = "King",
+                            Phone = "649.991.0844 x83692"
                         },
                         new
                         {
                             Id = 9,
                             AddressId = 9,
-                            Email = "virgie_farrell@okon.name",
-                            FirstName = "Madyson",
-                            LastName = "Metz",
-                            Phone = "653-910-2121 x20133"
+                            Email = "jada@rogahn.ca",
+                            FirstName = "Alexa",
+                            LastName = "Larkin",
+                            Phone = "1-301-898-0601 x44098"
                         },
                         new
                         {
                             Id = 10,
                             AddressId = 10,
-                            Email = "hudson@heller.biz",
-                            FirstName = "Margarett",
-                            LastName = "Hand",
-                            Phone = "062.473.6113"
+                            Email = "nia@borer.com",
+                            FirstName = "Davonte",
+                            LastName = "Kub",
+                            Phone = "(791)146-0580"
                         },
                         new
                         {
                             Id = 11,
                             AddressId = 11,
-                            Email = "cordelia.pacocha@mckenzieschmidt.co.uk",
-                            FirstName = "Josh",
-                            LastName = "Weber",
-                            Phone = "931.700.7069"
+                            Email = "terry_ferry@kulas.ca",
+                            FirstName = "Obie",
+                            LastName = "O'Conner",
+                            Phone = "1-703-303-0169"
                         });
                 });
 
@@ -537,7 +537,7 @@ namespace GreenPrint.Repository.Migrations
                         {
                             Id = 2,
                             CustomerId = 2,
-                            Email = "megane.tromp@bradtke.uk",
+                            Email = "mercedes@kochmayert.com",
                             Password = "Password",
                             Roleid = 1
                         },
@@ -545,7 +545,7 @@ namespace GreenPrint.Repository.Migrations
                         {
                             Id = 3,
                             CustomerId = 3,
-                            Email = "brenda@runolfsdottir.name",
+                            Email = "leanna@waltercollier.ca",
                             Password = "Password",
                             Roleid = 2
                         },
@@ -553,7 +553,7 @@ namespace GreenPrint.Repository.Migrations
                         {
                             Id = 4,
                             CustomerId = 4,
-                            Email = "floyd@hauck.com",
+                            Email = "rosalyn_bernhard@abbott.com",
                             Password = "Password",
                             Roleid = 3
                         },
@@ -561,15 +561,15 @@ namespace GreenPrint.Repository.Migrations
                         {
                             Id = 5,
                             CustomerId = 5,
-                            Email = "myrtis@mcdermott.co.uk",
+                            Email = "caroline_jewess@waelchi.ca",
                             Password = "Password",
-                            Roleid = 3
+                            Roleid = 1
                         },
                         new
                         {
                             Id = 6,
                             CustomerId = 6,
-                            Email = "brooks@schimmel.info",
+                            Email = "bill@schowalter.ca",
                             Password = "Password",
                             Roleid = 1
                         },
@@ -577,7 +577,7 @@ namespace GreenPrint.Repository.Migrations
                         {
                             Id = 7,
                             CustomerId = 7,
-                            Email = "candelario_sawayn@heathcote.co.uk",
+                            Email = "arlo_schroeder@rohan.biz",
                             Password = "Password",
                             Roleid = 1
                         },
@@ -585,15 +585,15 @@ namespace GreenPrint.Repository.Migrations
                         {
                             Id = 8,
                             CustomerId = 8,
-                            Email = "ruthe@hills.info",
+                            Email = "christophe.schiller@murazik.co.uk",
                             Password = "Password",
-                            Roleid = 3
+                            Roleid = 2
                         },
                         new
                         {
                             Id = 9,
                             CustomerId = 9,
-                            Email = "virgie_farrell@okon.name",
+                            Email = "jada@rogahn.ca",
                             Password = "Password",
                             Roleid = 3
                         },
@@ -601,17 +601,17 @@ namespace GreenPrint.Repository.Migrations
                         {
                             Id = 10,
                             CustomerId = 10,
-                            Email = "hudson@heller.biz",
+                            Email = "nia@borer.com",
                             Password = "Password",
-                            Roleid = 3
+                            Roleid = 1
                         },
                         new
                         {
                             Id = 11,
                             CustomerId = 11,
-                            Email = "cordelia.pacocha@mckenzieschmidt.co.uk",
+                            Email = "terry_ferry@kulas.ca",
                             Password = "Password",
-                            Roleid = 2
+                            Roleid = 3
                         });
                 });
 

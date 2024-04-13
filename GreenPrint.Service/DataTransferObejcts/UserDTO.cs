@@ -11,10 +11,10 @@ namespace GreenPrint.Service.DataTransferObjects
     {
         [Key]
         public int Id { get; set; }
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         // Todo: Add hash and salt instead of plain text password
-        public string Email { get; set; }
+        public string? Email { get; set; }
         public int Roleid { get; set; }
         public int? CustomerId { get; set; }
 

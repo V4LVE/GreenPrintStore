@@ -18,6 +18,6 @@ namespace GreenPrint.Service.DataTransferObjects
 
         // Navigation properties
         public List<ItemOrderDTO>? ItemOrders { get; set; }
-        public CustomerDTO Customer { get; set; }
+        public CustomerDTO? Customer { get; set; }
     }
 }

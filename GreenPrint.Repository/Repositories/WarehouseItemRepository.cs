@@ -33,5 +33,18 @@ namespace GreenPrint.Repository.Repositories
             return temp;
         }
 
+        public async Task<bool> CheckWarehouseStock(int warehouseItemID, int amount)
+        {
+            WarehouseItem warehouseItem = await _dbContext.WarehouseItems.SingleAsync(wp => wp.ItemId == warehouseItemID);
+            if (warehouseItem.Quantity >= amount)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }
