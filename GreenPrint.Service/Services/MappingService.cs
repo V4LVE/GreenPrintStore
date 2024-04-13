@@ -50,6 +50,9 @@ namespace GreenPrint.Services.Services
 
                 cfg.CreateMap<Session, SessionDTO>();
                 cfg.CreateMap<SessionDTO, Session>();
+
+                cfg.CreateMap<ItemImage, ItemImageDTO>();
+                cfg.CreateMap<ItemImageDTO, ItemImage>();
             });
 
             try

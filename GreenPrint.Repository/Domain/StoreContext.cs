@@ -191,6 +191,7 @@ namespace GreenPrint.Repository.Domain
         public DbSet<ItemOrder> ItemOrders { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Session> Sessions { get; set; }
+        public DbSet<ItemImage> Images { get; set; }
 
     }
 }
