@@ -105,6 +105,13 @@ namespace GreenPrint.Repository.Domain
                                }
                           );
 
+            // ItemImages
+            modelBuilder.Entity<ItemImage>().HasData(
+                new ItemImage { Id = 1, ItemId = 1, ImageUrl = "1.png" },
+                new ItemImage { Id = 2, ItemId = 2, ImageUrl = "2.png" },
+                new ItemImage { Id = 3, ItemId = 3, ImageUrl = "3.png" }
+                );
+
             #endregion
 
             #region Faker Data
