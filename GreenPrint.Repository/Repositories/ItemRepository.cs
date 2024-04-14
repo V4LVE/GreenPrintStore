@@ -20,6 +20,13 @@ namespace GreenPrint.Repository.Repositories
 
         #endregion
 
+        new public async Task<List<Item>> GetAllAsync()
+        {
+            return await _dbContext.Items.AsNoTracking()
+                .Include(i => i.ItemImages)
+                .ToListAsync();
+        }
+
         new public async Task<Item> GetByIdAsync(int id)
         {
             return await _dbContext.Items.AsNoTracking()

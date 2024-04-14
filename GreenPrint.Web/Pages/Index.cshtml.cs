@@ -13,22 +13,26 @@ namespace GreenPrint.Web.Pages
         #region backing fields
         private readonly ILogger<IndexModel> _logger;
         private readonly ICategoryService _categoryService;
+        private readonly IItemService _itemService;
         #endregion
 
         #region Constructor
-        public IndexModel(ILogger<IndexModel> logger, ICategoryService categoryService)
+        public IndexModel(ILogger<IndexModel> logger, ICategoryService categoryService, IItemService itemService)
         {
             _logger = logger;
             _categoryService = categoryService;
+            _itemService = itemService;
         }
         #endregion
 
         public List<CategoryDTO> Categories { get; set; }
+        public List<ItemDTO> Items { get; set; }
 
 
         public async Task<IActionResult> OnGet()
         {
             Categories = await _categoryService.GetAllAsync();
+            Items = await _itemService.GetAllAsync();
 
             return Page();
         }
