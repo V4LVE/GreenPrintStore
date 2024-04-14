@@ -19,7 +19,7 @@ namespace GreenPrint.Repository.Repositories
 
         new public async Task<Customer> GetByIdAsync(int id)
         {
-            Customer entity = await _dbContext.Customers.AsNoTracking().Include(c => c.Address).SingleOrDefaultAsync(c => c.Id == id);
+            Customer entity = await _dbContext.Customers.AsNoTracking().Include(c => c.Address).Include(c => c.User).SingleOrDefaultAsync(c => c.Id == id);
             return entity;
         }
 

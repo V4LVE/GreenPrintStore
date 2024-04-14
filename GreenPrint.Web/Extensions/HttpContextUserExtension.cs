@@ -12,18 +12,16 @@ namespace GreenPrint.Web.Extensions
     public static class HttpContextUserExtension
     {
 
-        public static async Task<string> GetUser(this HttpContext context)
+        public static async Task<int> GetUser(this HttpContext context)
         {
-            IUserService userService = context.RequestServices.GetService<IUserService>();
-
             try
             {
                 SessionDTO session = await GetSession(context);
-                return userService.GetByIdAsync(session.UserId).Result.Email;
+                return session.UserId;
             }
             catch (Exception)
             {
-                return "Not logged in";
+                return 0;
             }
         }
         
