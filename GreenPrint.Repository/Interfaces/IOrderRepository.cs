@@ -24,5 +24,12 @@ namespace GreenPrint.Repository.Interfaces
         /// <param name="statusEnum"></param>
         /// <returns></returns>
         Task<List<Order>> GetOrdersByStatus(OrderStatusEnum status);
+
+        /// <summary>
+        /// Get all orders by customer ID
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns></returns>
+        Task <List<Order>> GetAllByCustomerId(int customerId);
     }
 }

@@ -37,6 +37,7 @@ namespace GreenPrint.Repository.Repositories
         {
             var temp = await _dbContext.Orders.AsNoTracking()
                 .Include(x => x.Customer)
+                .ThenInclude(x => x.User)
                 .Include(x => x.ItemOrders)
                 .ThenInclude(x => x.Item)
                 .Where(x => x.Id == id)
@@ -57,5 +58,9 @@ namespace GreenPrint.Repository.Repositories
             return await _dbContext.Orders.AsNoTracking().Where(x => x.Status == status).ToListAsync();
         }
 
+        public async Task<List<Order>> GetAllByCustomerId(int customerId)
+        {
+            return await _dbContext.Orders.AsNoTracking().Where(x => x.CustomerId == customerId).ToListAsync();
+        }
     }
 }

@@ -1,5 +1,6 @@
 using GreenPrint.Service.DataTransferObjects;
 using GreenPrint.Service.Interfaces;
+using GreenPrint.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Text.Json;
@@ -54,6 +55,12 @@ namespace GreenPrint.Web.Pages.Items
 
         public async Task<IActionResult> OnGet()
         {
+            if (await HttpContext.IsLoggedIn())
+            {
+                var tempuser = await _userService.GetByIdAsync(await HttpContext.GetUser());
+                NewCustomer = await _customerService.GetByIdAsync((int)tempuser.CustomerId);
+                NewCustomerAddress = NewCustomer.Address;
+            }
             if (Request.Cookies["ItemCartCookie"] != null)
             {
                 CookieItemProducts = JsonSerializer.Deserialize<List<WarehouseItemDTO>>(Request.Cookies["ItemCartCookie"]);
@@ -105,6 +112,7 @@ namespace GreenPrint.Web.Pages.Items
             }
             List<ItemOrderDTO> itemOrders = new();
 
+            // If user wants to create an account
             if (CreateUserAccount)
             {
                 if (NewUser.Password != PassConfirm)
@@ -114,10 +122,17 @@ namespace GreenPrint.Web.Pages.Items
                     await OnGet();
                     return Page();
                 }
+                if (await _userService.GetUserByEmailAsync(NewUser.Email) != null)
+                {
+                    ModelState.AddModelError("NewUser.Email", "This email already exists. Please login instead");
+
+                    await OnGet();
+                    return Page();
+                }
                 NewCustomer = await _customerService.CreateAndReturn(NewCustomer);
                 NewUser.Roleid = 1;
                 NewUser.CustomerId = NewCustomer.Id;
-                await _userService.CreateAsync(NewUser);
+                NewUser = await _userService.CreateAndReturn(NewUser);
             }
             if (NewCustomer.Id == 0)
             {
@@ -135,7 +150,7 @@ namespace GreenPrint.Web.Pages.Items
 
             NewOrder = await _orderService.CreateAndReturn(NewOrder);
 
-            // If user wants to create an account
+           
            
 
             // add items to itemOrderlist
@@ -172,7 +187,7 @@ namespace GreenPrint.Web.Pages.Items
 
             Response.Cookies.Delete("ItemCartCookie");
 
-            return RedirectToPage("/Orders/Order", new { NewOrder.Id });
+            return RedirectToPage("/Orders/Order", new { orderId = NewOrder.Id });
 
             
         }

@@ -73,5 +73,10 @@ namespace GreenPrint.Service.Services
                 await UpdateAsync(Order);
             }
         }
+
+        public async Task<List<OrderDTO>> GetAllByCustomerId(int customerId)
+        {
+            return _mappingService._mapper.Map<List<OrderDTO>>(await _OrderRepository.GetAllByCustomerId(customerId));
+        }
     }
 }

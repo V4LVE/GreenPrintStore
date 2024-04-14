@@ -37,11 +37,7 @@ namespace GreenPrint.Web.Pages.Orders
             {
                 return NotFound();
             }
-            if (await HttpContext.GetUser() != Order.Customer.UserId || !await HttpContext.AuthenticatedUserIsAdmin())
-            {
-                return RedirectToPage("/UnAuthorized");
-            }
-
+           
             ItemOrders = await _itemOrderService.GetAllByOrderId(orderId);
 
             await _orderService.CheckOrderStatus(ItemOrders, Order);
