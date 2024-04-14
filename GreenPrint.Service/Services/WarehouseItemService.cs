@@ -27,10 +27,9 @@ namespace GreenPrint.Service.Services
             return temp;
         }
 
-        public async Task<List<WarehouseItem>> GetAllByByItemId(int itemId)
+        public async Task<List<WarehouseItemDTO>> GetAllByByItemId(int itemId)
         {
-            var temp = await _warehouseItemRepository.GetAllByByItemId(itemId);
-            return temp;
+            return _mappingService._mapper.Map<List<WarehouseItemDTO>>(await _warehouseItemRepository.GetAllByByItemId(itemId));
         }
 
         public async Task<bool> CheckWarehouseStock(int warehouseItemID, int amount)

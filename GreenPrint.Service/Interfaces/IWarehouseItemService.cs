@@ -23,7 +23,7 @@ namespace GreenPrint.Service.Interfaces
         /// </summary>
         /// <param name="itemId"></param>
         /// <returns></returns>
-        Task<List<WarehouseItem>> GetAllByByItemId(int itemId);
+        Task<List<WarehouseItemDTO>> GetAllByByItemId(int itemId);
 
 
         /// <summary>

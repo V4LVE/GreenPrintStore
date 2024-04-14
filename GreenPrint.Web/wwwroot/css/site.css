@@ -134,3 +134,10 @@ body {
     height: 32%;
     width: 32%
 }
+
+.navimg {
+    background-size: 40px 40px;
+    height: 40px;
+    margin: 5px;
+    width: 40px;
+}
