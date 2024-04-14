@@ -36,5 +36,17 @@ namespace GreenPrint.Web.Pages
 
             return Page();
         }
+
+        public async Task<IActionResult> OnPostSearchAsync(string searchQuery)
+        {
+            if (int.TryParse(searchQuery, out _))
+            {
+                return RedirectToPage("Items/Item", new { itemId = searchQuery });
+            }
+            else
+            {
+                return RedirectToPage("/items/SearchResult", new { SearchQuery = searchQuery });
+            }
+        }
     }
 }

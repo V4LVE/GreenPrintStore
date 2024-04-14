@@ -26,6 +26,6 @@ namespace GreenPrint.Repository.Interfaces
         /// </summary>
         /// <param name="searchQuery"></param>
         /// <returns></returns>
-        Task <List<Item>> GetItemsBySearch(string searchQuery);
+        Task <List<Item>> GetItemsBySearch(string searchQuery, PageOptions pageOptions, OrderByOptionsItem orderBy);
     }
 }

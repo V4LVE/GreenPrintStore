@@ -68,9 +68,15 @@ namespace GreenPrint.Repository.Repositories
             return await query.Skip((pageOptions.CurrentPage - 1) * pageOptions.PageSize).Take(pageOptions.PageSize).ToListAsync();
         }
 
-        public async Task<List<Item>> GetItemsBySearch(string searchQuery)
+        public async Task<List<Item>> GetItemsBySearch(string searchQuery, PageOptions pageOptions, OrderByOptionsItem orderBy)
         {
-            return await _dbContext.Items.Where(i => i.ItemName.Contains(searchQuery) || i.Description.Contains(searchQuery)).ToListAsync();
+            var query = _dbContext.Items.AsNoTracking()
+                .Include(s => s.Category)
+                .Include(s => s.ItemImages)
+                .Where(s => s.ItemName.Contains(searchQuery) || s.Description.Contains(searchQuery))
+                .OrderItemsBy(orderBy);
+
+            return await query.Skip((pageOptions.CurrentPage - 1) * pageOptions.PageSize).Take(pageOptions.PageSize).ToListAsync();
         }
 
     }
