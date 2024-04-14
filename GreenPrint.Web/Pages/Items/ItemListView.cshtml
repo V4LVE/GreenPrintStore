@@ -22,6 +22,13 @@
                         <option value="">Pagesize</option>
                     </select>
                 </div>
+                <div class="input-group-append col-2 me-2">
+                    <select asp-for="@Model.OrderBy"
+                            asp-items="Html.GetEnumSelectList<GreenPrint.Repository.Enums.OrderByOptionsItem>()"
+                            class="form-select">
+                        <option value="">Order By</option>
+                    </select>
+                </div>
                 <div class="col-2">
                     <button class="btn btn-outline-secondary" type="submit">
                         <i class="fas fa-search"></i>

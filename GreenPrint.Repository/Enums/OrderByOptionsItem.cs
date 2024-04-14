@@ -9,9 +9,9 @@ namespace GreenPrint.Repository.Enums
 {
     public enum OrderByOptionsItem
     {
-        [Display(Name = "Order Id Descending ↓")]
+        [Display(Name = "ID Descending ↓")]
         IDDes = 0,
-        [Display(Name = "Order Id Ascending ↑")]
+        [Display(Name = "ID Ascending ↑")]
         IDAsc,
         [Display(Name = "Price ↓")]
         PriceDes,

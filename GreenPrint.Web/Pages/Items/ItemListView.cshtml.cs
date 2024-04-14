@@ -1,3 +1,4 @@
+using GreenPrint.Repository.Enums;
 using GreenPrint.Repository.Paging;
 using GreenPrint.Service.DataTransferObjects;
 using GreenPrint.Service.Interfaces;
@@ -10,12 +11,12 @@ namespace GreenPrint.Web.Pages.Items
 {
     public enum PageSizeEnum
     {
-        [Display(Name = "5")]
-        _5 = 5,
-        [Display(Name = "10")]
-        _10 = 10,
-        [Display(Name = "25")]
-        _25 = 25,
+        [Display(Name = "8")]
+        _8 = 8,
+        [Display(Name = "16")]
+        _16 = 16,
+        [Display(Name = "32")]
+        _32 = 32,
     }
 
     public class ItemListViewModel : PageModel
@@ -34,13 +35,16 @@ namespace GreenPrint.Web.Pages.Items
         [BindProperty(SupportsGet = true)]
         public PageOptions OptionsPaging { get; set; } = new();
 
+        [BindProperty(SupportsGet =true)]
+        public OrderByOptionsItem OrderBy { get; set; } = OrderByOptionsItem.PriceAsc;
+
 
         public List<ItemDTO> Items { get; set; }
         public CategoryDTO Category { get; set; }
 
         public async Task<IActionResult> OnGet(int categoryID)
         {
-            Items = await _itemService.GetItemsByCategory(categoryID, OptionsPaging);
+            Items = await _itemService.GetItemsByCategory(categoryID, OptionsPaging, OrderBy);
             Category = await _categoryService.GetByIdAsync(categoryID);
             OptionsPaging.TotalPages = (int)Math.Ceiling(decimal.Divide(_itemService.GetAllAsync().Result.Count, OptionsPaging.PageSize));
             return Page();

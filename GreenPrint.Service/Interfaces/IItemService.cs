@@ -19,6 +19,7 @@ namespace GreenPrint.Service.Interfaces
         /// <returns></returns>
         Task<List<ItemDTO>> GetItemsByCategory(string category, PageOptions pageOptions);
         Task<List<ItemDTO>> GetItemsByCategory(int category, PageOptions pageOptions);
+        Task<List<ItemDTO>> GetItemsByCategory(int category, PageOptions pageOptions, OrderByOptionsItem orderBy);
 
         /// <summary>
         /// Get all items by search query
