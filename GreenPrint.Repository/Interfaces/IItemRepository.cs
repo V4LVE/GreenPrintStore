@@ -19,12 +19,13 @@ namespace GreenPrint.Repository.Interfaces
         /// <returns></returns>
         Task <List<Item>> GetItemsbyCategory(string category, PageOptions pageOptions);
         Task<List<Item>> GetItemsbyCategory(int category, PageOptions pageOptions);
+        Task<List<Item>> GetItemsbyCategory(int category, PageOptions pageOptions, OrderByOptionsItem orderBy);
 
         /// <summary>
         /// Get all items by search query
         /// </summary>
         /// <param name="searchQuery"></param>
         /// <returns></returns>
-        Task <List<Item>> GetItemsBySearch(string searchQuery);
+        Task <List<Item>> GetItemsBySearch(string searchQuery, PageOptions pageOptions, OrderByOptionsItem orderBy);
     }
 }

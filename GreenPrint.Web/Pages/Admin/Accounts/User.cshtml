@@ -1,0 +1,47 @@
+﻿@page "{userId:?}"
+@model GreenPrint.Web.Pages.Admin.Accounts.UserModel
+@{
+}
+
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <h5 class="card-header">
+                Editing @Model.User.Email
+            </h5>
+            <div class="card-body">
+                <form asp-page-handler="Update">
+                    <div class="row">
+                        <input hidden asp-for="@Model.User.Id" />
+                        <input hidden asp-for="@Model.User.Password"/>
+                        <input hidden asp-for="@Model.User.CustomerId"/>
+                        <!--User details-->
+                        <div class="col-6">
+                            <h3>User Details</h3>
+                            <div class="row">
+                                <div>
+                                    <label class="form-label" for="email" asp-for="@Model.User.Email"></label>
+                                    <input class="form-control" id="email" asp-for="@Model.User.Email" />
+                                    <span class="form-label" asp-validation-for="@Model.User.Email"></span>
+                                </div>
+                                <div>
+                                    <select name="roleId"
+                                            asp-items="@Model.SelectRoles"
+                                            class="form-select">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mt-2">
+                            <button class="btn btn-outline-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+                            <a class="btn btn-outline-secondary" asp-page="/Admin/Accounts/Users"><i class="fa-solid fa-left-long"></i> Cancel</a>
+                        </div>
+                    </div>
+                </form>
+                <button class="btn btn-outline-primary">Reset Password</button>
+            </div>
+        </div>
+    </div>
+</div>

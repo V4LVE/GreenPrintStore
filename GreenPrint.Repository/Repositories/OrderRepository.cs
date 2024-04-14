@@ -40,7 +40,7 @@ namespace GreenPrint.Repository.Repositories
                 .Include(x => x.ItemOrders)
                 .ThenInclude(x => x.Item)
                 .Where(x => x.Id == id)
-                .SingleAsync();
+                .SingleOrDefaultAsync();
 
             return temp;
         }

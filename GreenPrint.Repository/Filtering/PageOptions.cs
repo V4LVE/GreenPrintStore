@@ -12,7 +12,7 @@ namespace GreenPrint.Repository.Paging
     {
 
         // PAGING
-        public const int DefaultPageSize = 10;   //default page size is 10
+        public const int DefaultPageSize = 8;   //default page size is 10
         public const int defaultPageNumber = 1;  //default page number is 1
 
         public int CurrentPage { get; set; } = 1;

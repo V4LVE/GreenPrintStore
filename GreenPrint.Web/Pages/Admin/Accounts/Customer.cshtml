@@ -1,0 +1,87 @@
+﻿@page "{customerId:?}"
+@model GreenPrint.Web.Pages.Admin.Accounts.CustomerModel
+@{
+}
+
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <h5 class="card-header">
+                Editing @Model.Customer.FirstName @Model.Customer.LastName
+            </h5>
+            <div class="card-body">
+                <form asp-page-handler="Update">
+                    <div class="row">
+                        <input hidden asp-for="@Model.Customer.Id"/>
+                        <input hidden asp-for="@Model.Customer.AddressId" />
+                        <input hidden asp-for="@Model.Customer.Address.Id" />
+                        <!--Customer details-->
+                        <div class="col-6">
+                            <h3>Customer Details</h3>
+                            <div class="row">
+                                <div>
+                                    <label class="form-label" for="fname" asp-for="@Model.Customer.FirstName"></label>
+                                    <input class="form-control" id="fname" asp-for="@Model.Customer.FirstName" />
+                                    <span class="form-label" asp-validation-for="@Model.Customer.FirstName"></span>
+                                </div>
+                                <div>
+                                    <label class="form-label" for="lname" asp-for="@Model.Customer.LastName"></label>
+                                    <input class="form-control" id="lname" asp-for="@Model.Customer.LastName" />
+                                    <span class="form-label" asp-validation-for="@Model.Customer.LastName"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div>
+                                    <label class="form-label" for="email" asp-for="@Model.Customer.Email"></label>
+                                    <input class="form-control" id="email" asp-for="@Model.Customer.Email" />
+                                    <span class="form-label" asp-validation-for="@Model.Customer.Email"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div>
+                                    <label class="form-label" for="phone" asp-for="@Model.Customer.Phone"></label>
+                                    <input class="form-control" id="phone" asp-for="@Model.Customer.Phone" />
+                                    <span class="form-label" asp-validation-for="@Model.Customer.Phone"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Customer Address-->
+                        <div class="col-6">
+                            <h3>Address Details</h3>
+                            <div class="row">
+                                <div>
+                                    <label class="form-label" for="sname" asp-for="@Model.Customer.Address.StreetName"></label>
+                                    <input class="form-control" id="sname" asp-for="@Model.Customer.Address.StreetName" />
+                                    <span class="form-label" asp-validation-for="@Model.Customer.Address.StreetName"></span>
+                                </div>
+                                <div>
+                                    <label class="form-label" for="snum" asp-for="@Model.Customer.Address.StreetNumber"></label>
+                                    <input class="form-control" id="snum" asp-for="@Model.Customer.Address.StreetNumber" />
+                                    <span class="form-label" asp-validation-for="@Model.Customer.Address.StreetNumber"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div>
+                                    <label class="form-label" for="zcode" asp-for="@Model.Customer.Address.ZipCode"></label>
+                                    <input class="form-control" id="zcode" asp-for="@Model.Customer.Address.ZipCode" />
+                                    <span class="form-label" asp-validation-for="@Model.Customer.Address.ZipCode"></span>
+                                </div>
+                                <div>
+                                    <label class="form-label" for="city" asp-for="@Model.Customer.Address.City"></label>
+                                    <input class="form-control" id="city" asp-for="@Model.Customer.Address.City" />
+                                    <span class="form-label" asp-validation-for="@Model.Customer.Address.City"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mt-2">
+                            <button class="btn btn-outline-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+                            <a class="btn btn-outline-secondary" asp-page="/Admin/Accounts/Customers"><i class="fa-solid fa-left-long"></i> Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

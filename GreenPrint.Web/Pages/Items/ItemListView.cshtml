@@ -5,7 +5,7 @@
 
 <div class="container" style="height:75vh;">
     <div class="row">
-        <div class="row border-bottom border-danger">
+        <div class="row border-bottom border-primary">
             <h1>@Model.Category.CategoryName</h1>
         </div>
     </div>
@@ -14,14 +14,20 @@
     <!--Search functions-->
     <div class="row">
         <form method="get">
-            <div class="input-group mb-3">
-                <div class="input-group-append col-2">
+            <div class="input-group mb-3 mt-2">
+                <div class="input-group-append col-2 me-2">
                     <select asp-for="@Model.OptionsPaging.PageSize"
                             asp-items="Html.GetEnumSelectList<GreenPrint.Web.Pages.Items.PageSizeEnum>()"
-                            class="form-select ">
+                            class="form-select">
                         <option value="">Pagesize</option>
                     </select>
-
+                </div>
+                <div class="input-group-append col-2 me-2">
+                    <select asp-for="@Model.OrderBy"
+                            asp-items="Html.GetEnumSelectList<GreenPrint.Repository.Enums.OrderByOptionsItem>()"
+                            class="form-select">
+                        <option value="">Order By</option>
+                    </select>
                 </div>
                 <div class="col-2">
                     <button class="btn btn-outline-secondary" type="submit">
@@ -38,13 +44,29 @@
         @foreach (var item in Model.Items)
         {
             <div class="col-3 mt-2">
-
-                <a asp-page="Furniture/Details" asp-route-productGuid="@item.Id" class="card bg-danger text-decoration-none toggleLoader">
+                <div class="card">
+                    <a asp-page="Items/Item" asp-route-itemId="@item.Id" style="text-decoration:none;color:black">
+                        @if (item.ItemImages.Count > 0)
+                        {
+                            <img loading="lazy" src="~/Images/Items/@item.ItemImages.First().ImageUrl" class="card-img-top" alt="...">
+                        }
+                        else
+                        {
+                            <img loading="lazy" src="/Images/Items/No_image_available.svg" class="card-img-top" alt="...">
+                        }
+                        
+                        <div class="card-body">
+                            <h5 class="card-title">@item.ItemName</h5>
+                            <p class="card-text">@item.Description</p>
+                            <p class="card-text">@($"{item.Price:C}")</p>
+                        </div>
+                    </a>
                     <div class="card-footer text-center">
-                        <h5 class="card-title text-light">@item.ItemName</h5>
+                        <form asp-page-handler="AddToCart">
+                            <button type="submit" name="itemId" value="@item.Id" class="btn btn-outline-primary col-6">Add To Cart</button>
+                        </form>
                     </div>
-                </a>
-
+                </div>
             </div>
         }
 
@@ -52,9 +74,9 @@
 </div>
 
 <!--Paging-->
-<footer>
-    <div class="row mt-2 justify-content-center">
-        <ul class="pagination">
+<footer class="text-center">
+    <div class="container">
+        <ul class="pagination justify-content-center">
             @for (var i = 1; i <= Model.OptionsPaging.TotalPages; i++)
             {
                 <li class="page-item @(i == Model.OptionsPaging.CurrentPage ? "active" : "")">

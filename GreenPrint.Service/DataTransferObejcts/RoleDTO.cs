@@ -14,6 +14,6 @@ namespace GreenPrint.Service.DataTransferObjects
         public string RoleName { get; set; }
 
         // Navigation Properties
-        public List<UserDTO> Users { get; set; }
+        public List<UserDTO>? Users { get; set; }
     }
 }

@@ -22,8 +22,8 @@ namespace GreenPrint.Repository.Domain
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //optionsBuilder.UseSqlServer("Server =COLSERVER\\COLDB; Database = GreenPrintStore;User Id=DBUser;Password=Pwrvol901;TrustServerCertificate=True;"); // Desktop DB
-                optionsBuilder.UseSqlServer("Server =ALEX_PC\\SQLEXPRESS; Database = GreenPrintStore; Trusted_Connection = True;TrustServerCertificate=True; "); // Laptop DB
+                optionsBuilder.UseSqlServer("Server =COLSERVER\\SQLEXPRESS; Database = GreenPrintStore;User Id=DBUser;Password=Pwrvol901;TrustServerCertificate=True;"); // Desktop DB
+                //optionsBuilder.UseSqlServer("Server =ALEX_PC\\SQLEXPRESS; Database = GreenPrintStore; Trusted_Connection = True;TrustServerCertificate=True; "); // Laptop DB
                 optionsBuilder.EnableSensitiveDataLogging();
                 optionsBuilder.UseLoggerFactory(new ServiceCollection()
                               .AddLogging(builder => builder.AddConsole()
@@ -101,10 +101,16 @@ namespace GreenPrint.Repository.Domain
                                    Id = 1,
                                    Email = "alex802c@gmail.com",
                                    Password = "Pwrvol901",
-                                   CustomerId = 1,
                                    Roleid = 3
                                }
                           );
+
+            // ItemImages
+            modelBuilder.Entity<ItemImage>().HasData(
+                new ItemImage { Id = 1, ItemId = 1, ImageUrl = "1.png" },
+                new ItemImage { Id = 2, ItemId = 2, ImageUrl = "2.png" },
+                new ItemImage { Id = 3, ItemId = 3, ImageUrl = "3.png" }
+                );
 
             #endregion
 
@@ -169,6 +175,16 @@ namespace GreenPrint.Repository.Domain
             modelBuilder.Entity<Session>()
                 .HasOne(s => s.User).WithOne(u => u.Session).HasForeignKey<Session>(s => s.UserId).OnDelete(DeleteBehavior.NoAction);
             #endregion
+
+            #region Customer
+            modelBuilder.Entity<Customer>()
+                .HasOne(c => c.User).WithOne(u => u.Customer).HasForeignKey<User>(u => u.CustomerId).OnDelete(DeleteBehavior.NoAction);
+            #endregion
+
+            #region User
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Customer).WithOne(c => c.User).HasForeignKey<Customer>(c => c.UserId).OnDelete(DeleteBehavior.NoAction);
+            #endregion
         }
 
         public DbSet<User> Users { get; set; }
@@ -182,6 +198,7 @@ namespace GreenPrint.Repository.Domain
         public DbSet<ItemOrder> ItemOrders { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Session> Sessions { get; set; }
+        public DbSet<ItemImage> Images { get; set; }
 
     }
 }

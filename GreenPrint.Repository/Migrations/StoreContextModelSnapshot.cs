@@ -58,6 +58,86 @@ namespace GreenPrint.Repository.Migrations
                             StreetName = "JutlandStreet",
                             StreetNumber = "69B",
                             ZipCode = "6400"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            City = "Chaddfurt",
+                            StreetName = "Schaden Valleys",
+                            StreetNumber = "79",
+                            ZipCode = "37460"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            City = "South Greyson",
+                            StreetName = "Padberg Loop",
+                            StreetNumber = "45",
+                            ZipCode = "37286"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            City = "Port Jacintheshire",
+                            StreetName = "Lenore Cliff",
+                            StreetNumber = "4",
+                            ZipCode = "69623"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            City = "Jerdeview",
+                            StreetName = "Barrett Summit",
+                            StreetNumber = "80",
+                            ZipCode = "24133"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            City = "West Roderickland",
+                            StreetName = "Jacobson Groves",
+                            StreetNumber = "99",
+                            ZipCode = "69813-6975"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            City = "New Marty",
+                            StreetName = "Olen Turnpike",
+                            StreetNumber = "88",
+                            ZipCode = "74561"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            City = "Rippinhaven",
+                            StreetName = "Herbert Way",
+                            StreetNumber = "93",
+                            ZipCode = "83639"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            City = "Boscoberg",
+                            StreetName = "Kshlerin Ports",
+                            StreetNumber = "75",
+                            ZipCode = "37471-2452"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            City = "Emilianoberg",
+                            StreetName = "Athena Wells",
+                            StreetNumber = "76",
+                            ZipCode = "36251-2903"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            City = "Lavonberg",
+                            StreetName = "Gregorio Camp",
+                            StreetNumber = "91",
+                            ZipCode = "21280"
                         });
                 });
 
@@ -122,9 +202,16 @@ namespace GreenPrint.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Customers");
 
@@ -137,6 +224,96 @@ namespace GreenPrint.Repository.Migrations
                             FirstName = "John",
                             LastName = "Doe",
                             Phone = "69696969"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AddressId = 2,
+                            Email = "eino@yost.name",
+                            FirstName = "Emmitt",
+                            LastName = "Reinger",
+                            Phone = "631.037.4878 x60305"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AddressId = 3,
+                            Email = "orville@rutherford.biz",
+                            FirstName = "Hollis",
+                            LastName = "Purdy",
+                            Phone = "1-725-587-4998"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AddressId = 4,
+                            Email = "garth@greenholt.ca",
+                            FirstName = "Paxton",
+                            LastName = "McKenzie",
+                            Phone = "(390)226-6150 x0257"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AddressId = 5,
+                            Email = "kareem_tremblay@runolfsdottirgleichner.info",
+                            FirstName = "Elton",
+                            LastName = "Schneider",
+                            Phone = "442-655-0172"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AddressId = 6,
+                            Email = "janick.orn@bins.uk",
+                            FirstName = "Brendan",
+                            LastName = "Powlowski",
+                            Phone = "967.111.7920"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AddressId = 7,
+                            Email = "general_satterfield@pollichcorkery.uk",
+                            FirstName = "Dorian",
+                            LastName = "Hessel",
+                            Phone = "109.036.6012 x413"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AddressId = 8,
+                            Email = "hailee_okon@greenfelderrempel.biz",
+                            FirstName = "Delores",
+                            LastName = "Brown",
+                            Phone = "(181)056-3208 x001"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AddressId = 9,
+                            Email = "will@willwintheiser.ca",
+                            FirstName = "Annabel",
+                            LastName = "Sipes",
+                            Phone = "539-830-2959"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AddressId = 10,
+                            Email = "chaz_kemmer@parisian.ca",
+                            FirstName = "Randy",
+                            LastName = "Johnston",
+                            Phone = "1-157-616-0951 x61510"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            AddressId = 11,
+                            Email = "orpha@dach.us",
+                            FirstName = "Elvis",
+                            LastName = "Fahey",
+                            Phone = "818.185.1922"
                         });
                 });
 
@@ -192,6 +369,54 @@ namespace GreenPrint.Repository.Migrations
                             Description = "A material for printing",
                             ItemName = "Sort PLA 1Kg",
                             Price = 150.0
+                        });
+                });
+
+            modelBuilder.Entity("GreenPrint.Repository.Entities.ItemImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("Images");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "1.png",
+                            ItemId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "2.png",
+                            ItemId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "3.png",
+                            ItemId = 3
                         });
                 });
 
@@ -341,10 +566,6 @@ namespace GreenPrint.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId")
-                        .IsUnique()
-                        .HasFilter("[CustomerId] IS NOT NULL");
-
                     b.HasIndex("Roleid");
 
                     b.ToTable("Users");
@@ -353,10 +574,89 @@ namespace GreenPrint.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CustomerId = 1,
                             Email = "alex802c@gmail.com",
                             Password = "Pwrvol901",
                             Roleid = 3
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CustomerId = 2,
+                            Email = "eino@yost.name",
+                            Password = "Password",
+                            Roleid = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CustomerId = 3,
+                            Email = "orville@rutherford.biz",
+                            Password = "Password",
+                            Roleid = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CustomerId = 4,
+                            Email = "garth@greenholt.ca",
+                            Password = "Password",
+                            Roleid = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CustomerId = 5,
+                            Email = "kareem_tremblay@runolfsdottirgleichner.info",
+                            Password = "Password",
+                            Roleid = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CustomerId = 6,
+                            Email = "janick.orn@bins.uk",
+                            Password = "Password",
+                            Roleid = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CustomerId = 7,
+                            Email = "general_satterfield@pollichcorkery.uk",
+                            Password = "Password",
+                            Roleid = 2
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CustomerId = 8,
+                            Email = "hailee_okon@greenfelderrempel.biz",
+                            Password = "Password",
+                            Roleid = 3
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CustomerId = 9,
+                            Email = "will@willwintheiser.ca",
+                            Password = "Password",
+                            Roleid = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CustomerId = 10,
+                            Email = "chaz_kemmer@parisian.ca",
+                            Password = "Password",
+                            Roleid = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CustomerId = 11,
+                            Email = "orpha@dach.us",
+                            Password = "Password",
+                            Roleid = 1
                         });
                 });
 
@@ -447,7 +747,14 @@ namespace GreenPrint.Repository.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("GreenPrint.Repository.Entities.User", "User")
+                        .WithOne("Customer")
+                        .HasForeignKey("GreenPrint.Repository.Entities.Customer", "UserId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.Navigation("Address");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.Item", b =>
@@ -459,6 +766,17 @@ namespace GreenPrint.Repository.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("GreenPrint.Repository.Entities.ItemImage", b =>
+                {
+                    b.HasOne("GreenPrint.Repository.Entities.Item", "Item")
+                        .WithMany("ItemImages")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.ItemOrder", b =>
@@ -512,17 +830,11 @@ namespace GreenPrint.Repository.Migrations
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.User", b =>
                 {
-                    b.HasOne("GreenPrint.Repository.Entities.Customer", "Customer")
-                        .WithOne("User")
-                        .HasForeignKey("GreenPrint.Repository.Entities.User", "CustomerId");
-
                     b.HasOne("GreenPrint.Repository.Entities.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("Roleid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Customer");
 
                     b.Navigation("Role");
                 });
@@ -541,7 +853,7 @@ namespace GreenPrint.Repository.Migrations
             modelBuilder.Entity("GreenPrint.Repository.Entities.WarehouseItem", b =>
                 {
                     b.HasOne("GreenPrint.Repository.Entities.Item", "Item")
-                        .WithMany()
+                        .WithMany("warehouseItems")
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -565,9 +877,13 @@ namespace GreenPrint.Repository.Migrations
             modelBuilder.Entity("GreenPrint.Repository.Entities.Customer", b =>
                 {
                     b.Navigation("Orders");
+                });
 
-                    b.Navigation("User")
-                        .IsRequired();
+            modelBuilder.Entity("GreenPrint.Repository.Entities.Item", b =>
+                {
+                    b.Navigation("ItemImages");
+
+                    b.Navigation("warehouseItems");
                 });
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.Order", b =>
@@ -582,6 +898,8 @@ namespace GreenPrint.Repository.Migrations
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.User", b =>
                 {
+                    b.Navigation("Customer");
+
                     b.Navigation("Session");
                 });
 

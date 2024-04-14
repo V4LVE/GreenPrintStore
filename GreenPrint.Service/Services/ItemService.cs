@@ -23,9 +23,9 @@ namespace GreenPrint.Service.Services
 
         #endregion
 
-        public async Task<List<ItemDTO>> GetItemsBySearch(string searchQuery)
+        public async Task<List<ItemDTO>> GetItemsBySearch(string searchQuery, PageOptions pageOptions, OrderByOptionsItem orderBy)
         {
-            return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetItemsBySearch(searchQuery));
+            return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetItemsBySearch(searchQuery,pageOptions,orderBy));
         }
 
         public async Task<List<ItemDTO>> GetItemsByCategory(string category, PageOptions pageOptions)
@@ -36,6 +36,10 @@ namespace GreenPrint.Service.Services
         public async Task<List<ItemDTO>> GetItemsByCategory(int categoryId, PageOptions pageOptions)
         {
             return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetItemsbyCategory(categoryId, pageOptions));
+        }
+        public async Task<List<ItemDTO>> GetItemsByCategory(int categoryId, PageOptions pageOptions, OrderByOptionsItem orderBy)
+        {
+            return _mappingService._mapper.Map<List<ItemDTO>>(await _ItemRepository.GetItemsbyCategory(categoryId, pageOptions,orderBy));
         }
 
     }

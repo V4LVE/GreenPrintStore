@@ -44,15 +44,25 @@ builder.Services.AddScoped<IWarehouseItemService, WarehouseItemService>();
 builder.Services.AddScoped<ISessionRepository, SessionRepository>();
 builder.Services.AddScoped<ISessionService, SessionService>();
 
+builder.Services.AddScoped<IItemImageRepository, ItemImageRepository>();
+builder.Services.AddScoped<IItemImageService, ItemImageService>();
+
 #endregion
 
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.CheckConsentNeeded = context => true;
+    options.MinimumSameSitePolicy = SameSiteMode.Strict;
+});
+
 builder.Services.AddDbContext<StoreContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Laptop"));
+    //options.UseSqlServer(builder.Configuration.GetConnectionString("Laptop")); // Laptop DB
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Desktop")); // Desktop DB
     options.EnableSensitiveDataLogging();
 });
 
@@ -68,6 +78,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseCookiePolicy();
 
 app.UseRouting();
 

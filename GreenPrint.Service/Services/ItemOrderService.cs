@@ -20,5 +20,11 @@ namespace GreenPrint.Service.Services
         private readonly IItemOrderRepository _ItemOrderRepository = itemOrderRepository;
 
         #endregion
+
+        public async Task<List<ItemOrderDTO>> GetAllByOrderId(int orderId)
+        {
+            var temp = _mappingService._mapper.Map<List<ItemOrderDTO>>(await _ItemOrderRepository.GetAllByOrderId(orderId));
+            return temp;
+        }
     }
 }

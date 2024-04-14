@@ -12,18 +12,16 @@ namespace GreenPrint.Web.Extensions
     public static class HttpContextUserExtension
     {
 
-        public static async Task<string> GetUser(this HttpContext context)
+        public static async Task<int> GetUser(this HttpContext context)
         {
-            IUserService userService = context.RequestServices.GetService<IUserService>();
-
             try
             {
                 SessionDTO session = await GetSession(context);
-                return userService.GetByIdAsync(session.UserId).Result.Email;
+                return session.UserId;
             }
             catch (Exception)
             {
-                return "Not logged in";
+                return 0;
             }
         }
         
@@ -67,8 +65,25 @@ namespace GreenPrint.Web.Extensions
 
         public static async Task<SessionDTO> GetSession(this HttpContext context)
         {
-           
             return JsonSerializer.Deserialize<SessionDTO>(context.Request.Cookies["Session"]);
+        }
+
+        public static async Task<int> GetCartCount(this HttpContext context)
+        {
+            string jsoncartCookie = context.Request.Cookies["ItemCartCookie"];
+
+            if (jsoncartCookie != null)
+            {
+                var tempitems = JsonSerializer.Deserialize<List<WarehouseItemDTO>>(jsoncartCookie);
+                var totalCount = 0;
+                foreach (var item in tempitems)
+                {
+                    totalCount += item.Quantity;
+                }
+                return totalCount;
+            }
+
+            return 0;
         }
     }
 }

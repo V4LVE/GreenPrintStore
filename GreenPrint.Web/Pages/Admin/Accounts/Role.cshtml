@@ -1,0 +1,57 @@
+﻿@page "{roleId:?}"
+@model GreenPrint.Web.Pages.Admin.Accounts.RoleModel
+@{
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="card col-6">
+            <h5 class="card-header">
+                Editing @Model.Role.RoleName
+            </h5>
+            <div class="card-body">
+                <form asp-page-handler="Update">
+                    <div class="row">
+                        <input hidden asp-for="@Model.Role.Id" />
+                        <!--Role details-->
+                        <div class="col-6">
+                            <h3>Role Details</h3>
+                            <div class="row">
+                                <div>
+                                    <label class="form-label" for="fname" asp-for="@Model.Role.RoleName"></label>
+                                    <input class="form-control" id="fname" asp-for="@Model.Role.RoleName" />
+                                    <span class="form-label" asp-validation-for="@Model.Role.RoleName"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-12 mt-2">
+                            <button class="btn btn-outline-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+                            <a class="btn btn-outline-secondary" asp-page="/Admin/Accounts/Customers"><i class="fa-solid fa-left-long"></i> Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <h5>Members:</h5>
+            <table class="table table-striped">
+                <thead>
+                    <th>User ID</th>
+                    <th>User Email</th>
+                </thead>
+                <tbody>
+                    @foreach (var member in Model.Role.Users)
+                    {
+                        <tr>
+                            <td>@member.Id</td>
+                            <td>@member.Email</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -16,5 +16,20 @@ namespace GreenPrint.Repository.Interfaces
         /// <param name="warehouseId"></param>
         /// <returns></returns>
         Task<WarehouseItem> GetByItemAndWarehouseId(int itemId, int warehouseId);
+
+        /// <summary>
+        /// Get all warehouse items by item id
+        /// </summary>
+        /// <param name="itemId"></param>
+        /// <returns></returns>
+        Task<List<WarehouseItem>> GetAllByByItemId(int itemId);
+
+        /// <summary>
+        /// Check if there is enough stock in the warehouse
+        /// </summary>
+        /// <param name="warehouseItemID"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        Task<bool> CheckWarehouseStock(int warehouseItemID, int amount);
     }
 }

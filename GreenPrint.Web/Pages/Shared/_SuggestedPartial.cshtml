@@ -1,0 +1,69 @@
+﻿@model List<GreenPrint.Service.DataTransferObjects.ItemDTO>
+
+<!--Featured Carousel-->
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="row">
+                @foreach (var itemview in Model.Take(4))
+                {
+                    <div class="col-3 mt-2">
+                        <div class="card">
+                            <a asp-page="" asp-route-itemId="@itemview.Id" style="text-decoration:none;color:black">
+                                @if (itemview.ItemImages.Count > 0)
+                                {
+                                    <img loading="lazy" src="~/Images/Items/@itemview.ItemImages.First().ImageUrl" class="card-img-top" alt="...">
+                                }
+                                else
+                                {
+                                    <img loading="lazy" src="~/Images/Items/No_image_available.svg" class="card-img-top" alt="...">
+                                }
+
+                                <div class="card-body">
+                                    <h5 class="card-title">@itemview.ItemName</h5>
+                                    <p class="card-text">@itemview.Description</p>
+                                    <p class="card-text">@($"{itemview.Price:C}")</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        @if (Model.Count > 4)
+        {
+            <div class="carousel-item">
+                <div class="row">
+                    @foreach (var itemview in Model.Skip(4).Take(4))
+                    {
+                        <div class="col-3 mt-2">
+                            <div class="card">
+                                <a asp-page="" asp-route-itemId="@itemview.Id" style="text-decoration:none;color:black">
+                                    @if (itemview.ItemImages.Count > 0)
+                                    {
+                                        <img loading="lazy" src="~/Images/Items/@itemview.ItemImages.First().ImageUrl" class="card-img-top" alt="...">
+                                    }
+                                    else
+                                    {
+                                        <img loading="lazy" src="/Images/Items/No_image_available.svg" class="card-img-top" alt="...">
+                                    }
+
+                                    <div class="card-body">
+                                        <h5 class="card-title">@itemview.ItemName</h5>
+                                        <p class="card-text">@itemview.Description</p>
+                                        <p class="card-text">@($"{itemview.Price:C}")</p>
+                                    </div>
+                                </a>
+                                <div class="card-footer text-center">
+                                    <form asp-page-handler="AddToCart">
+                                        <button type="submit" name="itemId" value="@itemview.Id" class="btn btn-outline-primary col-6">Add To Cart</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
