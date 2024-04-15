@@ -31,7 +31,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-3">
+                    <div class="col-6">
                         <ul class="navbar-nav flex-grow-1">
                             
                                 @if (!await Context.IsLoggedIn())
@@ -44,8 +44,11 @@
                                 else
                                 {
                                     <li>
-                                    <a class="nav-link text-dark" asp-page="/Orders/MyOrders" asp-route-userId="@await Context.GetUser()"><i class="fa-solid fa-receipt"></i> Your Orders</a>
+                                    <a class="nav-link text-dark" asp-page="/Orders/MyOrders" asp-route-userId="@await Context.GetUser()"><i class="fa-solid fa-receipt"></i> My Orders</a>
                                     </li>
+                                <li>
+                                    <a class="nav-link text-dark" asp-page="/Login/MyAccount" asp-route-userId="@await Context.GetUser()"><i class="fa-solid fa-user-pen"></i> My Account</a>
+                                </li>
                                    <li>
                                     <a class="nav-link text-dark" asp-page="/Login/Logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
                                    </li>

@@ -278,16 +278,16 @@ namespace GreenPrint.Repository.Migrations
                 values: new object[,]
                 {
                     { 1, "Sønderborg", "JutlandStreet", "69B", "6400" },
-                    { 2, "Chaddfurt", "Schaden Valleys", "79", "37460" },
-                    { 3, "South Greyson", "Padberg Loop", "45", "37286" },
-                    { 4, "Port Jacintheshire", "Lenore Cliff", "4", "69623" },
-                    { 5, "Jerdeview", "Barrett Summit", "80", "24133" },
-                    { 6, "West Roderickland", "Jacobson Groves", "99", "69813-6975" },
-                    { 7, "New Marty", "Olen Turnpike", "88", "74561" },
-                    { 8, "Rippinhaven", "Herbert Way", "93", "83639" },
-                    { 9, "Boscoberg", "Kshlerin Ports", "75", "37471-2452" },
-                    { 10, "Emilianoberg", "Athena Wells", "76", "36251-2903" },
-                    { 11, "Lavonberg", "Gregorio Camp", "91", "21280" }
+                    { 2, "New Davemouth", "Schinner Forge", "24", "21955" },
+                    { 3, "West Ronnyshire", "Hayes Loaf", "89", "53811" },
+                    { 4, "Myrticechester", "Domenico Shoal", "43", "28916" },
+                    { 5, "North Deondrefort", "Loraine Street", "44", "28306" },
+                    { 6, "Ornside", "Leora Springs", "8", "62995-4518" },
+                    { 7, "West Maeshire", "Wilburn Fork", "41", "57842" },
+                    { 8, "Haileyside", "Nikolaus Motorway", "44", "12470" },
+                    { 9, "Pricebury", "Kutch Ranch", "77", "18346-1301" },
+                    { 10, "Wuckertburgh", "Lesley Corners", "27", "89892-1161" },
+                    { 11, "Olaton", "Powlowski View", "93", "99833" }
                 });
 
             migrationBuilder.InsertData(
@@ -316,16 +316,16 @@ namespace GreenPrint.Repository.Migrations
                 values: new object[,]
                 {
                     { 1, 1, "JohnnyD@69420.com", "John", "Doe", "69696969", null },
-                    { 2, 2, "eino@yost.name", "Emmitt", "Reinger", "631.037.4878 x60305", null },
-                    { 3, 3, "orville@rutherford.biz", "Hollis", "Purdy", "1-725-587-4998", null },
-                    { 4, 4, "garth@greenholt.ca", "Paxton", "McKenzie", "(390)226-6150 x0257", null },
-                    { 5, 5, "kareem_tremblay@runolfsdottirgleichner.info", "Elton", "Schneider", "442-655-0172", null },
-                    { 6, 6, "janick.orn@bins.uk", "Brendan", "Powlowski", "967.111.7920", null },
-                    { 7, 7, "general_satterfield@pollichcorkery.uk", "Dorian", "Hessel", "109.036.6012 x413", null },
-                    { 8, 8, "hailee_okon@greenfelderrempel.biz", "Delores", "Brown", "(181)056-3208 x001", null },
-                    { 9, 9, "will@willwintheiser.ca", "Annabel", "Sipes", "539-830-2959", null },
-                    { 10, 10, "chaz_kemmer@parisian.ca", "Randy", "Johnston", "1-157-616-0951 x61510", null },
-                    { 11, 11, "orpha@dach.us", "Elvis", "Fahey", "818.185.1922", null }
+                    { 2, 2, "otto@rosenbaum.co.uk", "Tavares", "Vandervort", "(213)957-3902", null },
+                    { 3, 3, "jammie_corkery@leannonpredovic.name", "Tad", "Greenholt", "153-635-7582", null },
+                    { 4, 4, "albin_bahringer@okon.uk", "Josiah", "Johnson", "505-699-9576 x148", null },
+                    { 5, 5, "rico@kuphal.com", "Marcelo", "Altenwerth", "(925)867-9543 x98419", null },
+                    { 6, 6, "jarret@carroll.name", "Kody", "Watsica", "(721)600-2187 x208", null },
+                    { 7, 7, "ian@stroman.biz", "Thelma", "Thompson", "528.474.0590 x1794", null },
+                    { 8, 8, "frank.roberts@schumm.ca", "Anika", "Upton", "099.854.6841", null },
+                    { 9, 9, "tyson@murray.com", "Porter", "Daniel", "1-294-426-2695", null },
+                    { 10, 10, "kyler@emmerich.ca", "Nikita", "Brown", "(682)348-3861 x1598", null },
+                    { 11, 11, "katrine_strosin@hermistontrantow.us", "Maria", "Hammes", "530.813.0972", null }
                 });
 
             migrationBuilder.InsertData(
@@ -344,16 +344,16 @@ namespace GreenPrint.Repository.Migrations
                 values: new object[,]
                 {
                     { 1, null, "alex802c@gmail.com", "Pwrvol901", 3, null },
-                    { 2, 2, "eino@yost.name", "Password", 2, null },
-                    { 3, 3, "orville@rutherford.biz", "Password", 3, null },
-                    { 4, 4, "garth@greenholt.ca", "Password", 2, null },
-                    { 5, 5, "kareem_tremblay@runolfsdottirgleichner.info", "Password", 2, null },
-                    { 6, 6, "janick.orn@bins.uk", "Password", 2, null },
-                    { 7, 7, "general_satterfield@pollichcorkery.uk", "Password", 2, null },
-                    { 8, 8, "hailee_okon@greenfelderrempel.biz", "Password", 3, null },
-                    { 9, 9, "will@willwintheiser.ca", "Password", 3, null },
-                    { 10, 10, "chaz_kemmer@parisian.ca", "Password", 1, null },
-                    { 11, 11, "orpha@dach.us", "Password", 1, null }
+                    { 2, 2, "otto@rosenbaum.co.uk", "Password", 1, null },
+                    { 3, 3, "jammie_corkery@leannonpredovic.name", "Password", 3, null },
+                    { 4, 4, "albin_bahringer@okon.uk", "Password", 2, null },
+                    { 5, 5, "rico@kuphal.com", "Password", 3, null },
+                    { 6, 6, "jarret@carroll.name", "Password", 3, null },
+                    { 7, 7, "ian@stroman.biz", "Password", 3, null },
+                    { 8, 8, "frank.roberts@schumm.ca", "Password", 2, null },
+                    { 9, 9, "tyson@murray.com", "Password", 3, null },
+                    { 10, 10, "kyler@emmerich.ca", "Password", 1, null },
+                    { 11, 11, "katrine_strosin@hermistontrantow.us", "Password", 3, null }
                 });
 
             migrationBuilder.InsertData(

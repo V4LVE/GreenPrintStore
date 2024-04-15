@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GreenPrint.Service.Interfaces
 {
-    public interface ICustomerService : IGenericService<CustomerDTO>
-    {
-    }
+	public interface ICustomerService : IGenericService<CustomerDTO>
+	{
+	}
 }

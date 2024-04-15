@@ -17,10 +17,11 @@ namespace GreenPrint.Web.Pages.Items
         private readonly ICustomerService _customerService;
         private readonly IUserService _userService;
         private readonly IItemOrderService _itemOrderService;
+        private readonly IMailService _mailService;
         #endregion
 
         #region Constructor
-        public CartModel(IItemService itemService, IWarehouseItemService warehouseItemService, IWarehouseService warehouseService, IOrderService orderService, ICustomerService customerService, IUserService userService, IItemOrderService itemOrderService)
+        public CartModel(IItemService itemService, IWarehouseItemService warehouseItemService, IWarehouseService warehouseService, IOrderService orderService, ICustomerService customerService, IUserService userService, IItemOrderService itemOrderService, IMailService mailService)
         {
             _itemService = itemService;
             _warehouseItemService = warehouseItemService;
@@ -29,6 +30,7 @@ namespace GreenPrint.Web.Pages.Items
             _customerService = customerService;
             _userService = userService;
             _itemOrderService = itemOrderService;
+            _mailService = mailService;
         }
         #endregion
 
@@ -58,8 +60,12 @@ namespace GreenPrint.Web.Pages.Items
             if (await HttpContext.IsLoggedIn())
             {
                 var tempuser = await _userService.GetByIdAsync(await HttpContext.GetUser());
-                NewCustomer = await _customerService.GetByIdAsync((int)tempuser.CustomerId);
-                NewCustomerAddress = NewCustomer.Address;
+                if (tempuser.CustomerId != null)
+                {
+                    NewCustomer = await _customerService.GetByIdAsync((int)tempuser.CustomerId);
+                    NewCustomerAddress = NewCustomer.Address;
+                }
+                
             }
             if (Request.Cookies["ItemCartCookie"] != null)
             {
@@ -185,11 +191,18 @@ namespace GreenPrint.Web.Pages.Items
                 await _warehouseItemService.UpdateAsync(warehouseItem);
             }
 
+            await _mailService.SendOrderConfirmMail(NewOrder);
             Response.Cookies.Delete("ItemCartCookie");
 
             return RedirectToPage("/Orders/Order", new { orderId = NewOrder.Id });
 
             
+        }
+
+        public async Task<IActionResult> OnPostTestMailAsync()
+        {
+            await _mailService.SendTestMail();
+            return RedirectToPage();
         }
     }
 }
