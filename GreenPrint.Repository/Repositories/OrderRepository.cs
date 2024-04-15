@@ -49,8 +49,7 @@ namespace GreenPrint.Repository.Repositories
         public async Task<List<Order>> GetOrdersBySearch(string searchQuery)
         {
             return await _dbContext.Orders.AsNoTracking().Where(
-                x => x.Customer.FirstName.Equals(searchQuery) ||
-                x.Customer.Email.Contains(searchQuery)).ToListAsync();
+                x => x.Customer.FirstName.Equals(searchQuery)).ToListAsync();
         }
 
         public async Task<List<Order>> GetOrdersByStatus(OrderStatusEnum status)

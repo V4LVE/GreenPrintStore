@@ -89,10 +89,7 @@ namespace GreenPrint.Repository.Domain
                 );
 
             // Customer
-            modelBuilder.Entity<Customer>().HasData(
-                new Customer
-                { Id = 1, FirstName = "John", LastName = "Doe", AddressId = 1, Email = "JohnnyD@69420.com", Phone = "69696969" }
-                );
+            
 
             // User
             modelBuilder.Entity<User>().HasData(
@@ -101,9 +98,15 @@ namespace GreenPrint.Repository.Domain
                                    Id = 1,
                                    Email = "alex802c@gmail.com",
                                    Password = "Pwrvol901",
-                                   Roleid = 3
+                                   Roleid = 3,
                                }
                           );
+
+            //CUstomer
+            modelBuilder.Entity<Customer>().HasData(
+                new Customer
+                { Id = 1, FirstName = "John", LastName = "Doe", AddressId = 1, Phone = "69696969", userId = 1 }
+                );
 
             // ItemImages
             modelBuilder.Entity<ItemImage>().HasData(
@@ -119,41 +122,8 @@ namespace GreenPrint.Repository.Domain
             for (int i = 0; i < 10; i++)
             {
 
-                var email = Internet.Email();
-
-                modelBuilder.Entity<Customer>().HasData(
-                    new Customer
-                    {
-                        Id = i + 2,
-                        FirstName = Name.First(),
-                        LastName = Name.Last(),
-                        AddressId = i + 2,
-                        Email = email,
-                        Phone = Phone.Number()
-                    }
-                );
-
-                modelBuilder.Entity<User>().HasData(
-                    new User
-                    {
-                        Id = i + 2,
-                        Email = email,
-                        Password = "Password",
-                        CustomerId = i + 2,
-                        Roleid = RandomNumber.Next(1, 3),
-                    }
-                );
-
-                modelBuilder.Entity<Entities.Address>().HasData(
-                    new Entities.Address
-                    {
-                        Id = i + 2,
-                        StreetName = Faker.Address.StreetName(),
-                        StreetNumber = RandomNumber.Next(1, 100).ToString(),
-                        ZipCode = Faker.Address.ZipCode(),
-                        City = Faker.Address.City()
-                    }
-                );
+                
+                
             }
             #endregion
 
@@ -176,15 +146,16 @@ namespace GreenPrint.Repository.Domain
                 .HasOne(s => s.User).WithOne(u => u.Session).HasForeignKey<Session>(s => s.UserId).OnDelete(DeleteBehavior.NoAction);
             #endregion
 
-            #region Customer
-            modelBuilder.Entity<Customer>()
-                .HasOne(c => c.User).WithOne(u => u.Customer).HasForeignKey<User>(u => u.CustomerId).OnDelete(DeleteBehavior.NoAction);
-            #endregion
+            //#region Customer
+            //modelBuilder.Entity<Customer>()
+            //    .HasOne(c => c.User).WithOne(u => u.Customer).HasForeignKey<User>(u => u.CustomerId).OnDelete(DeleteBehavior.NoAction);
 
-            #region User
-            modelBuilder.Entity<User>()
-                .HasOne(u => u.Customer).WithOne(c => c.User).HasForeignKey<Customer>(c => c.UserId).OnDelete(DeleteBehavior.NoAction);
-            #endregion
+            //#endregion
+
+            //#region User
+            //modelBuilder.Entity<User>()
+            //    .HasOne(u => u.Customer).WithOne(c => c.User).HasForeignKey<Customer>(c => c.UserId).OnDelete(DeleteBehavior.NoAction);
+            //#endregion
         }
 
         public DbSet<User> Users { get; set; }

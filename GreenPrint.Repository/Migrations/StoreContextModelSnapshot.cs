@@ -58,86 +58,6 @@ namespace GreenPrint.Repository.Migrations
                             StreetName = "JutlandStreet",
                             StreetNumber = "69B",
                             ZipCode = "6400"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            City = "New Davemouth",
-                            StreetName = "Schinner Forge",
-                            StreetNumber = "24",
-                            ZipCode = "21955"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            City = "West Ronnyshire",
-                            StreetName = "Hayes Loaf",
-                            StreetNumber = "89",
-                            ZipCode = "53811"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            City = "Myrticechester",
-                            StreetName = "Domenico Shoal",
-                            StreetNumber = "43",
-                            ZipCode = "28916"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            City = "North Deondrefort",
-                            StreetName = "Loraine Street",
-                            StreetNumber = "44",
-                            ZipCode = "28306"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            City = "Ornside",
-                            StreetName = "Leora Springs",
-                            StreetNumber = "8",
-                            ZipCode = "62995-4518"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            City = "West Maeshire",
-                            StreetName = "Wilburn Fork",
-                            StreetNumber = "41",
-                            ZipCode = "57842"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            City = "Haileyside",
-                            StreetName = "Nikolaus Motorway",
-                            StreetNumber = "44",
-                            ZipCode = "12470"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            City = "Pricebury",
-                            StreetName = "Kutch Ranch",
-                            StreetNumber = "77",
-                            ZipCode = "18346-1301"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            City = "Wuckertburgh",
-                            StreetName = "Lesley Corners",
-                            StreetNumber = "27",
-                            ZipCode = "89892-1161"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            City = "Olaton",
-                            StreetName = "Powlowski View",
-                            StreetNumber = "93",
-                            ZipCode = "99833"
                         });
                 });
 
@@ -183,35 +103,30 @@ namespace GreenPrint.Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AddressId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("userId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
+                    b.HasIndex("userId")
+                        .IsUnique();
 
                     b.ToTable("Customers");
 
@@ -220,100 +135,10 @@ namespace GreenPrint.Repository.Migrations
                         {
                             Id = 1,
                             AddressId = 1,
-                            Email = "JohnnyD@69420.com",
                             FirstName = "John",
                             LastName = "Doe",
-                            Phone = "69696969"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AddressId = 2,
-                            Email = "otto@rosenbaum.co.uk",
-                            FirstName = "Tavares",
-                            LastName = "Vandervort",
-                            Phone = "(213)957-3902"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AddressId = 3,
-                            Email = "jammie_corkery@leannonpredovic.name",
-                            FirstName = "Tad",
-                            LastName = "Greenholt",
-                            Phone = "153-635-7582"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AddressId = 4,
-                            Email = "albin_bahringer@okon.uk",
-                            FirstName = "Josiah",
-                            LastName = "Johnson",
-                            Phone = "505-699-9576 x148"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AddressId = 5,
-                            Email = "rico@kuphal.com",
-                            FirstName = "Marcelo",
-                            LastName = "Altenwerth",
-                            Phone = "(925)867-9543 x98419"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AddressId = 6,
-                            Email = "jarret@carroll.name",
-                            FirstName = "Kody",
-                            LastName = "Watsica",
-                            Phone = "(721)600-2187 x208"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AddressId = 7,
-                            Email = "ian@stroman.biz",
-                            FirstName = "Thelma",
-                            LastName = "Thompson",
-                            Phone = "528.474.0590 x1794"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            AddressId = 8,
-                            Email = "frank.roberts@schumm.ca",
-                            FirstName = "Anika",
-                            LastName = "Upton",
-                            Phone = "099.854.6841"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            AddressId = 9,
-                            Email = "tyson@murray.com",
-                            FirstName = "Porter",
-                            LastName = "Daniel",
-                            Phone = "1-294-426-2695"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            AddressId = 10,
-                            Email = "kyler@emmerich.ca",
-                            FirstName = "Nikita",
-                            LastName = "Brown",
-                            Phone = "(682)348-3861 x1598"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            AddressId = 11,
-                            Email = "katrine_strosin@hermistontrantow.us",
-                            FirstName = "Maria",
-                            LastName = "Hammes",
-                            Phone = "530.813.0972"
+                            Phone = "69696969",
+                            userId = 1
                         });
                 });
 
@@ -547,9 +372,6 @@ namespace GreenPrint.Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -576,86 +398,6 @@ namespace GreenPrint.Repository.Migrations
                             Id = 1,
                             Email = "alex802c@gmail.com",
                             Password = "Pwrvol901",
-                            Roleid = 3
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CustomerId = 2,
-                            Email = "otto@rosenbaum.co.uk",
-                            Password = "Password",
-                            Roleid = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CustomerId = 3,
-                            Email = "jammie_corkery@leannonpredovic.name",
-                            Password = "Password",
-                            Roleid = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CustomerId = 4,
-                            Email = "albin_bahringer@okon.uk",
-                            Password = "Password",
-                            Roleid = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CustomerId = 5,
-                            Email = "rico@kuphal.com",
-                            Password = "Password",
-                            Roleid = 3
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CustomerId = 6,
-                            Email = "jarret@carroll.name",
-                            Password = "Password",
-                            Roleid = 3
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CustomerId = 7,
-                            Email = "ian@stroman.biz",
-                            Password = "Password",
-                            Roleid = 3
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CustomerId = 8,
-                            Email = "frank.roberts@schumm.ca",
-                            Password = "Password",
-                            Roleid = 2
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CustomerId = 9,
-                            Email = "tyson@murray.com",
-                            Password = "Password",
-                            Roleid = 3
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CustomerId = 10,
-                            Email = "kyler@emmerich.ca",
-                            Password = "Password",
-                            Roleid = 1
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CustomerId = 11,
-                            Email = "katrine_strosin@hermistontrantow.us",
-                            Password = "Password",
                             Roleid = 3
                         });
                 });
@@ -743,14 +485,13 @@ namespace GreenPrint.Repository.Migrations
                 {
                     b.HasOne("GreenPrint.Repository.Entities.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressId");
 
                     b.HasOne("GreenPrint.Repository.Entities.User", "User")
                         .WithOne("Customer")
-                        .HasForeignKey("GreenPrint.Repository.Entities.Customer", "UserId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("GreenPrint.Repository.Entities.Customer", "userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Address");
 
@@ -898,7 +639,8 @@ namespace GreenPrint.Repository.Migrations
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.User", b =>
                 {
-                    b.Navigation("Customer");
+                    b.Navigation("Customer")
+                        .IsRequired();
 
                     b.Navigation("Session");
                 });

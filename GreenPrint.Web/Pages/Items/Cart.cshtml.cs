@@ -60,11 +60,6 @@ namespace GreenPrint.Web.Pages.Items
             if (await HttpContext.IsLoggedIn())
             {
                 var tempuser = await _userService.GetByIdAsync(await HttpContext.GetUser());
-                if (tempuser.CustomerId != null)
-                {
-                    NewCustomer = await _customerService.GetByIdAsync((int)tempuser.CustomerId);
-                    NewCustomerAddress = NewCustomer.Address;
-                }
                 
             }
             if (Request.Cookies["ItemCartCookie"] != null)
@@ -135,9 +130,8 @@ namespace GreenPrint.Web.Pages.Items
                     await OnGet();
                     return Page();
                 }
-                NewCustomer = await _customerService.CreateAndReturn(NewCustomer);
                 NewUser.Roleid = 1;
-                NewUser.CustomerId = NewCustomer.Id;
+                NewUser.Customer = new CustomerDTO();
                 NewUser = await _userService.CreateAndReturn(NewUser);
             }
             if (NewCustomer.Id == 0)

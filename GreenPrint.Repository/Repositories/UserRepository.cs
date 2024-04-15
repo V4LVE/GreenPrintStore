@@ -20,7 +20,7 @@ namespace GreenPrint.Repository.Repositories
 
         new public async Task<User> GetByIdAsync(int id)
         {
-            User temp = await _dbContext.Users.AsNoTracking().Include(r => r.Role).Include(navigationPropertyPath: r => r.Customer).FirstOrDefaultAsync(x => x.Id == id);
+            User temp = await _dbContext.Users.AsNoTracking().Include(r => r.Role).Include(r => r.Customer).FirstOrDefaultAsync(x => x.Id == id);
 
             return temp;
         }

@@ -38,7 +38,7 @@ namespace GreenPrint.Web.Pages.Orders
             }
 
             User = await _userService.GetByIdAsync(userId);
-            Orders = await _orderService.GetAllByCustomerId((int)User.CustomerId);
+            Orders = await _orderService.GetAllByCustomerId((int)User.Customer.Id);
 
             return Page();
         }

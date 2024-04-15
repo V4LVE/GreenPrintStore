@@ -40,11 +40,6 @@ namespace GreenPrint.Web.Pages.Login
 
             User = await _userService.GetByIdAsync(userId);
 
-            if (User.CustomerId != null)
-            {
-                Customer = await _customerService.GetByIdAsync((int)User.CustomerId);
-                Address = Customer.Address;
-            }
 
             return Page();
         }

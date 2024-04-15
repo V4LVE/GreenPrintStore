@@ -53,8 +53,12 @@ namespace GreenPrint.Web.Pages.Login
                 ModelState.AddModelError("NewUser.Password", "Passwords do not match");
                 return Page();
             }
+
             NewUser.Roleid = 1;
+            NewUser.Customer = new CustomerDTO();
             NewUser = await _userService.CreateAndReturn(NewUser);
+
+
 
             var session = await _sessionService.CreateSession(NewUser.Id);
 
@@ -64,6 +68,8 @@ namespace GreenPrint.Web.Pages.Login
 
             string serializedSession = JsonSerializer.Serialize(session);
             Response.Cookies.Append("Session", serializedSession, options);
+
+
 
             return RedirectToPage("/Login/MyAccount", new { userId = NewUser.Id });
         }

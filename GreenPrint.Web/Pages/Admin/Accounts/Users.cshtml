@@ -30,7 +30,7 @@
                         <td>@User.Id</td>
                         <td>@User.Email</td>
                         <td>@User.Role.RoleName</td>
-                        <td>@(User.CustomerId != null ? "Yes" : "No")</td>
+                        <td>@(User.Customer != null ? "Yes" : "No")</td>
                         <td>
                             <div class="btn-group ">
                                 <form asp-page-handler="removeUser">
