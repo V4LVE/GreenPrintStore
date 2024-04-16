@@ -41,6 +41,7 @@ namespace GreenPrint.Service.Services
             List<ItemOrderDTO> tmpCancelled = ProductOrders.FindAll(x => x.Status == OrderStatusEnum.Cancelled);
             List<ItemOrderDTO> tmpRefunded = ProductOrders.FindAll(x => x.Status == OrderStatusEnum.Pending);
             Order.Customer = null;
+            Order.ItemOrders = null;
 
             if (tmpInProgress.Count > 0)
             {

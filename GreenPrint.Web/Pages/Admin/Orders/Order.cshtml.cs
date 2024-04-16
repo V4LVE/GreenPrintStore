@@ -1,3 +1,4 @@
+using GreenPrint.Repository.Entities;
 using GreenPrint.Repository.Enums;
 using GreenPrint.Service.DataTransferObjects;
 using GreenPrint.Service.Interfaces;
@@ -26,7 +27,7 @@ namespace GreenPrint.Web.Pages.Admin.Orders
         [BindProperty]
         public OrderDTO Order { get; set; }
         [BindProperty]
-        public ItemOrderDTO ItemOrderUpdate { get; set; }
+        public List<ItemOrderDTO> ItemOrders { get; set; }
         #endregion
 
         public async Task<IActionResult> OnGet(int orderId)
@@ -37,6 +38,7 @@ namespace GreenPrint.Web.Pages.Admin.Orders
             }
 
             Order = await _orderService.GetByIdAsync(orderId);
+            ItemOrders = Order.ItemOrders;
 
             if (Order == null)
             {
@@ -46,24 +48,11 @@ namespace GreenPrint.Web.Pages.Admin.Orders
             return Page();
         }
 
-        public async Task<IActionResult> OnPostUpdateItemOrderAsync(int id, int itemid, int orderid, int wid, int quan, OrderStatusEnum status)
+        public async Task<IActionResult> OnPostUpdateAsync()
         {
-
-            ItemOrderUpdate = new ItemOrderDTO
-            {
-                Id = id,
-                ItemId = itemid,
-                OrderId = orderid,
-                WarehouseId = wid,
-                Quantity = quan,
-                Status = status
-                
-            };
-
-            if (ModelState.IsValid)
-            {
-                await _itemOrderService.UpdateAsync(ItemOrderUpdate);
-            }
+            await _itemOrderService.UpdateListAsync(ItemOrders);
+            Order = await _orderService.GetByIdAsync(Order.Id);
+            await _orderService.CheckOrderStatus(Order.ItemOrders, Order);
 
             return RedirectToPage();
         }

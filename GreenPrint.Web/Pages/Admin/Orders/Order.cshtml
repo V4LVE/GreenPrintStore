@@ -2,109 +2,99 @@
 @model GreenPrint.Web.Pages.Admin.Orders.OrderModel
 @{
 }
-<section class="h-100 gradient-custom">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-lg-10 col-xl-8">
-                <div class="card" style="border-radius: 10px;">
-                    <div class="card-header px-4 py-5">
-                        <h5 class="text-muted mb-0">Thanks for your Order, <span class="text-primary">@Model.Order.Customer.FirstName</span>!</h5>
-                    </div>
-                    <div class="card-body p-4">
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                            <p class="lead fw-normal mb-0 text-primary">Details</p>
-                            <p class="small text-muted mb-0">Order ID : @Model.Order.Id</p>
+<form asp-page-handler="Update">
+    <section class="h-100 gradient-custom">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-10 col-xl-8">
+                    <div class="card" style="border-radius: 10px;">
+                        <div class="card-header px-4 py-5">
+                            <h5 class="text-muted mb-0">Thanks for your Order, <span class="text-primary">@Model.Order.Customer.FirstName</span>!</h5>
                         </div>
-                        <div class="card shadow-0 border mb-4">
-                            <div class="card-body">
-                                @foreach (var item in Model.Order.ItemOrders)
-                                {
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            @if (item.Item.ItemImages.Count > 0)
-                                            {
-                                                <img src="~/Images/Items/@item.Item.ItemImages.First().ImageUrl" class="img-fluid" alt="image">
-                                            }
-                                            else
-                                            {
-                                                <img src="/Images/Items/No_image_available.svg" class="img-fluid" alt="image">
-                                            }
-                                        </div>
-                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                            <p class="text-muted mb-0">@item.Item.ItemName</p>
-                                        </div>
-                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                            <p class="text-muted mb-0 small">Qty: @item.Quantity</p>
-                                        </div>
-                                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                            <p class="text-muted mb-0 small">@($"{item.Quantity * item.Item.Price:C}")</p>
-                                        </div>
-                                    </div>
-                                    <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
-                                    <div class="row d-flex align-items-center">
-                                        <div class="col-md-2">
-                                            <p class="text-muted mb-0 small">Track Status</p>
-                                        </div>
-                                        <div class="col-md-10">
-                                            <div class="progress" style="height: 6px; border-radius: 16px;">
-                                                <div class="progress-bar" role="progressbar"
-                                                     style="width: @((int)item.Status*20)%; border-radius: 16px; background-color: #a8729a;" aria-valuenow="65"
-                                                     aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <div class="d-flex justify-content-around mb-1" style="transform:translate(-3rem, 0rem)">
-                                                <p class="text-muted mt-1 mb-0 small ms-xl-3">Recieved</p>
-                                                <p class="text-muted mt-1 mb-0 small ms-xl-2">Pending</p>
-                                                <p class="text-muted mt-1 mb-0 small ms-xl-2">Processing</p>
-                                                <p class="text-muted mt-1 mb-0 small ms-xl-2">Shipped</p>
-                                                <p class="text-muted mt-1 mb-0 small ms-xl-3">Delivered</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <form asp-page-handler="UpdateItemOrder">
-
-                                        <input name="id" value="@item.Id" type="hidden"/>
-                                        <input  name="itemid" value="@item.ItemId" type="hidden" />
-                                        <input name="orderid" value="@item.OrderId" type="hidden" />
-                                        <input name="wid" value="@item.WarehouseId" type="hidden" />
-                                        <input name="quan" value="@item.Quantity" type="hidden" />
-
-                                        <input type="hidden" asp-for="@Model.Order.Id" />
-                                        <input type="hidden" asp-for="@Model.Order.CustomerId" />
-                                        <input type="hidden" asp-for="@Model.Order.OrderDate" />
-                                        <input type="hidden" asp-for="@Model.Order.Status" />
-
-                                        <select name="status" value="@item.Status"
-                                                asp-items="Html.GetEnumSelectList<GreenPrint.Repository.Enums.OrderStatusEnum>()"
-                                                class="form-select">
-                                            <option value="">Order Status</option>
-                                        </select>
-
-                                        <button type="submit" class="btn btn-outline-primary" >Update</button>
-                                    </form>
-
-                                    
-
-
-
-                                }
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <p class="lead fw-normal mb-0 text-primary">Details</p>
+                                <p class="small text-muted mb-0">Order ID : @Model.Order.Id</p>
                             </div>
-                        </div>
+                            <div class="card shadow-0 border mb-4">
+                                <div class="card-body">
+                                    <input type="hidden" asp-for="@Model.Order.Id" />
+                                    <input type="hidden" asp-for="@Model.Order.CustomerId" />
+                                    <input type="hidden" asp-for="@Model.Order.OrderDate" />
+                                    <input type="hidden" asp-for="@Model.Order.Status" />
+                                    @for (int i = 0; i < Model.ItemOrders.Count; i++)
+                                    {
+                                        <input type="hidden" asp-for="@Model.ItemOrders[i].OrderId" />
+                                        <input type="hidden" asp-for="@Model.ItemOrders[i].ItemId" />
+                                        <input type="hidden" asp-for="@Model.ItemOrders[i].Id" />
+                                        <input type="hidden" asp-for="@Model.ItemOrders[i].WarehouseId" />
+                                        <input type="hidden" asp-for="@Model.ItemOrders[i].Quantity" />
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                @if ( Model.ItemOrders[i].Item.ItemImages.Count > 0)
+                                                {
+                                                    <img src="~/Images/Items/@Model.ItemOrders[i].Item.ItemImages.First().ImageUrl" class="img-fluid" alt="image">
+                                                }
+                                                else
+                                                {
+                                                    <img src="/Images/Items/No_image_available.svg" class="img-fluid" alt="image">
+                                                }
+                                            </div>
+                                            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                <p class="text-muted mb-0">@Model.ItemOrders[i].Item.ItemName</p>
+                                            </div>
+                                            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                <p class="text-muted mb-0 small">Qty: @Model.ItemOrders[i].Quantity</p>
+                                            </div>
+                                            <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                <p class="text-muted mb-0 small">@($"{Model.ItemOrders[i].Quantity * Model.ItemOrders[i].Item.Price:C}")</p>
+                                            </div>
+                                        </div>
+                                        <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                                        <div class="row d-flex align-items-center">
+                                            <div class="col-md-2">
+                                                <p class="text-muted mb-0 small">Track Status</p>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="progress" style="height: 6px; border-radius: 16px;">
+                                                    <div class="progress-bar" role="progressbar"
+                                                         style="width: @((int)Model.ItemOrders[i].Status*20)%; border-radius: 16px; background-color: #a8729a;" aria-valuenow="65"
+                                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <div class="d-flex justify-content-around mb-1" style="transform:translate(-3rem, 0rem)">
+                                                    <p class="text-muted mt-1 mb-0 small ms-xl-3">Recieved</p>
+                                                    <p class="text-muted mt-1 mb-0 small ms-xl-2">Pending</p>
+                                                    <p class="text-muted mt-1 mb-0 small ms-xl-2">Processing</p>
+                                                    <p class="text-muted mt-1 mb-0 small ms-xl-2">Shipped</p>
+                                                    <p class="text-muted mt-1 mb-0 small ms-xl-3">Delivered</p>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                        <div class="d-flex justify-content-between pt-2">
-                            <p class="fw-bold mb-0">Order Details</p>
-                        </div>
 
-                        <div class="d-flex justify-content-between pt-2">
-                            <p class="text-muted mb-0">Order ID : @Model.Order.Id</p>
-                        </div>
+                                        <select class="form-select" asp-for="@Model.ItemOrders[i].Status" asp-items="@Html.GetEnumSelectList(typeof(GreenPrint.Repository.Enums.OrderStatusEnum))"></select>                            
+                                    }
+                                </div>
+                            </div>
 
-                        <div class="d-flex justify-content-between">
-                            <p class="text-muted mb-0">Order Date : @Model.Order.OrderDate</p>
-                        </div>
+                            <div class="d-flex justify-content-between pt-2">
+                                <p class="fw-bold mb-0">Order Details</p>
+                            </div>
 
+                            <div class="d-flex justify-content-between pt-2">
+                                <p class="text-muted mb-0">Order ID : @Model.Order.Id</p>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <p class="text-muted mb-0">Order Date : @Model.Order.OrderDate</p>
+                            </div>
+
+                        </div>
                     </div>
+
+                    <button type="submit" class="btn btn-outline-warning">Update</button>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</form>
