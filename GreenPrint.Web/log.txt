@@ -17996,3 +17996,443 @@ WHERE [c].[Id] = @__id_0
 2024-04-16 12:52:49.346 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
 2024-04-16 12:52:49.358 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 12.1831ms
 2024-04-16 12:52:49.379 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 32.3965ms
+2024-04-16 12:56:40.563 +02:00 [INF] User profile is available. Using 'C:\Users\Alex8\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-04-16 12:56:40.917 +02:00 [INF] Now listening on: https://localhost:7079
+2024-04-16 12:56:40.921 +02:00 [INF] Now listening on: http://localhost:5157
+2024-04-16 12:56:40.924 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-04-16 12:56:40.927 +02:00 [INF] Hosting environment: Development
+2024-04-16 12:56:40.929 +02:00 [INF] Content root path: C:\Users\Alex8\source\repos\GreenPrint.Repository\GreenPrint.Web
+2024-04-16 12:56:42.224 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/ - null null
+2024-04-16 12:56:43.033 +02:00 [INF] Executing endpoint '/Index'
+2024-04-16 12:56:43.166 +02:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-04-16 12:56:44.036 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.IndexModel.OnGet - ModelState is "Valid"
+2024-04-16 12:56:45.439 +02:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2024-04-16 12:56:46.437 +02:00 [INF] Executed DbCommand (38ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[CategoryName]
+FROM [Categories] AS [c]
+2024-04-16 12:56:46.712 +02:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM [Items] AS [i]
+LEFT JOIN [Images] AS [i0] ON [i].[Id] = [i0].[ItemId]
+ORDER BY [i].[Id]
+2024-04-16 12:56:46.747 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 12:56:47.435 +02:00 [INF] Executed page /Index in 4252.3572ms
+2024-04-16 12:56:47.441 +02:00 [INF] Executed endpoint '/Index'
+2024-04-16 12:56:47.463 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/ - 200 null text/html; charset=utf-8 5275.4231ms
+2024-04-16 12:56:47.631 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 12:56:47.631 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 12:56:47.648 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 18.5715ms
+2024-04-16 12:56:47.687 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Images/Items/400000000-0000-0000-0000-000000000000.png - null null
+2024-04-16 12:56:47.723 +02:00 [INF] The file /Images/Items/400000000-0000-0000-0000-000000000000.png was not modified
+2024-04-16 12:56:47.744 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Images/Items/400000000-0000-0000-0000-000000000000.png - 304 null image/png 56.9439ms
+2024-04-16 12:56:47.759 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 128.7404ms
+2024-04-16 12:56:50.731 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7079/?handler=AddToCart - application/x-www-form-urlencoded 191
+2024-04-16 12:56:50.791 +02:00 [INF] Executing endpoint '/Index'
+2024-04-16 12:56:50.792 +02:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-04-16 12:56:50.840 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.IndexModel.OnPostAddToCartAsync - ModelState is "Valid"
+2024-04-16 12:56:51.037 +02:00 [INF] Executed DbCommand (36ms) [Parameters=[@__id_0='1'], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CategoryId], [t].[Description], [t].[ItemName], [t].[Price], [t].[Id0], [t].[CategoryName], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM (
+    SELECT TOP(1) [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [c].[Id] AS [Id0], [c].[CategoryName]
+    FROM [Items] AS [i]
+    INNER JOIN [Categories] AS [c] ON [i].[CategoryId] = [c].[Id]
+    WHERE [i].[Id] = @__id_0
+) AS [t]
+LEFT JOIN [Images] AS [i0] ON [t].[Id] = [i0].[ItemId]
+ORDER BY [t].[Id], [t].[Id0]
+2024-04-16 12:56:51.108 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[@__itemId_0='1'], CommandType='"Text"', CommandTimeout='30']
+SELECT [w].[Id], [w].[ItemId], [w].[Quantity], [w].[WarehouseId], [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [w0].[Id], [w0].[AddressId], [w0].[WarehouseName]
+FROM [WarehouseItems] AS [w]
+INNER JOIN [Items] AS [i] ON [w].[ItemId] = [i].[Id]
+INNER JOIN [Warehouses] AS [w0] ON [w].[WarehouseId] = [w0].[Id]
+WHERE [w].[ItemId] = @__itemId_0
+2024-04-16 12:56:51.184 +02:00 [INF] Executed handler method OnPostAddToCartAsync, returned result Microsoft.AspNetCore.Mvc.RedirectToPageResult.
+2024-04-16 12:56:51.188 +02:00 [INF] Executing RedirectToPageResult, redirecting to null.
+2024-04-16 12:56:51.190 +02:00 [INF] Executed page /Index in 395.6768ms
+2024-04-16 12:56:51.192 +02:00 [INF] Executed endpoint '/Index'
+2024-04-16 12:56:51.199 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7079/?handler=AddToCart - 302 0 null 468.445ms
+2024-04-16 12:56:51.207 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/ - null null
+2024-04-16 12:56:51.258 +02:00 [INF] Executing endpoint '/Index'
+2024-04-16 12:56:51.259 +02:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-04-16 12:56:51.276 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.IndexModel.OnGet - ModelState is "Valid"
+2024-04-16 12:56:51.294 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[CategoryName]
+FROM [Categories] AS [c]
+2024-04-16 12:56:51.307 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM [Items] AS [i]
+LEFT JOIN [Images] AS [i0] ON [i].[Id] = [i0].[ItemId]
+ORDER BY [i].[Id]
+2024-04-16 12:56:51.322 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 12:56:51.853 +02:00 [INF] Executed page /Index in 592.3093ms
+2024-04-16 12:56:51.855 +02:00 [INF] Executed endpoint '/Index'
+2024-04-16 12:56:51.857 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/ - 200 null text/html; charset=utf-8 650.5941ms
+2024-04-16 12:56:51.932 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 12:56:51.933 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 12:56:51.937 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 5.3494ms
+2024-04-16 12:56:52.013 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 80.3765ms
+2024-04-16 12:56:53.385 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Items/Cart - null null
+2024-04-16 12:56:53.429 +02:00 [INF] Executing endpoint '/Items/Cart'
+2024-04-16 12:56:53.467 +02:00 [INF] Route matched with {page = "/Items/Cart"}. Executing page /Items/Cart
+2024-04-16 12:56:53.479 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.Items.CartModel.OnGet - ModelState is "Valid"
+2024-04-16 12:56:53.664 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__p_0='1'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[AddressId], [w].[WarehouseName]
+FROM [Warehouses] AS [w]
+WHERE [w].[Id] = @__p_0
+2024-04-16 12:56:53.748 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[@__id_0='1'], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CategoryId], [t].[Description], [t].[ItemName], [t].[Price], [t].[Id0], [t].[CategoryName], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM (
+    SELECT TOP(1) [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [c].[Id] AS [Id0], [c].[CategoryName]
+    FROM [Items] AS [i]
+    INNER JOIN [Categories] AS [c] ON [i].[CategoryId] = [c].[Id]
+    WHERE [i].[Id] = @__id_0
+) AS [t]
+LEFT JOIN [Images] AS [i0] ON [t].[Id] = [i0].[ItemId]
+ORDER BY [t].[Id], [t].[Id0]
+2024-04-16 12:56:53.775 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 12:56:54.788 +02:00 [INF] Executed page /Items/Cart in 1319.2507ms
+2024-04-16 12:56:54.789 +02:00 [INF] Executed endpoint '/Items/Cart'
+2024-04-16 12:56:54.791 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Items/Cart - 200 null text/html; charset=utf-8 1407.0583ms
+2024-04-16 12:56:54.812 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 12:56:54.812 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 12:56:54.821 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 9.0874ms
+2024-04-16 12:56:54.873 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 61.2543ms
+2024-04-16 12:57:06.799 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7079/Items/Cart?handler=Order - application/x-www-form-urlencoded 543
+2024-04-16 12:57:06.842 +02:00 [INF] Executing endpoint '/Items/Cart'
+2024-04-16 12:57:06.843 +02:00 [INF] Route matched with {page = "/Items/Cart"}. Executing page /Items/Cart
+2024-04-16 12:57:06.873 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.Items.CartModel.OnPostOrderAsync - ModelState is "Valid"
+2024-04-16 12:57:07.135 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__ToLower_0='diller@daller.com' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Password], [u].[Roleid]
+FROM [Users] AS [u]
+WHERE LOWER([u].[Email]) = @__ToLower_0
+2024-04-16 12:57:07.267 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='1'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[AddressId], [w].[WarehouseName]
+FROM [Warehouses] AS [w]
+WHERE [w].[Id] = @__p_0
+2024-04-16 12:57:07.277 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__id_0='1'], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CategoryId], [t].[Description], [t].[ItemName], [t].[Price], [t].[Id0], [t].[CategoryName], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM (
+    SELECT TOP(1) [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [c].[Id] AS [Id0], [c].[CategoryName]
+    FROM [Items] AS [i]
+    INNER JOIN [Categories] AS [c] ON [i].[CategoryId] = [c].[Id]
+    WHERE [i].[Id] = @__id_0
+) AS [t]
+LEFT JOIN [Images] AS [i0] ON [t].[Id] = [i0].[ItemId]
+ORDER BY [t].[Id], [t].[Id0]
+2024-04-16 12:57:07.292 +02:00 [INF] Executed handler method OnPostOrderAsync, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 12:57:08.062 +02:00 [INF] Executed page /Items/Cart in 1217.6773ms
+2024-04-16 12:57:08.063 +02:00 [INF] Executed endpoint '/Items/Cart'
+2024-04-16 12:57:08.065 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7079/Items/Cart?handler=Order - 200 null text/html; charset=utf-8 1265.2727ms
+2024-04-16 12:57:08.081 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 12:57:08.086 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 12:57:08.105 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 18.7036ms
+2024-04-16 12:57:08.105 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 24.4673ms
+2024-04-16 13:30:26.343 +02:00 [INF] User profile is available. Using 'C:\Users\Alex8\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-04-16 13:30:27.788 +02:00 [INF] Now listening on: https://localhost:7079
+2024-04-16 13:30:27.854 +02:00 [INF] Now listening on: http://localhost:5157
+2024-04-16 13:30:27.874 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-04-16 13:30:27.882 +02:00 [INF] Hosting environment: Development
+2024-04-16 13:30:27.887 +02:00 [INF] Content root path: C:\Users\Alex8\source\repos\GreenPrint.Repository\GreenPrint.Web
+2024-04-16 13:30:29.181 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/ - null null
+2024-04-16 13:30:30.250 +02:00 [INF] Executing endpoint '/Index'
+2024-04-16 13:30:30.536 +02:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-04-16 13:30:31.126 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.IndexModel.OnGet - ModelState is "Valid"
+2024-04-16 13:30:31.979 +02:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2024-04-16 13:30:32.967 +02:00 [INF] Executed DbCommand (36ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[CategoryName]
+FROM [Categories] AS [c]
+2024-04-16 13:30:33.244 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM [Items] AS [i]
+LEFT JOIN [Images] AS [i0] ON [i].[Id] = [i0].[ItemId]
+ORDER BY [i].[Id]
+2024-04-16 13:30:33.279 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 13:30:34.018 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/css/site.css?v=HGUgRd7eWwwHO_nNLzVG-m6EdgA0OoH55GE2T6C7mbc - null null
+2024-04-16 13:30:34.020 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/css/Logo.css?v=MIQ1VYgljdfGOQ8R2v9KRYEZ4SI7lWneQ0s4v2tFoKw - null null
+2024-04-16 13:30:34.019 +02:00 [INF] Executed page /Index in 3466.0226ms
+2024-04-16 13:30:34.021 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Images/GPlo.png - null null
+2024-04-16 13:30:34.030 +02:00 [INF] Executed endpoint '/Index'
+2024-04-16 13:30:34.033 +02:00 [INF] The file /css/site.css was not modified
+2024-04-16 13:30:34.033 +02:00 [INF] The file /css/Logo.css was not modified
+2024-04-16 13:30:34.033 +02:00 [INF] The file /Images/GPlo.png was not modified
+2024-04-16 13:30:34.041 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/css/site.css?v=HGUgRd7eWwwHO_nNLzVG-m6EdgA0OoH55GE2T6C7mbc - 304 null text/css 23.0228ms
+2024-04-16 13:30:34.046 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Images/GPlo.png - 304 null image/png 24.9562ms
+2024-04-16 13:30:34.041 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/css/Logo.css?v=MIQ1VYgljdfGOQ8R2v9KRYEZ4SI7lWneQ0s4v2tFoKw - 304 null text/css 18.1282ms
+2024-04-16 13:30:34.076 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/ - 200 null text/html; charset=utf-8 4907.0951ms
+2024-04-16 13:30:34.244 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 13:30:34.245 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 13:30:34.255 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 11.3453ms
+2024-04-16 13:30:34.319 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Images/Items/2.png - null null
+2024-04-16 13:30:34.321 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Images/Items/3.png - null null
+2024-04-16 13:30:34.319 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Images/Items/1.png - null null
+2024-04-16 13:30:34.367 +02:00 [INF] The file /Images/Items/2.png was not modified
+2024-04-16 13:30:34.321 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Images/Items/400000000-0000-0000-0000-000000000000.png - null null
+2024-04-16 13:30:34.423 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 178.9507ms
+2024-04-16 13:30:34.423 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Images/Items/2.png - 304 null image/png 104.2988ms
+2024-04-16 13:30:34.423 +02:00 [INF] The file /Images/Items/3.png was not modified
+2024-04-16 13:30:34.423 +02:00 [INF] The file /Images/Items/1.png was not modified
+2024-04-16 13:30:34.425 +02:00 [INF] The file /Images/Items/400000000-0000-0000-0000-000000000000.png was not modified
+2024-04-16 13:30:34.436 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Images/Items/3.png - 304 null image/png 114.7956ms
+2024-04-16 13:30:34.436 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Images/Items/1.png - 304 null image/png 117.3261ms
+2024-04-16 13:30:34.438 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Images/Items/400000000-0000-0000-0000-000000000000.png - 304 null image/png 117.0625ms
+2024-04-16 13:30:41.667 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Items/ItemListView/2 - null null
+2024-04-16 13:30:41.714 +02:00 [INF] Executing endpoint '/Items/ItemListView'
+2024-04-16 13:30:41.726 +02:00 [INF] Route matched with {page = "/Items/ItemListView"}. Executing page /Items/ItemListView
+2024-04-16 13:30:41.765 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.Items.ItemListViewModel.OnGet - ModelState is "Valid"
+2024-04-16 13:30:41.912 +02:00 [INF] Executed DbCommand (27ms) [Parameters=[@__categoryId_0='2', @__p_1='0', @__p_2='8'], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CategoryId], [t].[Description], [t].[ItemName], [t].[Price], [c].[Id], [c].[CategoryName], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM (
+    SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price]
+    FROM [Items] AS [i]
+    WHERE [i].[CategoryId] = @__categoryId_0
+    ORDER BY [i].[Price]
+    OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+) AS [t]
+INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+LEFT JOIN [Images] AS [i0] ON [t].[Id] = [i0].[ItemId]
+ORDER BY [t].[Price], [t].[Id], [c].[Id]
+2024-04-16 13:30:41.960 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='2'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CategoryName]
+FROM [Categories] AS [c]
+WHERE [c].[Id] = @__p_0
+2024-04-16 13:30:42.023 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM [Items] AS [i]
+LEFT JOIN [Images] AS [i0] ON [i].[Id] = [i0].[ItemId]
+ORDER BY [i].[Id]
+2024-04-16 13:30:42.026 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 13:30:42.437 +02:00 [INF] Executed page /Items/ItemListView in 709.4827ms
+2024-04-16 13:30:42.439 +02:00 [INF] Executed endpoint '/Items/ItemListView'
+2024-04-16 13:30:42.441 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Items/ItemListView/2 - 200 null text/html; charset=utf-8 775.4239ms
+2024-04-16 13:30:42.534 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 13:30:42.535 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 13:30:42.538 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 4.7729ms
+2024-04-16 13:30:42.603 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 68.1894ms
+2024-04-16 13:39:15.364 +02:00 [INF] User profile is available. Using 'C:\Users\Alex8\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-04-16 13:39:15.996 +02:00 [INF] Now listening on: https://localhost:7079
+2024-04-16 13:39:16.004 +02:00 [INF] Now listening on: http://localhost:5157
+2024-04-16 13:39:16.008 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-04-16 13:39:16.012 +02:00 [INF] Hosting environment: Development
+2024-04-16 13:39:16.014 +02:00 [INF] Content root path: C:\Users\Alex8\source\repos\GreenPrint.Repository\GreenPrint.Web
+2024-04-16 13:39:16.617 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/ - null null
+2024-04-16 13:39:16.922 +02:00 [INF] Executing endpoint '/Index'
+2024-04-16 13:39:17.030 +02:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-04-16 13:39:17.653 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.IndexModel.OnGet - ModelState is "Valid"
+2024-04-16 13:39:18.494 +02:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2024-04-16 13:39:20.063 +02:00 [INF] Executed DbCommand (68ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[CategoryName]
+FROM [Categories] AS [c]
+2024-04-16 13:39:20.393 +02:00 [INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM [Items] AS [i]
+LEFT JOIN [Images] AS [i0] ON [i].[Id] = [i0].[ItemId]
+ORDER BY [i].[Id]
+2024-04-16 13:39:20.439 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 13:39:21.190 +02:00 [INF] Executed page /Index in 4069.7904ms
+2024-04-16 13:39:21.202 +02:00 [INF] Executed endpoint '/Index'
+2024-04-16 13:39:21.232 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/ - 200 null text/html; charset=utf-8 4623.8982ms
+2024-04-16 13:39:21.416 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 13:39:21.416 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 13:39:21.452 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 35.9451ms
+2024-04-16 13:39:21.495 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Images/Items/400000000-0000-0000-0000-000000000000.png - null null
+2024-04-16 13:39:21.547 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 130.8747ms
+2024-04-16 13:39:21.550 +02:00 [INF] The file /Images/Items/400000000-0000-0000-0000-000000000000.png was not modified
+2024-04-16 13:39:21.552 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Images/Items/400000000-0000-0000-0000-000000000000.png - 304 null image/png 57.6707ms
+2024-04-16 13:39:30.684 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Items/ItemListView/2 - null null
+2024-04-16 13:39:30.732 +02:00 [INF] Executing endpoint '/Items/ItemListView'
+2024-04-16 13:39:30.746 +02:00 [INF] Route matched with {page = "/Items/ItemListView"}. Executing page /Items/ItemListView
+2024-04-16 13:39:30.787 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.Items.ItemListViewModel.OnGet - ModelState is "Valid"
+2024-04-16 13:39:30.944 +02:00 [INF] Executed DbCommand (28ms) [Parameters=[@__categoryId_0='2', @__p_1='0', @__p_2='8'], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CategoryId], [t].[Description], [t].[ItemName], [t].[Price], [c].[Id], [c].[CategoryName], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM (
+    SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price]
+    FROM [Items] AS [i]
+    WHERE [i].[CategoryId] = @__categoryId_0
+    ORDER BY [i].[Price]
+    OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+) AS [t]
+INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+LEFT JOIN [Images] AS [i0] ON [t].[Id] = [i0].[ItemId]
+ORDER BY [t].[Price], [t].[Id], [c].[Id]
+2024-04-16 13:39:30.992 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='2'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CategoryName]
+FROM [Categories] AS [c]
+WHERE [c].[Id] = @__p_0
+2024-04-16 13:39:31.067 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM [Items] AS [i]
+LEFT JOIN [Images] AS [i0] ON [i].[Id] = [i0].[ItemId]
+ORDER BY [i].[Id]
+2024-04-16 13:39:31.071 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 13:39:31.505 +02:00 [INF] Executed page /Items/ItemListView in 756.6948ms
+2024-04-16 13:39:31.506 +02:00 [INF] Executed endpoint '/Items/ItemListView'
+2024-04-16 13:39:31.513 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Items/ItemListView/2 - 200 null text/html; charset=utf-8 829.087ms
+2024-04-16 13:39:31.617 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 13:39:31.617 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 13:39:31.621 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 3.9821ms
+2024-04-16 13:39:31.649 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 31.7752ms
+2024-04-16 13:39:56.508 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Items/ItemListView/2 - null null
+2024-04-16 13:39:56.564 +02:00 [INF] Executing endpoint '/Items/ItemListView'
+2024-04-16 13:39:56.574 +02:00 [INF] Route matched with {page = "/Items/ItemListView"}. Executing page /Items/ItemListView
+2024-04-16 13:39:56.592 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.Items.ItemListViewModel.OnGet - ModelState is "Valid"
+2024-04-16 13:39:56.619 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[@__categoryId_0='2', @__p_1='0', @__p_2='8'], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CategoryId], [t].[Description], [t].[ItemName], [t].[Price], [c].[Id], [c].[CategoryName], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM (
+    SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price]
+    FROM [Items] AS [i]
+    WHERE [i].[CategoryId] = @__categoryId_0
+    ORDER BY [i].[Price]
+    OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+) AS [t]
+INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+LEFT JOIN [Images] AS [i0] ON [t].[Id] = [i0].[ItemId]
+ORDER BY [t].[Price], [t].[Id], [c].[Id]
+2024-04-16 13:39:56.649 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='2'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CategoryName]
+FROM [Categories] AS [c]
+WHERE [c].[Id] = @__p_0
+2024-04-16 13:39:56.660 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM [Items] AS [i]
+LEFT JOIN [Images] AS [i0] ON [i].[Id] = [i0].[ItemId]
+ORDER BY [i].[Id]
+2024-04-16 13:39:56.676 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 13:39:57.189 +02:00 [INF] Executed page /Items/ItemListView in 613.6593ms
+2024-04-16 13:39:57.207 +02:00 [INF] Executed endpoint '/Items/ItemListView'
+2024-04-16 13:39:57.208 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Items/ItemListView/2 - 200 null text/html; charset=utf-8 700.9414ms
+2024-04-16 13:39:57.269 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 13:39:57.270 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 13:39:57.276 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 7.1887ms
+2024-04-16 13:39:57.322 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 52.0958ms
+2024-04-16 13:39:59.764 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Items/ItemListView/2?currentpage=2&pageSize=8 - null null
+2024-04-16 13:39:59.807 +02:00 [INF] Executing endpoint '/Items/ItemListView'
+2024-04-16 13:39:59.809 +02:00 [INF] Route matched with {page = "/Items/ItemListView"}. Executing page /Items/ItemListView
+2024-04-16 13:39:59.819 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.Items.ItemListViewModel.OnGet - ModelState is "Valid"
+2024-04-16 13:39:59.838 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[@__categoryId_0='2', @__p_1='8'], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CategoryId], [t].[Description], [t].[ItemName], [t].[Price], [c].[Id], [c].[CategoryName], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM (
+    SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price]
+    FROM [Items] AS [i]
+    WHERE [i].[CategoryId] = @__categoryId_0
+    ORDER BY [i].[Price]
+    OFFSET @__p_1 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+LEFT JOIN [Images] AS [i0] ON [t].[Id] = [i0].[ItemId]
+ORDER BY [t].[Price], [t].[Id], [c].[Id]
+2024-04-16 13:39:59.855 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='2'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CategoryName]
+FROM [Categories] AS [c]
+WHERE [c].[Id] = @__p_0
+2024-04-16 13:39:59.861 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM [Items] AS [i]
+LEFT JOIN [Images] AS [i0] ON [i].[Id] = [i0].[ItemId]
+ORDER BY [i].[Id]
+2024-04-16 13:39:59.865 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 13:40:00.337 +02:00 [INF] Executed page /Items/ItemListView in 526.6601ms
+2024-04-16 13:40:00.340 +02:00 [INF] Executed endpoint '/Items/ItemListView'
+2024-04-16 13:40:00.342 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Items/ItemListView/2?currentpage=2&pageSize=8 - 200 null text/html; charset=utf-8 577.7424ms
+2024-04-16 13:40:00.469 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 13:40:00.473 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 13:40:00.476 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 8.185ms
+2024-04-16 13:40:00.555 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 82.5759ms
+2024-04-16 13:40:04.816 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Items/ItemListView/2?currentpage=1&pageSize=8 - null null
+2024-04-16 13:40:04.851 +02:00 [INF] Executing endpoint '/Items/ItemListView'
+2024-04-16 13:40:04.852 +02:00 [INF] Route matched with {page = "/Items/ItemListView"}. Executing page /Items/ItemListView
+2024-04-16 13:40:04.859 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.Items.ItemListViewModel.OnGet - ModelState is "Valid"
+2024-04-16 13:40:04.864 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__categoryId_0='2', @__p_1='0', @__p_2='8'], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CategoryId], [t].[Description], [t].[ItemName], [t].[Price], [c].[Id], [c].[CategoryName], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM (
+    SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price]
+    FROM [Items] AS [i]
+    WHERE [i].[CategoryId] = @__categoryId_0
+    ORDER BY [i].[Price]
+    OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+) AS [t]
+INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+LEFT JOIN [Images] AS [i0] ON [t].[Id] = [i0].[ItemId]
+ORDER BY [t].[Price], [t].[Id], [c].[Id]
+2024-04-16 13:40:04.886 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='2'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CategoryName]
+FROM [Categories] AS [c]
+WHERE [c].[Id] = @__p_0
+2024-04-16 13:40:04.893 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM [Items] AS [i]
+LEFT JOIN [Images] AS [i0] ON [i].[Id] = [i0].[ItemId]
+ORDER BY [i].[Id]
+2024-04-16 13:40:04.895 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 13:40:05.306 +02:00 [INF] Executed page /Items/ItemListView in 452.5966ms
+2024-04-16 13:40:05.308 +02:00 [INF] Executed endpoint '/Items/ItemListView'
+2024-04-16 13:40:05.310 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Items/ItemListView/2?currentpage=1&pageSize=8 - 200 null text/html; charset=utf-8 493.9207ms
+2024-04-16 13:40:05.344 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 13:40:05.345 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 13:40:05.349 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 5.2489ms
+2024-04-16 13:40:05.396 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 52.3075ms
+2024-04-16 13:40:19.594 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Items/ItemListView/2?OptionsPaging.PageSize=16&OrderBy=2 - null null
+2024-04-16 13:40:19.635 +02:00 [INF] Executing endpoint '/Items/ItemListView'
+2024-04-16 13:40:19.637 +02:00 [INF] Route matched with {page = "/Items/ItemListView"}. Executing page /Items/ItemListView
+2024-04-16 13:40:19.643 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.Items.ItemListViewModel.OnGet - ModelState is "Valid"
+2024-04-16 13:40:19.662 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[@__categoryId_0='2', @__p_1='0', @__p_2='16'], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CategoryId], [t].[Description], [t].[ItemName], [t].[Price], [c].[Id], [c].[CategoryName], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM (
+    SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price]
+    FROM [Items] AS [i]
+    WHERE [i].[CategoryId] = @__categoryId_0
+    ORDER BY [i].[Price] DESC
+    OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+) AS [t]
+INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+LEFT JOIN [Images] AS [i0] ON [t].[Id] = [i0].[ItemId]
+ORDER BY [t].[Price] DESC, [t].[Id], [c].[Id]
+2024-04-16 13:40:19.681 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='2'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CategoryName]
+FROM [Categories] AS [c]
+WHERE [c].[Id] = @__p_0
+2024-04-16 13:40:19.687 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM [Items] AS [i]
+LEFT JOIN [Images] AS [i0] ON [i].[Id] = [i0].[ItemId]
+ORDER BY [i].[Id]
+2024-04-16 13:40:19.689 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 13:40:20.099 +02:00 [INF] Executed page /Items/ItemListView in 461.6481ms
+2024-04-16 13:40:20.101 +02:00 [INF] Executed endpoint '/Items/ItemListView'
+2024-04-16 13:40:20.103 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Items/ItemListView/2?OptionsPaging.PageSize=16&OrderBy=2 - 200 null text/html; charset=utf-8 509.3796ms
+2024-04-16 13:40:20.118 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 13:40:20.132 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 13:40:20.143 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 17.5731ms
+2024-04-16 13:40:20.153 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 35.698ms
+2024-04-16 13:40:30.618 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Items/ItemListView/2?OptionsPaging.PageSize=8&OrderBy=2 - null null
+2024-04-16 13:40:30.645 +02:00 [INF] Executing endpoint '/Items/ItemListView'
+2024-04-16 13:40:30.646 +02:00 [INF] Route matched with {page = "/Items/ItemListView"}. Executing page /Items/ItemListView
+2024-04-16 13:40:30.651 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.Items.ItemListViewModel.OnGet - ModelState is "Valid"
+2024-04-16 13:40:30.657 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__categoryId_0='2', @__p_1='0', @__p_2='8'], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CategoryId], [t].[Description], [t].[ItemName], [t].[Price], [c].[Id], [c].[CategoryName], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM (
+    SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price]
+    FROM [Items] AS [i]
+    WHERE [i].[CategoryId] = @__categoryId_0
+    ORDER BY [i].[Price] DESC
+    OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+) AS [t]
+INNER JOIN [Categories] AS [c] ON [t].[CategoryId] = [c].[Id]
+LEFT JOIN [Images] AS [i0] ON [t].[Id] = [i0].[ItemId]
+ORDER BY [t].[Price] DESC, [t].[Id], [c].[Id]
+2024-04-16 13:40:30.675 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='2'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [c].[Id], [c].[CategoryName]
+FROM [Categories] AS [c]
+WHERE [c].[Id] = @__p_0
+2024-04-16 13:40:30.685 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM [Items] AS [i]
+LEFT JOIN [Images] AS [i0] ON [i].[Id] = [i0].[ItemId]
+ORDER BY [i].[Id]
+2024-04-16 13:40:30.688 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 13:40:31.078 +02:00 [INF] Executed page /Items/ItemListView in 431.4401ms
+2024-04-16 13:40:31.080 +02:00 [INF] Executed endpoint '/Items/ItemListView'
+2024-04-16 13:40:31.084 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Items/ItemListView/2?OptionsPaging.PageSize=8&OrderBy=2 - 200 null text/html; charset=utf-8 466.3614ms
+2024-04-16 13:40:31.113 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 13:40:31.113 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 13:40:31.132 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 19.0171ms
+2024-04-16 13:40:31.147 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 34.0282ms
