@@ -1,0 +1,49 @@
+﻿@page
+@model GreenPrint.Web.Pages.Admin.Orders.OrdersModel
+@{
+}
+
+<div class="container mb-5">
+    <div class="row border-bottom border-primary">
+        <h1>All Orders</h1>
+    </div>
+
+    <div class="row mt-2">
+        @if (Model.Orders.Any())
+        {
+            <table class="table table-light border border-primary table-striped text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">Order number</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Date created</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">View order</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model.Orders)
+                    {
+                        <tr>
+                            <td class="">@order.Id</td>
+                            <td>@order.Customer.FirstName @order.Customer.LastName</td>
+                            <td>@order.OrderDate</td>
+                            <td class="@(order.Status switch{ Repository.Enums.OrderStatusEnum.Created => "text-black",  Repository.Enums.OrderStatusEnum.Processing => "text-warning", Repository.Enums.OrderStatusEnum.Shipped => "text-info",  Repository.Enums.OrderStatusEnum.Delivered => "text-success", _ => "" })">
+                                @order.Status
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-primary rounded-circle toggleLoader" asp-page="/Admin/Orders/Order" asp-route-orderId="@order.Id"><i class="fa-solid fa-eye"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="row mt-2 text-center">
+                <h4 class="text-danger">You have made no orders yet!</h4>
+            </div>
+        }
+    </div>
+</div>
