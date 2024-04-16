@@ -118,14 +118,14 @@ namespace GreenPrint.Repository.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("userId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
 
-                    b.HasIndex("userId")
+                    b.HasIndex("UserId")
                         .IsUnique();
 
                     b.ToTable("Customers");
@@ -138,7 +138,7 @@ namespace GreenPrint.Repository.Migrations
                             FirstName = "John",
                             LastName = "Doe",
                             Phone = "69696969",
-                            userId = 1
+                            UserId = 1
                         });
                 });
 
@@ -194,6 +194,70 @@ namespace GreenPrint.Repository.Migrations
                             Description = "A material for printing",
                             ItemName = "Sort PLA 1Kg",
                             Price = 150.0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 2,
+                            Description = "A material for printing",
+                            ItemName = "Sort ABS 1Kg",
+                            Price = 200.0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 2,
+                            Description = "A material for printing",
+                            ItemName = "Sort PETG 1Kg",
+                            Price = 250.0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 2,
+                            Description = "A material for printing",
+                            ItemName = "Sort TPU 1Kg",
+                            Price = 300.0
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryId = 2,
+                            Description = "A material for printing",
+                            ItemName = "Sort Wood 1Kg",
+                            Price = 350.0
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CategoryId = 2,
+                            Description = "A material for printing",
+                            ItemName = "Sort Metal 1Kg",
+                            Price = 400.0
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CategoryId = 2,
+                            Description = "A material for printing",
+                            ItemName = "Sort Carbon 1Kg",
+                            Price = 450.0
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CategoryId = 2,
+                            Description = "A material for printing",
+                            ItemName = "Sort PVA 1Kg",
+                            Price = 500.0
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CategoryId = 2,
+                            Description = "A material for printing",
+                            ItemName = "Sort HIPS 1Kg",
+                            Price = 550.0
                         });
                 });
 
@@ -475,6 +539,62 @@ namespace GreenPrint.Repository.Migrations
                             ItemId = 3,
                             Quantity = 100,
                             WarehouseId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ItemId = 4,
+                            Quantity = 100,
+                            WarehouseId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ItemId = 5,
+                            Quantity = 100,
+                            WarehouseId = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ItemId = 6,
+                            Quantity = 100,
+                            WarehouseId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ItemId = 7,
+                            Quantity = 100,
+                            WarehouseId = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ItemId = 8,
+                            Quantity = 100,
+                            WarehouseId = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ItemId = 9,
+                            Quantity = 100,
+                            WarehouseId = 1
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ItemId = 10,
+                            Quantity = 100,
+                            WarehouseId = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ItemId = 11,
+                            Quantity = 0,
+                            WarehouseId = 1
                         });
                 });
 
@@ -486,7 +606,7 @@ namespace GreenPrint.Repository.Migrations
 
                     b.HasOne("GreenPrint.Repository.Entities.User", "User")
                         .WithOne("Customer")
-                        .HasForeignKey("GreenPrint.Repository.Entities.Customer", "userId")
+                        .HasForeignKey("GreenPrint.Repository.Entities.Customer", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -104,7 +104,12 @@ namespace GreenPrint.Web.Pages.Items
 
         public async Task<IActionResult> OnPostOrderAsync()
         {
-            
+            if (await HttpContext.IsLoggedIn())
+            {
+                var temp = await _userService.GetByIdAsync(await HttpContext.GetUser());
+                NewCustomer = temp.Customer;
+                NewCustomerAddress = NewCustomer.Address;
+            }
 
             if (!ModelState.IsValid)
             {
@@ -138,7 +143,10 @@ namespace GreenPrint.Web.Pages.Items
             }
             else
             {
+                NewCustomer = NewUser.Customer;
+                NewCustomerAddress = NewCustomer.Address;
                 await _userService.UpdateAsync(NewUser);
+                
             }
             
 

@@ -12,13 +12,15 @@ namespace GreenPrint.Web.Pages.Login
         #region Services
         private readonly IUserService _userService;
         private readonly ICustomerService _customerService;
+        private readonly IOrderService _orderService;
 		#endregion
 
 		#region constructor
-		public MyAccountModel(IUserService userService, ICustomerService customerService)
+		public MyAccountModel(IUserService userService, ICustomerService customerService, IOrderService orderService)
         {
 			_userService = userService;
 			_customerService = customerService;
+            _orderService = orderService;
 		}
         #endregion
 
@@ -26,9 +28,7 @@ namespace GreenPrint.Web.Pages.Login
         [BindProperty]
         public UserDTO User { get; set; }
         [BindProperty]
-        public CustomerDTO Customer { get; set; }
-        [BindProperty]
-        public AddressDTO Address { get; set; }
+        public List<OrderDTO> Orders { get; set; }
         #endregion
 
         public async Task<IActionResult> OnGet(int userId)
@@ -39,11 +39,17 @@ namespace GreenPrint.Web.Pages.Login
             }
 
             User = await _userService.GetByIdAsync(userId);
-            Customer = User.Customer;
-            Address = Customer.Address;
+            Orders = await _orderService.GetAllByCustomerId(userId);
 
 
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostUpdateAsync()
+        {
+            await _userService.UpdateAsync(User);
+
+            return RedirectToPage();
         }
     }
 }

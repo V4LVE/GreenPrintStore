@@ -45,7 +45,7 @@
         {
             <div class="col-3 mt-2">
                 <div class="card">
-                    <a asp-page="Items/Item" asp-route-itemId="@item.Id" style="text-decoration:none;color:black">
+                    <a asp-page="/Items/Item" asp-route-itemId="@item.Id" style="text-decoration:none;color:black">
                         @if (item.ItemImages.Count > 0)
                         {
                             <img loading="lazy" src="~/Images/Items/@item.ItemImages.First().ImageUrl" class="card-img-top" alt="...">

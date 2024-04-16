@@ -177,7 +177,7 @@ namespace GreenPrint.Repository.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AddressId = table.Column<int>(type: "int", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    userId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -188,8 +188,8 @@ namespace GreenPrint.Repository.Migrations
                         principalTable: "Addresses",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Customers_Users_userId",
-                        column: x => x.userId,
+                        name: "FK_Customers_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -303,7 +303,15 @@ namespace GreenPrint.Repository.Migrations
                 {
                     { 1, 1, "A good cheap 3D Printer", "ELEGOO Neptune 4 Pro", 2250.0 },
                     { 2, 1, "A great but expensive 3D printer", "Bambulab X1 Carbon", 8500.0 },
-                    { 3, 2, "A material for printing", "Sort PLA 1Kg", 150.0 }
+                    { 3, 2, "A material for printing", "Sort PLA 1Kg", 150.0 },
+                    { 4, 2, "A material for printing", "Sort ABS 1Kg", 200.0 },
+                    { 5, 2, "A material for printing", "Sort PETG 1Kg", 250.0 },
+                    { 6, 2, "A material for printing", "Sort TPU 1Kg", 300.0 },
+                    { 7, 2, "A material for printing", "Sort Wood 1Kg", 350.0 },
+                    { 8, 2, "A material for printing", "Sort Metal 1Kg", 400.0 },
+                    { 9, 2, "A material for printing", "Sort Carbon 1Kg", 450.0 },
+                    { 10, 2, "A material for printing", "Sort PVA 1Kg", 500.0 },
+                    { 11, 2, "A material for printing", "Sort HIPS 1Kg", 550.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -318,7 +326,7 @@ namespace GreenPrint.Repository.Migrations
 
             migrationBuilder.InsertData(
                 table: "Customers",
-                columns: new[] { "Id", "AddressId", "Email", "FirstName", "LastName", "Phone", "userId" },
+                columns: new[] { "Id", "AddressId", "Email", "FirstName", "LastName", "Phone", "UserId" },
                 values: new object[] { 1, 1, null, "John", "Doe", "69696969", 1 });
 
             migrationBuilder.InsertData(
@@ -338,7 +346,15 @@ namespace GreenPrint.Repository.Migrations
                 {
                     { 1, 1, 10, 1 },
                     { 2, 2, 5, 1 },
-                    { 3, 3, 100, 1 }
+                    { 3, 3, 100, 1 },
+                    { 4, 4, 100, 1 },
+                    { 5, 5, 100, 1 },
+                    { 6, 6, 100, 1 },
+                    { 7, 7, 100, 1 },
+                    { 8, 8, 100, 1 },
+                    { 9, 9, 100, 1 },
+                    { 10, 10, 100, 1 },
+                    { 11, 11, 0, 1 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -347,9 +363,9 @@ namespace GreenPrint.Repository.Migrations
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customers_userId",
+                name: "IX_Customers_UserId",
                 table: "Customers",
-                column: "userId",
+                column: "UserId",
                 unique: true);
 
             migrationBuilder.CreateIndex(

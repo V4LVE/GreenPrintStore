@@ -55,7 +55,15 @@ namespace GreenPrint.Repository.Domain
             modelBuilder.Entity<Item>().HasData(
                 new Item { Id = 1, ItemName = "ELEGOO Neptune 4 Pro", Description = "A good cheap 3D Printer", CategoryId = 1, Price = 2250 },
                 new Item { Id = 2, ItemName = "Bambulab X1 Carbon", Description = "A great but expensive 3D printer", CategoryId = 1, Price = 8500 },
-                new Item { Id = 3, ItemName = "Sort PLA 1Kg", Description = "A material for printing", CategoryId = 2, Price = 150 }
+                new Item { Id = 3, ItemName = "Sort PLA 1Kg", Description = "A material for printing", CategoryId = 2, Price = 150 },
+                new Item { Id = 4, ItemName = "Sort ABS 1Kg", Description = "A material for printing", CategoryId = 2, Price = 200 },
+                new Item { Id = 5, ItemName = "Sort PETG 1Kg", Description = "A material for printing", CategoryId = 2, Price = 250 },
+                new Item { Id = 6, ItemName = "Sort TPU 1Kg", Description = "A material for printing", CategoryId = 2, Price = 300 },
+                new Item { Id = 7, ItemName = "Sort Wood 1Kg", Description = "A material for printing", CategoryId = 2, Price = 350 },
+                new Item { Id = 8, ItemName = "Sort Metal 1Kg", Description = "A material for printing", CategoryId = 2, Price = 400 },
+                new Item { Id = 9, ItemName = "Sort Carbon 1Kg", Description = "A material for printing", CategoryId = 2, Price = 450 },
+                new Item { Id = 10, ItemName = "Sort PVA 1Kg", Description = "A material for printing", CategoryId = 2, Price = 500 },
+                new Item { Id = 11, ItemName = "Sort HIPS 1Kg", Description = "A material for printing", CategoryId = 2, Price = 550 }
                 );
 
             // Address
@@ -85,7 +93,15 @@ namespace GreenPrint.Repository.Domain
             modelBuilder.Entity<WarehouseItem>().HasData(
                 new WarehouseItem { Id = 1, WarehouseId = 1, ItemId = 1, Quantity = 10 },
                 new WarehouseItem { Id = 2, WarehouseId = 1, ItemId = 2, Quantity = 5 },
-                new WarehouseItem { Id = 3, WarehouseId = 1, ItemId = 3, Quantity = 100 }
+                new WarehouseItem { Id = 3, WarehouseId = 1, ItemId = 3, Quantity = 100 },
+                new WarehouseItem { Id = 4, WarehouseId = 1, ItemId = 4, Quantity = 100 },
+                new WarehouseItem { Id = 5, WarehouseId = 1, ItemId = 5, Quantity = 100 },
+                new WarehouseItem { Id = 6, WarehouseId = 1, ItemId = 6, Quantity = 100 },
+                new WarehouseItem { Id = 7, WarehouseId = 1, ItemId = 7, Quantity = 100 },
+                new WarehouseItem { Id = 8, WarehouseId = 1, ItemId = 8, Quantity = 100 },
+                new WarehouseItem { Id = 9, WarehouseId = 1, ItemId = 9, Quantity = 100 },
+                new WarehouseItem { Id = 10, WarehouseId = 1, ItemId = 10, Quantity = 100 },
+                new WarehouseItem { Id = 11, WarehouseId = 1, ItemId = 11, Quantity = 0 }
                 );
 
             // Customer

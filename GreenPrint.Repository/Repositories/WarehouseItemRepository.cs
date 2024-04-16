@@ -28,7 +28,7 @@ namespace GreenPrint.Repository.Repositories
             var temp = await _dbContext.WarehouseItems.AsNoTracking()
                 .Include(wi => wi.Item)
                 .Include(wi => wi.Warehouse)
-                .Where(wi => wi.ItemId == itemId && wi.Quantity > 0)
+                .Where(wi => wi.ItemId == itemId)
                 .ToListAsync();
             return temp;
         }

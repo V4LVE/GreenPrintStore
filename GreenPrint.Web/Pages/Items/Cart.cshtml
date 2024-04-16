@@ -24,6 +24,13 @@
                 }
                 <!-- Checkout -->
                 <form asp-page-handler="Order">
+                    <input asp-for="@Model.NewUser.Id" type="hidden" />
+                    <input asp-for="@Model.NewUser.Customer.Id" type="hidden" />
+                    <input asp-for="@Model.NewUser.Customer.Address.Id" type="hidden" />
+                    <input asp-for="@Model.NewUser.Email" type="hidden" />
+                    <input asp-for="@Model.NewUser.Password" type="hidden" />
+                    <input asp-for="@Model.NewUser.Role.RoleName" type="hidden" />
+                    <input asp-for="@Model.NewUser.Role.Id" type="hidden" />
                     <div class="card shadow-0 border">
                         <div class="p-4">
                             <h5 class="card-title mb-3">Checkout</h5>

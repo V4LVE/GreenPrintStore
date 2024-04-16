@@ -54,11 +54,7 @@
                                         <p class="card-text">@($"{itemview.Price:C}")</p>
                                     </div>
                                 </a>
-                                <div class="card-footer text-center">
-                                    <form asp-page-handler="AddToCart">
-                                        <button type="submit" name="itemId" value="@itemview.Id" class="btn btn-outline-primary col-6">Add To Cart</button>
-                                    </form>
-                                </div>
+                               
                             </div>
                         </div>
                     }
