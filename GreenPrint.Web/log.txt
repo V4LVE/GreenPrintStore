@@ -8648,3 +8648,81 @@ END
 2024-04-16 08:58:46.018 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
 2024-04-16 08:58:46.023 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 6.3126ms
 2024-04-16 08:58:46.077 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 59.4912ms
+2024-04-16 09:09:27.833 +02:00 [INF] User profile is available. Using 'C:\Users\Alex8\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-04-16 09:09:29.132 +02:00 [INF] Now listening on: https://localhost:7079
+2024-04-16 09:09:29.145 +02:00 [INF] Now listening on: http://localhost:5157
+2024-04-16 09:09:29.160 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-04-16 09:09:29.164 +02:00 [INF] Hosting environment: Development
+2024-04-16 09:09:29.166 +02:00 [INF] Content root path: C:\Users\Alex8\source\repos\GreenPrint.Repository\GreenPrint.Web
+2024-04-16 09:09:29.948 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/ - null null
+2024-04-16 09:09:30.318 +02:00 [INF] Executing endpoint '/Index'
+2024-04-16 09:09:30.410 +02:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-04-16 09:09:30.999 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.IndexModel.OnGet - ModelState is "Valid"
+2024-04-16 09:09:31.821 +02:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2024-04-16 09:09:32.946 +02:00 [INF] Executed DbCommand (56ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[CategoryName]
+FROM [Categories] AS [c]
+2024-04-16 09:09:33.265 +02:00 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM [Items] AS [i]
+LEFT JOIN [Images] AS [i0] ON [i].[Id] = [i0].[ItemId]
+ORDER BY [i].[Id]
+2024-04-16 09:09:33.310 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 09:09:33.623 +02:00 [INF] Executed DbCommand (25ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 09:09:33.647 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 09:09:33.685 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__id_0='5'], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[Id] = @__id_0 AND [u].[Roleid] = 3) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-04-16 09:09:33.770 +02:00 [INF] Executed page /Index in 3348.4336ms
+2024-04-16 09:09:33.777 +02:00 [INF] Executed endpoint '/Index'
+2024-04-16 09:09:33.819 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/ - 200 null text/html; charset=utf-8 3882.2078ms
+2024-04-16 09:09:34.001 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 09:09:34.001 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 09:09:34.019 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 18.063ms
+2024-04-16 09:09:34.126 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 125.5848ms
+2024-04-16 09:09:36.543 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Login/MyAccount/5 - null null
+2024-04-16 09:09:36.595 +02:00 [INF] Executing endpoint '/Login/MyAccount'
+2024-04-16 09:09:36.648 +02:00 [INF] Route matched with {page = "/Login/MyAccount"}. Executing page /Login/MyAccount
+2024-04-16 09:09:36.679 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.Login.MyAccountModel.OnGet - ModelState is "Valid"
+2024-04-16 09:09:36.810 +02:00 [INF] Executed DbCommand (7ms) [Parameters=[@__id_0='5'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Password], [u].[Roleid], [r].[Id], [r].[RoleName], [c].[Id], [c].[AddressId], [c].[Email], [c].[FirstName], [c].[LastName], [c].[Phone], [c].[UserId], [a].[Id], [a].[City], [a].[StreetName], [a].[StreetNumber], [a].[ZipCode]
+FROM [Users] AS [u]
+INNER JOIN [Roles] AS [r] ON [u].[Roleid] = [r].[Id]
+LEFT JOIN [Customers] AS [c] ON [u].[Id] = [c].[UserId]
+LEFT JOIN [Addresses] AS [a] ON [c].[AddressId] = [a].[Id]
+WHERE [u].[Id] = @__id_0
+2024-04-16 09:09:36.835 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 09:09:36.895 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 09:09:36.901 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 09:09:36.906 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__id_0='5'], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[Id] = @__id_0 AND [u].[Roleid] = 3) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-04-16 09:09:36.913 +02:00 [INF] Executed page /Login/MyAccount in 263.0411ms
+2024-04-16 09:09:36.915 +02:00 [INF] Executed endpoint '/Login/MyAccount'
+2024-04-16 09:09:36.917 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Login/MyAccount/5 - 200 null text/html; charset=utf-8 375.4048ms
+2024-04-16 09:09:37.058 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 09:09:37.070 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 09:09:37.088 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 31.6793ms
+2024-04-16 09:09:37.138 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 68.6739ms

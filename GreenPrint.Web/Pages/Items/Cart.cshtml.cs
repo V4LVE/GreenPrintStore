@@ -136,6 +136,10 @@ namespace GreenPrint.Web.Pages.Items
                 NewUser.Customer = NewCustomer;
                 NewUser = await _userService.CreateAndReturn(NewUser);
             }
+            else
+            {
+                await _userService.UpdateAsync(NewUser);
+            }
             
 
             if (Request.Cookies["ItemCartCookie"] != null)
