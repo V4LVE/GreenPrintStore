@@ -8224,3 +8224,427 @@ WHERE [c].[Id] = @__id_0
 2024-04-16 08:50:23.909 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
 2024-04-16 08:50:23.914 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 7.2407ms
 2024-04-16 08:50:23.945 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 35.3539ms
+2024-04-16 08:53:25.494 +02:00 [INF] User profile is available. Using 'C:\Users\Alex8\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-04-16 08:53:26.219 +02:00 [INF] Now listening on: https://localhost:7079
+2024-04-16 08:53:26.233 +02:00 [INF] Now listening on: http://localhost:5157
+2024-04-16 08:53:26.238 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-04-16 08:53:26.244 +02:00 [INF] Hosting environment: Development
+2024-04-16 08:53:26.247 +02:00 [INF] Content root path: C:\Users\Alex8\source\repos\GreenPrint.Repository\GreenPrint.Web
+2024-04-16 08:53:27.289 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/ - null null
+2024-04-16 08:53:28.432 +02:00 [INF] Executing endpoint '/Index'
+2024-04-16 08:53:28.712 +02:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-04-16 08:53:29.471 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.IndexModel.OnGet - ModelState is "Valid"
+2024-04-16 08:53:30.794 +02:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2024-04-16 08:53:31.966 +02:00 [INF] Executed DbCommand (47ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[CategoryName]
+FROM [Categories] AS [c]
+2024-04-16 08:53:32.200 +02:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM [Items] AS [i]
+LEFT JOIN [Images] AS [i0] ON [i].[Id] = [i0].[ItemId]
+ORDER BY [i].[Id]
+2024-04-16 08:53:32.227 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 08:53:32.861 +02:00 [INF] Executed page /Index in 4119.5712ms
+2024-04-16 08:53:32.867 +02:00 [INF] Executed endpoint '/Index'
+2024-04-16 08:53:32.897 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/ - 200 null text/html; charset=utf-8 5619.4773ms
+2024-04-16 08:53:33.080 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 08:53:33.080 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 08:53:33.145 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 61.0736ms
+2024-04-16 08:53:33.314 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 233.7628ms
+2024-04-16 08:53:34.797 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Login/Login - null null
+2024-04-16 08:53:34.849 +02:00 [INF] Executing endpoint '/Login/Login'
+2024-04-16 08:53:34.859 +02:00 [INF] Route matched with {page = "/Login/Login"}. Executing page /Login/Login
+2024-04-16 08:53:34.876 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.Login.LoginModel.OnGet - ModelState is "Valid"
+2024-04-16 08:53:34.879 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 08:53:35.315 +02:00 [INF] Executed page /Login/Login in 454.6593ms
+2024-04-16 08:53:35.317 +02:00 [INF] Executed endpoint '/Login/Login'
+2024-04-16 08:53:35.319 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Login/Login - 200 null text/html; charset=utf-8 522.0715ms
+2024-04-16 08:53:35.465 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 08:53:35.472 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 08:53:35.475 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 10.837ms
+2024-04-16 08:53:35.525 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 54.8021ms
+2024-04-16 08:53:46.238 +02:00 [INF] Request starting HTTP/2 POST https://localhost:7079/Login/Login?handler=Login - application/x-www-form-urlencoded 214
+2024-04-16 08:53:46.285 +02:00 [INF] Executing endpoint '/Login/Login'
+2024-04-16 08:53:46.286 +02:00 [INF] Route matched with {page = "/Login/Login"}. Executing page /Login/Login
+2024-04-16 08:53:46.332 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.Login.LoginModel.OnPostLoginAsync - ModelState is "Valid"
+2024-04-16 08:53:46.447 +02:00 [INF] Executed DbCommand (22ms) [Parameters=[@__email_0='io@io.com' (Size = 4000), @__password_1='pass' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[Email] = @__email_0 AND [u].[Password] = @__password_1) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-04-16 08:53:46.500 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__ToLower_0='io@io.com' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Password], [u].[Roleid]
+FROM [Users] AS [u]
+WHERE LOWER([u].[Email]) = @__ToLower_0
+2024-04-16 08:53:46.552 +02:00 [INF] Executed DbCommand (25ms) [Parameters=[@__session_UserId_0='5'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[UserId] = @__session_UserId_0
+2024-04-16 08:53:46.800 +02:00 [INF] Executed DbCommand (26ms) [Parameters=[@p0='2024-04-16T09:53:46.5123002+02:00', @p1='de8089a7-8fc6-4bf3-8d70-6fc08b239c6d', @p2='5'], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Sessions] ([ExpirationDate], [SessionToken], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2);
+2024-04-16 08:53:46.886 +02:00 [INF] Executed handler method OnPostLoginAsync, returned result Microsoft.AspNetCore.Mvc.RedirectToPageResult.
+2024-04-16 08:53:46.888 +02:00 [INF] Executing RedirectToPageResult, redirecting to /Index.
+2024-04-16 08:53:46.890 +02:00 [INF] Executed page /Login/Login in 602.0909ms
+2024-04-16 08:53:46.891 +02:00 [INF] Executed endpoint '/Login/Login'
+2024-04-16 08:53:46.892 +02:00 [INF] Request finished HTTP/2 POST https://localhost:7079/Login/Login?handler=Login - 302 0 null 654.0086ms
+2024-04-16 08:53:46.902 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/ - null null
+2024-04-16 08:53:46.928 +02:00 [INF] Executing endpoint '/Index'
+2024-04-16 08:53:46.930 +02:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-04-16 08:53:46.936 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.IndexModel.OnGet - ModelState is "Valid"
+2024-04-16 08:53:46.954 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[CategoryName]
+FROM [Categories] AS [c]
+2024-04-16 08:53:46.968 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM [Items] AS [i]
+LEFT JOIN [Images] AS [i0] ON [i].[Id] = [i0].[ItemId]
+ORDER BY [i].[Id]
+2024-04-16 08:53:46.982 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 08:53:47.001 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:53:47.014 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:53:47.024 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__id_0='5'], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[Id] = @__id_0 AND [u].[Roleid] = 3) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-04-16 08:53:47.033 +02:00 [INF] Executed page /Index in 102.005ms
+2024-04-16 08:53:47.035 +02:00 [INF] Executed endpoint '/Index'
+2024-04-16 08:53:47.036 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/ - 200 null text/html; charset=utf-8 134.5941ms
+2024-04-16 08:53:47.057 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 08:53:47.061 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 08:53:47.082 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 23.9733ms
+2024-04-16 08:53:47.095 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 38.5734ms
+2024-04-16 08:53:49.949 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Items/Cart - null null
+2024-04-16 08:53:49.981 +02:00 [INF] Executing endpoint '/Items/Cart'
+2024-04-16 08:53:50.008 +02:00 [INF] Route matched with {page = "/Items/Cart"}. Executing page /Items/Cart
+2024-04-16 08:53:50.019 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.Items.CartModel.OnGet - ModelState is "Valid"
+2024-04-16 08:53:50.032 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:53:50.108 +02:00 [INF] Executed DbCommand (45ms) [Parameters=[@__id_0='5'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Password], [u].[Roleid], [r].[Id], [r].[RoleName], [c].[Id], [c].[AddressId], [c].[Email], [c].[FirstName], [c].[LastName], [c].[Phone], [c].[UserId]
+FROM [Users] AS [u]
+INNER JOIN [Roles] AS [r] ON [u].[Roleid] = [r].[Id]
+LEFT JOIN [Customers] AS [c] ON [u].[Id] = [c].[UserId]
+WHERE [u].[Id] = @__id_0
+2024-04-16 08:53:50.127 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 08:53:50.137 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:53:50.196 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:53:50.205 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:53:50.209 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:53:50.216 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__id_0='5'], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[Id] = @__id_0 AND [u].[Roleid] = 3) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-04-16 08:53:50.221 +02:00 [INF] Executed page /Items/Cart in 211.6465ms
+2024-04-16 08:53:50.222 +02:00 [INF] Executed endpoint '/Items/Cart'
+2024-04-16 08:53:50.224 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Items/Cart - 200 null text/html; charset=utf-8 274.7953ms
+2024-04-16 08:53:50.256 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 08:53:50.260 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 08:53:50.300 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 38.7737ms
+2024-04-16 08:53:50.316 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 60.3529ms
+2024-04-16 08:56:50.243 +02:00 [INF] User profile is available. Using 'C:\Users\Alex8\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-04-16 08:56:51.296 +02:00 [INF] Now listening on: https://localhost:7079
+2024-04-16 08:56:51.324 +02:00 [INF] Now listening on: http://localhost:5157
+2024-04-16 08:56:51.332 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-04-16 08:56:51.346 +02:00 [INF] Hosting environment: Development
+2024-04-16 08:56:51.355 +02:00 [INF] Content root path: C:\Users\Alex8\source\repos\GreenPrint.Repository\GreenPrint.Web
+2024-04-16 08:56:52.065 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/ - null null
+2024-04-16 08:56:52.451 +02:00 [INF] Executing endpoint '/Index'
+2024-04-16 08:56:52.556 +02:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-04-16 08:56:53.424 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.IndexModel.OnGet - ModelState is "Valid"
+2024-04-16 08:56:54.371 +02:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2024-04-16 08:56:55.522 +02:00 [INF] Executed DbCommand (40ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[CategoryName]
+FROM [Categories] AS [c]
+2024-04-16 08:56:55.831 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM [Items] AS [i]
+LEFT JOIN [Images] AS [i0] ON [i].[Id] = [i0].[ItemId]
+ORDER BY [i].[Id]
+2024-04-16 08:56:55.861 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 08:56:56.160 +02:00 [INF] Executed DbCommand (32ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:56:56.177 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:56:56.205 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__id_0='5'], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[Id] = @__id_0 AND [u].[Roleid] = 3) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-04-16 08:56:56.272 +02:00 [INF] Executed page /Index in 3707.502ms
+2024-04-16 08:56:56.276 +02:00 [INF] Executed endpoint '/Index'
+2024-04-16 08:56:56.305 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/ - 200 null text/html; charset=utf-8 4248.1417ms
+2024-04-16 08:56:56.549 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 08:56:56.549 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 08:56:56.564 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 16.1004ms
+2024-04-16 08:56:56.701 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 152.2536ms
+2024-04-16 08:56:59.796 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Items/Cart - null null
+2024-04-16 08:56:59.844 +02:00 [INF] Executing endpoint '/Items/Cart'
+2024-04-16 08:56:59.880 +02:00 [INF] Route matched with {page = "/Items/Cart"}. Executing page /Items/Cart
+2024-04-16 08:56:59.908 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.Items.CartModel.OnGet - ModelState is "Valid"
+2024-04-16 08:56:59.973 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:57:00.019 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[@__id_0='5'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Password], [u].[Roleid], [r].[Id], [r].[RoleName], [c].[Id], [c].[AddressId], [c].[Email], [c].[FirstName], [c].[LastName], [c].[Phone], [c].[UserId]
+FROM [Users] AS [u]
+INNER JOIN [Roles] AS [r] ON [u].[Roleid] = [r].[Id]
+LEFT JOIN [Customers] AS [c] ON [u].[Id] = [c].[UserId]
+WHERE [u].[Id] = @__id_0
+2024-04-16 08:57:00.046 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 08:57:00.058 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:57:00.113 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:57:00.123 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:57:00.130 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:57:00.137 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__id_0='5'], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[Id] = @__id_0 AND [u].[Roleid] = 3) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-04-16 08:57:00.144 +02:00 [INF] Executed page /Items/Cart in 261.6702ms
+2024-04-16 08:57:00.146 +02:00 [INF] Executed endpoint '/Items/Cart'
+2024-04-16 08:57:00.148 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Items/Cart - 200 null text/html; charset=utf-8 352.8602ms
+2024-04-16 08:57:00.247 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 08:57:00.248 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 08:57:00.251 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 4.5323ms
+2024-04-16 08:57:00.283 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 34.9197ms
+2024-04-16 08:57:41.325 +02:00 [INF] User profile is available. Using 'C:\Users\Alex8\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-04-16 08:57:42.300 +02:00 [INF] Now listening on: https://localhost:7079
+2024-04-16 08:57:42.321 +02:00 [INF] Now listening on: http://localhost:5157
+2024-04-16 08:57:42.461 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-04-16 08:57:42.467 +02:00 [INF] Hosting environment: Development
+2024-04-16 08:57:42.468 +02:00 [INF] Content root path: C:\Users\Alex8\source\repos\GreenPrint.Repository\GreenPrint.Web
+2024-04-16 08:57:43.653 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/ - null null
+2024-04-16 08:57:44.240 +02:00 [INF] Executing endpoint '/Index'
+2024-04-16 08:57:44.770 +02:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-04-16 08:57:45.518 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.IndexModel.OnGet - ModelState is "Valid"
+2024-04-16 08:57:46.844 +02:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2024-04-16 08:57:47.959 +02:00 [INF] Executed DbCommand (36ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[CategoryName]
+FROM [Categories] AS [c]
+2024-04-16 08:57:48.236 +02:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM [Items] AS [i]
+LEFT JOIN [Images] AS [i0] ON [i].[Id] = [i0].[ItemId]
+ORDER BY [i].[Id]
+2024-04-16 08:57:48.263 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 08:57:48.573 +02:00 [INF] Executed DbCommand (27ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:57:48.587 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:57:48.621 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__id_0='5'], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[Id] = @__id_0 AND [u].[Roleid] = 3) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-04-16 08:57:48.678 +02:00 [INF] Executed page /Index in 3827.7612ms
+2024-04-16 08:57:48.683 +02:00 [INF] Executed endpoint '/Index'
+2024-04-16 08:57:48.714 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/ - 200 null text/html; charset=utf-8 5085.1103ms
+2024-04-16 08:57:48.965 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 08:57:48.965 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 08:57:49.010 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 44.8967ms
+2024-04-16 08:57:49.167 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 201.8477ms
+2024-04-16 08:57:50.809 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Items/Cart - null null
+2024-04-16 08:57:50.875 +02:00 [INF] Executing endpoint '/Items/Cart'
+2024-04-16 08:57:50.918 +02:00 [INF] Route matched with {page = "/Items/Cart"}. Executing page /Items/Cart
+2024-04-16 08:57:50.952 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.Items.CartModel.OnGet - ModelState is "Valid"
+2024-04-16 08:57:51.064 +02:00 [INF] Executed DbCommand (9ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:57:51.128 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[@__id_0='5'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Password], [u].[Roleid], [r].[Id], [r].[RoleName], [c].[Id], [c].[AddressId], [c].[Email], [c].[FirstName], [c].[LastName], [c].[Phone], [c].[UserId]
+FROM [Users] AS [u]
+INNER JOIN [Roles] AS [r] ON [u].[Roleid] = [r].[Id]
+LEFT JOIN [Customers] AS [c] ON [u].[Id] = [c].[UserId]
+WHERE [u].[Id] = @__id_0
+2024-04-16 08:57:51.154 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 08:57:51.166 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:57:51.227 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:57:51.235 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:57:51.241 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:57:51.247 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__id_0='5'], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[Id] = @__id_0 AND [u].[Roleid] = 3) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-04-16 08:57:51.252 +02:00 [INF] Executed page /Items/Cart in 331.9726ms
+2024-04-16 08:57:51.254 +02:00 [INF] Executed endpoint '/Items/Cart'
+2024-04-16 08:57:51.256 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Items/Cart - 200 null text/html; charset=utf-8 448.0596ms
+2024-04-16 08:57:51.391 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 08:57:51.393 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 08:57:51.401 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 10.1595ms
+2024-04-16 08:57:51.471 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 79.3797ms
+2024-04-16 08:58:03.103 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Items/Cart - null null
+2024-04-16 08:58:03.173 +02:00 [INF] Executing endpoint '/Items/Cart'
+2024-04-16 08:58:03.174 +02:00 [INF] Route matched with {page = "/Items/Cart"}. Executing page /Items/Cart
+2024-04-16 08:58:03.195 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.Items.CartModel.OnGet - ModelState is "Valid"
+2024-04-16 08:58:33.432 +02:00 [INF] User profile is available. Using 'C:\Users\Alex8\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-04-16 08:58:34.061 +02:00 [INF] Now listening on: https://localhost:7079
+2024-04-16 08:58:34.069 +02:00 [INF] Now listening on: http://localhost:5157
+2024-04-16 08:58:34.074 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-04-16 08:58:34.076 +02:00 [INF] Hosting environment: Development
+2024-04-16 08:58:34.078 +02:00 [INF] Content root path: C:\Users\Alex8\source\repos\GreenPrint.Repository\GreenPrint.Web
+2024-04-16 08:58:34.899 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/ - null null
+2024-04-16 08:58:35.296 +02:00 [INF] Executing endpoint '/Index'
+2024-04-16 08:58:35.394 +02:00 [INF] Route matched with {page = "/Index"}. Executing page /Index
+2024-04-16 08:58:36.136 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.IndexModel.OnGet - ModelState is "Valid"
+2024-04-16 08:58:37.162 +02:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2024-04-16 08:58:38.320 +02:00 [INF] Executed DbCommand (60ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[CategoryName]
+FROM [Categories] AS [c]
+2024-04-16 08:58:38.752 +02:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[CategoryId], [i].[Description], [i].[ItemName], [i].[Price], [i0].[Id], [i0].[DateCreated], [i0].[ImageUrl], [i0].[ItemId]
+FROM [Items] AS [i]
+LEFT JOIN [Images] AS [i0] ON [i].[Id] = [i0].[ItemId]
+ORDER BY [i].[Id]
+2024-04-16 08:58:38.796 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 08:58:39.048 +02:00 [INF] Executed DbCommand (23ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:58:39.067 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:58:39.097 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__id_0='5'], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[Id] = @__id_0 AND [u].[Roleid] = 3) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-04-16 08:58:39.159 +02:00 [INF] Executed page /Index in 3757.3553ms
+2024-04-16 08:58:39.164 +02:00 [INF] Executed endpoint '/Index'
+2024-04-16 08:58:39.195 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/ - 200 null text/html; charset=utf-8 4304.2982ms
+2024-04-16 08:58:39.403 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 08:58:39.403 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 08:58:39.418 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 15.5496ms
+2024-04-16 08:58:39.521 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 117.7593ms
+2024-04-16 08:58:41.042 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/Items/Cart - null null
+2024-04-16 08:58:41.087 +02:00 [INF] Executing endpoint '/Items/Cart'
+2024-04-16 08:58:41.133 +02:00 [INF] Route matched with {page = "/Items/Cart"}. Executing page /Items/Cart
+2024-04-16 08:58:41.157 +02:00 [INF] Executing handler method GreenPrint.Web.Pages.Items.CartModel.OnGet - ModelState is "Valid"
+2024-04-16 08:58:45.682 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:58:45.741 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[@__id_0='5'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[Password], [u].[Roleid], [r].[Id], [r].[RoleName], [c].[Id], [c].[AddressId], [c].[Email], [c].[FirstName], [c].[LastName], [c].[Phone], [c].[UserId], [a].[Id], [a].[City], [a].[StreetName], [a].[StreetNumber], [a].[ZipCode]
+FROM [Users] AS [u]
+INNER JOIN [Roles] AS [r] ON [u].[Roleid] = [r].[Id]
+LEFT JOIN [Customers] AS [c] ON [u].[Id] = [c].[UserId]
+LEFT JOIN [Addresses] AS [a] ON [c].[AddressId] = [a].[Id]
+WHERE [u].[Id] = @__id_0
+2024-04-16 08:58:45.772 +02:00 [INF] Executed handler method OnGet, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2024-04-16 08:58:45.792 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:58:45.868 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:58:45.881 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:58:45.889 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__sessionId_0='4'], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [s].[Id], [s].[ExpirationDate], [s].[SessionToken], [s].[UserId]
+FROM [Sessions] AS [s]
+WHERE [s].[Id] = @__sessionId_0
+2024-04-16 08:58:45.896 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__id_0='5'], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[Id] = @__id_0 AND [u].[Roleid] = 3) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-04-16 08:58:45.904 +02:00 [INF] Executed page /Items/Cart in 4769.0908ms
+2024-04-16 08:58:45.905 +02:00 [INF] Executed endpoint '/Items/Cart'
+2024-04-16 08:58:45.908 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/Items/Cart - 200 null text/html; charset=utf-8 4866.2698ms
+2024-04-16 08:58:46.017 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - null null
+2024-04-16 08:58:46.018 +02:00 [INF] Request starting HTTP/2 GET https://localhost:7079/_vs/browserLink - null null
+2024-04-16 08:58:46.023 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_framework/aspnetcore-browser-refresh.js - 200 13764 application/javascript; charset=utf-8 6.3126ms
+2024-04-16 08:58:46.077 +02:00 [INF] Request finished HTTP/2 GET https://localhost:7079/_vs/browserLink - 200 null text/javascript; charset=UTF-8 59.4912ms

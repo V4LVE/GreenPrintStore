@@ -57,7 +57,9 @@ namespace GreenPrint.Web.Pages.Items
         {
             if (await HttpContext.IsLoggedIn())
             {
-                var tempuser = await _userService.GetByIdAsync(await HttpContext.GetUser());
+                NewUser = await _userService.GetByIdAsync(await HttpContext.GetUser());
+                NewCustomer = NewUser.Customer;
+                NewCustomerAddress = NewCustomer.Address;
 
             }
             if (Request.Cookies["ItemCartCookie"] != null)
@@ -102,7 +104,7 @@ namespace GreenPrint.Web.Pages.Items
 
         public async Task<IActionResult> OnPostOrderAsync()
         {
-            NewCustomer.Address = NewCustomerAddress;
+            
 
             if (!ModelState.IsValid)
             {
@@ -112,25 +114,29 @@ namespace GreenPrint.Web.Pages.Items
             List<ItemOrderDTO> itemOrders = new();
 
             // If user wants to create an account
-
-            if (NewUser.Password != PassConfirm)
+            if (!await HttpContext.IsLoggedIn())
             {
-                ModelState.AddModelError("NewUser.Password", "Passwords do not match");
+                NewCustomer.Address = NewCustomerAddress;
+                if (NewUser.Password != PassConfirm)
+                {
+                    ModelState.AddModelError("NewUser.Password", "Passwords do not match");
 
-                await OnGet();
-                return Page();
+                    await OnGet();
+                    return Page();
+                }
+                if (await _userService.GetUserByEmailAsync(NewUser.Email) != null)
+                {
+                    ModelState.AddModelError("NewUser.Email", "This email already exists. Please login instead");
+
+                    await OnGet();
+                    return Page();
+                }
+
+                NewUser.Roleid = 1;
+                NewUser.Customer = NewCustomer;
+                NewUser = await _userService.CreateAndReturn(NewUser);
             }
-            if (await _userService.GetUserByEmailAsync(NewUser.Email) != null)
-            {
-                ModelState.AddModelError("NewUser.Email", "This email already exists. Please login instead");
-
-                await OnGet();
-                return Page();
-            }
-
-            NewUser.Roleid = 1;
-            NewUser.Customer = NewCustomer;
-            NewUser = await _userService.CreateAndReturn(NewUser);
+            
 
             if (Request.Cookies["ItemCartCookie"] != null)
             {
