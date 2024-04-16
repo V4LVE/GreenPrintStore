@@ -117,24 +117,30 @@ namespace GreenPrint.Web.Pages.Items
                 await OnGet();
                 return Page();
             }
-            if (await _userService.GetUserByEmailAsync(NewUser.Email) != null)
+            if (!await HttpContext.IsLoggedIn())
             {
-                ModelState.AddModelError("NewUser.Email", "This email already exists. Please login instead");
+                if (await _userService.GetUserByEmailAsync(NewUser.Email) != null)
+                {
+                    ModelState.AddModelError("NewUser.Email", "This email already exists. Please login instead");
 
-                await OnGet();
-                return Page();
+                    await OnGet();
+                    return Page();
+                }
             }
 
             if (!await HttpContext.IsLoggedIn())
             {
                 NewUser.Roleid = 1;
+                
                 NewUser.Customer = NewCustomer;
                 NewUser.Customer.Address = NewCustomerAddress;
                 NewUser = await _userService.CreateAndReturn(NewUser);
             }
             else
             {
-                NewUser.Roleid = 1;
+                NewUser = await _userService.GetByIdAsync(await HttpContext.GetUser());
+                NewCustomer.Id = NewUser.Customer.Id;
+                NewCustomerAddress.Id = NewUser.Customer.Address.Id;
                 NewUser.Customer = NewCustomer;
                 NewUser.Customer.Address = NewCustomerAddress;
                 await _userService.UpdateAsync(NewUser);
