@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenPrint.Repository.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20240415162951_Init")]
+    [Migration("20240415184647_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -386,9 +386,6 @@ namespace GreenPrint.Repository.Migrations
                     b.Property<int>("Roleid")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SessionId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Roleid");
@@ -566,7 +563,7 @@ namespace GreenPrint.Repository.Migrations
                     b.HasOne("GreenPrint.Repository.Entities.User", "User")
                         .WithOne("Session")
                         .HasForeignKey("GreenPrint.Repository.Entities.Session", "UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");

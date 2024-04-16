@@ -52,15 +52,13 @@ namespace GreenPrint.Web.Pages.Items
         public OrderDTO NewOrder { get; set; }
         [BindProperty]
         public string? PassConfirm { get; set; }
-        [BindProperty]
-        public bool CreateUserAccount { get; set; } = false;
 
         public async Task<IActionResult> OnGet()
         {
             if (await HttpContext.IsLoggedIn())
             {
                 var tempuser = await _userService.GetByIdAsync(await HttpContext.GetUser());
-                
+
             }
             if (Request.Cookies["ItemCartCookie"] != null)
             {
@@ -100,7 +98,7 @@ namespace GreenPrint.Web.Pages.Items
 
             return RedirectToPage();
         }
-        
+
 
         public async Task<IActionResult> OnPostOrderAsync()
         {
@@ -114,44 +112,39 @@ namespace GreenPrint.Web.Pages.Items
             List<ItemOrderDTO> itemOrders = new();
 
             // If user wants to create an account
-            if (CreateUserAccount)
-            {
-                if (NewUser.Password != PassConfirm)
-                {
-                    ModelState.AddModelError("NewUser.Password", "Passwords do not match");
 
-                    await OnGet();
-                    return Page();
-                }
-                if (await _userService.GetUserByEmailAsync(NewUser.Email) != null)
-                {
-                    ModelState.AddModelError("NewUser.Email", "This email already exists. Please login instead");
-
-                    await OnGet();
-                    return Page();
-                }
-                NewUser.Roleid = 1;
-                NewUser.Customer = new CustomerDTO();
-                NewUser = await _userService.CreateAndReturn(NewUser);
-            }
-            if (NewCustomer.Id == 0)
+            if (NewUser.Password != PassConfirm)
             {
-                NewCustomer = await _customerService.CreateAndReturn(NewCustomer);
+                ModelState.AddModelError("NewUser.Password", "Passwords do not match");
+
+                await OnGet();
+                return Page();
             }
+            if (await _userService.GetUserByEmailAsync(NewUser.Email) != null)
+            {
+                ModelState.AddModelError("NewUser.Email", "This email already exists. Please login instead");
+
+                await OnGet();
+                return Page();
+            }
+
+            NewUser.Roleid = 1;
+            NewUser.Customer = NewCustomer;
+            NewUser = await _userService.CreateAndReturn(NewUser);
 
             if (Request.Cookies["ItemCartCookie"] != null)
             {
                 CookieItemProducts = JsonSerializer.Deserialize<List<WarehouseItemDTO>>(Request.Cookies["ItemCartCookie"]);
             }
 
-            NewOrder.CustomerId = NewCustomer.Id;
+            NewOrder.CustomerId = NewUser.Customer.Id;
             NewOrder.OrderDate = DateTime.Now;
             NewOrder.Status = Repository.Enums.OrderStatusEnum.Created;
 
             NewOrder = await _orderService.CreateAndReturn(NewOrder);
 
-           
-           
+
+
 
             // add items to itemOrderlist
             foreach (WarehouseItemDTO item in CookieItemProducts)
@@ -190,7 +183,7 @@ namespace GreenPrint.Web.Pages.Items
 
             return RedirectToPage("/Orders/Order", new { orderId = NewOrder.Id });
 
-            
+
         }
 
         public async Task<IActionResult> OnPostTestMailAsync()

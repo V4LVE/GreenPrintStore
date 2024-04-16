@@ -105,8 +105,7 @@ namespace GreenPrint.Repository.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Roleid = table.Column<int>(type: "int", nullable: false),
-                    SessionId = table.Column<int>(type: "int", nullable: true)
+                    Roleid = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -213,7 +212,8 @@ namespace GreenPrint.Repository.Migrations
                         name: "FK_Sessions_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -308,8 +308,8 @@ namespace GreenPrint.Repository.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Email", "Password", "Roleid", "SessionId" },
-                values: new object[] { 1, "alex802c@gmail.com", "Pwrvol901", 3, null });
+                columns: new[] { "Id", "Email", "Password", "Roleid" },
+                values: new object[] { 1, "alex802c@gmail.com", "Pwrvol901", 3 });
 
             migrationBuilder.InsertData(
                 table: "Warehouses",

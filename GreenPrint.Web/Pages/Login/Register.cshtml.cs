@@ -2,6 +2,7 @@ using GreenPrint.Repository.Entities;
 using GreenPrint.Service.DataTransferObjects;
 using GreenPrint.Service.Interfaces;
 using GreenPrint.Service.Services;
+using GreenPrint.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Text.Json;
@@ -58,20 +59,7 @@ namespace GreenPrint.Web.Pages.Login
             NewUser.Customer = new CustomerDTO();
             NewUser = await _userService.CreateAndReturn(NewUser);
 
-
-
-            var session = await _sessionService.CreateSession(NewUser.Id);
-
-            CookieOptions options = new() { Expires = session.ExpirationDate, Secure = true };
-
-
-
-            string serializedSession = JsonSerializer.Serialize(session);
-            Response.Cookies.Append("Session", serializedSession, options);
-
-
-
-            return RedirectToPage("/Login/MyAccount", new { userId = NewUser.Id });
+            return RedirectToPage("/Login/Login");
         }
     }   
 }

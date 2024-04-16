@@ -16,7 +16,6 @@ namespace GreenPrint.Repository.Entities
         // Todo: Add hash and salt instead of plain text password
         public string Email { get; set; }
         public int Roleid { get; set; }
-        public int? SessionId { get; set; }
 
         // Navigation properties
         public Role Role { get; set; }

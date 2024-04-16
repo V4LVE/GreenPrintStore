@@ -17,7 +17,7 @@ namespace GreenPrint.Repository.Entities
         public string? Email { get; set; }
         public int? AddressId { get; set; }
         public string? Phone { get; set; }
-        public int userId { get; set; }
+        public int UserId { get; set; }
 
         // Navigation properties
         public Address? Address { get; set; }

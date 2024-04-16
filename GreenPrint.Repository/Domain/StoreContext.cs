@@ -105,7 +105,7 @@ namespace GreenPrint.Repository.Domain
             //CUstomer
             modelBuilder.Entity<Customer>().HasData(
                 new Customer
-                { Id = 1, FirstName = "John", LastName = "Doe", AddressId = 1, Phone = "69696969", userId = 1 }
+                { Id = 1, FirstName = "John", LastName = "Doe", AddressId = 1, Phone = "69696969", UserId = 1 }
                 );
 
             // ItemImages
@@ -141,10 +141,10 @@ namespace GreenPrint.Repository.Domain
                 .HasMany(w => w.ItemOrders).WithOne(io => io.Warehouse);
             #endregion
 
-            #region Session
-            modelBuilder.Entity<Session>()
-                .HasOne(s => s.User).WithOne(u => u.Session).HasForeignKey<Session>(s => s.UserId).OnDelete(DeleteBehavior.NoAction);
-            #endregion
+            //#region Session
+            //modelBuilder.Entity<Session>()
+            //    .HasOne(s => s.User).WithOne(u => u.Session).HasForeignKey<Session>(s => s.UserId).OnDelete(DeleteBehavior.NoAction);
+            //#endregion
 
             //#region Customer
             //modelBuilder.Entity<Customer>()
