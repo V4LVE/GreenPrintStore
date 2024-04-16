@@ -1,0 +1,120 @@
+﻿@page "{itemId:int}"
+@model GreenPrint.Web.Pages.Admin.Items.ItemModel
+@{
+}
+<form method="post" enctype="multipart/form-data" class="container" asp-page-handler="Update">
+
+    <div class="row border-bottom border-primary">
+        <div class="col-10">
+            <h1>Editing: @Model.Item.ItemName</h1>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-6">
+
+            <!-- Product name -->
+            <div>
+                <label class="form-label fw-bold">Name</label>
+                <input type="text" class="form-control border-primary" asp-for="@Model.Item.ItemName" />
+                <span asp-validation-for="@Model.Item.ItemName" class="text-danger"></span>
+            </div>
+
+            <!-- Category dropdown -->
+            <div class="mt-2">
+                <label class="form-label fw-bold">Category</label>
+                <select class="form-select border-primary" asp-for="@Model.Item.CategoryId">
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.Id">@category.CategoryName</option>
+                    }
+                </select>
+            </div>
+
+            <!-- Product description -->
+            <div class="mt-2">
+                <label class="form-label fw-bold">Description</label>
+                <textarea asp-for="@Model.Item.Description" rows="10" class="form-control border-primary"></textarea>
+            </div>
+            <div>
+                <label class="form-label fw-bold">Price</label>
+                <input type="text" class="form-control border-primary" asp-for="@Model.Item.Price" />
+                <span asp-validation-for="@Model.Item.Price" class="text-danger"></span>
+            </div>
+
+            <!-- Product images -->
+            <div class="mt-2" cla>
+                <label class="form-label fw-bold">New image(s)</label>
+                <input type="file" multiple accept="image/*" class="form-control border-primary" asp-for="@Model.NewProductImages" />
+                <span asp-validation-for="NewProductImages" class="text-primary"></span>
+            </div
+
+        </div>
+        <div class="col-6 mt-2">
+
+            <!-- Warehouse and stock -->
+            <table class="table table-light table-bordered border-primary table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Warehouse</th>
+                        <th scope="col">In stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.WarehouseItems.Any())
+                    {
+                        @for (int i = 0; i < Model.WarehouseItems.Count; i++)
+                        {
+                            <input type="hidden" asp-for="@Model.WarehouseItems[i].Id" />
+                            <input type="hidden" asp-for="@Model.WarehouseItems[i].ItemId" />
+                            <input type="hidden" asp-for="@Model.WarehouseItems[i].WarehouseId" />
+                            <tr>
+                                <td>@Model.WarehouseItems[i].Warehouse.WarehouseName</td>
+                                <td>
+                                    <input type="number" asp-for="@Model.WarehouseItems[i].Quantity" />
+                                    <span asp-validation-for="@Model.WarehouseItems[i].Quantity" class="text-primary"></span>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+            <!-- Images -->
+            <table class="table table-light table-bordered border-primary table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col" class="col-3">Image</th>
+                        <th scope="col">Date added</th>
+                        <th scope="col" class="text-center">#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Item.ItemImages.Any())
+                    {
+                        @foreach (var image in Model.Item.ItemImages)
+                        {
+                            <tr>
+                                <td>
+                                    <img src="~/images/Items/@image.ImageUrl" class="w-100 d-block" />
+                                </td>
+                                <td>@image.DateCreated</td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-danger" onclick="AjaxDeleteImage('@image.Id', '@image.ImageUrl')">Delete</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+   
+
+    <div class="row mt-3">
+        <div class="col-2">
+            <button type="submit" class="btn btn-warning text-light col-12 toggleLoader"><i class="fa-solid fa-arrow-up"></i> Update</button>
+        </div>
+    </div>
+</form>

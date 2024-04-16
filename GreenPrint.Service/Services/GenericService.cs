@@ -61,5 +61,10 @@ namespace GreenPrint.Services.Services
         {
             await _genericRepository.UpdateAsync(_mappingService._mapper.Map<Entity>(entity));
         }
+
+        public async Task UpdateListAsync(List<DTO> entityList)
+        {
+            await _genericRepository.UpdateListAsync(_mappingService._mapper.Map<List<Entity>>(entityList));
+        }
     }
 }

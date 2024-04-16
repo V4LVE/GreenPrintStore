@@ -104,51 +104,46 @@ namespace GreenPrint.Web.Pages.Items
 
         public async Task<IActionResult> OnPostOrderAsync()
         {
-            if (await HttpContext.IsLoggedIn())
-            {
-                var temp = await _userService.GetByIdAsync(await HttpContext.GetUser());
-                NewCustomer = temp.Customer;
-                NewCustomerAddress = NewCustomer.Address;
-            }
-
             if (!ModelState.IsValid)
             {
                 await OnGet();
                 return Page();
             }
-            List<ItemOrderDTO> itemOrders = new();
 
-            // If user wants to create an account
+            if (NewUser.Password != PassConfirm)
+            {
+                ModelState.AddModelError("NewUser.Password", "Passwords do not match");
+
+                await OnGet();
+                return Page();
+            }
+            if (await _userService.GetUserByEmailAsync(NewUser.Email) != null)
+            {
+                ModelState.AddModelError("NewUser.Email", "This email already exists. Please login instead");
+
+                await OnGet();
+                return Page();
+            }
+
             if (!await HttpContext.IsLoggedIn())
             {
-                NewCustomer.Address = NewCustomerAddress;
-                if (NewUser.Password != PassConfirm)
-                {
-                    ModelState.AddModelError("NewUser.Password", "Passwords do not match");
-
-                    await OnGet();
-                    return Page();
-                }
-                if (await _userService.GetUserByEmailAsync(NewUser.Email) != null)
-                {
-                    ModelState.AddModelError("NewUser.Email", "This email already exists. Please login instead");
-
-                    await OnGet();
-                    return Page();
-                }
-
                 NewUser.Roleid = 1;
                 NewUser.Customer = NewCustomer;
+                NewUser.Customer.Address = NewCustomerAddress;
                 NewUser = await _userService.CreateAndReturn(NewUser);
             }
             else
             {
-                NewCustomer = NewUser.Customer;
-                NewCustomerAddress = NewCustomer.Address;
+                NewUser.Roleid = 1;
+                NewUser.Customer = NewCustomer;
+                NewUser.Customer.Address = NewCustomerAddress;
                 await _userService.UpdateAsync(NewUser);
-                
             }
             
+
+            List<ItemOrderDTO> itemOrders = new();
+
+            // If user wants to create an account
 
             if (Request.Cookies["ItemCartCookie"] != null)
             {

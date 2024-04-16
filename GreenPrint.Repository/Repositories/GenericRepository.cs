@@ -52,6 +52,16 @@ namespace GreenPrint.Repository.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task UpdateListAsync(List<E> entityList)
+        {
+            _dbContext.Set<E>().AttachRange(entityList);
+            foreach (E entity in entityList)
+            {
+                _dbContext.Entry(entity).State = EntityState.Modified;
+            }
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task<List<E>> GetAllAsync()
         {
             List<E> temp = new(await _dbContext.Set<E>().AsNoTracking().ToListAsync());
