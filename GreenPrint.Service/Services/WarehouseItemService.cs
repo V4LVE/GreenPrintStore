@@ -37,5 +37,19 @@ namespace GreenPrint.Service.Services
             bool tmpBool = await _warehouseItemRepository.CheckWarehouseStock(warehouseItemID, amount);
             return tmpBool;
         }
+
+        public async Task<bool> RegisterProductAsync(WarehouseItemDTO warehouseItem)
+        {
+            try
+            {
+                await _warehouseItemRepository.RegisterProductAsync(_mappingService._mapper.Map<WarehouseItem>(warehouseItem));
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

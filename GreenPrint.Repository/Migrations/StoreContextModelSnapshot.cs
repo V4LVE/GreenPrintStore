@@ -58,86 +58,6 @@ namespace GreenPrint.Repository.Migrations
                             StreetName = "JutlandStreet",
                             StreetNumber = "69B",
                             ZipCode = "6400"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            City = "Chaddfurt",
-                            StreetName = "Schaden Valleys",
-                            StreetNumber = "79",
-                            ZipCode = "37460"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            City = "South Greyson",
-                            StreetName = "Padberg Loop",
-                            StreetNumber = "45",
-                            ZipCode = "37286"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            City = "Port Jacintheshire",
-                            StreetName = "Lenore Cliff",
-                            StreetNumber = "4",
-                            ZipCode = "69623"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            City = "Jerdeview",
-                            StreetName = "Barrett Summit",
-                            StreetNumber = "80",
-                            ZipCode = "24133"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            City = "West Roderickland",
-                            StreetName = "Jacobson Groves",
-                            StreetNumber = "99",
-                            ZipCode = "69813-6975"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            City = "New Marty",
-                            StreetName = "Olen Turnpike",
-                            StreetNumber = "88",
-                            ZipCode = "74561"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            City = "Rippinhaven",
-                            StreetName = "Herbert Way",
-                            StreetNumber = "93",
-                            ZipCode = "83639"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            City = "Boscoberg",
-                            StreetName = "Kshlerin Ports",
-                            StreetNumber = "75",
-                            ZipCode = "37471-2452"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            City = "Emilianoberg",
-                            StreetName = "Athena Wells",
-                            StreetNumber = "76",
-                            ZipCode = "36251-2903"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            City = "Lavonberg",
-                            StreetName = "Gregorio Camp",
-                            StreetNumber = "91",
-                            ZipCode = "21280"
                         });
                 });
 
@@ -183,26 +103,22 @@ namespace GreenPrint.Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AddressId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -210,8 +126,7 @@ namespace GreenPrint.Repository.Migrations
                     b.HasIndex("AddressId");
 
                     b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Customers");
 
@@ -220,100 +135,10 @@ namespace GreenPrint.Repository.Migrations
                         {
                             Id = 1,
                             AddressId = 1,
-                            Email = "JohnnyD@69420.com",
                             FirstName = "John",
                             LastName = "Doe",
-                            Phone = "69696969"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AddressId = 2,
-                            Email = "eino@yost.name",
-                            FirstName = "Emmitt",
-                            LastName = "Reinger",
-                            Phone = "631.037.4878 x60305"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AddressId = 3,
-                            Email = "orville@rutherford.biz",
-                            FirstName = "Hollis",
-                            LastName = "Purdy",
-                            Phone = "1-725-587-4998"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AddressId = 4,
-                            Email = "garth@greenholt.ca",
-                            FirstName = "Paxton",
-                            LastName = "McKenzie",
-                            Phone = "(390)226-6150 x0257"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AddressId = 5,
-                            Email = "kareem_tremblay@runolfsdottirgleichner.info",
-                            FirstName = "Elton",
-                            LastName = "Schneider",
-                            Phone = "442-655-0172"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AddressId = 6,
-                            Email = "janick.orn@bins.uk",
-                            FirstName = "Brendan",
-                            LastName = "Powlowski",
-                            Phone = "967.111.7920"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AddressId = 7,
-                            Email = "general_satterfield@pollichcorkery.uk",
-                            FirstName = "Dorian",
-                            LastName = "Hessel",
-                            Phone = "109.036.6012 x413"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            AddressId = 8,
-                            Email = "hailee_okon@greenfelderrempel.biz",
-                            FirstName = "Delores",
-                            LastName = "Brown",
-                            Phone = "(181)056-3208 x001"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            AddressId = 9,
-                            Email = "will@willwintheiser.ca",
-                            FirstName = "Annabel",
-                            LastName = "Sipes",
-                            Phone = "539-830-2959"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            AddressId = 10,
-                            Email = "chaz_kemmer@parisian.ca",
-                            FirstName = "Randy",
-                            LastName = "Johnston",
-                            Phone = "1-157-616-0951 x61510"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            AddressId = 11,
-                            Email = "orpha@dach.us",
-                            FirstName = "Elvis",
-                            LastName = "Fahey",
-                            Phone = "818.185.1922"
+                            Phone = "69696969",
+                            UserId = 1
                         });
                 });
 
@@ -369,6 +194,70 @@ namespace GreenPrint.Repository.Migrations
                             Description = "A material for printing",
                             ItemName = "Sort PLA 1Kg",
                             Price = 150.0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 2,
+                            Description = "A material for printing",
+                            ItemName = "Sort ABS 1Kg",
+                            Price = 200.0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 2,
+                            Description = "A material for printing",
+                            ItemName = "Sort PETG 1Kg",
+                            Price = 250.0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 2,
+                            Description = "A material for printing",
+                            ItemName = "Sort TPU 1Kg",
+                            Price = 300.0
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryId = 2,
+                            Description = "A material for printing",
+                            ItemName = "Sort Wood 1Kg",
+                            Price = 350.0
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CategoryId = 2,
+                            Description = "A material for printing",
+                            ItemName = "Sort Metal 1Kg",
+                            Price = 400.0
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CategoryId = 2,
+                            Description = "A material for printing",
+                            ItemName = "Sort Carbon 1Kg",
+                            Price = 450.0
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CategoryId = 2,
+                            Description = "A material for printing",
+                            ItemName = "Sort PVA 1Kg",
+                            Price = 500.0
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CategoryId = 2,
+                            Description = "A material for printing",
+                            ItemName = "Sort HIPS 1Kg",
+                            Price = 550.0
                         });
                 });
 
@@ -547,9 +436,6 @@ namespace GreenPrint.Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -559,9 +445,6 @@ namespace GreenPrint.Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Roleid")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SessionId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -577,86 +460,6 @@ namespace GreenPrint.Repository.Migrations
                             Email = "alex802c@gmail.com",
                             Password = "Pwrvol901",
                             Roleid = 3
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CustomerId = 2,
-                            Email = "eino@yost.name",
-                            Password = "Password",
-                            Roleid = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CustomerId = 3,
-                            Email = "orville@rutherford.biz",
-                            Password = "Password",
-                            Roleid = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CustomerId = 4,
-                            Email = "garth@greenholt.ca",
-                            Password = "Password",
-                            Roleid = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CustomerId = 5,
-                            Email = "kareem_tremblay@runolfsdottirgleichner.info",
-                            Password = "Password",
-                            Roleid = 2
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CustomerId = 6,
-                            Email = "janick.orn@bins.uk",
-                            Password = "Password",
-                            Roleid = 2
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CustomerId = 7,
-                            Email = "general_satterfield@pollichcorkery.uk",
-                            Password = "Password",
-                            Roleid = 2
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CustomerId = 8,
-                            Email = "hailee_okon@greenfelderrempel.biz",
-                            Password = "Password",
-                            Roleid = 3
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CustomerId = 9,
-                            Email = "will@willwintheiser.ca",
-                            Password = "Password",
-                            Roleid = 3
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CustomerId = 10,
-                            Email = "chaz_kemmer@parisian.ca",
-                            Password = "Password",
-                            Roleid = 1
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CustomerId = 11,
-                            Email = "orpha@dach.us",
-                            Password = "Password",
-                            Roleid = 1
                         });
                 });
 
@@ -736,6 +539,62 @@ namespace GreenPrint.Repository.Migrations
                             ItemId = 3,
                             Quantity = 100,
                             WarehouseId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ItemId = 4,
+                            Quantity = 100,
+                            WarehouseId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ItemId = 5,
+                            Quantity = 100,
+                            WarehouseId = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ItemId = 6,
+                            Quantity = 100,
+                            WarehouseId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ItemId = 7,
+                            Quantity = 100,
+                            WarehouseId = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ItemId = 8,
+                            Quantity = 100,
+                            WarehouseId = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ItemId = 9,
+                            Quantity = 100,
+                            WarehouseId = 1
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ItemId = 10,
+                            Quantity = 100,
+                            WarehouseId = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ItemId = 11,
+                            Quantity = 0,
+                            WarehouseId = 1
                         });
                 });
 
@@ -743,14 +602,13 @@ namespace GreenPrint.Repository.Migrations
                 {
                     b.HasOne("GreenPrint.Repository.Entities.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressId");
 
                     b.HasOne("GreenPrint.Repository.Entities.User", "User")
                         .WithOne("Customer")
                         .HasForeignKey("GreenPrint.Repository.Entities.Customer", "UserId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Address");
 
@@ -822,7 +680,7 @@ namespace GreenPrint.Repository.Migrations
                     b.HasOne("GreenPrint.Repository.Entities.User", "User")
                         .WithOne("Session")
                         .HasForeignKey("GreenPrint.Repository.Entities.Session", "UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -898,7 +756,8 @@ namespace GreenPrint.Repository.Migrations
 
             modelBuilder.Entity("GreenPrint.Repository.Entities.User", b =>
                 {
-                    b.Navigation("Customer");
+                    b.Navigation("Customer")
+                        .IsRequired();
 
                     b.Navigation("Session");
                 });

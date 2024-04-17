@@ -31,18 +31,28 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-3">
+                    <div class="col-6">
                         <ul class="navbar-nav flex-grow-1">
-                            <li>
+                            
                                 @if (!await Context.IsLoggedIn())
                                 {
+                                    <li>
                                     <a class="nav-link text-dark" asp-page="/Login/Login"><i class="fa-solid fa-user-lock"></i> Login</a>
+                                    </li>
+                                   
                                 }
                                 else
                                 {
+                                    
+                                <li>
+                                    <a class="nav-link text-dark" asp-page="/Login/MyAccount" asp-route-userId="@await Context.GetUser()"><i class="fa-solid fa-user-pen"></i> My Account</a>
+                                </li>
+                                   <li>
                                     <a class="nav-link text-dark" asp-page="/Login/Logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                                   </li>
+                                    
                                 }
-                            </li>
+                           
                             @if (await Context.AuthenticatedUserIsAdmin())
                             {
                                 <li>

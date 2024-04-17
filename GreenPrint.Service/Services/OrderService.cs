@@ -41,6 +41,7 @@ namespace GreenPrint.Service.Services
             List<ItemOrderDTO> tmpCancelled = ProductOrders.FindAll(x => x.Status == OrderStatusEnum.Cancelled);
             List<ItemOrderDTO> tmpRefunded = ProductOrders.FindAll(x => x.Status == OrderStatusEnum.Pending);
             Order.Customer = null;
+            Order.ItemOrders = null;
 
             if (tmpInProgress.Count > 0)
             {
@@ -72,6 +73,11 @@ namespace GreenPrint.Service.Services
                 Order.Status = OrderStatusEnum.Pending;
                 await UpdateAsync(Order);
             }
+        }
+
+        public async Task<List<OrderDTO>> GetAllByCustomerId(int customerId)
+        {
+            return _mappingService._mapper.Map<List<OrderDTO>>(await _OrderRepository.GetAllByCustomerId(customerId));
         }
     }
 }

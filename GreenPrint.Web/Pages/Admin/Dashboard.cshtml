@@ -26,11 +26,11 @@
         </div>
 
         <div class="col-2 p-1">
-            <a class="btn btn-primary col-12 toggleLoader" asp-page="/Admin/Store/Orders"><i class="fas fa-receipt"></i> All Orders</a>
+            <a class="btn btn-primary col-12 toggleLoader" asp-page="/Admin/Orders/Orders"><i class="fas fa-receipt"></i> All Orders</a>
         </div>
 
         <div class="col-2 p-1">
-            <a class="btn btn-primary col-12 toggleLoader" asp-page="/Admin/Store/Products"><i class="fa-solid fa-boxes-stacked"></i> Products</a>
+            <button type="button" class="btn btn-primary col-12" data-bs-toggle="modal" data-bs-target="#newProd"><i class="fa-solid fa-boxes-stacked"></i> Add Product</button>
         </div>
     </div>
 
@@ -48,7 +48,7 @@
                         <form method="post" asp-page-handler="DeleteCategory" class="row m-1">
                             <div class="input-group">
                                 <input type="text" class="form-control border-primary" value="@category.CategoryName" disabled />
-                                <button type="submit" value="@category.Id" onclick="return confirm('Are you sure you want to delete this category?')" name="categoryID" class="btn btn-outline-danger fw-bold"><i class="fa-solid fa-trash-can"></i></button>
+                                <button type="submit" value="@category.Id" onclick="return confirm('Are you sure you want to delete this category?')" name="categoryID" class="btn btn-outline-primary fw-bold"><i class="fa-solid fa-trash-can"></i></button>
                             </div>
                         </form>
                     }
@@ -74,7 +74,7 @@
                         <form method="post" asp-page-handler="DeleteWarehouse" class="row m-1">
                             <div class="input-group">
                                 <input type="text" class="form-control border-primary" value="@warehouse.WarehouseName" disabled />
-                                <button type="submit" value="@warehouse.Id" onclick="return confirm('Are you sure you want to delete this warehouse?')" name="warehouseID" class="btn btn-outline-danger fw-bold"><i class="fa-solid fa-trash-can"></i></button>
+                                <button type="submit" value="@warehouse.Id" onclick="return confirm('Are you sure you want to delete this warehouse?')" name="warehouseID" class="btn btn-outline-primary fw-bold"><i class="fa-solid fa-trash-can"></i></button>
                             </div>
                         </form>
                     }
@@ -134,3 +134,99 @@
     </div>
 
 </div>
+
+<form method="post" enctype="multipart/form-data" class="container" asp-page-handler="AddNewItem">
+    <div class="modal fade" id="newProd" tabindex="-1" aria-labelledby="newProdLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mt-2">
+                        <div class="col-6">
+
+                            <!-- Product name -->
+                            <div class="mt-2">
+                                <label class="form-label fw-bold">Product name *</label>
+                                <input type="text" class="form-control border-primary" asp-for="@Model.NewProduct.ItemName" />
+                                <span asp-validation-for="@Model.NewProduct.ItemName" class="text-primary"></span>
+                            </div>
+
+                            <div class="mt-2">
+                                <label class="form-label fw-bold">Product price *</label>
+                                <input type="text" class="form-control border-primary" asp-for="@Model.NewProduct.Price" />
+                                <span asp-validation-for="@Model.NewProduct.Price" class="text-primary"></span>
+                            </div>
+ 
+                            <!-- Category dropdown -->
+                            <div class="mt-2">
+                                <label class="form-label fw-bold">Category *</label>
+                                <select class="form-select border-primary" asp-for="@Model.NewProduct.CategoryId">
+                                    <option selected disabled>--- Choose category ---</option>
+                                    @foreach (var category in Model.Categories)
+                                    {
+                                        <option value="@category.Id">@category.CategoryName</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="@Model.NewProduct.CategoryId" class="text-primary"></span>
+                            </div>
+
+                            <!-- Warehouse dropdown -->
+                            <div class="mt-2">
+                                <label class="form-label fw-bold">Warehouse *</label>
+                                <select class="form-select border-primary" asp-for="@Model.NewWarehouseItem.WarehouseId">
+                                    @foreach (var warehouse in Model.Warehouses)
+                                    {
+                                        <option value="@warehouse.Id">@warehouse.WarehouseName</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="@Model.NewWarehouseItem.WarehouseId" class="text-primary"></span>
+                            </div>
+
+                            <!-- Product image -->
+                            <div class="mt-2">
+                                <label class="form-label fw-bold">Image *</label>
+                                <input type="file" multiple accept="image/*" class="form-control border-primary" asp-for="@Model.ProductImages" />
+                                <span asp-validation-for="ProductImages" class="text-primary"></span>
+                            </div>
+
+                            <!-- Stock -->
+                            <div class="mt-2">
+                                
+                                    <label class="form-label fw-bold">Amount *</label>
+                                    <input type="number" class="form-control border-primary" value="0" asp-for="@Model.NewWarehouseItem.Quantity" />
+                                    <span asp-validation-for="@Model.NewWarehouseItem.Quantity" class="text-primary"></span>
+                                
+                            </div>
+
+                        </div>
+
+                        <div class="col-6">
+
+                            <!-- Product description -->
+                            <div class="mt-2">
+                                <label class="form-label fw-bold">Description</label>
+                                <textarea class="form-control border-primary" rows="18" asp-for="@Model.NewProduct.Description"></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <div class="row mt-2">
+                        
+                            <button type="submit" class="btn btn-success col-12 toggleLoader">Add</button>
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>

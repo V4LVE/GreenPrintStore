@@ -5,8 +5,19 @@ using GreenPrint.Service.Interfaces;
 using GreenPrint.Service.Services;
 using GreenPrint.Services.Services;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+using var logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File("log.txt")
+    .CreateLogger();
+
+
+builder.Logging.ClearProviders();
+
+builder.Logging.AddSerilog(logger);
 
 #region DI Container
 builder.Services.AddScoped<MappingService>();
@@ -47,7 +58,10 @@ builder.Services.AddScoped<ISessionService, SessionService>();
 builder.Services.AddScoped<IItemImageRepository, ItemImageRepository>();
 builder.Services.AddScoped<IItemImageService, ItemImageService>();
 
+builder.Services.AddScoped<IMailService, MailService>();
+
 #endregion
+
 
 
 // Add services to the container.
@@ -61,10 +75,14 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 
 builder.Services.AddDbContext<StoreContext>(options =>
 {
-    //options.UseSqlServer(builder.Configuration.GetConnectionString("Laptop")); // Laptop DB
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Desktop")); // Desktop DB
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Laptop")); // Laptop DB
+    //options.UseSqlServer(builder.Configuration.GetConnectionString("Desktop")); // Desktop DB
     options.EnableSensitiveDataLogging();
 });
+
+builder.Logging.AddConsole();
+builder.Logging.AddEventLog();
+
 
 var app = builder.Build();
 

@@ -38,6 +38,13 @@ namespace GreenPrint.Service.Interfaces
         Task UpdateAsync(DTO entity);
 
         /// <summary>
+        /// Updates a list of entities in the database
+        /// </summary>
+        /// <param name="entityList"></param>
+        /// <returns></returns>
+        Task UpdateListAsync(List<DTO> entityList);
+
+        /// <summary>
         /// Deletes an entity from the database
         /// </summary>
         /// <param name="entity"></param>

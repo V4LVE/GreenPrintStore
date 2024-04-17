@@ -28,7 +28,7 @@ namespace GreenPrint.Repository.Repositories
             var temp = await _dbContext.WarehouseItems.AsNoTracking()
                 .Include(wi => wi.Item)
                 .Include(wi => wi.Warehouse)
-                .Where(wi => wi.ItemId == itemId && wi.Quantity > 0)
+                .Where(wi => wi.ItemId == itemId)
                 .ToListAsync();
             return temp;
         }
@@ -43,6 +43,31 @@ namespace GreenPrint.Repository.Repositories
             else
             {
                 return false;
+            }
+        }
+
+        public async Task RegisterProductAsync(WarehouseItem warehouseItem)
+        {
+            bool doesExist = await _dbContext.WarehouseItems
+                .AsNoTracking()
+                .Where(wp => wp.ItemId == warehouseItem.ItemId && wp.WarehouseId == warehouseItem.WarehouseId)
+                .AnyAsync();
+
+            if (doesExist)
+            {
+                WarehouseItem oldWarehouseProduct = await _dbContext.WarehouseItems
+                    .AsNoTracking()
+                    .SingleAsync(wp => wp.ItemId == warehouseItem.ItemId && wp.WarehouseId == warehouseItem.WarehouseId);
+
+                oldWarehouseProduct.Quantity += warehouseItem.Quantity;
+
+                _dbContext.WarehouseItems.Update(oldWarehouseProduct);
+                await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                _dbContext.WarehouseItems.Add(warehouseItem);
+                await _dbContext.SaveChangesAsync();
             }
         }
 

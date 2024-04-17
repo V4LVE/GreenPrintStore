@@ -3,7 +3,6 @@
 @model GreenPrint.Web.Pages.Items.CartModel
 @{
 }
-
 <section class="bg-light py-5">
     <div class="container">
         <div class="row">
@@ -112,10 +111,6 @@
                                 {
                                     <div class="mb-3">
                                         <p class="mb-0">Account</p>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" asp-for="@Model.CreateUserAccount" id="usera" />
-                                            <label class="form-check-label" for="usera">Create User Account?</label>
-                                        </div>
                                         <div class="form-floating mb-2">
                                             <input type="email" asp-for="@Model.NewUser.Email" id="email" class="form-control" placeholder="Email" />
                                             <label class="form-label" for="email">Email address</label>
@@ -134,7 +129,7 @@
                                 }
                                 <div class="text-center">
                                     <button class="btn btn-light border">Cancel</button>
-                                    <button type="submit" class="btn btn-outline-primary shadow-0 border">Pay</button>
+                                    <button type="submit" class="btn btn-outline-primary shadow-0 border" @(Model.CookieItemProducts.Count == 0 ? "disabled" : "")>Pay</button>
                                 </div>
                             </div>
                         </div>

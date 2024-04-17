@@ -105,9 +105,7 @@ namespace GreenPrint.Repository.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Roleid = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: true),
-                    SessionId = table.Column<int>(type: "int", nullable: true)
+                    Roleid = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -174,12 +172,12 @@ namespace GreenPrint.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AddressId = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: true)
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddressId = table.Column<int>(type: "int", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -188,13 +186,13 @@ namespace GreenPrint.Repository.Migrations
                         name: "FK_Customers_Addresses_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Addresses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Customers_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -214,7 +212,8 @@ namespace GreenPrint.Repository.Migrations
                         name: "FK_Sessions_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -275,20 +274,7 @@ namespace GreenPrint.Repository.Migrations
             migrationBuilder.InsertData(
                 table: "Addresses",
                 columns: new[] { "Id", "City", "StreetName", "StreetNumber", "ZipCode" },
-                values: new object[,]
-                {
-                    { 1, "Sønderborg", "JutlandStreet", "69B", "6400" },
-                    { 2, "Chaddfurt", "Schaden Valleys", "79", "37460" },
-                    { 3, "South Greyson", "Padberg Loop", "45", "37286" },
-                    { 4, "Port Jacintheshire", "Lenore Cliff", "4", "69623" },
-                    { 5, "Jerdeview", "Barrett Summit", "80", "24133" },
-                    { 6, "West Roderickland", "Jacobson Groves", "99", "69813-6975" },
-                    { 7, "New Marty", "Olen Turnpike", "88", "74561" },
-                    { 8, "Rippinhaven", "Herbert Way", "93", "83639" },
-                    { 9, "Boscoberg", "Kshlerin Ports", "75", "37471-2452" },
-                    { 10, "Emilianoberg", "Athena Wells", "76", "36251-2903" },
-                    { 11, "Lavonberg", "Gregorio Camp", "91", "21280" }
-                });
+                values: new object[] { 1, "Sønderborg", "JutlandStreet", "69B", "6400" });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -311,55 +297,37 @@ namespace GreenPrint.Repository.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Customers",
-                columns: new[] { "Id", "AddressId", "Email", "FirstName", "LastName", "Phone", "UserId" },
-                values: new object[,]
-                {
-                    { 1, 1, "JohnnyD@69420.com", "John", "Doe", "69696969", null },
-                    { 2, 2, "eino@yost.name", "Emmitt", "Reinger", "631.037.4878 x60305", null },
-                    { 3, 3, "orville@rutherford.biz", "Hollis", "Purdy", "1-725-587-4998", null },
-                    { 4, 4, "garth@greenholt.ca", "Paxton", "McKenzie", "(390)226-6150 x0257", null },
-                    { 5, 5, "kareem_tremblay@runolfsdottirgleichner.info", "Elton", "Schneider", "442-655-0172", null },
-                    { 6, 6, "janick.orn@bins.uk", "Brendan", "Powlowski", "967.111.7920", null },
-                    { 7, 7, "general_satterfield@pollichcorkery.uk", "Dorian", "Hessel", "109.036.6012 x413", null },
-                    { 8, 8, "hailee_okon@greenfelderrempel.biz", "Delores", "Brown", "(181)056-3208 x001", null },
-                    { 9, 9, "will@willwintheiser.ca", "Annabel", "Sipes", "539-830-2959", null },
-                    { 10, 10, "chaz_kemmer@parisian.ca", "Randy", "Johnston", "1-157-616-0951 x61510", null },
-                    { 11, 11, "orpha@dach.us", "Elvis", "Fahey", "818.185.1922", null }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Items",
                 columns: new[] { "Id", "CategoryId", "Description", "ItemName", "Price" },
                 values: new object[,]
                 {
                     { 1, 1, "A good cheap 3D Printer", "ELEGOO Neptune 4 Pro", 2250.0 },
                     { 2, 1, "A great but expensive 3D printer", "Bambulab X1 Carbon", 8500.0 },
-                    { 3, 2, "A material for printing", "Sort PLA 1Kg", 150.0 }
+                    { 3, 2, "A material for printing", "Sort PLA 1Kg", 150.0 },
+                    { 4, 2, "A material for printing", "Sort ABS 1Kg", 200.0 },
+                    { 5, 2, "A material for printing", "Sort PETG 1Kg", 250.0 },
+                    { 6, 2, "A material for printing", "Sort TPU 1Kg", 300.0 },
+                    { 7, 2, "A material for printing", "Sort Wood 1Kg", 350.0 },
+                    { 8, 2, "A material for printing", "Sort Metal 1Kg", 400.0 },
+                    { 9, 2, "A material for printing", "Sort Carbon 1Kg", 450.0 },
+                    { 10, 2, "A material for printing", "Sort PVA 1Kg", 500.0 },
+                    { 11, 2, "A material for printing", "Sort HIPS 1Kg", 550.0 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "CustomerId", "Email", "Password", "Roleid", "SessionId" },
-                values: new object[,]
-                {
-                    { 1, null, "alex802c@gmail.com", "Pwrvol901", 3, null },
-                    { 2, 2, "eino@yost.name", "Password", 2, null },
-                    { 3, 3, "orville@rutherford.biz", "Password", 3, null },
-                    { 4, 4, "garth@greenholt.ca", "Password", 2, null },
-                    { 5, 5, "kareem_tremblay@runolfsdottirgleichner.info", "Password", 2, null },
-                    { 6, 6, "janick.orn@bins.uk", "Password", 2, null },
-                    { 7, 7, "general_satterfield@pollichcorkery.uk", "Password", 2, null },
-                    { 8, 8, "hailee_okon@greenfelderrempel.biz", "Password", 3, null },
-                    { 9, 9, "will@willwintheiser.ca", "Password", 3, null },
-                    { 10, 10, "chaz_kemmer@parisian.ca", "Password", 1, null },
-                    { 11, 11, "orpha@dach.us", "Password", 1, null }
-                });
+                columns: new[] { "Id", "Email", "Password", "Roleid" },
+                values: new object[] { 1, "alex802c@gmail.com", "Pwrvol901", 3 });
 
             migrationBuilder.InsertData(
                 table: "Warehouses",
                 columns: new[] { "Id", "AddressId", "WarehouseName" },
                 values: new object[] { 1, 1, "Warehouse" });
+
+            migrationBuilder.InsertData(
+                table: "Customers",
+                columns: new[] { "Id", "AddressId", "Email", "FirstName", "LastName", "Phone", "UserId" },
+                values: new object[] { 1, 1, null, "John", "Doe", "69696969", 1 });
 
             migrationBuilder.InsertData(
                 table: "Images",
@@ -378,7 +346,15 @@ namespace GreenPrint.Repository.Migrations
                 {
                     { 1, 1, 10, 1 },
                     { 2, 2, 5, 1 },
-                    { 3, 3, 100, 1 }
+                    { 3, 3, 100, 1 },
+                    { 4, 4, 100, 1 },
+                    { 5, 5, 100, 1 },
+                    { 6, 6, 100, 1 },
+                    { 7, 7, 100, 1 },
+                    { 8, 8, 100, 1 },
+                    { 9, 9, 100, 1 },
+                    { 10, 10, 100, 1 },
+                    { 11, 11, 0, 1 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -390,8 +366,7 @@ namespace GreenPrint.Repository.Migrations
                 name: "IX_Customers_UserId",
                 table: "Customers",
                 column: "UserId",
-                unique: true,
-                filter: "[UserId] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Images_ItemId",

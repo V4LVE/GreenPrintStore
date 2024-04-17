@@ -31,5 +31,12 @@ namespace GreenPrint.Service.Interfaces
         /// <param name="ItemOrders"></param>
         /// <param name="Order"></param>
         Task CheckOrderStatus(List<ItemOrderDTO> ItemOrders, OrderDTO Order);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns></returns>
+        Task<List<OrderDTO>> GetAllByCustomerId(int customerId);
     }
 }

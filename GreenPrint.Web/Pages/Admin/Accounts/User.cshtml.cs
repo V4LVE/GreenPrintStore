@@ -53,10 +53,6 @@ namespace GreenPrint.Web.Pages.Admin.Accounts
         public async Task<IActionResult> OnPostUpdateAsync(int roleId)
         {
             var tempRole = await _RoleService.GetByIdAsync(roleId);
-            if (User.CustomerId != null)
-            {
-                User.Customer = await _CustomerService.GetByIdAsync((int)User.CustomerId);
-            }
             
             tempRole.Users = null;
             User.Role = tempRole;

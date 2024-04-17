@@ -22,8 +22,8 @@ namespace GreenPrint.Repository.Domain
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server =COLSERVER\\SQLEXPRESS; Database = GreenPrintStore;User Id=DBUser;Password=Pwrvol901;TrustServerCertificate=True;"); // Desktop DB
-                //optionsBuilder.UseSqlServer("Server =ALEX_PC\\SQLEXPRESS; Database = GreenPrintStore; Trusted_Connection = True;TrustServerCertificate=True; "); // Laptop DB
+                //optionsBuilder.UseSqlServer("Server =COLSERVER\\SQLEXPRESS; Database = GreenPrintStore;User Id=DBUser;Password=Pwrvol901;TrustServerCertificate=True;"); // Desktop DB
+                optionsBuilder.UseSqlServer("Server =ALEX_PC\\SQLEXPRESS; Database = GreenPrintStore; Trusted_Connection = True;TrustServerCertificate=True; "); // Laptop DB
                 optionsBuilder.EnableSensitiveDataLogging();
                 optionsBuilder.UseLoggerFactory(new ServiceCollection()
                               .AddLogging(builder => builder.AddConsole()
@@ -55,7 +55,15 @@ namespace GreenPrint.Repository.Domain
             modelBuilder.Entity<Item>().HasData(
                 new Item { Id = 1, ItemName = "ELEGOO Neptune 4 Pro", Description = "A good cheap 3D Printer", CategoryId = 1, Price = 2250 },
                 new Item { Id = 2, ItemName = "Bambulab X1 Carbon", Description = "A great but expensive 3D printer", CategoryId = 1, Price = 8500 },
-                new Item { Id = 3, ItemName = "Sort PLA 1Kg", Description = "A material for printing", CategoryId = 2, Price = 150 }
+                new Item { Id = 3, ItemName = "Sort PLA 1Kg", Description = "A material for printing", CategoryId = 2, Price = 150 },
+                new Item { Id = 4, ItemName = "Sort ABS 1Kg", Description = "A material for printing", CategoryId = 2, Price = 200 },
+                new Item { Id = 5, ItemName = "Sort PETG 1Kg", Description = "A material for printing", CategoryId = 2, Price = 250 },
+                new Item { Id = 6, ItemName = "Sort TPU 1Kg", Description = "A material for printing", CategoryId = 2, Price = 300 },
+                new Item { Id = 7, ItemName = "Sort Wood 1Kg", Description = "A material for printing", CategoryId = 2, Price = 350 },
+                new Item { Id = 8, ItemName = "Sort Metal 1Kg", Description = "A material for printing", CategoryId = 2, Price = 400 },
+                new Item { Id = 9, ItemName = "Sort Carbon 1Kg", Description = "A material for printing", CategoryId = 2, Price = 450 },
+                new Item { Id = 10, ItemName = "Sort PVA 1Kg", Description = "A material for printing", CategoryId = 2, Price = 500 },
+                new Item { Id = 11, ItemName = "Sort HIPS 1Kg", Description = "A material for printing", CategoryId = 2, Price = 550 }
                 );
 
             // Address
@@ -85,14 +93,19 @@ namespace GreenPrint.Repository.Domain
             modelBuilder.Entity<WarehouseItem>().HasData(
                 new WarehouseItem { Id = 1, WarehouseId = 1, ItemId = 1, Quantity = 10 },
                 new WarehouseItem { Id = 2, WarehouseId = 1, ItemId = 2, Quantity = 5 },
-                new WarehouseItem { Id = 3, WarehouseId = 1, ItemId = 3, Quantity = 100 }
+                new WarehouseItem { Id = 3, WarehouseId = 1, ItemId = 3, Quantity = 100 },
+                new WarehouseItem { Id = 4, WarehouseId = 1, ItemId = 4, Quantity = 100 },
+                new WarehouseItem { Id = 5, WarehouseId = 1, ItemId = 5, Quantity = 100 },
+                new WarehouseItem { Id = 6, WarehouseId = 1, ItemId = 6, Quantity = 100 },
+                new WarehouseItem { Id = 7, WarehouseId = 1, ItemId = 7, Quantity = 100 },
+                new WarehouseItem { Id = 8, WarehouseId = 1, ItemId = 8, Quantity = 100 },
+                new WarehouseItem { Id = 9, WarehouseId = 1, ItemId = 9, Quantity = 100 },
+                new WarehouseItem { Id = 10, WarehouseId = 1, ItemId = 10, Quantity = 100 },
+                new WarehouseItem { Id = 11, WarehouseId = 1, ItemId = 11, Quantity = 0 }
                 );
 
             // Customer
-            modelBuilder.Entity<Customer>().HasData(
-                new Customer
-                { Id = 1, FirstName = "John", LastName = "Doe", AddressId = 1, Email = "JohnnyD@69420.com", Phone = "69696969" }
-                );
+            
 
             // User
             modelBuilder.Entity<User>().HasData(
@@ -101,9 +114,15 @@ namespace GreenPrint.Repository.Domain
                                    Id = 1,
                                    Email = "alex802c@gmail.com",
                                    Password = "Pwrvol901",
-                                   Roleid = 3
+                                   Roleid = 3,
                                }
                           );
+
+            //CUstomer
+            modelBuilder.Entity<Customer>().HasData(
+                new Customer
+                { Id = 1, FirstName = "John", LastName = "Doe", AddressId = 1, Phone = "69696969", UserId = 1 }
+                );
 
             // ItemImages
             modelBuilder.Entity<ItemImage>().HasData(
@@ -119,41 +138,8 @@ namespace GreenPrint.Repository.Domain
             for (int i = 0; i < 10; i++)
             {
 
-                var email = Internet.Email();
-
-                modelBuilder.Entity<Customer>().HasData(
-                    new Customer
-                    {
-                        Id = i + 2,
-                        FirstName = Name.First(),
-                        LastName = Name.Last(),
-                        AddressId = i + 2,
-                        Email = email,
-                        Phone = Phone.Number()
-                    }
-                );
-
-                modelBuilder.Entity<User>().HasData(
-                    new User
-                    {
-                        Id = i + 2,
-                        Email = email,
-                        Password = "Password",
-                        CustomerId = i + 2,
-                        Roleid = RandomNumber.Next(1, 3),
-                    }
-                );
-
-                modelBuilder.Entity<Entities.Address>().HasData(
-                    new Entities.Address
-                    {
-                        Id = i + 2,
-                        StreetName = Faker.Address.StreetName(),
-                        StreetNumber = RandomNumber.Next(1, 100).ToString(),
-                        ZipCode = Faker.Address.ZipCode(),
-                        City = Faker.Address.City()
-                    }
-                );
+                
+                
             }
             #endregion
 
@@ -171,20 +157,21 @@ namespace GreenPrint.Repository.Domain
                 .HasMany(w => w.ItemOrders).WithOne(io => io.Warehouse);
             #endregion
 
-            #region Session
-            modelBuilder.Entity<Session>()
-                .HasOne(s => s.User).WithOne(u => u.Session).HasForeignKey<Session>(s => s.UserId).OnDelete(DeleteBehavior.NoAction);
-            #endregion
+            //#region Session
+            //modelBuilder.Entity<Session>()
+            //    .HasOne(s => s.User).WithOne(u => u.Session).HasForeignKey<Session>(s => s.UserId).OnDelete(DeleteBehavior.NoAction);
+            //#endregion
 
-            #region Customer
-            modelBuilder.Entity<Customer>()
-                .HasOne(c => c.User).WithOne(u => u.Customer).HasForeignKey<User>(u => u.CustomerId).OnDelete(DeleteBehavior.NoAction);
-            #endregion
+            //#region Customer
+            //modelBuilder.Entity<Customer>()
+            //    .HasOne(c => c.User).WithOne(u => u.Customer).HasForeignKey<User>(u => u.CustomerId).OnDelete(DeleteBehavior.NoAction);
 
-            #region User
-            modelBuilder.Entity<User>()
-                .HasOne(u => u.Customer).WithOne(c => c.User).HasForeignKey<Customer>(c => c.UserId).OnDelete(DeleteBehavior.NoAction);
-            #endregion
+            //#endregion
+
+            //#region User
+            //modelBuilder.Entity<User>()
+            //    .HasOne(u => u.Customer).WithOne(c => c.User).HasForeignKey<Customer>(c => c.UserId).OnDelete(DeleteBehavior.NoAction);
+            //#endregion
         }
 
         public DbSet<User> Users { get; set; }

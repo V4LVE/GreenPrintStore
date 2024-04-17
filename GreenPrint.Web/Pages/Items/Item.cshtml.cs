@@ -45,7 +45,7 @@ namespace GreenPrint.Web.Pages.Items
             }
 
             Stock = await _warehouseItemService.GetAllByByItemId(itemId);
-            SuggestedItems = await _itemService.GetItemsByCategory(itemId, OptionsPaging);
+            SuggestedItems = await _itemService.GetItemsByCategory(Item.CategoryId, OptionsPaging);
             
             return Page();
         }

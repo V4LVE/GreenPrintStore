@@ -4,6 +4,8 @@ using GreenPrint.Service.DataTransferObjects;
 using GreenPrint.Service.Interfaces;
 using GreenPrint.Service.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Text.Json;
 
@@ -45,7 +47,7 @@ namespace GreenPrint.Web.Extensions
         {
             IUserService userService = context.RequestServices.GetService<IUserService>();
             ISessionService sessionService = context.RequestServices.GetService<ISessionService>();
-
+            
             try
             {
                 SessionDTO session = await GetSession(context);
@@ -84,6 +86,27 @@ namespace GreenPrint.Web.Extensions
             }
 
             return 0;
+        }
+
+        public static async Task RemoteLogin(this HttpContext context, string userEmail)
+        {
+            ISessionService sessionService = context .RequestServices.GetService<ISessionService>();
+            IUserService userService = context.RequestServices.GetService<IUserService>();
+
+            if (userEmail != null)
+            {
+                UserDTO user = await userService.GetUserByEmailAsync(userEmail);
+                var session = await sessionService.CreateSession(user.Id);
+
+                CookieOptions options = new() { Expires = session.ExpirationDate, Secure = true };
+
+
+
+                string serializedSession = JsonSerializer.Serialize(session);
+                context.Response.Cookies.Append("Session", serializedSession, options);
+
+             
+            }
         }
     }
 }

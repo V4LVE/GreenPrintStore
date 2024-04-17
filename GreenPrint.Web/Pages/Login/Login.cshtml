@@ -12,6 +12,7 @@
         <div class="text-center">
             <h2>Login</h2>
         </div>
+        
         <form class="col-4" asp-page-handler="Login">
             <!-- Email input -->
             <div class="form-floating mb-4">
@@ -33,7 +34,7 @@
 
             <!-- Register buttons -->
             <div class="text-center">
-                <p>Not a member? <a href="#!">Register</a></p>
+                <p>Not a member? <a asp-page="/Login/Register">Register</a></p>
             </div>
         </form>
 

@@ -15,8 +15,7 @@ namespace GreenPrint.Service.DataTransferObjects
 
         // Todo: Add hash and salt instead of plain text password
         public string? Email { get; set; }
-        public int Roleid { get; set; }
-        public int? CustomerId { get; set; }
+        public int Roleid { get; set; } 
 
         // Navigation properties
         public RoleDTO? Role { get; set; }
