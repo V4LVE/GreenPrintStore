@@ -16,16 +16,18 @@ namespace GreenPrint.Web.Pages.Admin.Items
         private readonly IWarehouseItemService _warehouseItemService;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IItemImageService _imageService;
+        private readonly IWarehouseService _warehouseService;
         #endregion
 
         #region Constructor
-        public ItemModel(IItemService itemService, ICategoryService categoryService, IWarehouseItemService warehouseItemService, IWebHostEnvironment webHostEnvironment, IItemImageService imageService)
+        public ItemModel(IItemService itemService, ICategoryService categoryService, IWarehouseItemService warehouseItemService, IWebHostEnvironment webHostEnvironment, IItemImageService imageService, IWarehouseService warehouseService)
         {
             _itemService = itemService;
             _categoryService = categoryService;
             _warehouseItemService = warehouseItemService;
             _webHostEnvironment = webHostEnvironment;
             _imageService = imageService;
+            _warehouseService = warehouseService;
         }
         #endregion
 
@@ -36,6 +38,10 @@ namespace GreenPrint.Web.Pages.Admin.Items
         public List<CategoryDTO> Categories { get; set; }
         [BindProperty]
         public List<WarehouseItemDTO> WarehouseItems { get; set; }
+        [BindProperty]
+        public WarehouseItemDTO NewWarehouseItem { get; set; }
+        [BindProperty]
+        public List<WarehouseDTO> Warehouses { get; set; }
 
         [BindProperty]
         public IFormFile[]? NewProductImages { get; set; }
@@ -55,6 +61,7 @@ namespace GreenPrint.Web.Pages.Admin.Items
             }
 
             Categories = await _categoryService.GetAllAsync();
+            Warehouses = await _warehouseService.GetAllAsync();
             WarehouseItems = await _warehouseItemService.GetAllByByItemId(itemId);
 
             return Page();
@@ -94,6 +101,15 @@ namespace GreenPrint.Web.Pages.Admin.Items
             await _warehouseItemService.UpdateListAsync(WarehouseItems);
 
             return RedirectToPage();
+        }
+
+        public async Task<IActionResult> OnPostAddWarehouseAsync()
+        {
+            NewWarehouseItem.ItemId = Item.Id;
+            await _warehouseItemService.RegisterProductAsync(NewWarehouseItem);
+
+            return RedirectToPage("/Admin/Items/Item", new { itemId = Item.Id });
+
         }
     }
 }

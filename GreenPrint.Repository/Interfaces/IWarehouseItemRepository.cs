@@ -31,5 +31,12 @@ namespace GreenPrint.Repository.Interfaces
         /// <param name="amount"></param>
         /// <returns></returns>
         Task<bool> CheckWarehouseStock(int warehouseItemID, int amount);
+
+        /// <summary>
+        /// Add a new product to the warehouse
+        /// </summary>
+        /// <param name="warehouseItem"></param>
+        /// <returns></returns>
+        Task RegisterProductAsync(WarehouseItem warehouseItem);
     }
 }

@@ -46,5 +46,30 @@ namespace GreenPrint.Repository.Repositories
             }
         }
 
+        public async Task RegisterProductAsync(WarehouseItem warehouseItem)
+        {
+            bool doesExist = await _dbContext.WarehouseItems
+                .AsNoTracking()
+                .Where(wp => wp.ItemId == warehouseItem.ItemId && wp.WarehouseId == warehouseItem.WarehouseId)
+                .AnyAsync();
+
+            if (doesExist)
+            {
+                WarehouseItem oldWarehouseProduct = await _dbContext.WarehouseItems
+                    .AsNoTracking()
+                    .SingleAsync(wp => wp.ItemId == warehouseItem.ItemId && wp.WarehouseId == warehouseItem.WarehouseId);
+
+                oldWarehouseProduct.Quantity += warehouseItem.Quantity;
+
+                _dbContext.WarehouseItems.Update(oldWarehouseProduct);
+                await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                _dbContext.WarehouseItems.Add(warehouseItem);
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+
     }
 }
