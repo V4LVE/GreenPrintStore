@@ -1,38 +1,11 @@
 @GreenPrint.WebApi_HostAddress = https://localhost:7131
 
 
-GET {{GreenPrint.WebApi_HostAddress}}/warehouse?warehouseId=1
+
+GET {{GreenPrint.WebApi_HostAddress}}/categories
 
 ###
 
-POST {{GreenPrint.WebApi_HostAddress}}/warehouse/create
-Content-Type: application/json
-
-{
-  "warehouseName": "Berlin",
-  "address": {
-    "streetName": "BerlinerGade",
-    "streetNumber": "69B",
-    "zipCode": "24765",
-    "city": "Berlin"
-     }
-}
-
-###
-
-DELETE {{GreenPrint.WebApi_HostAddress}}/warehouse/remove?warehouseId=0
-
-###
-
-PATCH {{GreenPrint.WebApi_HostAddress}}/warehouse/update?warehouseId=0
-Content-Type: application/json
-
-{
-  //JsonPatchDocument
-}
-
-###
-
-GET {{GreenPrint.WebApi_HostAddress}}/warehouses
+GET {{GreenPrint.WebApi_HostAddress}}/category?CategoryId=1
 
 ###

@@ -5,6 +5,8 @@ using GreenPrint.Service.Interfaces;
 using GreenPrint.Service.Services;
 using GreenPrint.Services.Services;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,8 +50,11 @@ builder.Services.AddScoped<ISessionService, SessionService>();
 
 #endregion
 
-builder.Services.AddControllers()
-    .AddNewtonsoftJson();
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+});
 
 builder.Services.AddDbContext<StoreContext>(options =>
 {
