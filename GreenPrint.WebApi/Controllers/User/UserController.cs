@@ -4,22 +4,22 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GreenPrint.WebApi.Controllers.Role
+namespace GreenPrint.WebApi.Controllers.User
 {
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class RoleController : ControllerBase
+    public class UserController : ControllerBase
     {
         #region
-        private readonly IRoleService _RoleService;
-        private readonly ILogger<RoleController> _logger;
+        private readonly IUserService _UserService;
+        private readonly ILogger<UserController> _logger;
         #endregion
 
         #region Constructor
-        public RoleController(IRoleService RoleService, ILogger<RoleController> logger)
+        public UserController(IUserService UserService, ILogger<UserController> logger)
         {
-            _RoleService = RoleService;
+            _UserService = UserService;
             _logger = logger;
         }
         #endregion
@@ -28,13 +28,15 @@ namespace GreenPrint.WebApi.Controllers.Role
 
 
 
-        [HttpGet(Name = "GetRole")]
-        public async Task<IActionResult> GetRole(int RoleId)
+        [HttpGet(Name = "GetUser")]
+        public async Task<IActionResult> GetUser(int UserId)
         {
-            var temp = await _RoleService.GetByIdAsync(RoleId);
+            var temp = await _UserService.GetByIdAsync(UserId);
 
             if (temp != null)
             {
+                //temp.Customer.User = null;
+                
                 return Ok(temp);
             }
 
@@ -44,12 +46,13 @@ namespace GreenPrint.WebApi.Controllers.Role
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> Create(RoleDTO Role)
+        public async Task<IActionResult> Create(UserDTO User)
         {
             try
             {
-                Role = await _RoleService.CreateAndReturn(Role);
-                return CreatedAtAction("GetRole", new { RoleId = Role.Id }, Role);
+                User.Customer = new CustomerDTO();
+                User = await _UserService.CreateAndReturn(User);
+                return CreatedAtAction("GetUser", new { UserId = User.Id }, User);
             }
             catch (Exception e)
             {
@@ -59,16 +62,16 @@ namespace GreenPrint.WebApi.Controllers.Role
 
         [HttpDelete]
         [Route("remove")]
-        public async Task<IActionResult> Remove(int RoleId)
+        public async Task<IActionResult> Remove(int UserId)
         {
-            var Role = await _RoleService.GetByIdAsync(RoleId);
+            var User = await _UserService.GetByIdAsync(UserId);
 
-            if (Role == null)
+            if (User == null)
                 return NotFound();
 
             try
             {
-                await _RoleService.DeleteAsync(Role);
+                await _UserService.DeleteAsync(User);
                 return NoContent(); // Success
             }
             catch (Exception e)
@@ -80,12 +83,12 @@ namespace GreenPrint.WebApi.Controllers.Role
 
         [HttpPut]
         [Route("edit")]
-        public async Task<IActionResult> Edit(RoleDTO Role)
+        public async Task<IActionResult> Edit(UserDTO User)
         {
             try
             {
-                await _RoleService.UpdateAsync(Role);
-                return CreatedAtAction("GetRole", new { RoleId = Role.Id }, Role);
+                await _UserService.UpdateAsync(User);
+                return CreatedAtAction("GetUser", new { UserId = User.Id }, User);
             }
             catch (Exception e)
             {
@@ -95,18 +98,18 @@ namespace GreenPrint.WebApi.Controllers.Role
 
         [HttpPatch]
         [Route("update")]
-        public async Task<IActionResult> EditPartially(int RoleId, [FromBody] JsonPatchDocument<RoleDTO> patchDocument)
+        public async Task<IActionResult> EditPartially(int UserId, [FromBody] JsonPatchDocument<UserDTO> patchDocument)
         {
-            var Role = await _RoleService.GetByIdAsync(RoleId);
-            if (Role == null)
+            var User = await _UserService.GetByIdAsync(UserId);
+            if (User == null)
             {
                 return NotFound();
             }
 
             try
             {
-                patchDocument.ApplyTo(Role);
-                await _RoleService.UpdateAsync(Role);
+                patchDocument.ApplyTo(User);
+                await _UserService.UpdateAsync(User);
             }
             catch (Exception e)
             {
@@ -114,7 +117,7 @@ namespace GreenPrint.WebApi.Controllers.Role
                 return UnprocessableEntity(e.Message);
             }
 
-            return CreatedAtAction("GetRole", new { RoleId = Role.Id }, Role);
+            return CreatedAtAction("GetUser", new { UserId = User.Id }, User);
         }
     }
 }

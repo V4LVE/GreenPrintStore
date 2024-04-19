@@ -2,10 +2,29 @@
 
 
 
-GET {{GreenPrint.WebApi_HostAddress}}/categories
+GET {{GreenPrint.WebApi_HostAddress}}/user?UserId=1
 
 ###
 
-GET {{GreenPrint.WebApi_HostAddress}}/category?CategoryId=1
+GET {{GreenPrint.WebApi_HostAddress}}/users?apikey=12345
+
+###
+
+POST {{GreenPrint.WebApi_HostAddress}}/user/create
+Content-Type: application/json
+
+{
+  "password": "Pass",
+  "email": "Jens@Jensen.dk",
+  "roleid": 1
+}
+
+###
+
+DELETE {{GreenPrint.WebApi_HostAddress}}/user/remove?UserId=2
+
+###
+
+GET {{GreenPrint.WebApi_HostAddress}}/users/GetDeffered
 
 ###
