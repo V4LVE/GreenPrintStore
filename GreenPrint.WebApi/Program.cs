@@ -5,6 +5,10 @@ using GreenPrint.Service.Interfaces;
 using GreenPrint.Service.Services;
 using GreenPrint.Services.Services;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using GreenPrint.WebApi.Authentication;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,14 +52,24 @@ builder.Services.AddScoped<ISessionService, SessionService>();
 
 #endregion
 
-builder.Services.AddControllers()
-    .AddNewtonsoftJson();
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+    //options.SerializerSettings.MaxDepth = 2;
+});
 
 builder.Services.AddDbContext<StoreContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Laptop"));
     options.EnableSensitiveDataLogging();
 });
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = ApiKeyAuthOptions.DefaultScheme;
+    options.DefaultChallengeScheme = ApiKeyAuthOptions.DefaultScheme;
+}).AddApiKeyAuth(builder.Configuration.GetSection("Authentication").Bind);
 
 builder.Services.AddControllers();
 
@@ -65,6 +79,7 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

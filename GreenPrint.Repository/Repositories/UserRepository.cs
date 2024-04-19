@@ -22,6 +22,7 @@ namespace GreenPrint.Repository.Repositories
         {
             User temp = await _dbContext.Users.AsNoTracking()
                 .Include(r => r.Role)
+                .Include(r => r.Session)
                 .Include(r => r.Customer)
                 .ThenInclude(r => r.Address)
                 .FirstOrDefaultAsync(x => x.Id == id);

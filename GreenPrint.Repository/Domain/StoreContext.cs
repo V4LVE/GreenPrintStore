@@ -135,12 +135,6 @@ namespace GreenPrint.Repository.Domain
 
             #region Faker Data
             //Customers
-            for (int i = 0; i < 10; i++)
-            {
-
-                
-                
-            }
             #endregion
 
             // Relationships

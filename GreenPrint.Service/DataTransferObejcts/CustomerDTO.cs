@@ -1,4 +1,5 @@
 ﻿using GreenPrint.Repository.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,11 +18,12 @@ namespace GreenPrint.Service.DataTransferObjects
         public int? AddressId { get; set; }
         public string? Email { get; set; }
         public string? Phone { get; set; }
-        public int? UserId { get; set; }
+        public int UserId { get; set; }
 
         // Navigation properties
         public AddressDTO? Address { get; set; }
         public List<Order>? Orders { get; set; }
-        public User? User { get; set; }
+        [JsonIgnore]
+        public User User { get; set; }
     }
 }

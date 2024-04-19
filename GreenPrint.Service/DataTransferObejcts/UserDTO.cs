@@ -20,6 +20,7 @@ namespace GreenPrint.Service.DataTransferObjects
         // Navigation properties
         public RoleDTO? Role { get; set; }
         public CustomerDTO? Customer { get; set; }
+        public SessionDTO Session { get; set; }
 
     }
 }

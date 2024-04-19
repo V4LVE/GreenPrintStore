@@ -1,9 +1,11 @@
 ﻿using GreenPrint.Service.DataTransferObjects;
 using GreenPrint.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GreenPrint.WebApi.Controllers.Warehouse
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class WarehousesController : ControllerBase

@@ -1,38 +1,30 @@
 @GreenPrint.WebApi_HostAddress = https://localhost:7131
 
 
-GET {{GreenPrint.WebApi_HostAddress}}/warehouse?warehouseId=1
+
+GET {{GreenPrint.WebApi_HostAddress}}/user?UserId=1
 
 ###
 
-POST {{GreenPrint.WebApi_HostAddress}}/warehouse/create
+GET {{GreenPrint.WebApi_HostAddress}}/users?apikey=12345
+
+###
+
+POST {{GreenPrint.WebApi_HostAddress}}/user/create
 Content-Type: application/json
 
 {
-  "warehouseName": "Berlin",
-  "address": {
-    "streetName": "BerlinerGade",
-    "streetNumber": "69B",
-    "zipCode": "24765",
-    "city": "Berlin"
-     }
+  "password": "Pass",
+  "email": "Jens@Jensen.dk",
+  "roleid": 1
 }
 
 ###
 
-DELETE {{GreenPrint.WebApi_HostAddress}}/warehouse/remove?warehouseId=0
+DELETE {{GreenPrint.WebApi_HostAddress}}/user/remove?UserId=2
 
 ###
 
-PATCH {{GreenPrint.WebApi_HostAddress}}/warehouse/update?warehouseId=0
-Content-Type: application/json
-
-{
-  //JsonPatchDocument
-}
-
-###
-
-GET {{GreenPrint.WebApi_HostAddress}}/warehouses
+GET {{GreenPrint.WebApi_HostAddress}}/users/GetDeffered
 
 ###
