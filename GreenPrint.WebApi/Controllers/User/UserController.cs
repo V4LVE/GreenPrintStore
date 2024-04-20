@@ -28,7 +28,7 @@ namespace GreenPrint.WebApi.Controllers.User
 
 
 
-        [HttpGet(Name = "GetUser")]
+        [HttpGet("{userId:int}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int UserId)
         {
             var temp = await _UserService.GetByIdAsync(UserId);
@@ -60,7 +60,7 @@ namespace GreenPrint.WebApi.Controllers.User
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{userId:int}")]
         [Route("remove")]
         public async Task<IActionResult> Remove(int UserId)
         {
@@ -96,7 +96,7 @@ namespace GreenPrint.WebApi.Controllers.User
             }
         }
 
-        [HttpPatch]
+        [HttpPatch("{userId:int}")]
         [Route("update")]
         public async Task<IActionResult> EditPartially(int UserId, [FromBody] JsonPatchDocument<UserDTO> patchDocument)
         {

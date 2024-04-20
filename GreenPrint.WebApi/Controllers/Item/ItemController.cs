@@ -4,22 +4,22 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GreenPrint.WebApi.Controllers.Role
+namespace GreenPrint.WebApi.Controllers.Item
 {
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class RoleController : ControllerBase
+    public class ItemController : ControllerBase
     {
         #region
-        private readonly IRoleService _RoleService;
-        private readonly ILogger<RoleController> _logger;
+        private readonly IItemService _itemService;
+        private readonly ILogger<ItemController> _logger;
         #endregion
 
         #region Constructor
-        public RoleController(IRoleService RoleService, ILogger<RoleController> logger)
+        public ItemController(IItemService itemService, ILogger<ItemController> logger)
         {
-            _RoleService = RoleService;
+            _itemService = itemService;
             _logger = logger;
         }
         #endregion
@@ -28,10 +28,10 @@ namespace GreenPrint.WebApi.Controllers.Role
 
 
 
-        [HttpGet("{roleId:int}", Name = "GetRole")]
-        public async Task<IActionResult> GetRole(int RoleId)
+        [HttpGet("{itemId:int}", Name = "GetItem")]
+        public async Task<IActionResult> GetItem(int itemId)
         {
-            var temp = await _RoleService.GetByIdAsync(RoleId);
+            var temp = await _itemService.GetByIdAsync(itemId);
 
             if (temp != null)
             {
@@ -44,12 +44,12 @@ namespace GreenPrint.WebApi.Controllers.Role
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> Create(RoleDTO Role)
+        public async Task<IActionResult> Create(ItemDTO item)
         {
             try
             {
-                Role = await _RoleService.CreateAndReturn(Role);
-                return CreatedAtAction("GetRole", new { RoleId = Role.Id }, Role);
+                item = await _itemService.CreateAndReturn(item);
+                return CreatedAtAction("GetItem", new { itemId = item.Id }, item);
             }
             catch (Exception e)
             {
@@ -57,18 +57,18 @@ namespace GreenPrint.WebApi.Controllers.Role
             }
         }
 
-        [HttpDelete("{roleId:int}")]
+        [HttpDelete("{itemId:int}")]
         [Route("remove")]
-        public async Task<IActionResult> Remove(int RoleId)
+        public async Task<IActionResult> Remove(int itemId)
         {
-            var Role = await _RoleService.GetByIdAsync(RoleId);
+            var item = await _itemService.GetByIdAsync(itemId);
 
-            if (Role == null)
+            if (item == null)
                 return NotFound();
 
             try
             {
-                await _RoleService.DeleteAsync(Role);
+                await _itemService.DeleteAsync(item);
                 return NoContent(); // Success
             }
             catch (Exception e)
@@ -80,12 +80,12 @@ namespace GreenPrint.WebApi.Controllers.Role
 
         [HttpPut]
         [Route("edit")]
-        public async Task<IActionResult> Edit(RoleDTO Role)
+        public async Task<IActionResult> Edit(ItemDTO item)
         {
             try
             {
-                await _RoleService.UpdateAsync(Role);
-                return CreatedAtAction("GetRole", new { RoleId = Role.Id }, Role);
+                await _itemService.UpdateAsync(item);
+                return CreatedAtAction("GetItem", new { itemId = item.Id }, item);
             }
             catch (Exception e)
             {
@@ -93,20 +93,20 @@ namespace GreenPrint.WebApi.Controllers.Role
             }
         }
 
-        [HttpPatch("{roleId:int}")]
+        [HttpPatch("{itemId:int}")]
         [Route("update")]
-        public async Task<IActionResult> EditPartially(int RoleId, [FromBody] JsonPatchDocument<RoleDTO> patchDocument)
+        public async Task<IActionResult> EditPartially(int itemId, [FromBody] JsonPatchDocument<ItemDTO> patchDocument)
         {
-            var Role = await _RoleService.GetByIdAsync(RoleId);
-            if (Role == null)
+            var item = await _itemService.GetByIdAsync(itemId);
+            if (item == null)
             {
                 return NotFound();
             }
 
             try
             {
-                patchDocument.ApplyTo(Role);
-                await _RoleService.UpdateAsync(Role);
+                patchDocument.ApplyTo(item);
+                await _itemService.UpdateAsync(item);
             }
             catch (Exception e)
             {
@@ -114,7 +114,7 @@ namespace GreenPrint.WebApi.Controllers.Role
                 return UnprocessableEntity(e.Message);
             }
 
-            return CreatedAtAction("GetRole", new { RoleId = Role.Id }, Role);
+            return CreatedAtAction("GetItem", new { itemId = item.Id }, item);
         }
     }
 }

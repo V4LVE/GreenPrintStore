@@ -28,7 +28,7 @@ namespace GreenPrint.WebApi.Controllers.Category
 
 
 
-        [HttpGet(Name = "GetCategory")]
+        [HttpGet("{categoryId:int}", Name = "GetCategory")]
         public async Task<IActionResult> GetCategory(int CategoryId)
         {
             var temp = await _CategoryService.GetByIdAsync(CategoryId);
@@ -57,7 +57,7 @@ namespace GreenPrint.WebApi.Controllers.Category
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{categoryId:int}")]
         [Route("remove")]
         public async Task<IActionResult> Remove(int CategoryId)
         {
@@ -93,7 +93,7 @@ namespace GreenPrint.WebApi.Controllers.Category
             }
         }
 
-        [HttpPatch]
+        [HttpPatch("{categoryId:int}")]
         [Route("update")]
         public async Task<IActionResult> EditPartially(int CategoryId, [FromBody] JsonPatchDocument<CategoryDTO> patchDocument)
         {

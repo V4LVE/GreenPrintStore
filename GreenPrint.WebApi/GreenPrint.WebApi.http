@@ -2,7 +2,7 @@
 
 
 
-GET {{GreenPrint.WebApi_HostAddress}}/user?UserId=1
+GET {{GreenPrint.WebApi_HostAddress}}/user/1?apikey=12345
 
 ###
 
@@ -10,13 +10,14 @@ GET {{GreenPrint.WebApi_HostAddress}}/users?apikey=12345
 
 ###
 
-POST {{GreenPrint.WebApi_HostAddress}}/user/create
+POST {{GreenPrint.WebApi_HostAddress}}/item/create?apikey=12345
 Content-Type: application/json
 
 {
-  "password": "Pass",
-  "email": "Jens@Jensen.dk",
-  "roleid": 1
+  "itemName": "Ender 3 Pro",
+  "description": "A good cheap 3D Printer",
+  "price": 1700.0,
+  "categoryId": 1,
 }
 
 ###
@@ -27,4 +28,13 @@ DELETE {{GreenPrint.WebApi_HostAddress}}/user/remove?UserId=2
 
 GET {{GreenPrint.WebApi_HostAddress}}/users/GetDeffered
 
+
 ###
+
+GET {{GreenPrint.WebApi_HostAddress}}/items?apikey=12345
+
+
+
+###
+
+GET {{GreenPrint.WebApi_HostAddress}}/item/12?apikey=12345

@@ -28,7 +28,7 @@ namespace GreenPrint.WebApi.Controllers.Warehouse
 
 
 
-        [HttpGet(Name = "GetWarehouse")]
+        [HttpGet("{warehouseId:int}", Name = "GetWarehouse")]
         public async Task<IActionResult> GetWarehouse(int warehouseId)
         {
             var temp = await _warehouseService.GetByIdAsync(warehouseId);
@@ -57,7 +57,7 @@ namespace GreenPrint.WebApi.Controllers.Warehouse
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{warehouseId:int}")]
         [Route("remove")]
         public async Task<IActionResult> Remove(int warehouseId)
         {
@@ -93,7 +93,7 @@ namespace GreenPrint.WebApi.Controllers.Warehouse
             }
         }
 
-        [HttpPatch]
+        [HttpPatch("{warehouseId:int}")]
         [Route("update")]
         public async Task<IActionResult> EditPartially(int warehouseId, [FromBody] JsonPatchDocument<WarehouseDTO> patchDocument)
         {
