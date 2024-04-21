@@ -21,9 +21,4 @@
     <ProjectReference Include="..\GreenPrint.Service\GreenPrint.Service.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\Session\" />
-    <Folder Include="Controllers\WarehouseItem\" />
-  </ItemGroup>
-
 </Project>

@@ -35,6 +35,7 @@ namespace GreenPrint.WebApi.Controllers.Order
 
             if (temp != null)
             {
+                temp.Customer.Orders = null;
                 return Ok(temp);
             }
 

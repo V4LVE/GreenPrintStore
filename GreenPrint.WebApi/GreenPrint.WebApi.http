@@ -45,3 +45,7 @@ Content-Type: application/json
 
 
 ###
+
+GET {{GreenPrint.WebApi_HostAddress}}/order/1?apikey=12345
+
+###
