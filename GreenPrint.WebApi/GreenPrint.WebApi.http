@@ -2,13 +2,6 @@
 
 
 
-GET {{GreenPrint.WebApi_HostAddress}}/user/1?apikey=12345
-
-###
-
-GET {{GreenPrint.WebApi_HostAddress}}/users?apikey=12345
-
-###
 
 POST {{GreenPrint.WebApi_HostAddress}}/item/create?apikey=12345
 Content-Type: application/json
@@ -22,19 +15,33 @@ Content-Type: application/json
 
 ###
 
-DELETE {{GreenPrint.WebApi_HostAddress}}/user/remove?UserId=2
+POST {{GreenPrint.WebApi_HostAddress}}/order/create?apikey=12345
+Content-Type: application/json
+
+{
+  "customerId": 1,
+  "OrderDate": "2024-04-21T10:25:43.511Z"
+}
 
 ###
 
-GET {{GreenPrint.WebApi_HostAddress}}/users/GetDeffered
+POST {{GreenPrint.WebApi_HostAddress}}/itemorder/create?apikey=12345
+Content-Type: application/json
+
+
+[
+  {
+    "itemId": 1,
+    "orderId": 1,
+    "warehouseId": 1,
+    "quantity": 1
+  },
+  {
+    "itemId": 2,
+    "orderId": 1,
+    "warehouseId": 1,
+    "quantity": 1
+  }]
 
 
 ###
-
-GET {{GreenPrint.WebApi_HostAddress}}/items?apikey=12345
-
-
-
-###
-
-GET {{GreenPrint.WebApi_HostAddress}}/item/12?apikey=12345

@@ -17,8 +17,8 @@ namespace GreenPrint.Service.DataTransferObjects
         public OrderStatusEnum Status { get; set; }
 
         // Navigation Properties
-        public ItemDTO Item { get; set; }
-        public OrderDTO Order { get; set; }
+        public ItemDTO? Item { get; set; }
+        public OrderDTO? Order { get; set; }
         public WarehouseDTO? Warehouse { get; set; }
     }
 }
