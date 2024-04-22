@@ -49,3 +49,12 @@ Content-Type: application/json
 GET {{GreenPrint.WebApi_HostAddress}}/order/1?apikey=12345
 
 ###
+
+POST {{GreenPrint.WebApi_HostAddress}}/category/create
+Content-Type: application/json
+
+{
+  "CategoryName": "TestCat"
+}
+
+###

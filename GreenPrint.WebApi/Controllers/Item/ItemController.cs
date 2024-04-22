@@ -57,8 +57,8 @@ namespace GreenPrint.WebApi.Controllers.Item
             }
         }
 
-        [HttpDelete("{itemId:int}")]
-        [Route("remove")]
+        [HttpDelete]
+        [Route("remove/{itemId:int}")]
         public async Task<IActionResult> Remove(int itemId)
         {
             var item = await _itemService.GetByIdAsync(itemId);
@@ -93,8 +93,8 @@ namespace GreenPrint.WebApi.Controllers.Item
             }
         }
 
-        [HttpPatch("{itemId:int}")]
-        [Route("update")]
+        [HttpPatch]
+        [Route("update/{itemId:int}")]
         public async Task<IActionResult> EditPartially(int itemId, [FromBody] JsonPatchDocument<ItemDTO> patchDocument)
         {
             var item = await _itemService.GetByIdAsync(itemId);

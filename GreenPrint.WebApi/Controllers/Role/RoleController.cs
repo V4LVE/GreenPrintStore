@@ -57,8 +57,8 @@ namespace GreenPrint.WebApi.Controllers.Role
             }
         }
 
-        [HttpDelete("{roleId:int}")]
-        [Route("remove")]
+        [HttpDelete]
+        [Route("remove/{roleId:int}")]
         public async Task<IActionResult> Remove(int RoleId)
         {
             var Role = await _RoleService.GetByIdAsync(RoleId);
@@ -93,8 +93,8 @@ namespace GreenPrint.WebApi.Controllers.Role
             }
         }
 
-        [HttpPatch("{roleId:int}")]
-        [Route("update")]
+        [HttpPatch]
+        [Route("update/{roleId:int}")]
         public async Task<IActionResult> EditPartially(int RoleId, [FromBody] JsonPatchDocument<RoleDTO> patchDocument)
         {
             var Role = await _RoleService.GetByIdAsync(RoleId);

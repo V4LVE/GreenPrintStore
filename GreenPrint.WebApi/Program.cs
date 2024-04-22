@@ -9,6 +9,7 @@ using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using GreenPrint.WebApi.Authentication;
 using Microsoft.Extensions.Configuration;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,9 +62,43 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 
 builder.Services.AddDbContext<StoreContext>(options =>
 {
-    //options.UseSqlServer(builder.Configuration.GetConnectionString("Laptop"));
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Desktop"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Laptop"));
+    //options.UseSqlServer(builder.Configuration.GetConnectionString("Desktop"));
     options.EnableSensitiveDataLogging();
+});
+
+
+
+builder.Services.AddControllers();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "GreenPrint WebAPI", Version = "v1" });
+    c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
+    {
+        Description = "ApiKey must appear in header",
+        Type = SecuritySchemeType.ApiKey,
+        Name = "apikey",
+        In = ParameterLocation.Header,
+        Scheme = "ApiKeyScheme"
+    });
+    var key = new OpenApiSecurityScheme()
+    {
+        Reference = new OpenApiReference
+        {
+            Type = ReferenceType.SecurityScheme,
+            Id = "ApiKey"
+        },
+        In = ParameterLocation.Header
+    };
+    var requirement = new OpenApiSecurityRequirement
+                    {
+                             { key, new List<string>() }
+                    };
+    c.AddSecurityRequirement(requirement);
 });
 
 builder.Services.AddAuthentication(options =>
@@ -72,11 +107,15 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme = ApiKeyAuthOptions.DefaultScheme;
 }).AddApiKeyAuth(builder.Configuration.GetSection("Authentication").Bind);
 
-builder.Services.AddControllers();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseHttpsRedirection();
 

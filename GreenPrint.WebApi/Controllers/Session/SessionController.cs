@@ -55,8 +55,8 @@ namespace GreenPrint.WebApi.Controllers.Session
             }
         }
 
-        [HttpDelete("{SessionId:int}")]
-        [Route("remove")]
+        [HttpDelete]
+        [Route("remove/{SessionId:int}")]
         public async Task<IActionResult> Remove(int SessionId)
         {
             var Session = await _SessionService.GetByIdAsync(SessionId);
@@ -91,8 +91,8 @@ namespace GreenPrint.WebApi.Controllers.Session
             }
         }
 
-        [HttpPatch("{SessionId:int}")]
-        [Route("update")]
+        [HttpPatch]
+        [Route("update/{SessionId:int}")]
         public async Task<IActionResult> EditPartially(int SessionId, [FromBody] JsonPatchDocument<SessionDTO> patchDocument)
         {
             var Session = await _SessionService.GetByIdAsync(SessionId);

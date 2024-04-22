@@ -1,5 +1,7 @@
 ﻿using GreenPrint.Service.DataTransferObjects;
 using GreenPrint.Service.Interfaces;
+using GreenPrint.WebApi.Models;
+using GreenPrint.WebApi.ExtensionMethods;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -41,15 +43,16 @@ namespace GreenPrint.WebApi.Controllers.Category
             return NotFound();
         }
 
-
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> Create(CategoryDTO Category)
+        public async Task<IActionResult> Create(CategoryModel Category)
         {
+            var CategoryDto = Category.MapCategoryToDto();
+
             try
             {
-                Category = await _CategoryService.CreateAndReturn(Category);
-                return CreatedAtAction("GetCategory", new { CategoryId = Category.Id }, Category);
+                CategoryDto = await _CategoryService.CreateAndReturn(CategoryDto);
+                return CreatedAtAction("GetCategory", new { CategoryId = CategoryDto.Id }, CategoryDto);
             }
             catch (Exception e)
             {
@@ -57,8 +60,8 @@ namespace GreenPrint.WebApi.Controllers.Category
             }
         }
 
-        [HttpDelete("{categoryId:int}")]
-        [Route("remove")]
+        [HttpDelete]
+        [Route("remove/{categoryId:int}")]
         public async Task<IActionResult> Remove(int CategoryId)
         {
             var Category = await _CategoryService.GetByIdAsync(CategoryId);
@@ -93,8 +96,8 @@ namespace GreenPrint.WebApi.Controllers.Category
             }
         }
 
-        [HttpPatch("{categoryId:int}")]
-        [Route("update")]
+        [HttpPatch]
+        [Route("update/{categoryId:int}")]
         public async Task<IActionResult> EditPartially(int CategoryId, [FromBody] JsonPatchDocument<CategoryDTO> patchDocument)
         {
             var Category = await _CategoryService.GetByIdAsync(CategoryId);
