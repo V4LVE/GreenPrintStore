@@ -29,9 +29,9 @@ namespace GreenPrint.WebApi.Controllers.Role
 
 
         [HttpGet("{roleId:int}", Name = "GetRole")]
-        public async Task<IActionResult> GetRole(int RoleId)
+        public async Task<IActionResult> GetRole(int roleId)
         {
-            var temp = await _RoleService.GetByIdAsync(RoleId);
+            var temp = await _RoleService.GetByIdAsync(roleId);
 
             if (temp != null)
             {
@@ -59,9 +59,9 @@ namespace GreenPrint.WebApi.Controllers.Role
 
         [HttpDelete]
         [Route("remove/{roleId:int}")]
-        public async Task<IActionResult> Remove(int RoleId)
+        public async Task<IActionResult> Remove(int roleId)
         {
-            var Role = await _RoleService.GetByIdAsync(RoleId);
+            var Role = await _RoleService.GetByIdAsync(roleId);
 
             if (Role == null)
                 return NotFound();
@@ -95,9 +95,9 @@ namespace GreenPrint.WebApi.Controllers.Role
 
         [HttpPatch]
         [Route("update/{roleId:int}")]
-        public async Task<IActionResult> EditPartially(int RoleId, [FromBody] JsonPatchDocument<RoleDTO> patchDocument)
+        public async Task<IActionResult> EditPartially(int roleId, [FromBody] JsonPatchDocument<RoleDTO> patchDocument)
         {
-            var Role = await _RoleService.GetByIdAsync(RoleId);
+            var Role = await _RoleService.GetByIdAsync(roleId);
             if (Role == null)
             {
                 return NotFound();

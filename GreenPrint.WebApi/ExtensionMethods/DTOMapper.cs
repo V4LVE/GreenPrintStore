@@ -13,5 +13,16 @@ namespace GreenPrint.WebApi.ExtensionMethods
                 CategoryName = category.CategoryName
             };
         }
+
+        public static ItemDTO MapItemToDto(this ItemModel item)
+        {
+            return new ItemDTO
+            {
+                ItemName = item.ItemName,
+                Description = item.Description,
+                Price = item.Price,
+                CategoryId = item.CategoryId
+            };
+        }
     }
 }

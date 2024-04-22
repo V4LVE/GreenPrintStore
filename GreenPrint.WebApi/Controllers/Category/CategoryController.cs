@@ -31,9 +31,9 @@ namespace GreenPrint.WebApi.Controllers.Category
 
 
         [HttpGet("{categoryId:int}", Name = "GetCategory")]
-        public async Task<IActionResult> GetCategory(int CategoryId)
+        public async Task<IActionResult> GetCategory(int categoryId)
         {
-            var temp = await _CategoryService.GetByIdAsync(CategoryId);
+            var temp = await _CategoryService.GetByIdAsync(categoryId);
 
             if (temp != null)
             {
@@ -62,9 +62,9 @@ namespace GreenPrint.WebApi.Controllers.Category
 
         [HttpDelete]
         [Route("remove/{categoryId:int}")]
-        public async Task<IActionResult> Remove(int CategoryId)
+        public async Task<IActionResult> Remove(int categoryId)
         {
-            var Category = await _CategoryService.GetByIdAsync(CategoryId);
+            var Category = await _CategoryService.GetByIdAsync(categoryId);
 
             if (Category == null)
                 return NotFound();
@@ -98,9 +98,9 @@ namespace GreenPrint.WebApi.Controllers.Category
 
         [HttpPatch]
         [Route("update/{categoryId:int}")]
-        public async Task<IActionResult> EditPartially(int CategoryId, [FromBody] JsonPatchDocument<CategoryDTO> patchDocument)
+        public async Task<IActionResult> EditPartially(int categoryId, [FromBody] JsonPatchDocument<CategoryDTO> patchDocument)
         {
-            var Category = await _CategoryService.GetByIdAsync(CategoryId);
+            var Category = await _CategoryService.GetByIdAsync(categoryId);
             if (Category == null)
             {
                 return NotFound();

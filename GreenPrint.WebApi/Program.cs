@@ -68,11 +68,7 @@ builder.Services.AddDbContext<StoreContext>(options =>
 });
 
 
-
-builder.Services.AddControllers();
-
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 builder.Services.AddSwaggerGen(c =>
 {
