@@ -1,6 +1,8 @@
 ﻿using GreenPrint.Service.DataTransferObjects;
 using GreenPrint.Service.Interfaces;
 using GreenPrint.Service.Services;
+using GreenPrint.WebApi.ExtensionMethods;
+using GreenPrint.WebApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -44,12 +46,14 @@ namespace GreenPrint.WebApi.Controllers.ItemOrder
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> Create(List<ItemOrderDTO> itemOrders)
+        public async Task<IActionResult> Create(List<ItemOrderModel> itemOrders)
         {
+            var itemOrdersDto = itemOrders.MapItemOrderToDto();
+
             try
             {
-                await _ItemOrderService.CreateListAsync(itemOrders);
-                return CreatedAtAction("GetItemOrders", itemOrders);
+                await _ItemOrderService.CreateListAsync(itemOrdersDto);
+                return CreatedAtAction("GetItemOrders", itemOrdersDto);
             }
             catch (Exception e)
             {

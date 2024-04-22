@@ -1,5 +1,7 @@
 ﻿using GreenPrint.Service.DataTransferObjects;
 using GreenPrint.Service.Interfaces;
+using GreenPrint.WebApi.ExtensionMethods;
+using GreenPrint.WebApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -44,12 +46,14 @@ namespace GreenPrint.WebApi.Controllers.Role
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> Create(RoleDTO Role)
+        public async Task<IActionResult> Create(RoleModel Role)
         {
+            var RoleDto = Role.MapRoleToDto();
+
             try
             {
-                Role = await _RoleService.CreateAndReturn(Role);
-                return CreatedAtAction("GetRole", new { RoleId = Role.Id }, Role);
+                RoleDto = await _RoleService.CreateAndReturn(RoleDto);
+                return CreatedAtAction("GetRole", new { RoleId = RoleDto.Id }, RoleDto);
             }
             catch (Exception e)
             {

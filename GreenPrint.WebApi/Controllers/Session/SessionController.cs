@@ -1,5 +1,7 @@
 ﻿using GreenPrint.Service.DataTransferObjects;
 using GreenPrint.Service.Interfaces;
+using GreenPrint.WebApi.ExtensionMethods;
+using GreenPrint.WebApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -42,12 +44,14 @@ namespace GreenPrint.WebApi.Controllers.Session
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> Create(SessionDTO Session)
+        public async Task<IActionResult> Create(SessionModel Session)
         {
+            var SessionDto = Session.MapSessionToDto();
+
             try
             {
-                Session = await _SessionService.CreateAndReturn(Session);
-                return CreatedAtAction("GetSession", new { SessionId = Session.Id }, Session);
+                SessionDto = await _SessionService.CreateAndReturn(SessionDto);
+                return CreatedAtAction("GetSession", new { SessionId = SessionDto.Id }, SessionDto);
             }
             catch (Exception e)
             {
