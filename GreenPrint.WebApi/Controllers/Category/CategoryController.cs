@@ -31,6 +31,9 @@ namespace GreenPrint.WebApi.Controllers.Category
 
 
         [HttpGet("{categoryId:int}", Name = "GetCategory")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetCategory(int categoryId)
         {
             var temp = await _CategoryService.GetByIdAsync(categoryId);
@@ -44,6 +47,8 @@ namespace GreenPrint.WebApi.Controllers.Category
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [Route("create")]
         public async Task<IActionResult> Create(CategoryModel Category)
         {
