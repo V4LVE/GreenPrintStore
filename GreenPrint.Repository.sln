@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenPrint.UnitTests", "Gre
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenPrint.Web", "GreenPrint.Web\GreenPrint.Web.csproj", "{12B5EDED-C081-470E-B47A-74E17F15F311}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenPrint.WebApi", "GreenPrint.WebApi\GreenPrint.WebApi.csproj", "{5F15CEC2-F9EE-41CE-B3EF-B3ABC598A072}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenPrint.WebApi", "GreenPrint.WebApi\GreenPrint.WebApi.csproj", "{5F15CEC2-F9EE-41CE-B3EF-B3ABC598A072}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenPrint.Blazor", "GreenPrint.Blazor\GreenPrint.Blazor.csproj", "{1172A324-1174-4BFA-B64F-30D9E58C59CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{5F15CEC2-F9EE-41CE-B3EF-B3ABC598A072}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F15CEC2-F9EE-41CE-B3EF-B3ABC598A072}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F15CEC2-F9EE-41CE-B3EF-B3ABC598A072}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1172A324-1174-4BFA-B64F-30D9E58C59CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1172A324-1174-4BFA-B64F-30D9E58C59CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1172A324-1174-4BFA-B64F-30D9E58C59CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1172A324-1174-4BFA-B64F-30D9E58C59CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,6 +9,7 @@ namespace GreenPrint.WebApi.Models
 {
     public class CategoryModel
     {
+        [Required]
         public string CategoryName { get; set; }
 
     }

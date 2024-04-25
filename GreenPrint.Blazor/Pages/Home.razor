@@ -1,0 +1,27 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<h1>@currentCount</h1>
+
+<RadzenButton Text="Count -" Click="@(() => DecrementCount())" />
+<RadzenButton Text="Count +" Click="@(() => IncrementCount())" />
+
+Welcome to your new app.
+
+@code {
+
+    int currentCount = 0;
+
+    void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    void DecrementCount()
+    {
+        currentCount--;
+    }
+
+
+}

@@ -82,17 +82,17 @@ namespace GreenPrint.WebApi.ExtensionMethods
             };
         }
 
-        //public static WarehouseItemDTO MapWarehouseItemToDto(this WarehouseItemModel warehouseItem)
-        //{
-        //    return new WarehouseItemDTO
-        //    {
-        //        WarehouseId = warehouseItem.WarehouseId,
-        //        ItemId = warehouseItem.ItemId,
-        //        Quantity = warehouseItem.Quantity
-        //    };
-        //}
+        public static WarehouseItemDTO MapWarehouseItemToDto(this WarehouseItemModel warehouseItem)
+        {
+            return new WarehouseItemDTO
+            {
+                WarehouseId = warehouseItem.WarehouseId,
+                ItemId = warehouseItem.ItemId,
+                Quantity = warehouseItem.Quantity
+            };
+        }
 
-        
+
 
         public static AddressDTO MapAddressToDto(this AddressModel address)
         {

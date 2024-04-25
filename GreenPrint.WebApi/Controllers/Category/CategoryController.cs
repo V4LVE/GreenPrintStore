@@ -32,7 +32,7 @@ namespace GreenPrint.WebApi.Controllers.Category
 
         [HttpGet("{categoryId:int}", Name = "GetCategory")]
         [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(CategoryDTO),StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetCategory(int categoryId)
         {
@@ -61,6 +61,7 @@ namespace GreenPrint.WebApi.Controllers.Category
             }
             catch (Exception e)
             {
+                _logger.LogError(e.Message);
                 return UnprocessableEntity(e.Message);
             }
         }
@@ -97,6 +98,7 @@ namespace GreenPrint.WebApi.Controllers.Category
             }
             catch (Exception e)
             {
+                _logger.LogError(e.Message);
                 return UnprocessableEntity(e.Message);
             }
         }
