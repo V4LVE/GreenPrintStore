@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenPrint.Web", "GreenPrin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenPrint.WebApi", "GreenPrint.WebApi\GreenPrint.WebApi.csproj", "{5F15CEC2-F9EE-41CE-B3EF-B3ABC598A072}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenPrint.Blazor", "GreenPrint.Blazor\GreenPrint.Blazor.csproj", "{1172A324-1174-4BFA-B64F-30D9E58C59CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenPrint.Blazor", "GreenPrint.Blazor\GreenPrint.Blazor.csproj", "{1172A324-1174-4BFA-B64F-30D9E58C59CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
