@@ -4,6 +4,7 @@ using GreenPrint.Blazor.Service.Services;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Radzen;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -14,6 +15,10 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 #region DI Container
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+// Radzen Services
+builder.Services.AddScoped<NotificationService>();
+builder.Services.AddScoped<DialogService>();
 
 #endregion
 

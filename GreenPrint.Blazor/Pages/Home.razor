@@ -1,5 +1,6 @@
-﻿@page "/"
-
+﻿@inject NotificationService _notificationService
+@page "/"
+<RadzenNotification />
 <PageTitle>Home</PageTitle>
 
 <h1>@currentCount</h1>
@@ -11,10 +12,23 @@ Welcome to your new app.
 
 @code {
 
+
+
+    NotificationMessage message = new()
+        {
+            Severity = NotificationSeverity.Success,
+            Summary = "Success",
+            Detail = "The Counter has Incremented",
+            Duration = 4000
+        };
+
+
+
     int currentCount = 0;
 
     void IncrementCount()
     {
+        _notificationService.Notify(message);
         currentCount++;
     }
 
