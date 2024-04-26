@@ -1,41 +1,52 @@
-﻿@inject NotificationService _notificationService
+﻿@using GreenPrint.Blazor.Service.Intefaces;
+
+@inject NotificationService _notificationService
+@inject NavigationManager _navigationManager
+
+
+
 @page "/"
-<RadzenNotification />
 <PageTitle>Home</PageTitle>
 
-<h1>@currentCount</h1>
+<div class="container">
+    <div class="row border-bottom border-primary">
+        <div class="col-8">
+            <h1>Catalog</h1>
+        </div>
+        <div class="col-4">
+            <form method="post" asp-page-handler="Search">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search for product ID or Name" name="searchQuery">
+                    <button class="btn btn-primary toggleLoader" type="submit"><i class="bi bi-search"></i> Search</button>
+                </div>
+            </form>
 
-<RadzenButton Text="Count -" Click="@(() => DecrementCount())" />
-<RadzenButton Text="Count +" Click="@(() => IncrementCount())" />
+        </div>
+    </div>
 
-Welcome to your new app.
+
+    <div class="row mt-2">
+        @foreach (var category in Categories)
+        {
+            <div class="col-4 mt-2">
+                <RadzenButton class="col-12" Variant="Variant.Outlined" Click=@(() => _navigationManager.NavigateTo("/ItemView/" + category.Id)) Text="@category.CategoryName" ButtonStyle="ButtonStyle.Primary" />
+            </div>
+        }
+    </div>
+</div>
 
 @code {
+    @using GreenPrint.Blazor.Models
 
+    @inject ICategoryService _categoryService
 
+    public List<Category> Categories { get; set; } = new();
 
-    NotificationMessage message = new()
-        {
-            Severity = NotificationSeverity.Success,
-            Summary = "Success",
-            Detail = "The Counter has Incremented",
-            Duration = 4000
-        };
-
-
-
-    int currentCount = 0;
-
-    void IncrementCount()
+    protected override async Task OnInitializedAsync()
     {
-        _notificationService.Notify(message);
-        currentCount++;
+        Categories = await _categoryService.GetAllCategoriesAsync();
     }
 
-    void DecrementCount()
-    {
-        currentCount--;
-    }
-
+   
 
 }

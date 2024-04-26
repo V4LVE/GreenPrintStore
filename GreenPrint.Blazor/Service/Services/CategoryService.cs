@@ -1,8 +1,23 @@
-﻿using GreenPrint.Blazor.Service.Intefaces;
+﻿using GreenPrint.Blazor.Models;
+using GreenPrint.Blazor.Service.Intefaces;
+using System.Net.Http.Json;
 
 namespace GreenPrint.Blazor.Service.Services
 {
     public class CategoryService : ICategoryService
     {
+        private readonly HttpClient _client;
+
+        public CategoryService(HttpClient client)
+        {
+            _client = client;
+        }
+
+        public async Task<List<Category>> GetAllCategoriesAsync()
+        {
+            var Request = "/Categories";
+
+            return await _client.GetFromJsonAsync<List<Category>>(Request);
+        }
     }
 }
