@@ -21,6 +21,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https:/
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IItemService, ItemService>();
+builder.Services.AddScoped<IWarehouseItemService, WarehouseItemService>();
 
 // Radzen Services
 builder.Services.AddScoped<NotificationService>();

@@ -10,7 +10,7 @@
 
         // Navigation Properties
         public Category Category { get; set; }
-        public List<WarehouseItem>? warehouseItems { get; set; }
+        public List<WarehouseItem>? WarehouseItems { get; set; }
         public List<ItemImage>? ItemImages { get; set; }
     }
 }

@@ -1,0 +1,169 @@
+﻿@page "/Items/Item/{Id:int}"
+
+<section class="py-5">
+    <div class="container">
+        <div class="row gx-5">
+            <aside class="col-lg-6">
+                <div class="border rounded-4 mb-3 d-flex justify-content-center">
+                    <div id="carouselControls" class="carousel carousel-fade slide" data-bs-ride="carousel">
+
+                        <!-- Images -->
+                        
+                            <div class="carousel-inner bg-black rounded" style="max-height: 450px">
+
+                                @if (LoadedItem.ItemImages != null)
+                                {
+                                    <div class="carousel-item active">
+                                        <img src="/images/Items/@LoadedItem.ItemImages.First().ImageUrl" class="d-block w-100" style="max-height: 450px" />
+                                    </div>
+                                    @for (int i = 1; i < LoadedItem.ItemImages.Count; i++)
+                                    {
+                                        <div class="carousel-item">
+                                            <img src="/images/Items/@LoadedItem.ItemImages[i].ImageUrl" class="d-block w-100" style="max-height: 450px" />
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="carousel-item active">
+                                        <img src="/images/Items/No_image_available.svg" class="d-block w-100" style="max-height: 450px" />
+                                    </div>
+                                }
+
+                            </div>
+                        
+                        
+                            @if (LoadedItem.ItemImages != null)
+                            {
+                                <!-- Previous -->
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon bg-primary rounded" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+
+                                <!-- Indicators -->
+                                <div class="carousel-indicators">
+                                    <button type="button" data-bs-target="#carouselControls" data-bs-slide-to="0" class="active bg-primary" aria-current="true"></button>
+                                    @for (int i = 1; i < LoadedItem.ItemImages.Count; i++)
+                                    {
+                                        <button type="button" data-bs-target="#carouselControls" data-bs-slide-to="@i" class="bg-primary"></button>
+                                    }
+                                </div>
+
+                                <!-- Next -->
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselControls" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon bg-primary rounded" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            }
+                        
+                    </div>
+                </div>
+
+            </aside>
+            <main class="col-lg-6">
+                <div class="ps-lg-3">
+                    
+                    <h4 class="title text-dark">
+                        @LoadedItem.ItemName
+
+                    </h4>
+                    
+                    <div class="d-flex flex-row my-3">
+                        <div class="text-warning mb-1 me-2">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="ms-1">
+                                4.5
+                            </span>
+                        </div>
+                        
+                        @if (Stock.First().Quantity > 0)
+                        {
+                            <span class="text-success ms-2">In stock</span>
+                        }
+                        else
+                        {
+                            <span class="text-danger ms-2">Sold Out</span>
+                        }
+                        
+                    </div>
+
+
+                    <div class="mb-3">
+                        <span class="h5">@($"{LoadedItem.Price:C}")</span>
+                    </div>
+                    
+                    <p>
+                        @LoadedItem.Description
+                    </p>
+                    
+                    <hr />
+                    <div class="row">
+                        
+                        <form asp-page-handler="AddToCart" class="col-6">
+                            @if (Stock.First().Quantity > 0)
+                            {
+                                <button type="submit" name="itemId" value="LoadedItem.Id" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart</button>
+                            }
+                            else
+                            {
+                                <button type="submit" name="itemId" value="LoadedItem.Id" class="btn btn-primary shadow-0" disabled> <i class="me-1 fa fa-shopping-basket"></i> Add to cart</button>
+                            }
+
+
+                        </form>
+                       
+
+                        <a asp-page="/Admin/Items/Item" asp-route-itemId="LoadedItem.Id" class="btn btn-outline-warning col-2 me-2"><i class="fa-solid fa-pen"></i> Edit</a>
+
+                        <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3 col-2"> <i class="me-1 fa fa-heart fa-lg"></i> Save </a>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="mb-2 mt-2">
+        <hr />
+    </div>
+    <div class="text-center">
+        <h2>You might also like</h2>
+    </div>
+    <GreenPrint.Blazor.Component.ItemDisplayComponent Items="SuggestedItems" />
+
+
+</section>
+
+
+@code {
+    @using GreenPrint.Blazor.Service.Intefaces
+    @inject IItemService _itemService
+    @inject IWarehouseItemService _warehouseItemService
+
+    [Parameter]
+    public int Id { get; set; } = 0;
+
+    public GreenPrint.Blazor.Models.Item LoadedItem { get; set; } = new();
+    public List<GreenPrint.Blazor.Models.WarehouseItem>? Stock { get; set; } = new();
+    public List<GreenPrint.Blazor.Models.Item>? SuggestedItems { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        LoadedItem = await _itemService.GetItemByIdAsync(Id);
+        SuggestedItems = await _itemService.GetFeaturedItemsByCategoryAsync(LoadedItem.CategoryId);
+        Stock = await _warehouseItemService.GetAllByByItemId(Id);
+
+        Console.WriteLine(LoadedItem.ItemName);
+        Console.WriteLine(LoadedItem.Description);
+        Console.WriteLine(LoadedItem.ItemImages.Count);
+        Console.WriteLine(SuggestedItems.Count);
+        Console.WriteLine(Stock.Count);
+
+        await base.OnInitializedAsync();
+    }
+}

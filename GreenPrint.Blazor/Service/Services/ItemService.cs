@@ -19,5 +19,20 @@ namespace GreenPrint.Blazor.Service.Services
 
             return await _client.GetFromJsonAsync<List<Item>>(Request);
         }
+
+        public async Task<List<Item>> GetFeaturedItemsByCategoryAsync(int categoryId)
+        {
+            //var Request = $"/Items/GetFeaturedItemsByCategory/{categoryId:int}/1/8";
+            var Request = $"/Items/GetFeaturedItemsByCategory/1/1/8";
+
+            return await _client.GetFromJsonAsync<List<Item>>(Request);
+        }
+
+        public async Task<Item> GetItemByIdAsync(int itemId)
+        {
+            var Request = $"/Item/{itemId}";
+
+            return await _client.GetFromJsonAsync<Item>(Request);
+        }
     }
 }
