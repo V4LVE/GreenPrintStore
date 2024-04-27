@@ -1,4 +1,4 @@
-﻿@using GreenPrint.Blazor.Service.Intefaces;
+﻿@using GreenPrint.Blazor.Service.Intefaces
 
 @inject NotificationService _notificationService
 @inject NavigationManager _navigationManager
@@ -33,20 +33,32 @@
             </div>
         }
     </div>
+
+    <div class="mb-2 mt-2">
+        <hr />
+    </div>
+    <div class="text-center">
+        <h2>Featured Items</h2>
+    </div>
+    <GreenPrint.Blazor.Component.ItemDisplayComponent Items="FeaturedItems" />
+
 </div>
 
 @code {
     @using GreenPrint.Blazor.Models
 
     @inject ICategoryService _categoryService
+    @inject IItemService _itemService
 
     public List<Category> Categories { get; set; } = new();
+    public List<Item> FeaturedItems { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
         Categories = await _categoryService.GetAllCategoriesAsync();
+        FeaturedItems = await _itemService.GetFeaturedItemsAsync();
     }
 
-   
+
 
 }
