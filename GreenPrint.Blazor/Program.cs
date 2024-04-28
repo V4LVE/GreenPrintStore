@@ -15,6 +15,9 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https:/
 
 #region IndexedDb
 builder.Services.AddScoped<IndexedDbAccessor>();
+builder.Services.AddScoped<CookieAccessor>();
+builder.Services.AddScoped<LocalStorage>();
+
 var host = builder.Build();
 using var scope = host.Services.CreateScope();
 await using var indexedDB = scope.ServiceProvider.GetService<IndexedDbAccessor>();
