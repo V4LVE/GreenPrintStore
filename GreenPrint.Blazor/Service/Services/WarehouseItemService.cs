@@ -15,8 +15,7 @@ namespace GreenPrint.Blazor.Service.Services
 
         public async Task<List<WarehouseItem>> GetAllByByItemId(int itemId)
         {
-            //var Request = $"/WarehouseItem/item/{itemId}";
-            var Request = $"/WarehouseItem/item/1";
+            var Request = $"/WarehouseItem/item/{itemId}";
 
             return await _client.GetFromJsonAsync<List<WarehouseItem>>(Request);
         }

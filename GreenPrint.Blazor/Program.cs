@@ -1,6 +1,7 @@
 using GreenPrint.Blazor;
 using GreenPrint.Blazor.Service.Intefaces;
 using GreenPrint.Blazor.Service.Services;
+using GreenPrint.Blazor.Utility;
 using Microsoft.AspNetCore.Components.RenderTree;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -12,16 +13,24 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7131"), DefaultRequestHeaders = { { "apikey", "12345" } } });
 
-//builder.Services.AddHttpClient<HttpClient>(client =>
-//{
-//    client.BaseAddress = new Uri("https://localhost:7131/");
-//});
+#region IndexedDb
+builder.Services.AddScoped<IndexedDbAccessor>();
+var host = builder.Build();
+using var scope = host.Services.CreateScope();
+await using var indexedDB = scope.ServiceProvider.GetService<IndexedDbAccessor>();
+
+if (indexedDB is not null)
+{
+    await indexedDB.InitializeAsync();
+}
+#endregion
 
 #region DI Container
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IItemService, ItemService>();
 builder.Services.AddScoped<IWarehouseItemService, WarehouseItemService>();
+builder.Services.AddScoped<IImageService, ImageService>();
 
 // Radzen Services
 builder.Services.AddScoped<NotificationService>();

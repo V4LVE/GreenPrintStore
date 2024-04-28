@@ -20,5 +20,12 @@ namespace GreenPrint.Service.Services
         private readonly IItemImageRepository _ItemImageRepository = ItemImageRepository;
 
         #endregion
+
+        public async Task<List<ItemImageDTO>> GetAllImagesByItemId(int itemId)
+        {
+            var temp = _mappingService._mapper.Map<List<ItemImageDTO>>(await _ItemImageRepository.GetAllImagesByItemId(itemId));
+
+            return temp;
+        }
     }
 }

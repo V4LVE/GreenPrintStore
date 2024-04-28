@@ -51,6 +51,9 @@ builder.Services.AddScoped<IWarehouseItemService, WarehouseItemService>();
 builder.Services.AddScoped<ISessionRepository, SessionRepository>();
 builder.Services.AddScoped<ISessionService, SessionService>();
 
+builder.Services.AddScoped<IItemImageRepository, ItemImageRepository>();
+builder.Services.AddScoped<IItemImageService, ItemImageService>();
+
 #endregion
 
 builder.Services.AddCors(options =>

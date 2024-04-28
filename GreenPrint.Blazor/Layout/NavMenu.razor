@@ -1,4 +1,10 @@
-﻿<nav class="navbar navbar-expand-lg bg-body-tertiary">
+﻿@using GreenPrint.Blazor.Utility
+@using System.Text.Json;
+@using GreenPrint.Blazor.Models
+
+@inject IndexedDbAccessor _indexedDbAccessor
+<script src="https://kit.fontawesome.com/b87b53de45.js" crossorigin="anonymous"></script>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="/Images/GPlo.png" alt="Bootstrap" width="30" height="24">
@@ -9,16 +15,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+
+                <li>
+                    <a asp-page="/Items/Cart" class="p-0 pt-2 ps-1 nav-link">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="badge badge-warning" style="transform: translate(-10px,-10px);">
+                            <span class="badge bg-primary">@CartCount</span>
+                        </span>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -27,4 +33,14 @@
 
 @code {
 
+    public int CartCount { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        JsonDocument cart = await _indexedDbAccessor.GetAllAsync<JsonDocument>("items");
+        var StoredValue = cart.RootElement.Deserialize<List<Item>>();
+        CartCount = StoredValue.Count;
+
+        await base.OnInitializedAsync();
+    }
 }

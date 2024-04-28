@@ -1,6 +1,7 @@
 ﻿using GreenPrint.Repository.Domain;
 using GreenPrint.Repository.Entities;
 using GreenPrint.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,10 @@ namespace GreenPrint.Repository.Repositories
         #endregion
         #region Constructor
         #endregion
+
+        public async Task<List<ItemImage>> GetAllImagesByItemId(int itemId)
+        {
+            return await _dbContext.Images.AsNoTracking().Where(x => x.ItemId == itemId).ToListAsync();
+        }
     }
 }

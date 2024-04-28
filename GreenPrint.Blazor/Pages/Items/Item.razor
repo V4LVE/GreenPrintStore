@@ -11,7 +11,7 @@
                         
                             <div class="carousel-inner bg-black rounded" style="max-height: 450px">
 
-                                @if (LoadedItem.ItemImages != null)
+                                @if (Images.Count > 0)
                                 {
                                     <div class="carousel-item active">
                                         <img src="/images/Items/@LoadedItem.ItemImages.First().ImageUrl" class="d-block w-100" style="max-height: 450px" />
@@ -31,9 +31,9 @@
                                 }
 
                             </div>
-                        
-                        
-                            @if (LoadedItem.ItemImages != null)
+
+
+                        @if (Images.Count > 0)
                             {
                                 <!-- Previous -->
                                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls" data-bs-slide="prev">
@@ -66,7 +66,6 @@
                     
                     <h4 class="title text-dark">
                         @LoadedItem.ItemName
-
                     </h4>
                     
                     <div class="d-flex flex-row my-3">
@@ -144,23 +143,25 @@
     @using GreenPrint.Blazor.Service.Intefaces
     @inject IItemService _itemService
     @inject IWarehouseItemService _warehouseItemService
+    @inject IImageService _imageService
 
     [Parameter]
     public int Id { get; set; } = 0;
 
-    public GreenPrint.Blazor.Models.Item LoadedItem { get; set; } = new();
-    public List<GreenPrint.Blazor.Models.WarehouseItem>? Stock { get; set; } = new();
+    
+    public GreenPrint.Blazor.Models.Item LoadedItem { get; set; }
+    public List<GreenPrint.Blazor.Models.WarehouseItem>? Stock { get; set; }
     public List<GreenPrint.Blazor.Models.Item>? SuggestedItems { get; set; } = new();
+    public List<GreenPrint.Blazor.Models.ItemImage>? Images { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
         LoadedItem = await _itemService.GetItemByIdAsync(Id);
         SuggestedItems = await _itemService.GetFeaturedItemsByCategoryAsync(LoadedItem.CategoryId);
+        Images = await _imageService.GetAllByItemId(Id);
         Stock = await _warehouseItemService.GetAllByByItemId(Id);
 
-        Console.WriteLine(LoadedItem.ItemName);
-        Console.WriteLine(LoadedItem.Description);
-        Console.WriteLine(LoadedItem.ItemImages.Count);
+
         Console.WriteLine(SuggestedItems.Count);
         Console.WriteLine(Stock.Count);
 
