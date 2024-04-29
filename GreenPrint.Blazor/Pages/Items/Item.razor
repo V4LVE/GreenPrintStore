@@ -109,7 +109,7 @@
                             
                             @if (Stock.First().Quantity > 0)
                             {
-                                <button type="submit" name="itemId" value="LoadedItem.Id" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart</button>
+                                <RadzenButton Shade="Shade.Lighter" Icon="shopping_cart" Text="Add To Cart" ButtonStyle="ButtonStyle.Primary" />
                             }
                             else
                             {

@@ -7,8 +7,10 @@ namespace GreenPrint.Blazor.Extensions
 {
     public static class CartExtension
     {
+        public static int CartCount { get; set; } = 0;
 
-        public static async Task AddToCart(LocalStorage localStorage, IWarehouseItemService warehouseItemService, int itemId)
+
+        public static async Task AddToCart(LocalStorage localStorage, IWarehouseItemService warehouseItemService, IItemService itemService, int itemId)
         {
            
             var warehouseItems = await warehouseItemService.GetAllByByItemId(itemId);
@@ -23,9 +25,10 @@ namespace GreenPrint.Blazor.Extensions
                     Id = warehouseItems[0].Id,
                     WarehouseId = warehouseItems[0].WarehouseId,
                     ItemId = itemId,
+                    Item = await itemService.GetItemByIdAsync(itemId),
                     Quantity = 1
                 });
-
+                CartCount = ordredItems.Sum(wi => wi.Quantity);
                 string serializedItems = JsonSerializer.Serialize(ordredItems);
                 await localStorage.SetValueAsync("Cart", serializedItems);
             } // If cookie exists
@@ -48,6 +51,8 @@ namespace GreenPrint.Blazor.Extensions
                         Quantity = 1
                     });
                 }
+
+                CartCount = ordredItems.Sum(wi => wi.Quantity);
                 string serializedItems = JsonSerializer.Serialize(ordredItems);
                 await localStorage.SetValueAsync("Cart", serializedItems);
             }

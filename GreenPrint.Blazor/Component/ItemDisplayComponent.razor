@@ -93,7 +93,7 @@
     private async Task AddToCart(int itemId)
     {
         var item = await _itemService.GetItemByIdAsync(itemId);
-        await CartExtension.AddToCart(_localStorage, _warehouseItemService, itemId);
+        await CartExtension.AddToCart(_localStorage, _warehouseItemService, _itemService, itemId);
 
 
         StateHasChanged();

@@ -1,4 +1,7 @@
 ﻿@page "/ItemView/{Id:int}"
+
+@inject NavigationManager _navigationManager
+
 <RadzenNotification />
 <div class="container">
     <div class="row">
@@ -12,7 +15,7 @@
             <Template Context="item">
                 <div class="col-3 mt-2">
                     <div class="card">
-                        <a asp-page="/Items/Item" asp-route-itemId="@item.Id" style="text-decoration:none;color:black">
+                        <a @onclick='() => _navigationManager.NavigateTo("/Items/Item/" + item.Id)' style="text-decoration:none;color:black;cursor:pointer">
                             @if (item.ItemImages.Count > 0)
                             {
                                 <img loading="lazy" src="/Images/Items/@item.ItemImages.First().ImageUrl" class="card-img-top" alt="...">
@@ -79,7 +82,8 @@
 
         if (await _warehouseItemService.CheckStock(itemId, 1))
         {
-            await CartExtension.AddToCart(_localStorage, _warehouseItemService, itemId);
+            await CartExtension.AddToCart(_localStorage, _warehouseItemService, _itemService, itemId);
+            StateHasChanged();
             _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = $"{item.ItemName} was added to cart", Duration = 4000 });
         }
         else

@@ -1,7 +1,7 @@
 ﻿@using GreenPrint.Blazor.Utility
 @using System.Text.Json;
 @using GreenPrint.Blazor.Models
-
+@inject NavigationManager _navigationManager
 @inject IndexedDbAccessor _indexedDbAccessor
 @inject CookieAccessor _cookieAccessor
 @inject LocalStorage _localStorage
@@ -26,10 +26,10 @@
             <div class="col-2 justify-content-end">
                 <ul class="navbar-nav">
                     <li>
-                        <a asp-page="/Items/Cart" class="p-0 pt-2 ps-1 nav-link">
+                        <a @onclick='() => _navigationManager.NavigateTo("/Cart")' class="p-0 pt-2 ps-1 nav-link" style="cursor:pointer">
                             <i class="fa-solid fa-cart-shopping"></i>
                             <span class="badge badge-warning" style="transform: translate(-10px,-10px);">
-                                <span class="badge bg-primary">@CartCount</span>
+                                <span class="badge bg-primary">@CartExtension.CartCount</span>
                             </span>
                         </a>
                     </li>
@@ -39,10 +39,9 @@
     </div>
 </nav>
 
+@using GreenPrint.Blazor.Extensions
+
 @code {
-
-    public int CartCount { get; set; }
-
     protected override async Task OnInitializedAsync()
     {
         string? storage = await _localStorage.GetValueAsync<string>("Cart");
@@ -50,21 +49,12 @@
         if (storage != null)
         {
             var storedValue = JsonSerializer.Deserialize<List<WarehouseItem>>(storage);
-            CartCount = storedValue.Sum(wi => wi.Quantity);
+            CartExtension.CartCount = storedValue.Sum(wi => wi.Quantity);
         }
         else
         {
-            CartCount = 0;
+            CartExtension.CartCount = 0;
         }
-
-        
-        
-
-
-        // JsonDocument cart = await _indexedDbAccessor.GetAllAsync<JsonDocument>("items");
-        // var storedValue = JsonSerializer.Deserialize<List<WarehouseItem>>(cart.RootElement);
-
-
         await base.OnInitializedAsync();
     }
 }
