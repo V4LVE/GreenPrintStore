@@ -19,5 +19,12 @@ namespace GreenPrint.Blazor.Service.Services
 
             return await _client.GetFromJsonAsync<List<WarehouseItem>>(Request);
         }
+
+        public async Task<bool> CheckStock(int itemId, int amount)
+        {
+            var Request = $"/WarehouseItem/item/stock/{itemId}/{amount}";
+
+            return await _client.GetFromJsonAsync<bool>(Request);
+        }
     }
 }

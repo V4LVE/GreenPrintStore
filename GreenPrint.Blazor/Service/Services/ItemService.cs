@@ -22,7 +22,7 @@ namespace GreenPrint.Blazor.Service.Services
 
         public async Task<List<Item>> GetAllItemsByCategory(int categoryId)
         {
-            var Request = $"/GetItemsByCategory/{categoryId}";
+            var Request = $"/Items/GetItemsByCategory/{categoryId}";
 
             return await _client.GetFromJsonAsync<List<Item>>(Request);
         }

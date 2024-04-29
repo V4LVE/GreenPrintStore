@@ -58,3 +58,7 @@ Content-Type: application/json
 }
 
 ###
+
+GET {{GreenPrint.WebApi_HostAddress}}/items/GetItemsByCategory/{categoryId:int}?
+
+###

@@ -1,5 +1,5 @@
 ﻿@page "/ItemView/{Id:int}"
-
+<RadzenNotification />
 <div class="container">
     <div class="row">
         <div class="row border-bottom border-primary">
@@ -29,9 +29,7 @@
                             </div>
                         </a>
                         <div class="card-footer text-center">
-                            <form asp-page-handler="AddToCart">
-                                <button type="submit" name="itemId" value="@item.Id" class="btn btn-outline-primary col-6">Add To Cart</button>
-                            </form>
+                            <RadzenButton Shade="Shade.Lighter" Click=@(args => AddToCart(item.Id)) Text="Add To Cart" ButtonStyle="ButtonStyle.Primary" />
                         </div>
                     </div>
                 </div>
@@ -46,9 +44,13 @@
 @using GreenPrint.Blazor.Service.Intefaces;
 @using GreenPrint.Blazor.Models;
 @using GreenPrint.Blazor.Models.Enums
+@using GreenPrint.Blazor.Utility
+@using GreenPrint.Blazor.Extensions
 @inject IItemService _itemService
 @inject ICategoryService _categoryService
 @inject IWarehouseItemService _warehouseItemService
+@inject LocalStorage _localStorage
+@inject NotificationService _notificationService
 
 @code {
     [Parameter]
@@ -67,9 +69,22 @@
     protected override async Task OnParametersSetAsync()
     {
         Category = await _categoryService.GetByIdAsync(Id);
-        Items = await _itemService.GetFeaturedItemsByCategoryAsync(Id);
+        Items = await _itemService.GetAllItemsByCategory(Category.Id);
         await base.OnParametersSetAsync();
     }
 
+    private async Task AddToCart(int itemId)
+    {
+        var item = await _itemService.GetItemByIdAsync(itemId);
 
+        if (await _warehouseItemService.CheckStock(itemId, 1))
+        {
+            await CartExtension.AddToCart(_localStorage, _warehouseItemService, itemId);
+            _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = $"{item.ItemName} was added to cart", Duration = 4000 });
+        }
+        else
+        {
+            _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = $"{item.ItemName} is out of stock!", Duration = 4000 });
+        }
+    }
 }
