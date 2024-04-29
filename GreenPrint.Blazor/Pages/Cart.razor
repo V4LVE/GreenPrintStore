@@ -1,5 +1,227 @@
-﻿<h3>Cart</h3>
+﻿<section class="bg-light py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 mb-4">
+                <!-- Login -->
+                @* @if (!await HttpContext.IsLoggedIn())
+                {
+                    <div class="card mb-4 border shadow-0">
+                        <div class="p-4 d-flex justify-content-between">
+                            <div class="">
+                                <h5>Already have an account?</h5>
+                                <p class="mb-0 text-wrap ">Make checkout easier by logging in.</p>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center flex-column flex-md-row">
+                                <a asp-page="/Login/Login" class="btn btn-primary shadow-0 text-nowrap w-100">Sign in</a>
+                            </div>
+                        </div>
+                    </div>
+                } *@
+                <!-- Checkout -->
+                <EditForm FormName="Checkout">
+                    <div class="card shadow-0 border">
+                        <div class="p-4">
+                            <h5 class="card-title mb-3">Checkout</h5>
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <p class="mb-0">First name</p>
+                                    <div class="form-outline">
+                                        <input type="text" @bind-value="NewUser.Customer.FirstName" placeholder="Type here" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <p class="mb-0">Last name</p>
+                                    <div class="form-outline">
+                                        <input type="text" @bind-value="NewUser.Customer.LastName" placeholder="Type here" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="col-6 mb-3">
+                                    <p class="mb-0">Phone</p>
+                                    <div class="form-outline">
+                                        <input type="tel" @bind-value="NewUser.Customer.Phone" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="col-6 mb-3">
+                                    <p class="mb-0">Email</p>
+                                    <div class="form-outline">
+                                        <input type="email" @bind-value="NewUser.Customer.Email" placeholder="example@gmail.com" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="my-4" />
+
+                            <h5 class="card-title mb-3">Shipping info</h5>
+
+                            <div class="row mb-3">
+                                <div class="col-lg-4 mb-3">
+                                    <!-- Default checked radio -->
+                                    <div class="form-check h-100 border rounded-3">
+                                        <div class="p-3">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="59" checked />
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                Express delivery - 59 DKK <br />
+                                                <small class="text-muted">1-2 days </small>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-8 mb-3">
+                                        <p class="mb-0">Street Name</p>
+                                        <div class="form-outline">
+                                            <input type="text" @bind-value="NewUser.Customer.Address.StreetName" placeholder="Type here" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 mb-3">
+                                        <p class="mb-0">City</p>
+                                        <div class="form-outline">
+                                            <input type="text" @bind-value="NewUser.Customer.Address.City" placeholder="Type here" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 mb-3">
+                                        <p class="mb-0">Street Number</p>
+                                        <div class="form-outline">
+                                            <input type="text" @bind-value="NewUser.Customer.Address.StreetNumber" placeholder="Type here" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 col-6 mb-3">
+                                        <p class="mb-0">Postal code</p>
+                                        <div class="form-outline">
+                                            <input type="text" @bind-value="NewUser.Customer.Address.ZipCode" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                               @*  @if (!await HttpContext.IsLoggedIn())
+                                {
+                                    <div class="mb-3">
+                                        <p class="mb-0">Account</p>
+                                        <div class="form-floating mb-2">
+                                            <input type="email" asp-for="@Model.NewUser.Email" id="email" class="form-control" placeholder="Email" />
+                                            <label class="form-label" for="email">Email address</label>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-floating mb-2 col-6">
+                                                <input type="password" asp-for="@Model.PassConfirm" id="pass1" class="form-control" placeholder="Password" />
+                                                <label class="form-label" for="pass1">Password</label>
+                                            </div>
+                                            <div class="form-floating mb-2 col-6">
+                                                <input type="password" asp-for="NewUser.Password" id="pass2" class="form-control" placeholder="Confirm Password" />
+                                                <label class="form-label" for="pass2">Confirm Password</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                } *@
+                                <div class="text-center">
+                                    <button class="btn btn-light border">Cancel</button>
+                                    <button type="submit" class="btn btn-outline-primary shadow-0 border" @(Model.CookieItemProducts.Count= =0 ? "disabled" : "" )>Pay</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </EditForm>
+
+            </div>
+            <!-- Checkout -->
+            <div class="col-xl-4 col-lg-4 d-flex justify-content-center justify-content-lg-end">
+                <div class="ms-lg-4 mt-4 mt-lg-0" style="max-width: 320px;">
+                    <h6 class="mb-3">Summary</h6>
+                    @* <div class="d-flex justify-content-between">
+                        <p class="mb-2">Total price:</p>
+                        <p class="mb-2">@($"{Model.ItemTotalPrice:C}")</p>
+                    </div>
+                    @if (Model.DiscountDeduct != 0)
+                    {
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">Discount:</p>
+                            <p class="mb-2 text-danger">- @($"{Model.DiscountDeduct:C}")</p>
+                        </div>
+                    }
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2">Shipping cost:</p>
+                        <p class="mb-2">+ @($"{Model.ShippingPrice:C}")</p>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2">Total price:</p>
+                        <p class="mb-2 fw-bold">@($"{Model.TotalPrice:C}")</p>
+                    </div>
+
+                    <div class="input-group mt-3 mb-4">
+                        <input type="text" class="form-control border" name="" placeholder="Promo code" value="@Model.DiscountCode" />
+                        <button class="btn btn-light text-primary border">Apply</button>
+                    </div> *@
+
+                    <hr />
+                    <h6 class="text-dark my-4">Items in cart</h6>
+
+                    @foreach (var item in CookieItemProducts)
+                    {
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="me-3 position-relative">
+                                <span class="badge badge-primary" style="transform:translate(-1rem, -1rem);">
+                                    <span class="badge bg-primary">@item.Quantity</span>
+                                </span>
+                                @if (item.Item.ItemImages.Count > 0)
+                                {
+                                    <img src="~/images/items/@item.Item.ItemImages.First().ImageUrl" style="height: 96px; width: 96x; float:left" class="img-sm rounded border" />
+                                }
+                                else
+                                {
+                                    <img src="/images/items/no_image_available.svg" style="height: 96px; width: 96x; float:left" class="img-sm rounded border" />
+                                }
+
+                            </div>
+                            <div class="">
+                                <p>
+                                    @item.Item.ItemName <br />
+                                    @item.Item.Category.CategoryName
+                                </p>
+                                <div class="price text-muted">
+                                    Price: @($"{item.Item.Price:C}")
+                                </div>
+                                <div>
+                                    <form asp-page-handler="RemoveFromCart" method="post">
+                                        <button type="submit" name="itemId" value="@item.ItemId" class="btn-close" style="transform:translate(7.5rem, -1.5rem)"></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@using GreenPrint.Blazor.Models
+@using GreenPrint.Blazor.Utility
+@using System.Text.Json;
+@inject LocalStorage _localStorage
 
 @code {
+    public List<WarehouseItem> CookieItemProducts { get; set; } = new();
+    public Customer NewCustomer { get; set; } = new();
+    public Address NewCustomerAddress { get; set; } = new();
+    public User NewUser { get; set; } = new();
 
+    protected override async Task OnParametersSetAsync()
+    {
+        string? storage = await _localStorage.GetValueAsync<string>("Cart");
+
+        if (storage != null)
+        {
+            CookieItemProducts = JsonSerializer.Deserialize<List<WarehouseItem>>(storage);
+        }
+
+        await base.OnParametersSetAsync();
+    }
 }

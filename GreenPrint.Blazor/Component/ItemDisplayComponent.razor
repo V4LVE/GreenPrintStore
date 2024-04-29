@@ -81,6 +81,8 @@
     </div>
 </div>
 
+@using GreenPrint.Blazor.Extensions
+
 @code {
     [Parameter]
     public List<Item> Items { get; set; }
@@ -91,46 +93,8 @@
     private async Task AddToCart(int itemId)
     {
         var item = await _itemService.GetItemByIdAsync(itemId);
-        var warehouseItems = await _warehouseItemService.GetAllByByItemId(itemId);
+        await CartExtension.AddToCart(_localStorage, _warehouseItemService, itemId);
 
-        string? storage = await _localStorage.GetValueAsync<string>("Cart");
-        List<WarehouseItem> ordredItems = new();
-
-        if (storage == null)
-        {
-            ordredItems.Add(new()
-                {
-                    Id = warehouseItems[0].Id,
-                    WarehouseId = warehouseItems[0].WarehouseId,
-                    ItemId = itemId,
-                    Quantity = 1
-                });
-
-            string serializedItems = JsonSerializer.Serialize(ordredItems);
-            await _localStorage.SetValueAsync("Cart", serializedItems);
-        } // If cookie exists
-        else
-        {
-            ordredItems = JsonSerializer.Deserialize<List<WarehouseItem>>(storage);
-
-            // Check if the item is already in the cart
-            if (ordredItems.Where(wp => wp.ItemId == itemId).Any())
-            {
-                ordredItems.Single(wp => wp.ItemId == itemId).Quantity++;
-            } // Else add it to the cart
-            else
-            {
-                ordredItems.Add(new()
-                    {
-                        Id = warehouseItems[0].Id,
-                        WarehouseId = warehouseItems[0].WarehouseId,
-                        ItemId = itemId,
-                        Quantity = 1
-                    });
-            }
-            string serializedItems = JsonSerializer.Serialize(ordredItems);
-            await _localStorage.SetValueAsync("Cart", serializedItems);
-        }
 
         StateHasChanged();
         _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = $"{item.ItemName} added to cart", Duration = 4000 });
