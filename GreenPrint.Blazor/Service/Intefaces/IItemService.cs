@@ -11,6 +11,12 @@ namespace GreenPrint.Blazor.Service.Intefaces
         public Task<List<Item>> GetFeaturedItemsAsync();
 
         /// <summary>
+        /// Get all items
+        /// </summary>
+        /// <returns></returns>
+        public Task<List<Item>> GetAllItemsByCategory(int categoryId);
+
+        /// <summary>
         /// Get item by id
         /// </summary>
         /// <param name="itemId"></param>

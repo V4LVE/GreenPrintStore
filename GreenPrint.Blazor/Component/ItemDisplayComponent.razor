@@ -38,7 +38,7 @@
                                 </div>
                             </a>
                             <div class="card-footer text-center">
-                                <RadzenButton Shade="Shade.Lighter" Click=@(args => AddToCart(itemview.Id)) Text="Add To Cart" ButtonStyle="ButtonStyle.Primary" />
+                                <RadzenButton Shade="Shade.Lighter" @onclick="() => ButtonClicked.InvokeAsync()" Click=@(args => AddToCart(itemview.Id)) Text="Add To Cart" ButtonStyle="ButtonStyle.Primary" />
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                                     </div>
                                 </a>
                                 <div class="card-footer text-center">
-                                    <RadzenButton Shade="Shade.Lighter" Click=@(args => AddToCart(itemview.Id)) Text="Add To Cart" ButtonStyle="ButtonStyle.Primary" />
+                                    <RadzenButton Shade="Shade.Lighter" @onclick="() => ButtonClicked.InvokeAsync()" Click=@(args => AddToCart(itemview.Id)) Text="Add To Cart" ButtonStyle="ButtonStyle.Primary" />
                                 </div>
                             </div>
                         </div>
@@ -84,6 +84,9 @@
 @code {
     [Parameter]
     public List<Item> Items { get; set; }
+
+    [Parameter]
+    public EventCallback ButtonClicked { get; set; } = new EventCallback();
 
     private async Task AddToCart(int itemId)
     {
@@ -129,7 +132,7 @@
             await _localStorage.SetValueAsync("Cart", serializedItems);
         }
 
-
+        StateHasChanged();
         _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = $"{item.ItemName} added to cart", Duration = 4000 });
     }
 }

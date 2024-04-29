@@ -79,15 +79,17 @@
                                 4.5
                             </span>
                         </div>
-                        
-                        @if (Stock.First().Quantity > 0)
-                        {
-                            <span class="text-success ms-2">In stock</span>
-                        }
-                        else
-                        {
-                            <span class="text-danger ms-2">Sold Out</span>
-                        }
+                     
+                            @if (Stock?.First().Quantity > 0)
+                            {
+                                <span class="text-success ms-2">In stock</span>
+                            }
+                            else
+                            {
+                                <span class="text-danger ms-2">Sold Out</span>
+                            }
+                      
+                       
                         
                     </div>
 
@@ -104,6 +106,7 @@
                     <div class="row">
                         
                         <form asp-page-handler="AddToCart" class="col-6">
+                            
                             @if (Stock.First().Quantity > 0)
                             {
                                 <button type="submit" name="itemId" value="LoadedItem.Id" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart</button>
@@ -112,7 +115,7 @@
                             {
                                 <button type="submit" name="itemId" value="LoadedItem.Id" class="btn btn-primary shadow-0" disabled> <i class="me-1 fa fa-shopping-basket"></i> Add to cart</button>
                             }
-
+                            
 
                         </form>
                        
@@ -148,23 +151,19 @@
     [Parameter]
     public int Id { get; set; } = 0;
 
-    
-    public GreenPrint.Blazor.Models.Item LoadedItem { get; set; }
-    public List<GreenPrint.Blazor.Models.WarehouseItem>? Stock { get; set; }
+
+    public GreenPrint.Blazor.Models.Item LoadedItem { get; set; } = new();
+    public List<GreenPrint.Blazor.Models.WarehouseItem>? Stock { get; set; } = new();
     public List<GreenPrint.Blazor.Models.Item>? SuggestedItems { get; set; } = new();
     public List<GreenPrint.Blazor.Models.ItemImage>? Images { get; set; } = new();
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
         LoadedItem = await _itemService.GetItemByIdAsync(Id);
         SuggestedItems = await _itemService.GetFeaturedItemsByCategoryAsync(LoadedItem.CategoryId);
         Images = await _imageService.GetAllByItemId(Id);
         Stock = await _warehouseItemService.GetAllByByItemId(Id);
 
-
-        Console.WriteLine(SuggestedItems.Count);
-        Console.WriteLine(Stock.Count);
-
-        await base.OnInitializedAsync();
+        await base.OnParametersSetAsync();
     }
 }

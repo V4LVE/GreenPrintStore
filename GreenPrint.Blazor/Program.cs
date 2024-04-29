@@ -1,3 +1,4 @@
+using Blazored.SessionStorage;
 using GreenPrint.Blazor;
 using GreenPrint.Blazor.Service.Intefaces;
 using GreenPrint.Blazor.Service.Services;
@@ -12,6 +13,8 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7131"), DefaultRequestHeaders = { { "apikey", "12345" } } });
+
+builder.Services.AddBlazoredSessionStorageAsSingleton();
 
 #region IndexedDb
 builder.Services.AddScoped<IndexedDbAccessor>();

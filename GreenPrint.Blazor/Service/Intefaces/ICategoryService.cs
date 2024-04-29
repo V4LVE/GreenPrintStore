@@ -10,5 +10,12 @@ namespace GreenPrint.Blazor.Service.Intefaces
         /// </summary>
         /// <returns></returns>
         public Task<List<Category>> GetAllCategoriesAsync();
+
+        /// <summary>
+        /// Get category by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Task<Category> GetByIdAsync(int id);
     }
 }

@@ -53,5 +53,12 @@ namespace GreenPrint.WebApi.Controllers.Item
 
             return await _ItemService.GetItemsByCategory(categoryId, pageOptions);
         }
+
+        [HttpGet]
+        [Route("GetItemsByCategory/{categoryId:int}")]
+        public async Task<IEnumerable<ItemDTO>> GetByCategory(int categoryId)
+        {
+            return await _ItemService.GetItemsByCategory(categoryId);
+        }
     }
 }

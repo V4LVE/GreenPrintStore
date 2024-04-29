@@ -17,6 +17,7 @@ namespace GreenPrint.Repository.Interfaces
         /// Get all items by category
         /// </summary>
         /// <returns></returns>
+        Task<List<Item>> GetItemsbyCategory(int category);
         Task <List<Item>> GetItemsbyCategory(string category, PageOptions pageOptions);
         Task<List<Item>> GetItemsbyCategory(int category, PageOptions pageOptions);
         Task<List<Item>> GetItemsbyCategory(int category, PageOptions pageOptions, OrderByOptionsItem orderBy);
