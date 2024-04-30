@@ -1,4 +1,4 @@
-﻿@page "/edititem/{itemId:int}"
+﻿@page "/createitem"
 
 @using GreenPrint.Blazor.Models
 @using GreenPrint.Blazor.Service.Intefaces
@@ -40,7 +40,7 @@
         <!-- Product images -->
         <div class="mt-2 mb-2" cla>
             <label class="form-label fw-bold">New image(s)</label>
-            <RadzenUpload Multiple="true" Url="upload/multiple" Accept="image/*" Complete=@OnComplete @bind-value="NewImages" class="w-100" InputAttributes="@(new Dictionary<string,object>(){ { "aria-label", "select file" }})" />
+            <InputFile multiple OnChange="HandleSelection" />
         </div>
 
 
@@ -54,10 +54,6 @@
 </RadzenStack>
 
 @code {
-    [Parameter]
-    public int itemId { get; set; } = 0;
-
-    RadzenUpload _upload;
 
     public Item EditItem { get; set; } = new();
     public List<Category> Categories { get; set; } = new();
@@ -65,7 +61,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        EditItem = await _itemService.GetItemByIdAsync(itemId);
         Categories = await _categoryService.GetAllCategoriesAsync();
         await base.OnInitializedAsync();
     }
@@ -75,32 +70,31 @@
         NewImages = eventArgs.GetMultipleFiles();
     }
 
-    void OnComplete(UploadCompleteEventArgs args)
-    {
-    }
-
-
     private async Task SubmitAsync()
     {
-        if (NewImages != null)
-        {
-            List<ItemImage> productImages = new();
+        EditItem = await _itemService.CreateItem(EditItem);
 
-            foreach (var image in NewImages)
-            {
-                string websiteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Items");
-                string imageName = $"{EditItem.Id}{Guid.NewGuid()}.png";
-                string imagePath = Path.Combine(websiteImagePath, imageName);
-                using (FileStream fileStream = new(imagePath, FileMode.Create))
-                {
-                    await image.OpenReadStream().CopyToAsync(fileStream);
-                }
+        // if (NewImages != null)
+        // {
+        //     List<ItemImage> productImages = new();
 
-                productImages.Add(new() { ItemId = EditItem.Id, ImageUrl = imageName, DateCreated = DateTime.Now });
-            }
-        }
+        //     foreach (var image in NewImages)
+        //     {
+        //         string websiteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Items");
+        //         string imageName = $"{EditItem.Id}{Guid.NewGuid()}.png";
+        //         string imagePath = Path.Combine(websiteImagePath, imageName);
+        //         using (FileStream fileStream = new(imagePath, FileMode.Create))
+        //         {
+        //             await image.OpenReadStream().CopyToAsync(fileStream);
+        //         }
 
-        await _itemService.UpdateShopAsync(EditItem.Id,EditItem);
+        //         productImages.Add(new() { ItemId = EditItem.Id, ImageUrl = imageName, DateCreated = DateTime.Now });
+        //     }
+
+        //     EditItem.ItemImages = productImages;
+        // }
+        
+        //await _itemService.CreateItem(EditItem);
         DialogService.Close(true);
     }
 }

@@ -109,14 +109,17 @@ namespace GreenPrint.WebApi.ExtensionMethods
         {
             List<ItemImageDTO> itemImagesDto = new();
 
-            foreach (var item in itemImages)
+            if (itemImages != null)
             {
-                itemImagesDto.Add(new ItemImageDTO
+                foreach (var item in itemImages)
                 {
-                    ItemId = item.ItemId,
-                    ImageUrl = item.ImageUrl,
-                    DateCreated = item.DateCreated
-                });
+                    itemImagesDto.Add(new ItemImageDTO
+                    {
+                        ItemId = item.ItemId,
+                        ImageUrl = item.ImageUrl,
+                        DateCreated = item.DateCreated
+                    });
+                }
             }
 
             return itemImagesDto;

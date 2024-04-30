@@ -10,79 +10,80 @@
     <div class="row mt-3 justify-content-evenly">
 
         <div class="col-2 p-1">
-            <a class="btn btn-primary col-12 toggleLoader" asp-page="/Admin/Accounts/Customers"><i class="fa-solid fa-user-tag"></i> Customers</a>
+            <RadzenButton Icon="support_agent" Text="Customers" ButtonStyle="ButtonStyle.Primary" />
         </div>
 
         <div class="col-2 p-1">
-            <a class="btn btn-primary col-12 toggleLoader" asp-page="/Admin/Accounts/Users"><i class="fa-solid fa-users"></i> Users</a>
+            <RadzenButton Icon="people" Text="Users" ButtonStyle="ButtonStyle.Primary" />
         </div>
 
         <div class="col-2 p-1">
-            <a class="btn btn-primary col-12 toggleLoader" asp-page="/Admin/Accounts/Roles"><i class="fa-solid fa-user-shield"></i> Roles</a>
+            <RadzenButton Icon="admin_panel_settingse" Text="Roles" ButtonStyle="ButtonStyle.Primary" />
         </div>
 
         <div class="col-2 p-1">
-            <a class="btn btn-primary col-12 toggleLoader" asp-page="/Admin/Orders/Orders"><i class="fas fa-receipt"></i> All Orders</a>
+            <RadzenButton Icon="receipt_long" Text="All Orders" ButtonStyle="ButtonStyle.Primary" />
         </div>
 
         <div class="col-2 p-1">
-            <button type="button" class="btn btn-primary col-12" data-bs-toggle="modal" data-bs-target="#newProd"><i class="fa-solid fa-boxes-stacked"></i> Add Product</button>
+            <RadzenButton Icon="add" Text="Add Product" ButtonStyle="ButtonStyle.Primary" Click=@CreateItem />
         </div>
     </div>
 
     <RadzenTabs RenderMode="TabRenderMode.Client">
         <Tabs>
             <RadzenTabsItem Text="Categories">
-                <div class="row border border-primary border-3 p-0 rounded">
-                    <div class="col-12 border-bottom border-primary border-3">
-                        <h3 class="mb-1">Categories</h3>
-                    </div>
-                    <div class="col-12">
-                        @foreach (var category in Categories)
-                        {
-                            <form method="post" asp-page-handler="DeleteCategory" class="row m-1">
-                                <div class="input-group">
-                                    <input type="text" class="form-control border-primary" value="@category.CategoryName" disabled />
-                                    <button type="submit" value="@category.Id" onclick="return confirm('Are you sure you want to delete this category?')" name="categoryID" class="btn btn-outline-primary fw-bold"><i class="fa-solid fa-trash-can"></i></button>
-                                </div>
-                            </form>
-                        }
-                    </div>
+                <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                                Data="@Categories" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" SelectionMode="DataGridSelectionMode.Single">
+                    <Columns>
+                        <RadzenDataGridColumn Property="Id" Filterable="false" Title="ID" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
+                        <RadzenDataGridColumn Property="CategoryName" Title="Name" Frozen="true" Width="160px" />
+                    </Columns>
+                </RadzenDataGrid>
                     <form method="post" asp-page-handler="AddCategory" class="col-12 border-top border-primary border-3 p-2">
                         <div class="input-group">
                             <input type="text" name="newCategoryName" class="form-control border-primary" />
                             <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-circle-plus"></i> Add</button>
                         </div>
                     </form>
-                </div>
-
             </RadzenTabsItem>
             <RadzenTabsItem Text="Warehouses">
-                <div class="row border border-primary border-3 p-0 rounded">
-                    <div class="col-12 border-bottom border-primary border-3">
-                        <h3 class="mb-1">Warehouses</h3>
-                    </div>
-                    <div class="col-12">
-                        @foreach (var warehouse in Warehouses)
-                        {
-                            <form method="post" asp-page-handler="DeleteWarehouse" class="row m-1">
-                                <div class="input-group">
-                                    <input type="text" class="form-control border-primary" value="@warehouse.WarehouseName" disabled />
-                                    <button type="submit" value="@warehouse.Id" onclick="return confirm('Are you sure you want to delete this warehouse?')" name="warehouseID" class="btn btn-outline-primary fw-bold"><i class="fa-solid fa-trash-can"></i></button>
-                                </div>
-                            </form>
-                        }
-                    </div>
+                <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                                Data="@Warehouses" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" SelectionMode="DataGridSelectionMode.Single">
+                    <Columns>
+                        <RadzenDataGridColumn Property="Id" Filterable="false" Title="ID" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
+                        <RadzenDataGridColumn Property="WarehousName" Title="Name" Frozen="true" Width="160px" />
+                    </Columns>
+                </RadzenDataGrid>
                     <div class="col-12 border-top border-primary border-3 p-2">
                         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createWarehouse" aria-controls="createWarehouse"><i class="fa-solid fa-circle-plus"></i> Add</button>
                     </div>
-                </div>
+               
             </RadzenTabsItem>
         </Tabs>
     </RadzenTabs>
 </div>
 
+@using GreenPrint.Blazor.Service.Intefaces
+@using GreenPrint.Blazor.Component
+@inject ICategoryService _categoryService
+@inject DialogService dialogService
+
 @code {
     private List<Category> Categories { get; set; } = new();
     private List<Warehouse> Warehouses { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Categories = await _categoryService.GetAllCategoriesAsync();
+        await base.OnInitializedAsync();
+    }
+
+    public async Task CreateItem()
+    {
+        await dialogService.OpenAsync<CreateItemDialogComponent>($"Create New Item",
+               new Dictionary<string, object>() { },
+               new DialogOptions() { Resizable = true, Draggable = true });
+    }
+
 }

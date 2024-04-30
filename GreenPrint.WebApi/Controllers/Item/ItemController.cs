@@ -103,6 +103,7 @@ namespace GreenPrint.WebApi.Controllers.Item
         public async Task<IActionResult> EditPartially(int itemId, [FromBody] JsonPatchDocument<ItemDTO> patchDocument)
         {
             var item = await _itemService.GetByIdAsync(itemId);
+            item.Category = null;
             if (item == null)
             {
                 return NotFound();

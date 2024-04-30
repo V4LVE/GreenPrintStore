@@ -4,6 +4,13 @@ namespace GreenPrint.Blazor.Service.Intefaces
 {
     public interface IItemService
     {
+
+        /// <summary>
+        /// Create an item
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public Task<Item> CreateItem(Item item);
         /// <summary>
         /// Get all items
         /// </summary>

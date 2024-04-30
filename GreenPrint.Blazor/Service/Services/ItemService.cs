@@ -4,6 +4,7 @@ using GreenPrint.Blazor.Service.Intefaces;
 using Microsoft.AspNetCore.JsonPatch;
 using Newtonsoft.Json;
 using System.Net.Http.Json;
+using System.Reflection;
 
 namespace GreenPrint.Blazor.Service.Services
 {
@@ -14,6 +15,15 @@ namespace GreenPrint.Blazor.Service.Services
         public ItemService(HttpClient client)
         {
             _client = client;
+        }
+
+        public async Task<Item> CreateItem(Item item)
+        {
+            var response = await _client.PostAsJsonAsync("/Item/create", item);
+
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadFromJsonAsync<Item>();
         }
 
         public async Task<List<Item>> GetFeaturedItemsAsync()
@@ -48,6 +58,8 @@ namespace GreenPrint.Blazor.Service.Services
         public async Task<Item> UpdateShopAsync(int itemId, Item newitem)
         {
             var oldItem = await GetItemByIdAsync(itemId);
+            oldItem.Category = null;
+            newitem.Category = null;
 
             JsonPatchDocument<Item> document = oldItem.PatchModel(newitem);
 
