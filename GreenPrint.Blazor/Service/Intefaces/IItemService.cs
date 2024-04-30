@@ -29,5 +29,13 @@ namespace GreenPrint.Blazor.Service.Intefaces
         /// <param name="categoryId"></param>
         /// <returns></returns>
         public Task<List<Item>> GetFeaturedItemsByCategoryAsync(int categoryId);
+
+        /// <summary>
+        /// Patch an item
+        /// </summary>
+        /// <param name="itemId"></param>
+        /// <param name="newitem"></param>
+        /// <returns></returns>
+        public Task<Item> UpdateShopAsync(int itemId, Item newitem);
     }
 }

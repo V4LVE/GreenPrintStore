@@ -98,6 +98,7 @@ namespace GreenPrint.WebApi.Controllers.Item
         }
 
         [HttpPatch]
+        [Consumes("application/json-patch+json")]
         [Route("update/{itemId:int}")]
         public async Task<IActionResult> EditPartially(int itemId, [FromBody] JsonPatchDocument<ItemDTO> patchDocument)
         {

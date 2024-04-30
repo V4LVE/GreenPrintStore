@@ -15,6 +15,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7131"), DefaultRequestHeaders = { { "apikey", "12345" } } });
 
 builder.Services.AddBlazoredSessionStorageAsSingleton();
+builder.Services.AddRadzenComponents();
 
 #region IndexedDb
 builder.Services.AddScoped<IndexedDbAccessor>();

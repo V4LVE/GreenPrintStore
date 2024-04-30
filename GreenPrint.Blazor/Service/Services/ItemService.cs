@@ -1,5 +1,8 @@
 ﻿using GreenPrint.Blazor.Models;
+using GreenPrint.Blazor.PatchExtensions;
 using GreenPrint.Blazor.Service.Intefaces;
+using Microsoft.AspNetCore.JsonPatch;
+using Newtonsoft.Json;
 using System.Net.Http.Json;
 
 namespace GreenPrint.Blazor.Service.Services
@@ -40,6 +43,23 @@ namespace GreenPrint.Blazor.Service.Services
             var Request = $"/Item/{itemId}";
 
             return await _client.GetFromJsonAsync<Item>(Request);
+        }
+
+        public async Task<Item> UpdateShopAsync(int itemId, Item newitem)
+        {
+            var oldItem = await GetItemByIdAsync(itemId);
+
+            JsonPatchDocument<Item> document = oldItem.PatchModel(newitem);
+
+            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(document), System.Text.Encoding.UTF8, "application/json-patch+json");
+
+            var request = new HttpRequestMessage(HttpMethod.Patch, $"/Item/update/{itemId}") { Content = stringContent };
+
+            var response = await _client.SendAsync(request);
+
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadFromJsonAsync<Item>();
         }
     }
 }
