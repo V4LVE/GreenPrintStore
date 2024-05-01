@@ -38,6 +38,8 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IItemService, ItemService>();
 builder.Services.AddScoped<IWarehouseItemService, WarehouseItemService>();
 builder.Services.AddScoped<IImageService, ImageService>();
+builder.Services.AddScoped<IWarehouseService, WarehouseService>();
+
 
 // Radzen Services
 builder.Services.AddScoped<NotificationService>();

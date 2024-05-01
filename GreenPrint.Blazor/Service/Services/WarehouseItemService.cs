@@ -26,5 +26,14 @@ namespace GreenPrint.Blazor.Service.Services
 
             return await _client.GetFromJsonAsync<bool>(Request);
         }
+
+        public async Task<WarehouseItem> AddStock(WarehouseItem warehouseItem)
+        {
+            var response = await _client.PostAsJsonAsync("/WarehouseItem/create", warehouseItem);
+
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadFromJsonAsync<WarehouseItem>();
+        }
     }
 }

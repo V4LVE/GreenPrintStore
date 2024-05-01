@@ -10,66 +10,66 @@
                     <div id="carouselControls" class="carousel carousel-fade slide" data-bs-ride="carousel">
 
                         <!-- Images -->
-                        
-                            <div class="carousel-inner bg-black rounded" style="max-height: 450px">
 
-                                @if (Images.Count > 0)
+                        <div class="carousel-inner bg-black rounded" style="max-height: 450px">
+
+                            @if (Images.Count > 0)
+                            {
+                                <div class="carousel-item active">
+                                    <img src="/images/Items/@LoadedItem.ItemImages.First().ImageUrl" class="d-block w-100" style="max-height: 450px" />
+                                </div>
+                                @for (int i = 1; i < LoadedItem.ItemImages.Count; i++)
                                 {
-                                    <div class="carousel-item active">
-                                        <img src="/images/Items/@LoadedItem.ItemImages.First().ImageUrl" class="d-block w-100" style="max-height: 450px" />
-                                    </div>
-                                    @for (int i = 1; i < LoadedItem.ItemImages.Count; i++)
-                                    {
-                                        <div class="carousel-item">
-                                            <img src="/images/Items/@LoadedItem.ItemImages[i].ImageUrl" class="d-block w-100" style="max-height: 450px" />
-                                        </div>
-                                    }
-                                }
-                                else
-                                {
-                                    <div class="carousel-item active">
-                                        <img src="/images/Items/No_image_available.svg" class="d-block w-100" style="max-height: 450px" />
+                                    <div class="carousel-item">
+                                        <img src="/images/Items/@LoadedItem.ItemImages[i].ImageUrl" class="d-block w-100" style="max-height: 450px" />
                                     </div>
                                 }
+                            }
+                            else
+                            {
+                                <div class="carousel-item active">
+                                    <img src="/images/Items/No_image_available.svg" class="d-block w-100" style="max-height: 450px" />
+                                </div>
+                            }
 
-                            </div>
+                        </div>
 
 
                         @if (Images.Count > 0)
-                            {
-                                <!-- Previous -->
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon bg-primary rounded" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
+                        {
+                            <!-- Previous -->
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon bg-primary rounded" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
 
-                                <!-- Indicators -->
-                                <div class="carousel-indicators">
-                                    <button type="button" data-bs-target="#carouselControls" data-bs-slide-to="0" class="active bg-primary" aria-current="true"></button>
-                                    @for (int i = 1; i < LoadedItem.ItemImages.Count; i++)
-                                    {
-                                        <button type="button" data-bs-target="#carouselControls" data-bs-slide-to="@i" class="bg-primary"></button>
-                                    }
-                                </div>
+                            <!-- Indicators -->
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselControls" data-bs-slide-to="0" class="active bg-primary" aria-current="true"></button>
+                                @for (int i = 1; i < LoadedItem.ItemImages.Count; i++)
+                                {
+                                    <button type="button" data-bs-target="#carouselControls" data-bs-slide-to="@i" class="bg-primary"></button>
+                                }
+                            </div>
 
-                                <!-- Next -->
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselControls" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon bg-primary rounded" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            }
-                        
+                            <!-- Next -->
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselControls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon bg-primary rounded" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        }
+
                     </div>
                 </div>
 
             </aside>
             <main class="col-lg-6">
                 <div class="ps-lg-3">
-                    
+
                     <h4 class="title text-dark">
                         @LoadedItem.ItemName
                     </h4>
-                    
+
                     <div class="d-flex flex-row my-3">
                         <div class="text-warning mb-1 me-2">
                             <i class="fa fa-star"></i>
@@ -81,7 +81,9 @@
                                 4.5
                             </span>
                         </div>
-                     
+
+                        @if (Stock.Any())
+                        {
                             @if (Stock?.First().Quantity > 0)
                             {
                                 <span class="text-success ms-2">In stock</span>
@@ -90,37 +92,48 @@
                             {
                                 <span class="text-danger ms-2">Sold Out</span>
                             }
-                      
-                       
-                        
+                        }
+                        else
+                        {
+                            <span class="text-danger ms-2">Sold Out</span>
+                        }
+
+
+
                     </div>
 
 
                     <div class="mb-3">
                         <span class="h5">@($"{LoadedItem.Price:C}")</span>
                     </div>
-                    
+
                     <p>
                         @LoadedItem.Description
                     </p>
-                    
+
                     <hr />
                     <div class="row">
-                        
+
                         <form asp-page-handler="AddToCart" class="col-6">
-                            
-                            @if (Stock.First().Quantity > 0)
+
+                            @if (Stock.Any())
                             {
-                                <RadzenButton Shade="Shade.Lighter" Icon="shopping_cart" Text="Add To Cart" ButtonStyle="ButtonStyle.Primary" />
+                                @if (Stock?.First().Quantity > 0)
+                                {
+                                    <RadzenButton Shade="Shade.Lighter" Icon="shopping_cart" Text="Add To Cart" ButtonStyle="ButtonStyle.Primary" />
+                                }
+                                else
+                                {
+                                    <RadzenButton Shade="Shade.Lighter" Disabled Icon="shopping_cart" Text="Add To Cart" ButtonStyle="ButtonStyle.Primary" />
+                                }
                             }
                             else
                             {
-                                <button type="submit" name="itemId" value="LoadedItem.Id" class="btn btn-primary shadow-0" disabled> <i class="me-1 fa fa-shopping-basket"></i> Add to cart</button>
+                                <RadzenButton Shade="Shade.Lighter" Disabled Icon="shopping_cart" Text="Add To Cart" ButtonStyle="ButtonStyle.Primary" />
                             }
-                            
 
                         </form>
-                       
+
 
                         <RadzenButton Variant="Variant.Outlined" ButtonStyle="ButtonStyle.Warning" Text="Edit" Icon="edit" Click=@EditItem class="col-2 me-2" />
                         <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3 col-2"> <i class="me-1 fa fa-heart fa-lg"></i> Save </a>
@@ -173,6 +186,6 @@
     {
         await dialogService.OpenAsync<EditItemDialogComponent>($"Editing {LoadedItem.ItemName}",
                new Dictionary<string, object>() { { "itemId", Id } },
-               new DialogOptions() {Resizable = true, Draggable = true });
+               new DialogOptions() { Resizable = true, Draggable = true });
     }
 }

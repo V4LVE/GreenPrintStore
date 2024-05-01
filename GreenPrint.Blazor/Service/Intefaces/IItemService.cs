@@ -11,6 +11,13 @@ namespace GreenPrint.Blazor.Service.Intefaces
         /// <param name="item"></param>
         /// <returns></returns>
         public Task<Item> CreateItem(Item item);
+
+        /// <summary>
+        /// Get all items
+        /// </summary>
+        /// <returns></returns>
+        public Task<List<Item>> GetAllItems();
+
         /// <summary>
         /// Get all items
         /// </summary>

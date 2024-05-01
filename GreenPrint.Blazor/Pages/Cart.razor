@@ -65,7 +65,7 @@
                                         <div class="col-lg-4 mb-3">
                                             <div class="form-check h-100 border rounded-3">
                                                 <div class="p-3">
-                                                    <RadzenRadioButtonListItem Text="" Value="0" />
+                                                    <RadzenRadioButtonListItem Text="Pick Up - Free" Value="0" />
                                                     <label class="form-check-label" for="flexRadioDefault1">
                                                         Pick Up - Free <br />
                                                         <small class="text-muted">Same Day </small>
@@ -76,7 +76,7 @@
                                         <div class="col-lg-4 mb-3">
                                             <div class="form-check h-100 border rounded-3">
                                                 <div class="p-3">
-                                                    <RadzenRadioButtonListItem Text="" Value="39" />
+                                                    <RadzenRadioButtonListItem Text="Standard delivery - 39 DKK" Value="39" />
                                                     <label class="form-check-label" for="flexRadioDefault1">
                                                         Standard delivery - 39 DKK <br />
                                                         <small class="text-muted">3-5 days </small>
@@ -87,7 +87,7 @@
                                         <div class="col-lg-4 mb-3">
                                             <div class="form-check h-100 border rounded-3">
                                                 <div class="p-3">
-                                                    <RadzenRadioButtonListItem Text="" Value="59" />
+                                                    <RadzenRadioButtonListItem Text="Express delivery - 59 DKK" Value="59" />
                                                     <label class="form-check-label" for="flexRadioDefault1">
                                                         Express delivery - 59 DKK <br />
                                                         <small class="text-muted">1-2 days </small>
@@ -247,6 +247,11 @@
     public double TotalPrice { get; set; } = 0;
     public string DiscountCode { get; set; }
     #endregion
+
+    private void Update()
+    {
+        TotalPrice = ItemTotalPrice + ShippingPrice - DiscountDeduct;
+    }
 
     private void ApplyDiscount()
     {

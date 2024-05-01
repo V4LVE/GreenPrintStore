@@ -40,12 +40,12 @@
                         <RadzenDataGridColumn Property="CategoryName" Title="Name" Frozen="true" Width="160px" />
                     </Columns>
                 </RadzenDataGrid>
-                    <form method="post" asp-page-handler="AddCategory" class="col-12 border-top border-primary border-3 p-2">
-                        <div class="input-group">
-                            <input type="text" name="newCategoryName" class="form-control border-primary" />
-                            <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-circle-plus"></i> Add</button>
-                        </div>
-                    </form>
+                <form method="post" asp-page-handler="AddCategory" class="col-12 border-top border-primary border-3 p-2">
+                    <div class="input-group">
+                        <input type="text" name="newCategoryName" class="form-control border-primary" />
+                        <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-circle-plus"></i> Add</button>
+                    </div>
+                </form>
             </RadzenTabsItem>
             <RadzenTabsItem Text="Warehouses">
                 <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
@@ -55,10 +55,52 @@
                         <RadzenDataGridColumn Property="WarehousName" Title="Name" Frozen="true" Width="160px" />
                     </Columns>
                 </RadzenDataGrid>
-                    <div class="col-12 border-top border-primary border-3 p-2">
-                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createWarehouse" aria-controls="createWarehouse"><i class="fa-solid fa-circle-plus"></i> Add</button>
+                <div class="col-12 border-top border-primary border-3 p-2">
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createWarehouse" aria-controls="createWarehouse"><i class="fa-solid fa-circle-plus"></i> Add</button>
+                </div>
+
+            </RadzenTabsItem>
+            <RadzenTabsItem Text="Stock">
+                <EditForm Model="warehouseItem" OnValidSubmit="AddStock" FormName="AddStock">
+                    <DataAnnotationsValidator />
+                    <div>
+                        <label class="form-label fw-bold">Item</label>
+                        <select class="form-select" @bind=warehouseItem.ItemId>
+                            <option selected disabled>--- Choose Item ---</option>
+                            @foreach (var category in Categories)
+                            {
+                                <optgroup label="- @category.CategoryName -">
+                                    @foreach (var item in Items.Where(p => p.CategoryId == category.Id))
+                                    {
+                                        <option value="@item.Id">@item.ItemName</option>
+                                    }
+                                </optgroup>
+                            }
+                        </select>
+                        <ValidationMessage For="() => warehouseItem.ItemId" />
                     </div>
-               
+                    <div class="mt-2">
+                        <label class="form-label fw-bold">Warehouse</label>
+                        <RadzenDropDown @bind-Value=@value Data=@Warehouses Style="width: 100%; max-width: 400px;" Name="DropDownBindValue" />
+                        @* <select class="form-select" @bind=warehouseItem.WarehouseId>
+                            <option selected disabled>--- Choose Warehouse ---</option>
+                            @foreach (var warehouse in Warehouses)
+                            {
+                                <option value="@warehouse.Id">@warehouse.WarehouseName</option>
+                            }
+                        </select> *@
+                        <ValidationMessage For="() => warehouseItem.WarehouseId" />
+                    </div>
+                    <!-- Amount -->
+                    <div class="mt-2 mb-2">
+                        <label class="form-label fw-bold">Amount</label>
+                        <input type="number" class="form-control" @bind-value=warehouseItem.Quantity />
+                        <ValidationMessage For="() => warehouseItem.Quantity" />
+                    </div>
+                    <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                        <RadzenButton Text="Add Stock" ButtonType="ButtonType.Submit" />
+                    </RadzenStack>
+                </EditForm>
             </RadzenTabsItem>
         </Tabs>
     </RadzenTabs>
@@ -67,14 +109,25 @@
 @using GreenPrint.Blazor.Service.Intefaces
 @using GreenPrint.Blazor.Component
 @inject ICategoryService _categoryService
+@inject IItemService _itemService
+@inject IWarehouseService _warehouseService
+@inject IWarehouseItemService _warehouseItemService
 @inject DialogService dialogService
+@inject NotificationService _notificationService
 
 @code {
     private List<Category> Categories { get; set; } = new();
     private List<Warehouse> Warehouses { get; set; } = new();
+    [SupplyParameterFromForm]
+    private WarehouseItem warehouseItem { get; set; } = new();
+    private List<Item> Items { get; set; } = new();
+
+    private int value { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
+        Warehouses = await _warehouseService.GetAllWarehouses();
+        Items = await _itemService.GetAllItems();
         Categories = await _categoryService.GetAllCategoriesAsync();
         await base.OnInitializedAsync();
     }
@@ -84,6 +137,20 @@
         await dialogService.OpenAsync<CreateItemDialogComponent>($"Create New Item",
                new Dictionary<string, object>() { },
                new DialogOptions() { Resizable = true, Draggable = true });
+    }
+
+    public async Task AddStock()
+    {
+        var temp = await _warehouseItemService.AddStock(warehouseItem);
+        temp.Warehouse = Warehouses.FirstOrDefault(p => p.Id == warehouseItem.WarehouseId);
+temp.Item = Items.FirstOrDefault(p => p.Id == warehouseItem.ItemId);
+
+        if (temp == null)
+        {
+            _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = $"Something went wrong. Please try again", Duration = 4000 });
+        }
+
+        _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = $"{temp.Quantity} {temp.Item.ItemName} was added to {temp.Warehouse.WarehouseName}", Duration = 4000 });
     }
 
 }

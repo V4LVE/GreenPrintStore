@@ -9,6 +9,20 @@ namespace GreenPrint.Blazor.Extensions
     {
         public static int CartCount { get; set; } = 0;
 
+        public static async Task UpdateCartCount(LocalStorage _localStorage)
+        {
+            string? storage = await _localStorage.GetValueAsync<string>("Cart");
+
+            if (storage != null)
+            {
+                var storedValue = JsonSerializer.Deserialize<List<WarehouseItem>>(storage);
+                CartCount = storedValue.Sum(wi => wi.Quantity);
+            }
+            else
+            {
+                CartCount = 0;
+            }
+        }
 
         public static async Task AddToCart(LocalStorage localStorage, IWarehouseItemService warehouseItemService, IItemService itemService, int itemId)
         {
@@ -53,7 +67,7 @@ namespace GreenPrint.Blazor.Extensions
                     });
                 }
 
-                CartCount = ordredItems.Sum(wi => wi.Quantity);
+                await UpdateCartCount(localStorage);
                 string serializedItems = JsonSerializer.Serialize(ordredItems);
                 await localStorage.SetValueAsync("Cart", serializedItems);
             }

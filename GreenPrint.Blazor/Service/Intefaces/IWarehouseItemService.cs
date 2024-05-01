@@ -18,5 +18,12 @@ namespace GreenPrint.Blazor.Service.Intefaces
         /// <param name="amount"></param>
         /// <returns>true/false</returns>
         public Task<bool> CheckStock(int itemId, int amount);
+
+        /// <summary>
+        /// Add stock to an item
+        /// </summary>
+        /// <param name="warehouseItem"></param>
+        /// <returns></returns>
+        public Task<WarehouseItem> AddStock(WarehouseItem warehouseItem);
     }
 }

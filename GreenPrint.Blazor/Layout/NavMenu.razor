@@ -47,17 +47,7 @@
 @code {
     protected override async Task OnInitializedAsync()
     {
-        string? storage = await _localStorage.GetValueAsync<string>("Cart");
-
-        if (storage != null)
-        {
-            var storedValue = JsonSerializer.Deserialize<List<WarehouseItem>>(storage);
-            CartExtension.CartCount = storedValue.Sum(wi => wi.Quantity);
-        }
-        else
-        {
-            CartExtension.CartCount = 0;
-        }
+        await CartExtension.UpdateCartCount(_localStorage);
         await base.OnInitializedAsync();
     }
 }
