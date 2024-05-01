@@ -7,11 +7,12 @@
 @inject Radzen.DialogService DialogService
 
 <RadzenStack Gap="1.5rem">
-    <EditForm Model="EditItem" OnSubmit="SubmitAsync" FormName="Edit">
-
+    <EditForm Model="EditItem" OnValidSubmit="SubmitAsync" FormName="Edit">
+        <DataAnnotationsValidator />
         <div>
             <label class="form-label fw-bold">Name</label>
             <input type="text" class="form-control border-primary" @bind="EditItem.ItemName" />
+            <ValidationMessage For="() => EditItem.ItemName" />
         </div>
         
 
@@ -25,16 +26,19 @@
                     <option value="@category.Id">@category.CategoryName</option>
                 }
             </select>
+            <ValidationMessage For="() => EditItem.CategoryId" />
         </div>
 
         <!-- Product description -->
         <div class="mt-2">
             <label class="form-label fw-bold">Description</label>
             <textarea @bind="EditItem.Description" rows="10" class="form-control border-primary"></textarea>
+            <ValidationMessage For="() => EditItem.Description" />
         </div>
         <div>
             <label class="form-label fw-bold">Price</label>
             <input type="text" class="form-control border-primary" @bind="EditItem.Price" />
+            <ValidationMessage For="() => EditItem.Price" />
         </div>
 
         <!-- Product images -->

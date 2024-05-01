@@ -7,14 +7,13 @@
 @inject Radzen.DialogService DialogService
 
 <RadzenStack Gap="1.5rem">
-    <EditForm Model="EditItem" OnSubmit="SubmitAsync" FormName="Edit">
-
+    <EditForm Model="EditItem" OnValidSubmit="SubmitAsync" FormName="Edit">
+        <DataAnnotationsValidator />
         <div>
             <label class="form-label fw-bold">Name</label>
             <input type="text" class="form-control border-primary" @bind="EditItem.ItemName" />
+            <ValidationMessage For="() => EditItem.ItemName" />
         </div>
-        
-
 
         <!-- Category dropdown -->
         <div class="mt-2">
@@ -25,23 +24,28 @@
                     <option value="@category.Id">@category.CategoryName</option>
                 }
             </select>
+            <ValidationMessage For="() => EditItem.CategoryId" />
         </div>
 
         <!-- Product description -->
         <div class="mt-2">
             <label class="form-label fw-bold">Description</label>
             <textarea @bind="EditItem.Description" rows="10" class="form-control border-primary"></textarea>
+            <ValidationMessage For="() => EditItem.Description" />
         </div>
         <div>
             <label class="form-label fw-bold">Price</label>
             <input type="text" class="form-control border-primary" @bind="EditItem.Price" />
+            <ValidationMessage For="() => EditItem.Price" />
         </div>
 
         <!-- Product images -->
-        <div class="mt-2 mb-2" cla>
+        <div class="mt-2 mb-2">
             <label class="form-label fw-bold">New image(s)</label>
-            <InputFile multiple OnChange="HandleSelection" />
+            <RadzenFileInput Accept="image/*" @bind-Value=NewImage Placeholder="Select image(s)" />
         </div>
+
+
 
 
         <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.SpaceBetween">
@@ -57,7 +61,8 @@
 
     public Item EditItem { get; set; } = new();
     public List<Category> Categories { get; set; } = new();
-    public IReadOnlyList<IBrowserFile> NewImages { get; set; }
+
+    public string NewImage { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -65,35 +70,28 @@
         await base.OnInitializedAsync();
     }
 
-    void HandleSelection(InputFileChangeEventArgs eventArgs)
-    {
-        NewImages = eventArgs.GetMultipleFiles();
-    }
-
     private async Task SubmitAsync()
     {
         EditItem = await _itemService.CreateItem(EditItem);
 
-        // if (NewImages != null)
+        // if (NewImage != null)
         // {
-        //     List<ItemImage> productImages = new();
+        //     var formattetStirng = NewImage.Replace("data:image/png;base64,", "");
+        //     byte[] imageBytes = Convert.FromBase64String(formattetStirng);
 
-        //     foreach (var image in NewImages)
-        //     {
-        //         string websiteImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images/Items");
-        //         string imageName = $"{EditItem.Id}{Guid.NewGuid()}.png";
-        //         string imagePath = Path.Combine(websiteImagePath, imageName);
-        //         using (FileStream fileStream = new(imagePath, FileMode.Create))
-        //         {
-        //             await image.OpenReadStream().CopyToAsync(fileStream);
-        //         }
+        //     ItemImage productImage = new();
+        //     string imageName = $"{EditItem.Id}{Guid.NewGuid()}.png";
+        //     string imagePath = $"C:\\Users\\Alexander\\source\repos\\GreenPrintStore\\GreenPrint.Blazor\\wwwroot\\Images\\Items\\{imageName}";
+        //     string imagePaths = $"C:\\Test\\{imageName}";
 
-        //         productImages.Add(new() { ItemId = EditItem.Id, ImageUrl = imageName, DateCreated = DateTime.Now });
-        //     }
+        //     File.WriteAllBytes(imagePaths, imageBytes);
+            
 
-        //     EditItem.ItemImages = productImages;
+        //     //productImages.Add(new() { ItemId = EditItem.Id, ImageUrl = imageName, DateCreated = DateTime.Now });
+
+        //     //EditItem.ItemImages = productImages;
         // }
-        
+
         //await _itemService.CreateItem(EditItem);
         DialogService.Close(true);
     }

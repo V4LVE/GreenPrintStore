@@ -48,6 +48,7 @@ namespace GreenPrint.Blazor.Extensions
                         Id = warehouseItems[0].Id,
                         WarehouseId = warehouseItems[0].WarehouseId,
                         ItemId = itemId,
+                        Item = await itemService.GetItemByIdAsync(itemId),
                         Quantity = 1
                     });
                 }
