@@ -61,11 +61,11 @@
 
             </RadzenTabsItem>
             <RadzenTabsItem Text="Stock">
-                <EditForm Model="warehouseItem" OnValidSubmit="AddStock" FormName="AddStock">
+                <EditForm Model="WarehouseItem" OnValidSubmit="AddStock" FormName="AddStock">
                     <DataAnnotationsValidator />
                     <div>
                         <label class="form-label fw-bold">Item</label>
-                        <select class="form-select" @bind=warehouseItem.ItemId>
+                        <select class="form-select" @bind=WarehouseItem.ItemId>
                             <option selected disabled>--- Choose Item ---</option>
                             @foreach (var category in Categories)
                             {
@@ -77,25 +77,24 @@
                                 </optgroup>
                             }
                         </select>
-                        <ValidationMessage For="() => warehouseItem.ItemId" />
+                        <ValidationMessage For="() => WarehouseItem.ItemId" />
                     </div>
                     <div class="mt-2">
                         <label class="form-label fw-bold">Warehouse</label>
-                        <RadzenDropDown @bind-Value=@value Data=@Warehouses Style="width: 100%; max-width: 400px;" Name="DropDownBindValue" />
-                        @* <select class="form-select" @bind=warehouseItem.WarehouseId>
+                        <select class="form-select" @bind=WarehouseItem.WarehouseId>
                             <option selected disabled>--- Choose Warehouse ---</option>
                             @foreach (var warehouse in Warehouses)
                             {
                                 <option value="@warehouse.Id">@warehouse.WarehouseName</option>
                             }
-                        </select> *@
-                        <ValidationMessage For="() => warehouseItem.WarehouseId" />
+                        </select>
+                        <ValidationMessage For="() => WarehouseItem.WarehouseId" />
                     </div>
                     <!-- Amount -->
                     <div class="mt-2 mb-2">
                         <label class="form-label fw-bold">Amount</label>
-                        <input type="number" class="form-control" @bind-value=warehouseItem.Quantity />
-                        <ValidationMessage For="() => warehouseItem.Quantity" />
+                        <input type="number" class="form-control" @bind-value=WarehouseItem.Quantity />
+                        <ValidationMessage For="() => WarehouseItem.Quantity" />
                     </div>
                     <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                         <RadzenButton Text="Add Stock" ButtonType="ButtonType.Submit" />
@@ -119,7 +118,7 @@
     private List<Category> Categories { get; set; } = new();
     private List<Warehouse> Warehouses { get; set; } = new();
     [SupplyParameterFromForm]
-    private WarehouseItem warehouseItem { get; set; } = new();
+    private WarehouseItem WarehouseItem { get; set; } = new();
     private List<Item> Items { get; set; } = new();
 
     private int value { get; set; }
@@ -141,9 +140,9 @@
 
     public async Task AddStock()
     {
-        var temp = await _warehouseItemService.AddStock(warehouseItem);
-        temp.Warehouse = Warehouses.FirstOrDefault(p => p.Id == warehouseItem.WarehouseId);
-temp.Item = Items.FirstOrDefault(p => p.Id == warehouseItem.ItemId);
+        var temp = await _warehouseItemService.AddStock(WarehouseItem);
+        temp.Warehouse = Warehouses.FirstOrDefault(p => p.Id == WarehouseItem.WarehouseId);
+        temp.Item = Items.FirstOrDefault(p => p.Id == WarehouseItem.ItemId);
 
         if (temp == null)
         {
