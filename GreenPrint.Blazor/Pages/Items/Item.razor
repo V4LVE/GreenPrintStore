@@ -82,16 +82,9 @@
                             </span>
                         </div>
 
-                        @if (Stock.Any())
+                        @if (Stock.Any() && Stock.FirstOrDefault().Quantity > 0)
                         {
-                            @if (Stock?.First().Quantity > 0)
-                            {
-                                <span class="text-success ms-2">In stock</span>
-                            }
-                            else
-                            {
-                                <span class="text-danger ms-2">Sold Out</span>
-                            }
+                            <span class="text-success ms-2">In stock</span>
                         }
                         else
                         {
@@ -116,16 +109,9 @@
 
                         <form asp-page-handler="AddToCart" class="col-6">
 
-                            @if (Stock.Any())
+                            @if (Stock.Any() && Stock.FirstOrDefault().Quantity > 0)
                             {
-                                @if (Stock?.First().Quantity > 0)
-                                {
-                                    <RadzenButton Shade="Shade.Lighter" Icon="shopping_cart" Text="Add To Cart" ButtonStyle="ButtonStyle.Primary" />
-                                }
-                                else
-                                {
-                                    <RadzenButton Shade="Shade.Lighter" Disabled Icon="shopping_cart" Text="Add To Cart" ButtonStyle="ButtonStyle.Primary" />
-                                }
+                                <RadzenButton Shade="Shade.Lighter" Icon="shopping_cart" Text="Add To Cart" ButtonStyle="ButtonStyle.Primary" />
                             }
                             else
                             {

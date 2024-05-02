@@ -5,7 +5,7 @@ namespace GreenPrint.Blazor.Models
     public class WarehouseItem
     {
         public int Id { get; set; }
-        [Required]
+        [Required, Range(1, 99999999999, ErrorMessage = "You must select a warehouse")]
         public int WarehouseId { get; set; }
         [Required]
         public int ItemId { get; set; }
