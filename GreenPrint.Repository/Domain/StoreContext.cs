@@ -22,8 +22,8 @@ namespace GreenPrint.Repository.Domain
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //optionsBuilder.UseSqlServer("Server =COLSERVER\\SQLEXPRESS; Database = GreenPrintStore;User Id=DBUser;Password=Pwrvol901;TrustServerCertificate=True;"); // Desktop DB
-                optionsBuilder.UseSqlServer("Server =ALEX_PC\\SQLEXPRESS; Database = GreenPrintStore; Trusted_Connection = True;TrustServerCertificate=True; "); // Laptop DB
+                optionsBuilder.UseSqlServer("Server =COLSERVER\\SQLEXPRESS; Database = GreenPrintStore;User Id=DBUser;Password=Pwrvol901;TrustServerCertificate=True;"); // Desktop DB
+                //optionsBuilder.UseSqlServer("Server =ALEX_PC\\SQLEXPRESS; Database = GreenPrintStore; Trusted_Connection = True;TrustServerCertificate=True; "); // Laptop DB
                 optionsBuilder.EnableSensitiveDataLogging();
                 optionsBuilder.UseLoggerFactory(new ServiceCollection()
                               .AddLogging(builder => builder.AddConsole()

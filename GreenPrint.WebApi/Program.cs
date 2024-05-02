@@ -75,8 +75,8 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 
 builder.Services.AddDbContext<StoreContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Laptop"));
-    //options.UseSqlServer(builder.Configuration.GetConnectionString("Desktop"));
+    //options.UseSqlServer(builder.Configuration.GetConnectionString("Laptop"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Desktop"));
     options.EnableSensitiveDataLogging();
 });
 

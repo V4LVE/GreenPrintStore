@@ -54,7 +54,7 @@ namespace GreenPrint.WebApi.Controllers.User
 
             try
             {
-                UserDto.Customer = new CustomerDTO();
+                //UserDto.Customer = new CustomerDTO();
                 UserDto = await _UserService.CreateAndReturn(UserDto);
                 return CreatedAtAction("GetUser", new { UserId = UserDto.Id }, UserDto);
             }

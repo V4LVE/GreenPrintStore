@@ -23,7 +23,7 @@ namespace GreenPrint.Service.Services
 
         public async Task<WarehouseItemDTO> GetByItemAndWarehouseId(int warehouseId, int itemId)
         {
-            var temp = _mappingService._mapper.Map<WarehouseItemDTO>(await _warehouseItemRepository.GetByItemAndWarehouseId(itemId, warehouseId));
+            var temp = _mappingService._mapper.Map<WarehouseItemDTO>(await _warehouseItemRepository.GetByItemAndWarehouseId(warehouseId , itemId));
             return temp;
         }
 

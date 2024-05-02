@@ -26,6 +26,17 @@ namespace GreenPrint.WebApi.ExtensionMethods
             };
         }
 
+        public static CustomerDTO MapCustomerToDtoTHIS(this CustomerModel customer)
+        {
+            return new CustomerDTO
+            {
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                Email = customer.Email,
+                Phone = customer.Phone
+            };
+        }
+
         public static List<ItemOrderDTO> MapItemOrderToDto(this List<ItemOrderModel> itemOrder)
         {
             List<ItemOrderDTO> itemOrderDTOs = new();
@@ -65,12 +76,24 @@ namespace GreenPrint.WebApi.ExtensionMethods
 
         public static UserDTO MapUserToDto(this UserModel user)
         {
+            if (user.Customer != null)
+            {
+                return new UserDTO
+                {
+                    Email = user.Email,
+                    Password = user.Password,
+                    Roleid = user.Roleid,
+                    Customer = user.Customer.MapCustomerToDtoTHIS()
+                };
+            }
+
             return new UserDTO
             {
                 Email = user.Email,
                 Password = user.Password,
                 Roleid = user.Roleid
             };
+
         }
 
         public static WarehouseDTO MapWarehouseToDto(this WarehouseModel warehouse)

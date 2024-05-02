@@ -38,23 +38,41 @@ namespace GreenPrint.Blazor.PatchExtensions
             {
                 patchdoc.Replace(p => p.CategoryId, NewItem.CategoryId);
             }
-            //var props = OldItem.GetType().GetProperties();
+            
 
-            //foreach (PropertyInfo propertyInfo in props)
-            //{
-            //    PropertyInfo correspondingProperty = NewItem.GetType().GetProperty(propertyInfo.Name);
+            return patchdoc;
+        }
 
-            //    if (correspondingProperty != null)
-            //    {
-            //        object OldValue = propertyInfo.GetValue(OldItem);
-            //        object NewValue = correspondingProperty.GetValue(NewItem);
+        public static JsonPatchDocument<WarehouseItem> PatchModelW(this WarehouseItem OldItem, WarehouseItem NewItem)
+        {
 
-            //        if (OldValue != NewValue)
-            //        {
-            //            patchdoc.Replace(p => propertyInfo.Name, NewValue);
-            //        }
-            //    }
-            //}
+            if (NewItem == null)
+            {
+                return new JsonPatchDocument<WarehouseItem>(); // No Changes
+            }
+            else if (OldItem == null)
+            {
+                return new JsonPatchDocument<WarehouseItem>();
+            }
+
+
+            JsonPatchDocument<WarehouseItem> patchdoc = new JsonPatchDocument<WarehouseItem>();
+
+
+            if (NewItem.ItemId != OldItem.ItemId)
+            {
+                patchdoc.Replace(p => p.ItemId, NewItem.ItemId);
+            }
+            if (NewItem.WarehouseId != OldItem.WarehouseId)
+            {
+                patchdoc.Replace(p => p.WarehouseId, NewItem.WarehouseId);
+            }
+            if (NewItem.Quantity != OldItem.Quantity)
+            {
+                patchdoc.Replace(p => p.Quantity, NewItem.Quantity);
+            }
+
+
 
             return patchdoc;
         }

@@ -39,7 +39,10 @@ builder.Services.AddScoped<IItemService, ItemService>();
 builder.Services.AddScoped<IWarehouseItemService, WarehouseItemService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IWarehouseService, WarehouseService>();
-
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IItemOrderService, ItemOrderService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 // Radzen Services
 builder.Services.AddScoped<NotificationService>();

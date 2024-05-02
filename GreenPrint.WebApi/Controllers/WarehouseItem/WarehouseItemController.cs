@@ -52,6 +52,19 @@ namespace GreenPrint.WebApi.Controllers.WarehouseItem
             return NotFound();
         }
 
+        [HttpGet("{ItemId:int}/{WarehouseId:int}", Name = "GetWarehouseItemByWarehouseIdAndItemId")]
+        public async Task<IActionResult> GetWarehouseItemByWarehouseIdAndItemId(int ItemId, int WarehouseId)
+        {
+            var temp = await _WarehouseItemService.GetByItemAndWarehouseId(WarehouseId , ItemId);
+
+            if (temp != null)
+            {
+                return Ok(temp);
+            }
+
+            return NotFound();
+        }
+
         [HttpGet("{WarehouseItemId:int}", Name = "GetWarehouseItem")]
         public async Task<IActionResult> GetWarehouseItem(int WarehouseItemId)
         {
