@@ -17,6 +17,14 @@ namespace GreenPrint.Blazor.Service.Services
             _client = client;
         }
 
+        public async Task DeleteItem(int itemId)
+        {
+            var response = await _client.DeleteAsync($"/Item/remove/{itemId}");
+
+
+            response.EnsureSuccessStatusCode();
+        }
+
         public async Task<Item> CreateItem(Item item)
         {
             var response = await _client.PostAsJsonAsync("/Item/create", item);

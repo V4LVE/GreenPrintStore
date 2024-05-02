@@ -101,6 +101,26 @@
                     </RadzenStack>
                 </EditForm>
             </RadzenTabsItem>
+            <RadzenTabsItem Text="Items">
+                <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" PageSizeOptions="@PageSizeOptions" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                                Data="@Items" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" SelectionMode="DataGridSelectionMode.Single">
+                    <Columns>
+                        <RadzenDataGridColumn Property="Id" Filterable="false" Title="ID" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
+                        <RadzenDataGridColumn Property="ItemName" Title="Name" Frozen="true" Width="160px" />
+                        <RadzenDataGridColumn Property="Description" Title="Description" />
+                        <RadzenDataGridColumn Property="Price" Title="Price" TextAlign="TextAlign.Center" />
+                        <RadzenDataGridColumn Title="Actions" Sortable="false" Filterable="false" TextAlign="TextAlign.Center" Width="100px">
+                            <Template>
+                                <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Light" Click="@(() => dialogService.OpenAsync<EditItemDialogComponent>($"Edit {context.ItemName}",
+                            new Dictionary<string, object>() { { "itemId", context.Id } },
+                            new DialogOptions() { Resizable = true, Draggable = true }))" />
+                                <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Light" Click=@(args => Delete(context.Id, context.ItemName)) />
+                            </Template>
+
+                        </RadzenDataGridColumn>
+                    </Columns>
+                </RadzenDataGrid>
+            </RadzenTabsItem>
         </Tabs>
     </RadzenTabs>
 </div>
@@ -120,6 +140,7 @@
     [SupplyParameterFromForm]
     private WarehouseItem WarehouseItem { get; set; } = new();
     private List<Item> Items { get; set; } = new();
+    public int[] PageSizeOptions = new int[] { 3, 6, 9, 12, 15 };
 
     private int value { get; set; }
 
@@ -136,6 +157,25 @@
         await dialogService.OpenAsync<CreateItemDialogComponent>($"Create New Item",
                new Dictionary<string, object>() { },
                new DialogOptions() { Resizable = true, Draggable = true });
+    }
+
+    public async Task Delete(int id, string name)
+    {
+        var delete = await this.dialogService.Confirm($"This action cannot be undone. {name} will be removed forever", "Are you sure?", new ConfirmOptions() { OkButtonText = "Yes", CancelButtonText = "No" });
+
+        if (delete == true)
+        {
+            try
+            {
+               await _itemService.DeleteItem(id);
+                _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = $"{name} was deleted", Duration = 4000 });
+            }
+            catch (Exception ex)
+            {
+
+                _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = $"ERROR", Detail = $"{ex.Message}", Duration = 4000 });
+            }
+        }
     }
 
     public async Task AddStock()
