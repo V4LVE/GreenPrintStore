@@ -111,7 +111,7 @@
 
                             @if (Stock.Any() && Stock.FirstOrDefault().Quantity > 0)
                             {
-                                <RadzenButton Shade="Shade.Lighter" Icon="shopping_cart" Text="Add To Cart" ButtonStyle="ButtonStyle.Primary" />
+                                <RadzenButton Shade="Shade.Lighter" Click=@AddToCart Icon="shopping_cart" Text="Add To Cart" ButtonStyle="ButtonStyle.Primary" />
                             }
                             else
                             {
@@ -145,9 +145,14 @@
 @code {
     @using GreenPrint.Blazor.Service.Intefaces
     @using GreenPrint.Blazor.Component
+    @using GreenPrint.Blazor.Extensions
+    @using GreenPrint.Blazor.Utility
+    @inject NotificationService _notificationService
     @inject IItemService _itemService
     @inject IWarehouseItemService _warehouseItemService
     @inject IImageService _imageService
+    @inject LocalStorage _localStorage
+
 
     [Parameter]
     public int Id { get; set; } = 0;
@@ -173,5 +178,16 @@
         await dialogService.OpenAsync<EditItemDialogComponent>($"Editing {LoadedItem.ItemName}",
                new Dictionary<string, object>() { { "itemId", Id } },
                new DialogOptions() { Resizable = true, Draggable = true });
+    }
+
+    private async Task AddToCart()
+    {
+        int itemId = Id;
+        var item = await _itemService.GetItemByIdAsync(itemId);
+        await CartExtension.AddToCart(_localStorage, _warehouseItemService, _itemService, itemId);
+
+
+        StateHasChanged();
+        _notificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = $"{item.ItemName} added to cart", Duration = 4000 });
     }
 }

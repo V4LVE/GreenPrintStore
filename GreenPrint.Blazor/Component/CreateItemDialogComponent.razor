@@ -57,6 +57,8 @@
     </EditForm>
 </RadzenStack>
 
+@inject NavigationManager _navigation
+
 @code {
 
     public Item EditItem { get; set; } = new();
@@ -74,25 +76,8 @@
     {
         EditItem = await _itemService.CreateItem(EditItem);
 
-        // if (NewImage != null)
-        // {
-        //     var formattetStirng = NewImage.Replace("data:image/png;base64,", "");
-        //     byte[] imageBytes = Convert.FromBase64String(formattetStirng);
-
-        //     ItemImage productImage = new();
-        //     string imageName = $"{EditItem.Id}{Guid.NewGuid()}.png";
-        //     string imagePath = $"C:\\Users\\Alexander\\source\repos\\GreenPrintStore\\GreenPrint.Blazor\\wwwroot\\Images\\Items\\{imageName}";
-        //     string imagePaths = $"C:\\Test\\{imageName}";
-
-        //     File.WriteAllBytes(imagePaths, imageBytes);
-            
-
-        //     //productImages.Add(new() { ItemId = EditItem.Id, ImageUrl = imageName, DateCreated = DateTime.Now });
-
-        //     //EditItem.ItemImages = productImages;
-        // }
-
-        //await _itemService.CreateItem(EditItem);
         DialogService.Close(true);
+
+        _navigation.NavigateTo("/Items/Item/" + EditItem.Id);
     }
 }
